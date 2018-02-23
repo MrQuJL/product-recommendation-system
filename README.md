@@ -29,7 +29,6 @@
 ### 后台框架
 
 
-
 ### 前台框架
 
 
@@ -44,7 +43,7 @@
 
 ## 数据库ER图
 
-![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/er.jpeg)
+![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/er.jpg)
 
 
 ## 数据库表设计
@@ -52,11 +51,10 @@
 * 一级类目表
 * 二级类目表
 * 商品表
-* 会员表
-* 系统管理员表
+* 用户表
 * 订单表
+* 订单明细表
 * 购物车表
-
 
 ## 项目中遇到的一些问题
 
@@ -65,4 +63,3 @@
 
 
 ## 致谢
-
