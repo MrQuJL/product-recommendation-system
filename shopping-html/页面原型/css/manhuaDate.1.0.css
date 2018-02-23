@@ -1,0 +1,100 @@
+* {
+	padding: 0;
+	margin: 0
+}
+
+.calender {
+	width: 255px;
+	margin: 50px auto;
+	top: 0;
+	left: 0;
+	border: 3px #D6D6D6 solid;
+	background: #F2F2F2;
+	position: absolute;
+	display: none;
+	z-index: 999;
+}
+
+.calendertb {
+	width: 100%;
+}
+
+.calendertb td {
+	width: 32px;
+	height: 32px;
+	border: 1px #CCCCCC solid;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.calendertb td.hover, .calendertb td.weekendhover {
+	background: #D6D6D6;
+}
+
+.calendertb th {
+	width: 35px;
+	height: 30px;
+	border: 1px #CCCCCC solid;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	color: #979797;
+}
+
+.tdtoday {
+	background: #0080FF;
+	color: #fff;
+	width: 35px;
+	height: 35px;
+	border: 1px #CCCCCC solid;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.getyear {
+	height: 32px;
+	line-height: 32px;
+	width: 100%;
+	text-align: center;
+}
+
+.preMonth {
+	font-size: 12px;
+	font-weight: bold;
+	cursor: pointer;
+	margin-right: 18px;
+	color: #0080FF;
+}
+
+.nextMonth {
+	font-size: 12px;
+	font-weight: bold;
+	cursor: pointer;
+	margin-left: 18px;
+	color: #0080FF;
+}
+
+.mh_date {
+	width: 249px;
+	height: 20px;
+	line-height: 20px;
+	border: 2px #AA9FFF solid;
+	cursor: pointer;
+	background: url(dateIco.png) no-repeat right center;
+}
+
+.zhezhao {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 998;
+	background: #fff;
+	filter: alpha(opacity = 10);
+	opacity: 0.1;
+	display: none;
+}
