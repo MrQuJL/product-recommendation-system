@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"     
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx.xsd   
+        http://www.springframework.org/schema/mvc    
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd    
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+   	
+   	<!--开启spring组件扫描  -->
+   	<context:component-scan base-package="com.lyu.shopping" use-default-filters="false">
+   		<context:include-filter type="annotation" 
+   			expression="org.springframework.stereotype.Controller"/>
+   	</context:component-scan>
+   	
+   	<!--开启mvc注解驱动  -->
+   	<mvc:annotation-driven></mvc:annotation-driven>
+   	
+   	<!--对静态资源文件的访问-->
+ 	<mvc:resources mapping="/jsAndCss/**" location="/jsAndCss/" />
+   	
+   	<!--配置视图解析器 -->
+	<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/pages/"></property> 
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+   
+   <!--文件上传解析器  -->
+	<bean id = "multipartResolver" class = "org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+ 		<property name="defaultEncoding" value="UTF-8"></property>
+ 		<!--指定所上传文件的总大小,单位字节。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和  -->		
+ 		<property name="maxUploadSize" value="10240000"></property>
+ 	</bean>
+   
+</beans>         

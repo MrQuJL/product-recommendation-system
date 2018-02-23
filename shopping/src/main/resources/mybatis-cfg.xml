@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE configuration   
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-config.dtd">  
+
+<configuration>
+    <settings>
+		<!--是否开启自动驼峰命名规则映射，
+		即从经典数据库列名 AB_CD 到经典 Java 属性名 AbCd 的类似映射。  默认false  -->
+       <setting name="mapUnderscoreToCamelCase" value="true"/>
+       <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+	<!--在mybatis默认提供的别名的基础上,还可以自定义别名引用  -->
+	<typeAliases>
+		<!-- 批量定义别名 -->
+		<package name="com.lyu.shopping.sysmanage.entity" />
+		<package name="com.lyu.shopping.sysmanage.dto" />
+	</typeAliases>
+	 
+	<!-- 配置pageHelper分页插件 -->
+ 	<plugins>
+      	<plugin interceptor="com.github.pagehelper.PageHelper">
+      	<!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库-->
+            <property name="dialect" value="mysql"/>
+            <!-- RowBounds参数offset作为PageNum使用 - 默认不使用 -->
+            <property name="offsetAsPageNum" value="false"/>
+            <!-- 使用RowBounds分页会进行count查询 -->   
+            <property name="rowBoundsWithCount" value="false"/>
+            <!--当设置为true的时候，如果pagesize设置为0 就不执行分页，返回全部结果  -->
+            <property name="pageSizeZero" value="true"/>
+            <!--合理化查询 比如如果pageNum<1会查询第一页;如果pageNum>pages会查询最后一页(设置为false返回空)-->
+            <property name="reasonable" value="false"/>
+            <!-- 支持通过Mapper接口参数来传递分页参数 -->
+            <property name="supportMethodsArguments" value="false"/>
+             <!-- 总是返回PageInfo类型,check检查返回类型是否为PageInfo,none返回Page -->    
+            <property name="returnPageInfo" value="none"/>
+        </plugin>
+    </plugins>
+	
+	<mappers>
+		<package name="com.lyu.shopping.*.mapper"/>
+	</mappers>
+ 
+</configuration>

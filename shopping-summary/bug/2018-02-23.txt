@@ -1,0 +1,6 @@
+1. 因为没有为index.jsp页面添加jsp的头部，导致项目一启动就报错
+
+2. 因为在springmvc的配置文件中配置了CommonsMultipartResolver文件上传的相关配置，但是却没有添加commons-fileupload的jar依赖导致项目启动失败
+
+
+
