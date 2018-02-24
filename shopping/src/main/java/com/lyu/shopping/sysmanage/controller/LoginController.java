@@ -38,8 +38,4 @@ public class LoginController {
 		return "main/main";
 	}
 	
-	
-	
-	
-	
 }
