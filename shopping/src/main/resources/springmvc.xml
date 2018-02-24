@@ -24,7 +24,7 @@
    	</context:component-scan>
    	
    	<!--开启mvc注解驱动  -->
-   	<mvc:annotation-driven></mvc:annotation-driven>
+   	<mvc:annotation-driven />
    	
    	<!--对静态资源文件的访问-->
  	<mvc:resources mapping="/jsAndCss/**" location="/jsAndCss/" />

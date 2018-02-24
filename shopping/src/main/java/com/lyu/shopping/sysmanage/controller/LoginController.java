@@ -12,14 +12,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class LoginController {
+
+	/**
+	 * 跳转到后台管理系统登录页面
+	 * @return
+	 */
+	@RequestMapping(value="/admin")
+	public String loginAdmin() {
+		return "loginAdmin";
+	}
+	
 	
 	/**
-	 * 跳转到登录页面
+	 * 跳转到商城用户登录页面
 	 * @return
 	 */
 	@RequestMapping(value="/toLogin")
-	public String login() {
-		return "login";
+	public String loginCustomer() {
+		return "loginCustomer";
 	}
 	
 }
