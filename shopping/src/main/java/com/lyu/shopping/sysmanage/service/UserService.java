@@ -19,4 +19,19 @@ public interface UserService {
 	 */
 	User loginUser(String loginName, String password);
 	
+	/**
+	 * 采用sha1加密算法将密码加密
+	 * @param plainPsd 为经过加密的密码
+	 * @return
+	 */
+	String encryptPsd(String plainPsd);
+	
+	/**
+	 * 验证密码是否正确
+	 * @param plainPsd 未加密的密码
+	 * @param encryptedPsd 加密之后的密码
+	 * @return
+	 */
+	boolean validatePsd(String plainPsd, String encryptedPsd);
+	
 }

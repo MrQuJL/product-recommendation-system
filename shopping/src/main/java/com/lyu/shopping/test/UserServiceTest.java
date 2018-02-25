@@ -29,10 +29,19 @@ public class UserServiceTest {
 	@Test
 	public void testListUser() {
 		UserService userService = (UserService) this.application.getBean("userService");
-		
 		User user = userService.loginUser("admin", "123456");
-		
 		System.out.println(user);
+	}
+	
+	/**
+	 * 测试密码加密
+	 */
+	@Test
+	public void testEncryptPassword() {
+		UserService userService = (UserService) this.application.getBean("userService");
+		String encryptedPsd = userService.encryptPsd("123");
+		boolean flag = userService.validatePsd("123", encryptedPsd);
+		System.out.println(flag);
 	}
 	
 }
