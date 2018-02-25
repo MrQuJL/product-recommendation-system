@@ -26,12 +26,6 @@ public class LoginAdminInterceptor implements HandlerInterceptor {
 		throws Exception {
 		System.out.println("进入LoginInterceptor.preHandle()");
 		
-		// 需要先过滤掉匿名访问地址
-		String uri = request.getRequestURI();
-		if (uri.indexOf("loginAdmin") >= 0) {
-			return true;
-		}
-		
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		// user不为空表示已经登录过，放行

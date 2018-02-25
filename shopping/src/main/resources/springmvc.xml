@@ -34,8 +34,10 @@
    		<mvc:interceptor>
    			<mvc:mapping path="/main"/>
    			<mvc:mapping path="/sysmgr/**"/>
+   			<!-- 对登录的请求放行 -->
    			<mvc:exclude-mapping path="/admin"/>
    			<mvc:exclude-mapping path="/loginAdmin"/>
+   			<mvc:exclude-mapping path="/logoutAdmin"/>
    			<bean class="com.lyu.shopping.interceptor.LoginAdminInterceptor"></bean>
    		</mvc:interceptor>
    	</mvc:interceptors>

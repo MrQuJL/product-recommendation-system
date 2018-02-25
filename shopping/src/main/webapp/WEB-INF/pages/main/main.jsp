@@ -210,7 +210,7 @@
 							</li>
 							<li class="divider"></li>
 							<li>
-								<a href="javascript:ovid(0)" id="Exit_system"><i class="icon-off"></i>退出</a>
+								<a href="${ctx}/logoutAdmin" id="Exit_system"><i class="icon-off"></i>退出</a>
 							</li>
 						</ul>
 					</li>
