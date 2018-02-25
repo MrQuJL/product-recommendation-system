@@ -18,7 +18,7 @@ public interface UserMapper {
 	 * @param user 根据user中已有的信息查询用户列表
 	 * @return
 	 */
-	List<User> getUserList(User user);
+	List<User> listUser(User user);
 	
 	
 }

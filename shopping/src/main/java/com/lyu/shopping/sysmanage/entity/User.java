@@ -40,108 +40,116 @@ public class User implements Serializable {
 
     private Integer isDeleted;
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getLoginName() {
-        return loginName;
-    }
+	public String getLoginName() {
+		return loginName;
+	}
 
-    public void setLoginName(String loginName) {
-        this.loginName = loginName == null ? null : loginName.trim();
-    }
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getMobile() {
-        return mobile;
-    }
+	public String getMobile() {
+		return mobile;
+	}
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
-    }
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
 
-    public Integer getAge() {
-        return age;
-    }
+	public Integer getAge() {
+		return age;
+	}
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
+	public void setAge(Integer age) {
+		this.age = age;
+	}
 
-    public String getAddress() {
-        return address;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public Integer getStatus() {
-        return status;
-    }
+	public Integer getStatus() {
+		return status;
+	}
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
-    public Integer getIsAdmin() {
-        return isAdmin;
-    }
+	public Integer getIsAdmin() {
+		return isAdmin;
+	}
 
-    public void setIsAdmin(Integer isAdmin) {
-        this.isAdmin = isAdmin;
-    }
+	public void setIsAdmin(Integer isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 
-    public Date getGmtCreate() {
-        return gmtCreate;
-    }
+	public Date getGmtCreate() {
+		return gmtCreate;
+	}
 
-    public void setGmtCreate(Date gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
+	public void setGmtCreate(Date gmtCreate) {
+		this.gmtCreate = gmtCreate;
+	}
 
-    public Date getGmtModified() {
-        return gmtModified;
-    }
+	public Date getGmtModified() {
+		return gmtModified;
+	}
 
-    public void setGmtModified(Date gmtModified) {
-        this.gmtModified = gmtModified;
-    }
+	public void setGmtModified(Date gmtModified) {
+		this.gmtModified = gmtModified;
+	}
 
-    public Integer getIsDeleted() {
-        return isDeleted;
-    }
+	public Integer getIsDeleted() {
+		return isDeleted;
+	}
 
-    public void setIsDeleted(Integer isDeleted) {
-        this.isDeleted = isDeleted;
-    }
+	public void setIsDeleted(Integer isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", loginName=" + loginName + ", username=" + username + ", password=" + password
+				+ ", email=" + email + ", mobile=" + mobile + ", age=" + age + ", address=" + address + ", status="
+				+ status + ", isAdmin=" + isAdmin + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
+				+ ", isDeleted=" + isDeleted + "]";
+	}
 	
 }

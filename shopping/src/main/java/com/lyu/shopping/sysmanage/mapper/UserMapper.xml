@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>  
-<!DOCTYPE configuration   
+<!DOCTYPE mapper   
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 
@@ -12,8 +12,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 将通用的sql查询条件抽取出来，成为sql片段给不同的方法用 -->
 	<sql id="query_user_sql_where">
-		<if test="userName != null">
-			AND username LIKE '%${userName}%'
+		<if test="username != null">
+			AND username LIKE '%${username}%'
 		</if>
 		<if test="loginName != null">
 			AND login_name = #{loginName}
@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 	
 	<!-- 查询用户列表 -->
-	<select id="getUserList" parameterType="user" resultType="user">
+	<select id="listUser" parameterType="user" resultType="user">
 		SELECT <include refid="all_user_columns" />
 		FROM shopping_user
 		<where>
