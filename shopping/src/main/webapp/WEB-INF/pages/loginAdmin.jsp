@@ -43,7 +43,7 @@
 								<img src="${ctxJsAndCss}/images/login.png" />
 							</div>
 
-							<form action="${ctx}/loginAdmin" method="post">
+							<form id="loginForm" action="${ctx}/loginAdmin" method="post">
 								<fieldset>
 									<label class="block clearfix"> 
 										<span class="block input-icon input-icon-right">
@@ -90,33 +90,5 @@
 	<div class="loginbm">
 		版权所有 2018 - 2018 <a href="">曲健磊</a>
 	</div>
-	<strong></strong>
-<script>
-	$('#login_btn').on('click', function() {
-		var num = 0;
-		var str = "";
-		$("input[type$='text']").each(function(n) {
-			if ($(this).val() == "") {
-
-				layer.alert(str += "" + $(this).attr("name") + "不能为空！\r\n", {
-					title : '提示框',
-					icon : 0,
-				});
-				num++;
-				return false;
-			}
-		});
-		if (num > 0) {
-			return false;
-		} else {
-			layer.alert('登陆成功！', {
-				title : '提示框',
-				icon : 1,
-			});
-			location.href = "index.html";
-			layer.close(index);
-		}
-	})
-</script>
 </body>
 </html>

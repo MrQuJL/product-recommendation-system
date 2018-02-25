@@ -50,7 +50,7 @@
 	</bean>
 	
 	<!--开启事务注解驱动  -->
-	<tx:annotation-driven  transaction-manager="txManager" />
+	<tx:annotation-driven transaction-manager="txManager" />
  	
  	<!-- 注册aspectJ的自动代理 -->
  	<aop:aspectj-autoproxy />

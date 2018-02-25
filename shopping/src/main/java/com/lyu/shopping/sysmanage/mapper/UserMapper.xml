@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>  
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE configuration   
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 
 <mapper namespace="com.lyu.shopping.sysmanage.mapper.UserMapper">
 	<!-- 用户表所有的字段 -->
@@ -8,7 +9,27 @@
 		id, login_name, username, password, email, mobile, age,
 		address, status, is_admin, gmt_create, gmt_modified, is_deleted
 	</sql>
-
-
+	
+	<!-- 将通用的sql查询条件抽取出来，成为sql片段给不同的方法用 -->
+	<sql id="query_user_sql_where">
+		<if test="userName != null">
+			AND username LIKE '%${userName}%'
+		</if>
+		<if test="loginName != null">
+			AND login_name = #{loginName}
+		</if>
+		<if test="password != null">
+			AND password = #{password}
+		</if>
+	</sql>
+	
+	<!-- 查询用户列表 -->
+	<select id="getUserList" parameterType="user" resultType="user">
+		SELECT <include refid="all_user_columns" />
+		FROM shopping_user
+		<where>
+			<include refid="query_user_sql_where" />
+		</where>
+	</select>
 
 </mapper>
