@@ -84,7 +84,6 @@ public class LoginController {
 	 */
 	@RequestMapping(value="/main")
 	public String main() {
-		
 		return "main/main";
 	}
 	

@@ -1,4 +1,4 @@
-package com.lyu.shopping.sysmanage.test;
+package com.lyu.shopping.test;
 
 import org.junit.Before;
 import org.junit.Test;
