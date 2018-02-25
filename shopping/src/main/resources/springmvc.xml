@@ -29,6 +29,17 @@
    	<!--对静态资源文件的访问-->
  	<mvc:resources mapping="/jsAndCss/**" location="/jsAndCss/" />
    	
+   	<!-- springmvc的拦截器 -->
+   	<mvc:interceptors>
+   		<mvc:interceptor>
+   			<mvc:mapping path="/main"/>
+   			<mvc:mapping path="/sysmgr/**"/>
+   			<mvc:exclude-mapping path="/admin"/>
+   			<mvc:exclude-mapping path="/loginAdmin"/>
+   			<bean class="com.lyu.shopping.interceptor.LoginAdminInterceptor"></bean>
+   		</mvc:interceptor>
+   	</mvc:interceptors>
+   	
    	<!--配置视图解析器 -->
 	<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/pages/"></property> 

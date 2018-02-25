@@ -3,13 +3,14 @@ package com.lyu.shopping.sysmanage.controller;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lyu.shopping.sysmanage.entity.User;
-
+import com.lyu.shopping.sysmanage.service.UserService;
 
 /**
  * 类描述：用于登录的控制器
@@ -25,6 +26,9 @@ public class LoginController {
 	 * 用来打印日志
 	 */
 	Logger logger = Logger.getLogger(LoginController.class);
+	
+	@Autowired
+	private UserService userService;
 	
 	/**
 	 * 处理跳转到商城用户登录页面的请求
@@ -60,11 +64,9 @@ public class LoginController {
 		
 		// 初步判断用户名和密码是否为空
 		if (!StringUtils.isEmpty(loginName) && !StringUtils.isEmpty(password)) {
-			if ("admin".equals(loginName) && "123".equals(password)) {
+			User user = this.userService.loginUser(loginName, password);
+			if (user != null) {
 				logger.info(loginName + "登录成功");
-				User user = new User();
-				user.setLoginName(loginName);
-				user.setPassword(password);
 				session.setAttribute("user", user);
 				return "redirect:/main";
 			} else {
@@ -75,7 +77,6 @@ public class LoginController {
 		model.addAttribute("loginFlag", "登录失败，请输入正确的用户名和密码");
 		return "forward:/WEB-INF/pages/loginAdmin.jsp";
 	}
-	
 	
 	/**
 	 * 处理跳转到后台管理系统主页面的请求
