@@ -276,10 +276,10 @@
 							class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
 							<li class="home"><a href="javascript:void(0)"
-								name="Guestbook.html" title="留言列表" class="iframeurl"><i
+								name="Guestbook.html" title="一级类目管理" class="iframeurl"><i
 									class="icon-double-angle-right"></i>一级类目管理</a></li>
 							<li class="home"><a href="javascript:void(0)"
-								name="Feedback.html" title="意见反馈" class="iframeurl"><i
+								name="Feedback.html" title="二级类目管理" class="iframeurl"><i
 									class="icon-double-angle-right"></i>二级类目管理</a></li>
 						</ul></li>
 					<li>
@@ -375,7 +375,7 @@
 
 				<iframe id="iframe"
 					style="border: 0; width: 100%; background-color: #FFF;"
-					name="iframe" frameborder="0" src="home.html"> </iframe>
+					name="iframe" frameborder="0" src="${ctx}/sysmgr/home"> </iframe>
 
 
 			</div>

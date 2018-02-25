@@ -36,23 +36,24 @@
 						<div class="widget-main">
 							<h4 class="header blue lighter bigger">
 								<i class="icon-coffee green"></i> 管理员登陆
+								<span style="color:red;font-size:16px;">&nbsp;&nbsp;&nbsp;${loginFlag}</span>
 							</h4>
-
+							
 							<div class="login_icon">
 								<img src="${ctxJsAndCss}/images/login.png" />
 							</div>
 
-							<form class="">
+							<form action="${ctx}/loginAdmin" method="post">
 								<fieldset>
 									<label class="block clearfix"> 
 										<span class="block input-icon input-icon-right">
-										<input type="text" class="form-control" placeholder="登录名" name="登录名">
+										<input type="text" name="loginName" class="form-control" placeholder="登录名" name="登录名">
 										<i class="icon-user"></i>
 										</span>
 									</label>
 									<label class="block clearfix">
 										<span class="block input-icon input-icon-right">
-										<input type="password" class="form-control" placeholder="密码" name="密码">
+										<input type="password" name="password" class="form-control" placeholder="密码" name="密码">
 										<i class="icon-lock"></i>
 										</span>
 									</label>
@@ -60,7 +61,7 @@
 									<div class="space"></div>
 
 									<div class="clearfix">
-										<button type="button" class="width-35 pull-right btn btn-sm btn-primary" id="login_btn">
+										<button type="submit" class="width-35 pull-right btn btn-sm btn-primary" id="login_btn">
 											<i class="icon-key"></i> 登陆
 										</button>
 									</div>

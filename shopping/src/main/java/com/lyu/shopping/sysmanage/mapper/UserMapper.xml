@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lyu.shopping.sysmanage.mapper.UserMapper">
+	<!-- 用户表所有的字段 -->
+	<sql id="all_user_columns">
+		id, login_name, username, password, email, mobile, age,
+		address, status, is_admin, gmt_create, gmt_modified, is_deleted
+	</sql>
+
+
+
+</mapper>
