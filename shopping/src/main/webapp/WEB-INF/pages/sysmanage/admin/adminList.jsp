@@ -8,7 +8,26 @@
 	<meta name="renderer" content="webkit|ie-comp|ie-stand">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta http-equiv="Cache-Control" content="no-siteapp" />
-	<%@ include file="/WEB-INF/pages/include/head.jsp"%>
+	<!-- css样式 -->
+	<link href="${ctxJsAndCss}/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="${ctxJsAndCss}/css/style.css"/>       
+    <link href="${ctxJsAndCss}/assets/css/codemirror.css" rel="stylesheet">
+    <link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace.min.css" />
+    <link rel="stylesheet" href="${ctxJsAndCss}/font/css/font-awesome.min.css" />
+    <!--[if lte IE 8]>
+	  <link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace-ie.min.css" />
+	<![endif]-->
+	<!-- js -->
+	<script src="${ctxJsAndCss}/js/jquery-1.9.1.min.js"></script>
+    <script src="${ctxJsAndCss}/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${ctxJsAndCss}/Widget/Validform/5.3.2/Validform.min.js"></script>
+	<script src="${ctxJsAndCss}/assets/js/typeahead-bs2.min.js"></script>           	
+	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.min.js"></script>
+	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.bootstrap.js"></script>
+    <script src="${ctxJsAndCss}/assets/layer/layer.js" type="text/javascript" ></script>          
+	<script src="${ctxJsAndCss}/js/lrtk.js" type="text/javascript" ></script>
+    <script src="${ctxJsAndCss}/assets/layer/layer.js" type="text/javascript"></script>	
+    <script src="${ctxJsAndCss}/assets/laydate/laydate.js" type="text/javascript"></script>
 </head>
 <body>
 	<div class="page-content clearfix">
@@ -258,7 +277,7 @@
 		});
 	</script>
 	<script type="text/javascript">
-		/* $(function() {
+		$(function() {
 			$("#administrator").fix({
 				float : 'left',
 				//minStatue : true,
@@ -267,7 +286,7 @@
 				spacingw : 50,//设置隐藏时的距离
 				spacingh : 270,//设置显示时间距
 			});
-		}); */
+		});
 		//字数限制
 		function checkLength(which) {
 			var maxChars = 100; //
