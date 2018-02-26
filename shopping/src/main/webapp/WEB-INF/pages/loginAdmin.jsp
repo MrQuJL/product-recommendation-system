@@ -63,13 +63,13 @@
 								<fieldset>
 									<label class="block clearfix"> 
 										<span class="block input-icon input-icon-right">
-										<input type="text" name="loginName" class="form-control" placeholder="登录名" name="登录名">
+										<input type="text" name="loginName" id="loginName" class="form-control" placeholder="登录名">
 										<i class="icon-user"></i>
 										</span>
 									</label>
 									<label class="block clearfix">
 										<span class="block input-icon input-icon-right">
-										<input type="password" name="password" class="form-control" placeholder="密码" name="密码">
+										<input type="password" name="password" id="password" class="form-control" placeholder="密码">
 										<i class="icon-lock"></i>
 										</span>
 									</label>
@@ -104,7 +104,26 @@
 		</div>
 	</div>
 	<div class="loginbm">
-		版权所有 2018 - 2018 <a href="">曲健磊</a>
+		版权所有 2018 - 2018 Powered by <a href="https://github.com/MrQuJL/shopping-system" target="_blank">曲健磊</a>
 	</div>
+<script>
+$('#login_btn').on('click', function(){
+    var num=0;
+	var str="";
+    $("input[type$='text']").each(function(n){
+        if ($(this).val()=="") {
+		    layer.alert(str+="用户名不能为空！\r\n",{title: '提示框',icon:0});
+		    num++;
+	        return false;
+        }
+        if ($("#password").val()=="") {
+        	layer.alert(str+="密码不能为空！\r\n",{title: '提示框',icon:0});
+		    num++;
+	        return false;
+        }
+    });
+	if(num>0){return false;}	 	
+})
+</script>
 </body>
 </html>
