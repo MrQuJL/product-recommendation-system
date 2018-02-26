@@ -30,17 +30,13 @@ public class LoginAdminInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 		throws Exception {
-		logger.info("进入LoginInterceptor.preHandle()");
-		
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		// user不为空表示已经登录过，放行
 		if (user != null) {
-			logger.info(user.getUsername() + "已登录");
 			return true;
 		}
 		
-		logger.info("没有用户登录");
 		request.getRequestDispatcher("/admin").forward(request, response);
 		
 		return false;

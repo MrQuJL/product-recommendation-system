@@ -1,5 +1,7 @@
 package com.lyu.shopping.sysmanage.service;
 
+import java.util.List;
+
 import com.lyu.shopping.sysmanage.entity.User;
 
 /**
@@ -18,6 +20,13 @@ public interface UserService {
 	 * @return
 	 */
 	User loginUser(String loginName, String password);
+	
+	/**
+	 * 根据用户已知信息查询用户列表
+	 * @param user 用户对象
+	 * @return
+	 */
+	List<User> listUser(User user);
 	
 	/**
 	 * 采用sha1加密算法将密码加密

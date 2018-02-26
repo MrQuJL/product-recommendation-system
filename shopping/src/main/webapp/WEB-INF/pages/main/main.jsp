@@ -196,7 +196,7 @@
 						btn : [ '是', '否' ],//按钮
 						icon : 2,
 					}, function() {
-						location.href = "login.html";
+						location.href = "${ctx}/logoutAdmin";
 					});
 				});
 			})
@@ -239,7 +239,7 @@
 							</li>
 							<li class="divider"></li>
 							<li>
-								<a href="${ctx}/logoutAdmin" id="Exit_system"><i class="icon-off"></i>退出</a>
+								<a href="#" id="Exit_system"><i class="icon-off"></i>退出</a>
 							</li>
 						</ul>
 					</li>
@@ -372,7 +372,7 @@
 						</ul></li>
 					<li><a href="#" class="dropdown-toggle"><i class="icon-group"></i><span class="menu-text"> 管理员管理 </span><b class="arrow icon-angle-down"></b></a>
 							<ul class="submenu">
-                                <li class="home"><a href="javascript:void(0)" name="${ctx}/sysmgr/adminList" title="管理员列表" class="iframeurl"><i class="icon-double-angle-right"></i>管理员列表</a></li>
+                                <li class="home"><a href="javascript:void(0)" name="${ctx}/sysmgr/admin/adminList" title="管理员列表" class="iframeurl"><i class="icon-double-angle-right"></i>管理员列表</a></li>
 								<li class="home"><a href="javascript:void(0)" name="admin_info.html" title="个人信息" class="iframeurl"><i class="icon-double-angle-right"></i>个人信息</a></li>
 							</ul>
 						</li>

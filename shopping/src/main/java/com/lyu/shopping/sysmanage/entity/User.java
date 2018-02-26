@@ -26,7 +26,7 @@ public class User implements Serializable {
 
     private String mobile;
 
-    private Integer age;
+    private String sex;
 
     private String address;
 
@@ -88,12 +88,12 @@ public class User implements Serializable {
 		this.mobile = mobile;
 	}
 
-	public Integer getAge() {
-		return age;
+	public String getSex() {
+		return sex;
 	}
 
-	public void setAge(Integer age) {
-		this.age = age;
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
 	public String getAddress() {
@@ -147,9 +147,9 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", loginName=" + loginName + ", username=" + username + ", password=" + password
-				+ ", email=" + email + ", mobile=" + mobile + ", age=" + age + ", address=" + address + ", status="
+				+ ", email=" + email + ", mobile=" + mobile + ", sex=" + sex + ", address=" + address + ", status="
 				+ status + ", isAdmin=" + isAdmin + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified
 				+ ", isDeleted=" + isDeleted + "]";
 	}
-	
+
 }

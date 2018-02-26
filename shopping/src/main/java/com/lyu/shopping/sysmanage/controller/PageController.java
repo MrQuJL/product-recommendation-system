@@ -23,13 +23,4 @@ public class PageController {
 		return "main/home";
 	}
 	
-	/**
-	 * 处理跳转到管理员列表的请求
-	 * @return
-	 */
-	@RequestMapping(value="/adminList")
-	public String gotoAdminList() {
-		return "sysmanage/admin/adminList";
-	}
-
 }

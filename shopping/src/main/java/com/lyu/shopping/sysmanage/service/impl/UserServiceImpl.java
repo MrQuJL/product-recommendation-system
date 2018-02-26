@@ -54,6 +54,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public List<User> listUser(User user) {
+		List<User> userList = this.userMapper.listUser(user);
+		
+		return userList;
+	}
+	
+	@Override
 	public String encryptPsd(String plainPsd) {
 		// 1.获取随机数
 		byte[] salt = EncryptUtils.generateSalt(SALT_SIZE);
@@ -90,5 +97,4 @@ public class UserServiceImpl implements UserService {
 		
 		return flag;
 	}
-
 }

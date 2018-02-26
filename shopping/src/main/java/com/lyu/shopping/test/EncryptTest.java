@@ -65,7 +65,7 @@ public class EncryptTest {
 	 */
 	@Test
 	public void testEncryptPassword() {
-		String plainPsd = "123456";
+		String plainPsd = "123";
 		// 1. 用SecureRandom生成一个随机数
 		byte[] salt = new byte[8];
 		SecureRandom securityRandom = new SecureRandom();
