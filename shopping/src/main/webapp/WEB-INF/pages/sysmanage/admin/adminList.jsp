@@ -43,6 +43,7 @@
 	<script src="${ctxJsAndCss}/js/H-ui.admin.js"></script>
 	<script src="${ctxJsAndCss}/assets/layer/layer.js"></script>
 	<script src="${ctxJsAndCss}/assets/laydate/laydate.js"></script>
+	<script src="${ctxJsAndCss}/js/date.js"></script>
 </head>
 <body>
 	<div class="page-content clearfix">
@@ -89,25 +90,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><label><input type="checkbox" class="ace"><span
-										class="lbl"></span></label></td>
-								<td>1</td>
-								<td><u style="cursor: pointer" class="text-primary"
-									onclick="member_show('张三','member-show.html','10001','500','400')">张三</u></td>
-								<td>男</td>
-								<td>13000000000</td>
-								<td>admin@mail.com</td>
-								<td class="text-l">北京市 海淀区</td>
-								<td>2014-6-11 11:11:42</td>
-								<td class="td-manage"> <a title="编辑"
-									onclick="member_edit('550')" href="javascript:;"
-									class="btn btn-xs btn-info"><i
-										class="icon-edit bigger-120"></i></a> <a title="删除"
-									href="javascript:;" onclick="member_del(this,'1')"
-									class="btn btn-xs btn-warning"><i
-										class="icon-trash  bigger-120"></i></a></td>
-							</tr>
+							
 						</tbody>
 					</table>
 				</div>
@@ -236,24 +219,6 @@
 	function member_show(title,url,id,w,h){
 		layer_show(title,url+'#?='+id,w,h);
 	}
-	/*管理员-停用*/
-	function member_stop(obj,id){
-		layer.confirm('确认要停用吗？',function(index){
-			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs " onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="icon-ok bigger-120"></i></a>');
-			$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
-			$(obj).remove();
-			layer.msg('已停用!',{icon: 5,time:1000});
-		});
-	}
-	/*管理员-启用*/
-	function member_start(obj,id){
-		layer.confirm('确认要启用吗？',function(index){
-			$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs btn-success" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="icon-ok bigger-120"></i></a>');
-			$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
-			$(obj).remove();
-			layer.msg('已启用!',{icon: 6,time:1000});
-		});
-	}
 	/*管理员-编辑*/
 	function member_edit(id){
 		  layer.open({
@@ -333,7 +298,7 @@
 							
 							htmlTable = htmlTable + "<td class=\"text-l\">" + data[i].address + "</td>";
 							
-							htmlTable = htmlTable + "<td>" + data[i].date + "</td>";
+							htmlTable = htmlTable + "<td>" +  timestampToTime(data[i].gmtCreate) + "</td>";
 							
 							htmlTable = htmlTable + 
 							"<td class=\"td-manage\"> <a title=\"编辑\""+
