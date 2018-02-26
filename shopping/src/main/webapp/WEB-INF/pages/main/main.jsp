@@ -5,8 +5,6 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>网站后台管理系统</title>
-	<meta name='keywords' content='管理' />
-	<meta name='description' content='商城后台管理系统' />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<%@ include file="/WEB-INF/pages/include/head.jsp"%>
 	<script type="text/javascript">
@@ -275,10 +273,10 @@
 							class="icon-edit"></i><span class="menu-text"> 类目管理 </span><b
 							class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
-							<li class="home"><a href="javascript:void(0)"
+							<li class="home"><a href="${ctx}/sysmgr/category1"
 								name="Guestbook.html" title="一级类目管理" class="iframeurl"><i
 									class="icon-double-angle-right"></i>一级类目管理</a></li>
-							<li class="home"><a href="javascript:void(0)"
+							<li class="home"><a href="${ctx}/sysmgr/category2"
 								name="Feedback.html" title="二级类目管理" class="iframeurl"><i
 									class="icon-double-angle-right"></i>二级类目管理</a></li>
 						</ul></li>
@@ -341,6 +339,12 @@
 								name="用户管理.html" title="系统日志" class="iframeurl"><i
 									class="icon-double-angle-right"></i>系统日志</a></li>
 						</ul></li>
+					<li><a href="#" class="dropdown-toggle"><i class="icon-group"></i><span class="menu-text"> 管理员管理 </span><b class="arrow icon-angle-down"></b></a>
+							<ul class="submenu">
+                                <li class="home"><a href="javascript:void(0)" name="${ctx}/sysmgr/adminList" title="管理员列表" class="iframeurl"><i class="icon-double-angle-right"></i>管理员列表</a></li>
+								<li class="home"><a href="javascript:void(0)" name="admin_info.html" title="个人信息" class="iframeurl"><i class="icon-double-angle-right"></i>个人信息</a></li>
+							</ul>
+						</li>
 				</ul>
 				<div class="sidebar-collapse" id="sidebar-collapse">
 					<i class="icon-double-angle-left"
@@ -363,7 +367,7 @@
 				</script>
 				<div class="breadcrumbs" id="breadcrumbs">
 					<ul class="breadcrumb">
-						<li><i class="icon-home home-icon"></i> <a href="index.html">首页</a>
+						<li><i class="icon-home home-icon"></i> <a href="${ctx}/sysmgr/home" target="iframe">首页</a>
 						</li>
 						<li class="active"><span class="Current_page iframeurl"></span></li>
 						<li class="active" id="parentIframe"><span

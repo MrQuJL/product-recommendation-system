@@ -79,9 +79,9 @@ body
 .search_style .title_names{ position:absolute; top:-20px; font-size:18px; background-color:#ffffff; padding:5px 20px; left:10px;}
 .state-overview{ margin-top:15px;}
 #add_administrator_style .c-red{ color:#F33}
-/*****************************面包屑样式*****************************/
+/*****************************闈㈠寘灞戞牱寮�*****************************/
 #breadcrumbs .iframeurl{ color:#333;text-decoration : none;}
-/******************边框样式**************/
+/******************杈规鏍峰紡**************/
 .t_Record{ border:1px solid #ddd; border-radius:3px; -moz-border-radius:3px;-webkit-border-radius:3px; padding:10px; float:left}
 .news_style{ width:250px; float:left; border:1px solid #ddd; margin-left:15px; height:320px; }
 .news_style .title_name{padding-left:20px;
@@ -124,13 +124,13 @@ body
 .grading_list .table_menu_list,
 .content_style{ padding:10px; }
 .grading_list .table_menu_list .table td{font-size:12px}
-/********密码修改样式***********/
+/********瀵嗙爜淇敼鏍峰紡***********/
 .change_Pass_style{ display:none;}
 .change_Pass_style .xg_style{}
 .change_Pass_style .xg_style li{ height:40px; padding:5px 0px; line-height:40px; margin-bottom:20px;}
 .change_Pass_style .xg_style li .label_name{ float:left; width:80px; text-align: right}
 .change_Pass_style .xg_style .btn{ display:block; margin-left:auto; margin-right:auto; margin-top:20px; text-align:center}
-/***********************留言样式属性**************************/
+/***********************鐣欒█鏍峰紡灞炴��**************************/
 .content_style .Reply_style{ margin-top:10px; display:none}
 .content_style textarea.form-control {
     width: 400px;
@@ -138,7 +138,7 @@ body
     resize: none;
 	margin:0px;
 }
-/***************************首页样式属性****************************/
+/***************************棣栭〉鏍峰紡灞炴��****************************/
 .state-overview .terques { background: #6ccac9;}
 .state-overview .red { background: #ff6c60;}
 .state-overview .yellow { background: #f8d347;}
@@ -153,7 +153,7 @@ body
 .state-overview .value h1, .state-overview .value p {margin: 0;padding: 0;color: #666666;}
 .state-overview .symbol, .state-overview .value {display: inline-block;text-align: center;}
 .state-overview .panel{border:1px solid #dddddd; margin-bottom:15px;}
-/***********************搜索查询***********************/
+/***********************鎼滅储鏌ヨ***********************/
 .search_style{ margin-bottom:20px;}
 .search_style .search_content li{ margin-right:20px; float:left; line-height:30px;}
 .search_style .search_content li .btn_search{
@@ -176,13 +176,13 @@ body
 	
 }
 .search_style .search_content li .btn_search i{ padding-right:5px;}
-/***********底部样式属性***********/
-.footer_style{ width:100%; border-top:1px solid #ddd; padding:2px 0px; color:#666666; background-color:#f2f2f2; font-family:"新宋体"; position: fixed; bottom:0px; z-index:1111; text-align:center;}
+/***********搴曢儴鏍峰紡灞炴��***********/
+.footer_style{ width:100%; border-top:1px solid #ddd; padding:2px 0px; color:#666666; background-color:#f2f2f2; font-family:"鏂板畫浣�"; position: fixed; bottom:0px; z-index:1111; text-align:center;}
 .footer_style p{ padding:0px 20px;}
-/*************************************************************待确认订单样式属性**********************************************************/
+/*************************************************************寰呯‘璁よ鍗曟牱寮忓睘鎬�**********************************************************/
 .d_Confirm_Order_style{}
 .d_Confirm_Order_style .title_name{ font-size:14px; padding:10px 0px ; border-bottom:1px solid #ddd; margin-bottom:20px;}
-/********************************菜单管理样式属性*************************/
+/********************************鑿滃崟绠＄悊鏍峰紡灞炴��*************************/
 .Menu_Manager{}
 .Menu_Manager .add_menu tr{ }
 .Manager_style .Role_xinxi td,
@@ -201,7 +201,7 @@ body
 .Manager_style .Role_xinxi button{ margin-left:70px; width:80px;}
 .Manager_style .Role_xinxi .radio,
 .add_menu .radio{ float:left; width:100px; margin-top:6px}
-/**************************用户管理样式属性***************************/
+/**************************鐢ㄦ埛绠＄悊鏍峰紡灞炴��***************************/
 .user_Manager_style{}
 .table.table-bordered tbody tr td.User_Action_btn{ text-align:left}
 .user_Manager_style .add_user_style{ margin:10px;}
@@ -243,14 +243,14 @@ body
 .finalists_style .btn_style{ width:160px; margin-top:20px; margin-left:auto; margin-right:auto;}
 .finalists_style .btn_style .Reset_btn{ border:1px solid #ddd; margin-left:20px;}
 .finalists_style .btn_style .save_btn{border:1px solid #d15b47}
-/**************************供应商信息样式属性*************************/
+/**************************渚涘簲鍟嗕俊鎭牱寮忓睘鎬�*************************/
 .info_Content .Content_list{ margin-top:20px}
 .info_Content .Content_list li{ float:left; height:40px; line-height:40px; margin-right:20px; margin-bottom:10px; }
 .info_Content .Content_list li .label_name{ float:left; border-right:1px dotted #ddd; margin-right:10px; padding-right:10px; width:110px; text-align:right}
 .info_Content .Content_list li span{ float:left; width:320px}
 .gys_style .Add_Manager_style{ margin:20px;}
 .gys_style .btn_operating{ width:180px}
-/**************品牌列表样式属性***************/
+/**************鍝佺墝鍒楄〃鏍峰紡灞炴��***************/
 .chart_style{ width:400px; border-right:1px solid #ddd; float:left; height:100%; position:relative;}
 .brand_list .table_menu_list{ float:right; margin-left:410px; overflow:auto; overflow:scroll; position:absolute}
 .brand_list .table_menu_list.Widescreen{ margin-left:0px;}
@@ -258,7 +258,7 @@ body
 .Resolution .brand_list .table_menu_list.Widescreen table{ width:1366px}
 .brand_list .table_menu_list.Widescreen table{ width:100%}
 .brand_list { overflow:hidden; position: relative; border-top:1px solid #dddddd;border-left:1px solid #dddddd ;border-right: 1px solid #dddddd;}
-/*********添加品牌样式属性********/
+/*********娣诲姞鍝佺墝鏍峰紡灞炴��********/
 #add_brand{}
 .button_brand{ position:absolute; bottom:10px; width:160px; left:45%}
 #add_brand .left_add{ width:600px; float:left; border-right:1px solid #ddd; border-bottom:1px solid #dddddd; position:fixed;overflow:auto; z-index:234}
@@ -300,7 +300,7 @@ body
 #add_brand{} .left_add i{ color:#F00}
 #add_brand .right_add .p_select_list { width:650px; margin-top:40px}
 #add_brand .right_add .p_select_list .title_name{ height:30px; font-size:14px; line-height:30px; position: relative}
-/*********************品牌详细信息样式属性***********************/
+/*********************鍝佺墝璇︾粏淇℃伅鏍峰紡灞炴��***********************/
 .brand_detailed{}
 .brand_detailed .brand_info{ border:1px solid #dddddd; margin-top:50px; position:relative; margin-bottom:20px}
 .brand_detailed .title_brand{font-size:16px; color:#F63; background-color:#FFF; position:absolute; top:-20px; left:0px; padding:0px 10px;  text-align:center; height:40px; line-height:40px;}
@@ -331,7 +331,7 @@ body
 .b_P_Sort_list li{ line-height:34px; margin-left:10px;}
 .b_P_Sort_list li .grey,
 .b_P_Sort_list li .orange{ margin-right:5px;}
-/*******************************产品类型样式属性******************************************/
+/*******************************浜у搧绫诲瀷鏍峰紡灞炴��******************************************/
 .left_Treeview{ position:relative; float:left}
 .page_right_style{ float:right; position:absolute; height:100%;}
 .page_right_style.Widescreen{ left:0px}
@@ -401,7 +401,7 @@ body
 .Resolution .h_products_list .table_menu_list.Widescreen table,
 .Resolution .h_products_list .table_menu_list table,
 .Resolution .order_style .search_style{ width:1366px}
-/**************添加产品信息样式***************/
+/**************娣诲姞浜у搧淇℃伅鏍峰紡***************/
 #add_picture{ padding:0px 0px; margin:0px;}
 #add_picture .page_right_style{ overflow: auto; position:fixed;left:220px; }
 #add_picture .page_right_style.Widescreen{ left:0px}
@@ -420,7 +420,7 @@ body
 #form-article-add .cl .input-text.Wdate{ width:200px;}
 #form-article-add .cl .Add_p_s .formControls { position:absolute; top:0px; z-index:11; left:90px; width:59%}
 .Button_operation{ width:360px; margin-left:auto; margin-right:auto}
-/*******************订单详细样式属性********************/
+/*******************璁㈠崟璇︾粏鏍峰紡灞炴��********************/
 .Order_Details_style{ margin-bottom:15px;}
 .Order_Details_style .Numbering{ border-bottom:1px dashed #ddd; height:40px; line-height:40px;}
 .Order_Details_style .Numbering b{ color:#F60; font-size:18px; margin-left:5px;}
@@ -438,7 +438,7 @@ body
 #products_list .order_style{ padding:10px; margin-left:220px;}
 #products_list .order_style .order_product_name img{ border:1px solid #dddddd; padding:1px; width:60px; height:60px; }
 #products_list .order_style .order_product_name i{ color:#CCC; font-size:24px;}
-/***********订单详细样式属性************/
+/***********璁㈠崟璇︾粏鏍峰紡灞炴��************/
 .detailed_style{}
 .detailed_style .Receiver_style,
 .detailed_style .product_style,
@@ -472,7 +472,7 @@ body
 .Total_style .Total_m_style{font-size:16px; border-top:1px solid #dddddd; line-height:40px; height:40px;}
 .Total_style .Total{ margin-right:10px;}
 .Total_style b{ color:#F33; font-weight:600}
-/***********询价列表样式属性***********/
+/***********璇环鍒楄〃鏍峰紡灞炴��***********/
 .Item_Details .table.table-bordered thead tr th,
 .Item_Details .table.table-bordered td { padding:0; line-height:30px; height:30px; font-weight:normal}
 .Item_Details .table.table-bordered thead tr th.label_name{}
@@ -483,23 +483,23 @@ body
 .Item_Details .table.table-bordered td .tb_price{ float:left; width:50%; height:100%; display:block;}
 .Item_Details .table.table-bordered td .tb_price input{ margin:0px;}
 .Tips_content h3{ margin-bottom:10px}
-/*************************添加管理项目样式属性**************************/
+/*************************娣诲姞绠＄悊椤圭洰鏍峰紡灞炴��**************************/
 .Add_Manager_style ul{ margin:0px}
 .Add_Manager_style li{ float:left; margin-right:20px; height:40px; line-height:30px; margin:10px 0px}
 .Add_Manager_style .label_name{ float:left; width:90px; text-align:right;}
-/****************添加项目*************/
+/****************娣诲姞椤圭洰*************/
 .project_style{ width:720px}
 .Item_Details .table td .add_text{ margin:5px;}
 .btn_operating{ width:400px; margin-left: auto; margin-right:auto; margin-top:20px}
 .btn_operating .btn{ margin-right:20px;}
-/*************产品管理样式属性****************/
+/*************浜у搧绠＄悊鏍峰紡灞炴��****************/
 .Product_Details ul li span{ width:200px}
 .Product_Details ul li .label_name{ width:100px;}
 .add_Attributes{ margin-bottom:20px;}
 .Attributes_style{ display:none; padding:20px; position:relative}
 .Attributes_style .Attributestext{ height:40px; width:260px;}
 .Attributes_style .btn{ position:absolute; left:300px; height:40px;}
-/***********************模板样式属性*******************/
+/***********************妯℃澘鏍峰紡灞炴��*******************/
 .select_gys .checkbox{ float:left;margin-right:10px; margin-top:6px;}
 .select_gys .Browse_MB{ height:32px; line-height:10px;}
 .fillin_style .mb_name{ margin:20px 0px}
@@ -521,10 +521,10 @@ body
 .Finalist_style .table.table-bordered tbody tr td.table_jiage td{ padding:0px 5px; border-left:1px solid #ddd;border-top:0px; height:30px;}
 .dd_title_name{ text-align:center; font-size:18px; margin-bottom:20px; line-height:40px}
 .d_submit_btn{ text-align:center; margin-top:30px;}
-/*********管理员样式属性***********/
+/*********绠＄悊鍛樻牱寮忓睘鎬�***********/
 #add_administrator_style{ padding:10px;}
 .administrator_style{ border-top:1px solid #dddddd; border-right:1px solid #dddddd; border-left:1px solid #dddddd;}
-.administrator_style .table_menu_list{float: right; margin-left: 220px;overflow: auto;position: absolute;  padding-left:10px;}
+.administrator_style .table_menu_list{float: left; overflow: auto;position: absolute;}
 .administrator_style .table_menu_list.Widescreen{ margin-left:0px;}
 .admin_info_style .text_info{    
     height: 30px;
@@ -555,13 +555,13 @@ body
 .admin_info_style .Button_operation .btn-success{ display:none}
 .admin_info_style  .xinxi span{ color:#858585}
 .admin_info_style .recording_style{ margin-left:400px; float:left; position:absolute;}
-/*********************用户权限样式属性***************************/
+/*********************鐢ㄦ埛鏉冮檺鏍峰紡灞炴��***************************/
 .Competence_info{ border:1px solid #ddd; margin:10px;}
 .Competence_info  .Competence_name{height:40px; line-height:40px; background-color:#E9EFFE;border-bottom:1px solid #ddd; text-align:center}
 .Competence_info .name{ height:30px; line-height:30px; font-size:14px; border-bottom:1px solid #ddd; text-align:center; background-color:#ededed;}
 .Competence_info .Competence_list{ width:33.33%; float:left; border-right:1px solid #ddd; margin:0; height:320px; min-height:320px}
 .Competence_info .Competence_list li{ height:40px; line-height:40px; padding:0px 20px; width:50%; float:left}
-/*********评分********/
+/*********璇勫垎********/
 .table-responsive{ }
 .table-responsive .table{min-width:1500px; width:expression_r( document.body.clientWidth < 1500px ? "1499px" : "auto");overflow-x:scroll}
  body:nth-of-type(1) .table-responsive .table{ width:1672px;}
@@ -574,7 +574,7 @@ body
 .abnormal_style .add_reason li label{ margin-left:80px;}
 .xinxi-xs{ height:40px; line-height:40px; border-bottom:1px dashed #ddd; margin-bottom:20px; font-size:18px;}
 .xinxi-xs span{ margin-right:30px; color:#438EB9}
-/*****************************添加用户样式属性************************/
+/*****************************娣诲姞鐢ㄦ埛鏍峰紡灞炴��************************/
 .add_menber{}
 .add_menber li{ margin:10px 0px; height:40px; line-height:40px; float:left; width:50%}
 .add_menber li.adderss{ width:100%}
@@ -582,7 +582,7 @@ body
 .member_content li .label_name { width:80px; text-align:right; float:left; line-height:30px;}
 .add_menber li .add_name{ float:left; margin-left:10px; line-height:30px;}
 .add_menber li .add_name .lbl{ top:-5px; left:10px;}
-/******用户信息********/
+/******鐢ㄦ埛淇℃伅********/
 .member_show{}
 .member_show .member_jbxx{background-color:#5bacb6; padding:10px;}
 .member_show .member_jbxx .img{ width:64px; height:64px; float:left;}
@@ -602,14 +602,14 @@ body
 	font-size: 0;
 	line-height: 0;
 }
-/************会员等级*************/
+/************浼氬憳绛夌骇*************/
 .grading_style .page_right_style{ left:220px; top:0px}
 .grading_style .page_right_style.Widescreen{ left:0px;}
 .Statistics{ height:400px; border-bottom:1px solid #ddd;}
 .grading_style .left_Treeview{ position:fixed; z-index:1111; background-color:#FFF}
 .grading_style .page_right_style{ height:auto}
 .grading_style .table_menu_list{ width:100%}
-/********************************广告界面样式属性*************************/
+/********************************骞垮憡鐣岄潰鏍峰紡灞炴��*************************/
 .Ads_list{ padding:15px;margin-left:220px; float:right; position: absolute}
 .Ads_list .ad_img{ overflow:hidden; width:250px; height:80px; display:block}
 .Ads_list.Widescreen { margin-left:0px;}
@@ -644,8 +644,8 @@ body
 .Competence_add_style .left_Competence_add .Competence_add .middle{ display:block; float:left; width:150px; margin-right:10px; margin-bottom:10px;}
 .Competence_add_style .Assign_style{ float:right; position:absolute; left:500px;}
 .Competence_add_style .Assign_style .Select_Competence{overflow: auto; position:absolute; }
-/*==============以下是业务相关的样式====================*/
-/*权限*/
+/*==============浠ヤ笅鏄笟鍔＄浉鍏崇殑鏍峰紡====================*/
+/*鏉冮檺*/
 .permission-list{ border:solid 1px #eee; margin:10px}
 .permission-list > dt{ background-color: #59BD1E;padding:5px 10px; color:#FFF}
 .permission-list > dd{ padding:10px;}
@@ -655,11 +655,11 @@ body
 .permission-list > dd > dl > dd{ margin-left:100px;}
 .permission-list > dd > dl > dd > label{ padding-right:10px}
 .permission-list .permission-list2 > dt input[type=checkbox].ace+.lbl::before,.permission-list .permission-list2 > dt input[type=radio].ace+.lbl::before{ border:0px}
-/**********************系统样式属性********************/
+/**********************绯荤粺鏍峰紡灞炴��********************/
 .stystems_style{}
 .stystems_style .tab-content .form-group .control-label i{ color:#F63}
 .stystems_style .tab-content .form-group .textarea{ width:100%;resize: none; margin-left: 10px; height:200px;}
-/*********************************验证样式属性*********************************/
+/*********************************楠岃瘉鏍峰紡灞炴��*********************************/
 #form-admin-add .input-text, #form-admin-add .textarea {
     box-sizing: border-box;
     border: solid 1px #ddd;
