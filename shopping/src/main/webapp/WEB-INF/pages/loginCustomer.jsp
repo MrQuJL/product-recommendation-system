@@ -7,7 +7,6 @@
 	<title>登录页面</title>
 	<meta name='keywords' content='关键词,关键词' />
 	<meta name='description' content='网站描述' />
-	<%@ include file="/WEB-INF/pages/include/head.jsp" %>
 </head>
 <body>
 	<h1>这是商城登录页面</h1>
