@@ -7,28 +7,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 类描述：用于退出的控制器
- * 类名称：com.lyu.shopping.sysmanage.controller.LogoutController
+ * 类描述：管理员退出的控制器
+ * 类名称：com.lyu.shopping.sysmanage.controller.LogoutAdminController
  * @author 曲健磊
- * 2018年2月25日.下午3:44:10
+ * 2018年2月27日.下午7:30:41
  * @version V1.0
  */
 @Controller
-public class LogoutController {
+public class LogoutAdminController {
 	
 	/**
 	 * 用来打印日志
 	 */
-	Logger logger = Logger.getLogger(LogoutController.class);
-	
-	/**
-	 * 处理退出商城用户登录状态的请求
-	 * @return
-	 */
-	@RequestMapping(value="/logoutCustomer")
-	public String gotoLoginCustomer() {
-		return "loginCustomer";
-	}
+	Logger logger = Logger.getLogger(LogoutAdminController.class);
 	
 	/**
 	 * 处理退出后台管理系统的请求

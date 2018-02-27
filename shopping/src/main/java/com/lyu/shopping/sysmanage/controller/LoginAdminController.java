@@ -10,34 +10,25 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lyu.shopping.sysmanage.entity.User;
-import com.lyu.shopping.sysmanage.service.UserService;
+import com.lyu.shopping.sysmanage.service.AdminService;
 
 /**
- * 类描述：用于登录的控制器
- * 类名称：com.lyu.shopping.sysmanage.controller.LoginController
+ * 类描述：用于管理员登录的控制器
+ * 类名称：com.lyu.shopping.sysmanage.controller.LoginAdminController
  * @author 曲健磊
  * 2018年2月23日.下午8:39:33
  * @version V1.0
  */
 @Controller
-public class LoginController {
+public class LoginAdminController {
 	
 	/**
 	 * 用来打印日志
 	 */
-	Logger logger = Logger.getLogger(LoginController.class);
+	Logger logger = Logger.getLogger(LoginAdminController.class);
 	
 	@Autowired
-	private UserService userService;
-	
-	/**
-	 * 处理跳转到商城用户登录页面的请求
-	 * @return
-	 */
-	@RequestMapping(value="/toLogin")
-	public String gotoLoginCustomer() {
-		return "loginCustomer";
-	}
+	private AdminService adminService;
 	
 	/**
 	 * 处理跳转到后台管理系统登录页面的请求
@@ -64,7 +55,7 @@ public class LoginController {
 		
 		// 初步判断用户名和密码是否为空
 		if (!StringUtils.isEmpty(loginName) && !StringUtils.isEmpty(password)) {
-			User user = this.userService.loginUser(loginName, password);
+			User user = this.adminService.loginAdmin(loginName, password);
 			if (user != null) {
 				logger.info(loginName + "登录成功");
 				session.setAttribute("user", user);

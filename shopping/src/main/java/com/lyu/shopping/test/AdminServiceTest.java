@@ -5,16 +5,16 @@ import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.lyu.shopping.sysmanage.entity.User;
-import com.lyu.shopping.sysmanage.service.UserService;
+import com.lyu.shopping.sysmanage.service.AdminService;
 
 /**
- * 类描述：测试用户服务类的一些功能
- * 类名称：com.lyu.shopping.sysmanage.test.UserTest
+ * 类描述：测试管理员服务类的一些功能
+ * 类名称：com.lyu.shopping.sysmanage.test.AdminServiceTest
  * @author 曲健磊
  * 2018年2月25日.下午2:57:48
  * @version V1.0
  */
-public class UserServiceTest {
+public class AdminServiceTest {
 	
 	private ClassPathXmlApplicationContext application;
 	
@@ -28,9 +28,9 @@ public class UserServiceTest {
 	 */
 	@Test
 	public void testListUser() {
-		UserService userService = (UserService) this.application.getBean("userService");
-		User user = userService.loginUser("admin", "123456");
-		System.out.println(user);
+		AdminService adminService = (AdminService) this.application.getBean("adminService");
+		User admin = adminService.loginAdmin("admin", "123");
+		System.out.println(admin);
 	}
 	
 	/**
@@ -38,9 +38,9 @@ public class UserServiceTest {
 	 */
 	@Test
 	public void testEncryptPassword() {
-		UserService userService = (UserService) this.application.getBean("userService");
-		String encryptedPsd = userService.encryptPsd("123");
-		boolean flag = userService.validatePsd("123", encryptedPsd);
+		AdminService adminService = (AdminService) this.application.getBean("adminService");
+		String encryptedPsd = adminService.encryptPsd("123");
+		boolean flag = adminService.validatePsd("123", encryptedPsd);
 		System.out.println(flag);
 	}
 	

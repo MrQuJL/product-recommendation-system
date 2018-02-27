@@ -10,29 +10,29 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.druid.util.StringUtils;
 import com.lyu.shopping.sysmanage.entity.User;
-import com.lyu.shopping.sysmanage.mapper.UserMapper;
-import com.lyu.shopping.sysmanage.service.UserService;
+import com.lyu.shopping.sysmanage.mapper.AdminMapper;
+import com.lyu.shopping.sysmanage.service.AdminService;
 import com.lyu.shopping.util.EncryptUtils;
 
 /**
  * 类描述：用户服务层接口的实现类
- * 类名称：com.lyu.shopping.sysmanage.service.impl.UserServiceImpl
+ * 类名称：com.lyu.shopping.sysmanage.service.impl.AdminServiceImpl
  * @author 曲健磊
  * 2018年2月25日.下午1:46:04
  * @version V1.0
  */
-@Service("userService")
-public class UserServiceImpl implements UserService {
+@Service("adminService")
+public class AdminServiceImpl implements AdminService {
 
 	private static final int HASH_ITERATIONS = 1024;
 	private static final int SALT_SIZE = 8;
 	private static final String DEFAULT_PASSWORD = "123";
 	
 	@Autowired
-	private UserMapper userMapper;
+	private AdminMapper userMapper;
 	
 	@Override
-	public User loginUser(String loginName, String password) {
+	public User loginAdmin(String loginName, String password) {
 		if (StringUtils.isEmpty(loginName) || StringUtils.isEmpty(password)) {
 			return null;
 		}
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
 		user.setLoginName(loginName);
 		
 		// 调用mapper去查询符合条件的用户列表
-		List<User> userList = this.userMapper.listUser(user);
+		List<User> userList = this.userMapper.listAdmin(user);
 		if (userList.isEmpty()) {
 			return null;
 		}
@@ -56,10 +56,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> listUser(User user) {
-		List<User> userList = this.userMapper.listUser(user);
-		
-		return userList;
+	public List<User> listAdmin(User admin) {
+		List<User> adminList = this.userMapper.listAdmin(admin);
+		return adminList;
 	}
 	
 	@Override
@@ -72,7 +71,7 @@ public class UserServiceImpl implements UserService {
 		user.setGmtModified(new Date());
 		user.setIsDeleted(0);
 		
-		int rows = this.userMapper.saveUser(user);
+		int rows = this.userMapper.saveAdmin(user);
 		if (rows > 0) {
 			return true;
 		}

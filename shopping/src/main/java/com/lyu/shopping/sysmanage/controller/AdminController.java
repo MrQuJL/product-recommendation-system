@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lyu.shopping.sysmanage.entity.User;
-import com.lyu.shopping.sysmanage.service.UserService;
+import com.lyu.shopping.sysmanage.service.AdminService;
 
 /**
  * 类描述：处理管理员的请求
@@ -31,9 +31,8 @@ public class AdminController {
 	
 	private static final String MESSAGE_ERROR = "新增用户失败";
 	
-	
 	@Autowired
-	private UserService userService;
+	private AdminService adminService;
 	
 	/**
 	 * 处理跳转到管理员列表的请求
@@ -61,12 +60,12 @@ public class AdminController {
 	public @ResponseBody List<User> listAdmin(String username, String date) {
 		User user = new User();
 		user.setUsername(username);
-		List<User> userList = this.userService.listUser(user);
+		List<User> userList = this.adminService.listAdmin(user);
 		return userList;
 	}
 	
 	/**
-	 * 新增用户
+	 * 新增管理员
 	 * @return
 	 */
 	@RequestMapping(value="/saveAdmin")
@@ -75,7 +74,7 @@ public class AdminController {
 		
 		message.put("message", MESSAGE_ERROR);
 		if (admin != null) {
-			boolean flag = this.userService.saveAdmin(admin);
+			boolean flag = this.adminService.saveAdmin(admin);
 			if (flag) {
 				message.put("message", MESSAGE_RIGHT);
 			}

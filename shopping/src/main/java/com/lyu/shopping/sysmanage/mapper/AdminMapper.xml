@@ -3,13 +3,13 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 
-<mapper namespace="com.lyu.shopping.sysmanage.mapper.UserMapper">
+<mapper namespace="com.lyu.shopping.sysmanage.mapper.AdminMapper">
 	<!-- 用户表所有的字段 -->
 	<sql id="all_user_columns">
 		id, login_name, username, age, sex, password, email, mobile,
 		address, status, is_admin, gmt_create, gmt_modified, is_deleted
 	</sql>
-	
+
 	<!-- 将通用的sql查询条件抽取出来，成为sql片段给不同的方法用 -->
 	<sql id="query_user_sql_where">
 		<if test="username != null">
@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 	
 	<!-- 查询用户列表 -->
-	<select id="listUser" parameterType="user" resultType="user">
+	<select id="listAdmin" parameterType="user" resultType="user">
 		SELECT <include refid="all_user_columns" />
 		FROM shopping_user
 		<where>
@@ -36,12 +36,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 新增用户 -->
-	<insert id="saveUser" parameterType="user">
+	<insert id="saveAdmin" parameterType="user">
 		INSERT INTO shopping_user(login_name, username, age, sex, password, email,
 			mobile, address, status, is_admin, gmt_create, gmt_modified, is_deleted)
 		VALUES(#{loginName}, #{username}, #{age}, #{sex}, #{password}, #{email},
 			#{mobile}, #{address}, #{status}, #{isAdmin}, #{gmtCreate}, #{gmtModified},
 			#{isDeleted})
 	</insert>
-
 </mapper>
