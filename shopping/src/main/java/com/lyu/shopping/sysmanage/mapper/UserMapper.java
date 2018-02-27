@@ -20,5 +20,4 @@ public interface UserMapper {
 	 */
 	List<User> listUser(User user);
 	
-	
 }

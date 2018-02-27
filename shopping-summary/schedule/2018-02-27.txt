@@ -1,0 +1,19 @@
+1. 前台在进行表单校验的时候，由于出现的错误提示是根据input的name来进行显示的，例如：我的<input name="username">这个输入框没有输入信息，在提交表单的时候前台就会提示"username不能为空！"，而不是"用户名不能为空！"，用户交互不友好，想出的解决方案如下：
+
+1). 前台是通过$(this).attr("name")来获取表单的name值从而显示提示信息的。
+
+2). 可以定义一个js的对象用来映射name和对应的中文
+// 输入框的name和对应的中文之间的映射关系
+var formMapping = {
+	loginName : "用户名",
+	username : "真实姓名",
+	gender : "性别",
+	age : "年龄",
+	mobile : "手机",
+	email : "邮箱",
+	address : "家庭地址"
+};
+
+3). 这样在显示提示信息的时候就可以把获取到的input的name的值作为key，去formMapping中查找对应的value，从而显示，代码如下：
+alert(formMapping[$(this).attr("name")] + "不能为空！");
+

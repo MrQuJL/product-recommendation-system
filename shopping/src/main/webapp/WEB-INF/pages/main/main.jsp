@@ -70,7 +70,7 @@
 		
 			//当文档窗口发生改变时 触发  
 			$(window).resize(function() {
-				/* $("#main-container").height(
+				$("#main-container").height(
 						$(window).height() - 76);
 				$("#iframe").height(
 						$(window).height() - 140);
@@ -80,7 +80,7 @@
 						$(window).outerHeight() - 173);
 				$(".submenu").height();
 				$("#nav_list").children(".submenu").css(
-						"height", thisHeight); */
+						"height", thisHeight);
 			});
 			$(".iframeurl").click(function() {
 				var cid = $(this).attr("name");

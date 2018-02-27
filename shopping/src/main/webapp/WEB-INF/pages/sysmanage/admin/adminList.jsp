@@ -99,41 +99,42 @@
 	</div>
 	<!--添加管理员图层-->
 	<div class="add_menber" id="add_menber_style" style="display: none">
-
-		<ul class=" page-content">
-			<li><label class="label_name">用&nbsp;&nbsp;户 &nbsp;名：</label><span
-				class="add_name"><input value="" name="管理员名" type="text"
-					class="text_add" /></span>
-			<div class="prompt r_f"></div></li>
-			<li><label class="label_name">真实姓名：</label><span
-				class="add_name"><input name="真实姓名" type="text"
-					class="text_add" /></span>
-			<div class="prompt r_f"></div></li>
-			<li><label class="label_name">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><span
-				class="add_name"> <label><input
-						name="form-field-radio" type="radio" checked="checked" class="ace"><span
-						class="lbl">男</span></label>&nbsp;&nbsp;&nbsp; <label><input
-						name="form-field-radio" type="radio" class="ace"><span
-						class="lbl">女</span></label>&nbsp;&nbsp;&nbsp;
-			</span>
+		<form action="#" method="post" id="adminForm">
+			<ul class=" page-content">
+				<li><label class="label_name">用&nbsp;&nbsp;户 &nbsp;名：</label><span
+					class="add_name"><input value="" name="loginName" type="text"
+						class="text_add" /></span>
 				<div class="prompt r_f"></div></li>
-			<li><label class="label_name">年龄：</label><span
-				class="add_name"><input name="年龄" type="text"
-					class="text_add" /></span>
-			<div class="prompt r_f"></div></li>
-			<li><label class="label_name">移动电话：</label><span
-				class="add_name"><input name="移动电话" type="text"
-					class="text_add" /></span>
-			<div class="prompt r_f"></div></li>
-			<li><label class="label_name">电子邮箱：</label><span
-				class="add_name"><input name="电子邮箱" type="text"
-					class="text_add" /></span>
-			<div class="prompt r_f"></div></li>
-			<li class="adderss"><label class="label_name">家庭住址：</label><span
-				class="add_name"><input name="家庭住址" type="text"
-					class="text_add" style="width: 350px" /></span>
-			<div class="prompt r_f"></div></li>
-		</ul>
+				<li><label class="label_name">真实姓名：</label><span
+					class="add_name"><input name="username" type="text"
+						class="text_add" /></span>
+				<div class="prompt r_f"></div></li>
+				<li><label class="label_name">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><span
+					class="add_name"> <label><input
+							name="gender" type="radio" checked="checked" class="ace"><span
+							class="lbl">男</span></label>&nbsp;&nbsp;&nbsp; <label><input
+							name="gender" type="radio" class="ace"><span
+							class="lbl">女</span></label>&nbsp;&nbsp;&nbsp;
+				</span>
+					<div class="prompt r_f"></div></li>
+				<li><label class="label_name">年龄：</label><span
+					class="add_name"><input name="age" type="text"
+						class="text_add" /></span>
+				<div class="prompt r_f"></div></li>
+				<li><label class="label_name">移动电话：</label><span
+					class="add_name"><input name="mobile" type="text"
+						class="text_add" /></span>
+				<div class="prompt r_f"></div></li>
+				<li><label class="label_name">电子邮箱：</label><span
+					class="add_name"><input name="email" type="text"
+						class="text_add" /></span>
+				<div class="prompt r_f"></div></li>
+				<li class="adderss"><label class="label_name">家庭住址：</label><span
+					class="add_name"><input name="address" type="text"
+						class="text_add" style="width: 350px" /></span>
+				<div class="prompt r_f"></div></li>
+			</ul>
+		</form>
 	</div>
 <script>
 	jQuery(function($) {
@@ -182,9 +183,19 @@
 			yes:function(index,layero){
 			 	var num=0;
 			 	var str="";
+			 	// 输入框的name和对应的中文之间的映射关系
+			 	var formMapping = {
+			 		loginName : "用户名",
+			 		username : "真实姓名",
+			 		gender : "性别",
+			 		age : "年龄",
+			 		mobile : "手机",
+			 		email : "邮箱",
+			 		address : "家庭地址"
+			 	};
 	     		$(".add_menber input[type$='text']").each(function(n){
 		        	if($(this).val()=="") {
-						layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",
+						layer.alert(str+=""+formMapping[$(this).attr("name")]+"不能为空！\r\n",
 							{title: '提示框', icon:0,}
 						);
 			    		num++;
@@ -194,6 +205,9 @@
 				if(num>0) {
 					return false;
 				} else {
+					// 异步的ajax请求
+					
+					
 					layer.alert('添加成功！',{title: '提示框', icon:1,});
 					layer.close(index);	
 				}
@@ -248,6 +262,7 @@
 </script>
 <script type="text/javascript">
 	var adminMgr = {
+		// 查询管理员列表
 		listAdmin : function() {
 			var username = $("#username").val();
 			var date = $("#start").val();
