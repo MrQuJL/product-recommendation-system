@@ -2,7 +2,7 @@ package com.lyu.shopping.sysmanage.service;
 
 import java.util.List;
 
-import com.lyu.shopping.sysmanage.entity.User;
+import com.lyu.shopping.sysmanage.entity.Admin;
 
 /**
  * 类描述：访问用户数据的服务类
@@ -19,21 +19,21 @@ public interface AdminService {
 	 * @param password 密码
 	 * @return
 	 */
-	User loginAdmin(String loginName, String password);
+	Admin loginAdmin(String loginName, String password);
 	
 	/**
 	 * 根据用户已知信息查询用户列表
 	 * @param user 用户对象
 	 * @return
 	 */
-	List<User> listAdmin(User admin);
+	List<Admin> listAdmin(Admin admin);
 	
 	/**
 	 * 新增管理严
 	 * @param user 待新增的管理员
 	 * @return
 	 */
-	boolean saveAdmin(User admin);
+	boolean saveAdmin(Admin admin);
 	
 	/**
 	 * 采用sha1加密算法将密码加密

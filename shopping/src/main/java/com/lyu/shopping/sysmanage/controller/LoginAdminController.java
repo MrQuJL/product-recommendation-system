@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.lyu.shopping.sysmanage.entity.User;
+import com.lyu.shopping.sysmanage.entity.Admin;
 import com.lyu.shopping.sysmanage.service.AdminService;
 
 /**
@@ -55,10 +55,10 @@ public class LoginAdminController {
 		
 		// 初步判断用户名和密码是否为空
 		if (!StringUtils.isEmpty(loginName) && !StringUtils.isEmpty(password)) {
-			User user = this.adminService.loginAdmin(loginName, password);
-			if (user != null) {
+			Admin admin = this.adminService.loginAdmin(loginName, password);
+			if (admin != null) {
 				logger.info(loginName + "登录成功");
-				session.setAttribute("user", user);
+				session.setAttribute("admin", admin);
 				return "redirect:/main";
 			} else {
 				model.addAttribute("loginFlag", "登录失败，请输入正确的用户名和密码");

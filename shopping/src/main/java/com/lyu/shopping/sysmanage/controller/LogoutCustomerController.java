@@ -30,13 +30,4 @@ public class LogoutCustomerController {
 		return "loginCustomer";
 	}
 	
-	/**
-	 * 处理退出后台管理系统的请求
-	 * @return
-	 */
-	@RequestMapping(value="/logoutAdmin")
-	public String gotoLoginAdmin(HttpSession session) {
-		session.removeAttribute("user");
-		return "loginAdmin";
-	}
 }

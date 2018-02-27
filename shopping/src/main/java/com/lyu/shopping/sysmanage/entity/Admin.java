@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 类描述：用户实体类
- * 类名称：com.lyu.shopping.sysmanage.entity.User
+ * 类描述：管理员实体类
+ * 类名称：com.lyu.shopping.sysmanage.entity.Admin
  * @author 曲健磊
  * 2018年2月25日.下午1:36:35
  * @version V1.0
  */
-public class User implements Serializable {
+public class Admin implements Serializable {
 
 	private static final long serialVersionUID = -8473741577132087469L;
 
@@ -18,7 +18,7 @@ public class User implements Serializable {
 
     private String loginName;
 
-    private String username;
+    private String adminName;
 
     private String password;
 
@@ -33,8 +33,6 @@ public class User implements Serializable {
     private String address;
 
     private Integer status;
-
-    private Integer isAdmin;
 
     private Date gmtCreate;
 
@@ -58,12 +56,12 @@ public class User implements Serializable {
 		this.loginName = loginName;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getAdminName() {
+		return adminName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setAdminName(String adminName) {
+		this.adminName = adminName;
 	}
 
 	public String getPassword() {
@@ -122,14 +120,6 @@ public class User implements Serializable {
 		this.status = status;
 	}
 
-	public Integer getIsAdmin() {
-		return isAdmin;
-	}
-
-	public void setIsAdmin(Integer isAdmin) {
-		this.isAdmin = isAdmin;
-	}
-
 	public Date getGmtCreate() {
 		return gmtCreate;
 	}
@@ -156,10 +146,10 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", loginName=" + loginName + ", username=" + username + ", password=" + password
+		return "Admin [id=" + id + ", loginName=" + loginName + ", adminName=" + adminName + ", password=" + password
 				+ ", email=" + email + ", mobile=" + mobile + ", sex=" + sex + ", age=" + age + ", address=" + address
-				+ ", status=" + status + ", isAdmin=" + isAdmin + ", gmtCreate=" + gmtCreate + ", gmtModified="
-				+ gmtModified + ", isDeleted=" + isDeleted + "]";
+				+ ", status=" + status + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", isDeleted="
+				+ isDeleted + "]";
 	}
 
 }

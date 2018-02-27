@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.lyu.shopping.sysmanage.entity.User;
+import com.lyu.shopping.sysmanage.entity.Admin;
 
 /**
  * 类描述：用于后台管理员登录验证的拦截器
@@ -31,9 +31,9 @@ public class LoginAdminInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 		throws Exception {
 		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
+		Admin admin = (Admin) session.getAttribute("admin");
 		// user不为空表示已经登录过，放行
-		if (user != null) {
+		if (admin != null) {
 			return true;
 		}
 		

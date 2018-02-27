@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.lyu.shopping.sysmanage.entity.User;
+import com.lyu.shopping.sysmanage.entity.Admin;
 import com.lyu.shopping.sysmanage.service.AdminService;
 
 /**
@@ -24,12 +24,12 @@ public class AdminServiceTest {
 	}
 	
 	/**
-	 * 测试查询用户列表
+	 * 测试查询管理员列表
 	 */
 	@Test
-	public void testListUser() {
+	public void testLoginAdmin() {
 		AdminService adminService = (AdminService) this.application.getBean("adminService");
-		User admin = adminService.loginAdmin("admin", "123");
+		Admin admin = adminService.loginAdmin("admin", "123");
 		System.out.println(admin);
 	}
 	

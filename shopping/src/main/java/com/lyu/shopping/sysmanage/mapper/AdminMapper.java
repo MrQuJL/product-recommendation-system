@@ -2,7 +2,7 @@ package com.lyu.shopping.sysmanage.mapper;
 
 import java.util.List;
 
-import com.lyu.shopping.sysmanage.entity.User;
+import com.lyu.shopping.sysmanage.entity.Admin;
 
 /**
  * 类描述：管理员mapper接口
@@ -14,17 +14,17 @@ import com.lyu.shopping.sysmanage.entity.User;
 public interface AdminMapper {
     
 	/**
-	 * 根据user来查询管理员列表
+	 * 根据admin来查询管理员列表
 	 * @param user 根据user中已有的信息查询管理员列表
 	 * @return
 	 */
-	List<User> listAdmin(User admin);
+	List<Admin> listAdmin(Admin admin);
 	
 	/**
-	 * 新增用户
-	 * @param user
+	 * 新增管理员
+	 * @param admin
 	 * @return
 	 */
-	int saveAdmin(User admin);
+	int saveAdmin(Admin admin);
 	
 }

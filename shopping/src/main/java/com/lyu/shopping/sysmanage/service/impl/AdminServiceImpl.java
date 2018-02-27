@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.druid.util.StringUtils;
-import com.lyu.shopping.sysmanage.entity.User;
+import com.lyu.shopping.sysmanage.entity.Admin;
 import com.lyu.shopping.sysmanage.mapper.AdminMapper;
 import com.lyu.shopping.sysmanage.service.AdminService;
 import com.lyu.shopping.util.EncryptUtils;
@@ -25,30 +25,32 @@ import com.lyu.shopping.util.EncryptUtils;
 public class AdminServiceImpl implements AdminService {
 
 	private static final int HASH_ITERATIONS = 1024;
+	
 	private static final int SALT_SIZE = 8;
+	
 	private static final String DEFAULT_PASSWORD = "123";
 	
 	@Autowired
 	private AdminMapper userMapper;
 	
 	@Override
-	public User loginAdmin(String loginName, String password) {
+	public Admin loginAdmin(String loginName, String password) {
 		if (StringUtils.isEmpty(loginName) || StringUtils.isEmpty(password)) {
 			return null;
 		}
-		User user = new User();
+		Admin user = new Admin();
 		user.setLoginName(loginName);
 		
 		// 调用mapper去查询符合条件的用户列表
-		List<User> userList = this.userMapper.listAdmin(user);
+		List<Admin> userList = this.userMapper.listAdmin(user);
 		if (userList.isEmpty()) {
 			return null;
 		}
 		
 		// 用户列表不为空则验证密码是否正确，正确则返回该用户
-		User plainUser = userList.get(0);
+		Admin plainUser = userList.get(0);
 		String encryptedPassword = plainUser.getPassword();
-		if (validatePsd(password, encryptedPassword) && plainUser.getIsAdmin().equals(1)) {
+		if (validatePsd(password, encryptedPassword)) {
 			return plainUser;
 		}
 		
@@ -56,17 +58,16 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<User> listAdmin(User admin) {
-		List<User> adminList = this.userMapper.listAdmin(admin);
+	public List<Admin> listAdmin(Admin admin) {
+		List<Admin> adminList = this.userMapper.listAdmin(admin);
 		return adminList;
 	}
 	
 	@Override
-	public boolean saveAdmin(User user) {
+	public boolean saveAdmin(Admin user) {
 		if (user == null) return false;
 		user.setPassword(this.encryptPsd(DEFAULT_PASSWORD));
 		user.setStatus(0);
-		user.setIsAdmin(1);
 		user.setGmtCreate(new Date());
 		user.setGmtModified(new Date());
 		user.setIsDeleted(0);

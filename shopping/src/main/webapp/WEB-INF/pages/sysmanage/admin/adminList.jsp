@@ -48,12 +48,12 @@
 		var adminMgr = {
 			// 查询管理员列表
 			listAdmin : function() {
-				var username = $("#username").val();
+				var adminName = $("#adminName").val();
 				var date = $("#start").val();
 				$.ajax({
 					type : "post",
 					url : "${ctx}/sysmgr/admin/listAdmin",
-					data : {"username" : username, "date" : date},
+					data : {"adminName" : adminName, "date" : date},
 					dataType : "json",
 					success : function(data) {
 						var htmlTable = "";
@@ -65,7 +65,7 @@
 								
 								htmlTable = htmlTable + "<td>" + data[i].id + "</td>";
 								
-								htmlTable = htmlTable + "<td>" + data[i].username + "</td>";
+								htmlTable = htmlTable + "<td>" + data[i].adminName + "</td>";
 								
 								htmlTable = htmlTable + "<td>" + data[i].sex + "</td>";
 								
@@ -105,7 +105,7 @@
 				<div class="search_style">
 					<div class="title_names">搜索查询</div>
 					<ul class="search_content clearfix">
-						<li><label class="l_f">管理员名称</label><input id="username" name="username" type="text"
+						<li><label class="l_f">管理员名称</label><input id="adminName" name="adminName" type="text"
 							class="text_add" placeholder="输入管理员名称" style="width: 400px" /></li>
 						<li><label class="l_f">添加时间</label><input
 							class="inline laydate-icon" id="start" name="date" style="margin-left: 10px;"></li>
@@ -169,7 +169,7 @@
 				<li>
 					<label class="label_name">真实姓名：</label>
 					<span class="add_name">
-						<input name="username" type="text" class="text_add" />
+						<input name="adminName" type="text" class="text_add" />
 					</span>
 					<div class="prompt r_f"></div>
 				</li>
@@ -239,7 +239,7 @@
 			 	// 输入框的name和对应的中文之间的映射关系
 			 	var formMapping = {
 			 		loginName : "用户名",
-			 		username : "真实姓名",
+			 		adminName : "真实姓名",
 			 		gender : "性别",
 			 		age : "年龄",
 			 		mobile : "手机",
@@ -310,7 +310,7 @@
 		 		// 输入框的name和对应的中文之间的映射关系
 			 	var formMapping = {
 			 		loginName : "用户名",
-			 		username : "真实姓名",
+			 		adminName : "真实姓名",
 			 		gender : "性别",
 			 		age : "年龄",
 			 		mobile : "手机",

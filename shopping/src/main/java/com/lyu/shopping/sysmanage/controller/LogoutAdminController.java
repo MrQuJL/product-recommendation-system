@@ -27,7 +27,7 @@ public class LogoutAdminController {
 	 */
 	@RequestMapping(value="/logoutAdmin")
 	public String gotoLoginAdmin(HttpSession session) {
-		session.removeAttribute("user");
+		session.removeAttribute("admin");
 		return "loginAdmin";
 	}
 }

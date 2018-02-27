@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.lyu.shopping.sysmanage.entity.User;
+import com.lyu.shopping.sysmanage.entity.Admin;
 import com.lyu.shopping.sysmanage.service.AdminService;
 
 /**
@@ -57,11 +57,12 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping(value="/listAdmin")
-	public @ResponseBody List<User> listAdmin(String username, String date) {
-		User user = new User();
-		user.setUsername(username);
-		List<User> userList = this.adminService.listAdmin(user);
-		return userList;
+	public @ResponseBody List<Admin> listAdmin(String adminName, String date) {
+		Admin admin = new Admin();
+		admin.setAdminName(adminName);
+		
+		List<Admin> adminList = this.adminService.listAdmin(admin);
+		return adminList;
 	}
 	
 	/**
@@ -69,7 +70,7 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping(value="/saveAdmin")
-	public @ResponseBody Map<String, Object> saveAdmin(@RequestBody User admin) {
+	public @ResponseBody Map<String, Object> saveAdmin(@RequestBody Admin admin) {
 		Map<String, Object> message = new HashMap<String, Object>();
 		
 		message.put("message", MESSAGE_ERROR);
