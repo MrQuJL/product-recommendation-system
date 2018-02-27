@@ -29,6 +29,13 @@ public interface UserService {
 	List<User> listUser(User user);
 	
 	/**
+	 * 新增管理严
+	 * @param user 待新增的管理员
+	 * @return
+	 */
+	boolean saveAdmin(User user);
+	
+	/**
 	 * 采用sha1加密算法将密码加密
 	 * @param plainPsd 为经过加密的密码
 	 * @return

@@ -1,5 +1,6 @@
 package com.lyu.shopping.sysmanage.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.codec.DecoderException;
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService {
 
 	private static final int HASH_ITERATIONS = 1024;
 	private static final int SALT_SIZE = 8;
+	private static final String DEFAULT_PASSWORD = "123";
 	
 	@Autowired
 	private UserMapper userMapper;
@@ -58,6 +60,24 @@ public class UserServiceImpl implements UserService {
 		List<User> userList = this.userMapper.listUser(user);
 		
 		return userList;
+	}
+	
+	@Override
+	public boolean saveAdmin(User user) {
+		if (user == null) return false;
+		user.setPassword(this.encryptPsd(DEFAULT_PASSWORD));
+		user.setStatus(0);
+		user.setIsAdmin(1);
+		user.setGmtCreate(new Date());
+		user.setGmtModified(new Date());
+		user.setIsDeleted(0);
+		
+		int rows = this.userMapper.saveUser(user);
+		if (rows > 0) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	@Override
@@ -97,4 +117,5 @@ public class UserServiceImpl implements UserService {
 		
 		return flag;
 	}
+
 }

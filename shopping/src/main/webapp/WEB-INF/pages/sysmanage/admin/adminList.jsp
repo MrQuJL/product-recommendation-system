@@ -72,13 +72,17 @@
 					</span> <span class="r_f">共：<b>2345</b>条
 					</span>
 				</div>
-				<!---->
+				<!--  -->
 				<div class="table_menu_list">
 					<table class="table table-striped table-bordered table-hover" id="sample-table">
 						<thead>
 							<tr>
-								<th width="25"><label><input type="checkbox"
-										class="ace"><span class="lbl"></span></label></th>
+								<th width="25">
+									<label>
+										<input type="checkbox" class="ace">
+										<span class="lbl"></span>
+									</label>
+								</th>
 								<th width="80">ID</th>
 								<th width="100">管理员名</th>
 								<th width="80">性别</th>
@@ -101,23 +105,35 @@
 	<div class="add_menber" id="add_menber_style" style="display: none">
 		<form action="#" method="post" id="adminForm">
 			<ul class=" page-content">
-				<li><input name="id" type="hidden" value="" ></li>
-				<li><label class="label_name">用&nbsp;&nbsp;户 &nbsp;名：</label><span
-					class="add_name"><input value="" name="loginName" type="text"
-						class="text_add" /></span>
-				<div class="prompt r_f"></div></li>
-				<li><label class="label_name">真实姓名：</label><span
-					class="add_name"><input name="username" type="text"
-						class="text_add" /></span>
-				<div class="prompt r_f"></div></li>
-				<li><label class="label_name">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label><span
-					class="add_name"> <label><input
-							name="gender" type="radio" checked="checked" class="ace"><span
-							class="lbl">男</span></label>&nbsp;&nbsp;&nbsp; <label><input
-							name="gender" type="radio" class="ace"><span
-							class="lbl">女</span></label>&nbsp;&nbsp;&nbsp;
-				</span>
-					<div class="prompt r_f"></div></li>
+				<li>
+					<label class="label_name">用&nbsp;&nbsp;户 &nbsp;名：</label>
+					<span class="add_name">
+						<input name="id" type="hidden" value="hhiden" >
+						<input value="" name="loginName" type="text" class="text_add" />
+					</span>
+					<div class="prompt r_f"></div>
+				</li>
+				<li>
+					<label class="label_name">真实姓名：</label>
+					<span class="add_name">
+						<input name="username" type="text" class="text_add" />
+					</span>
+					<div class="prompt r_f"></div>
+				</li>
+				<li>
+					<label class="label_name">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label>
+					<span class="add_name">
+						<label>
+							<input id="man" name="sex" type="radio" checked="checked" value="男" class="ace">
+							<span class="lbl">男</span>
+						</label>&nbsp;&nbsp;&nbsp;
+						<label>
+							<input id="women" name="sex" type="radio" class="ace" value="女">
+							<span class="lbl">女</span>
+						</label>&nbsp;&nbsp;&nbsp;
+					</span>
+					<div class="prompt r_f"></div>
+				</li>
 				<li><label class="label_name">年龄：</label><span
 					class="add_name"><input name="age" type="text"
 						class="text_add" /></span>
@@ -139,15 +155,6 @@
 	</div>
 <script>
 	jQuery(function($) {
-		/* var oTable1 = $('#sample-table').dataTable( {
-			"aaSorting": [[ 1, "desc" ]],//默认第几个排序
-			"bStateSave": true,//状态保存
-			"aoColumnDefs": [
-		 	//{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-		  	{"orderable":false,"aTargets":[0,8,9]}// 制定列不参与排序
-			]
-		}); */
-		
 		$('table th input:checkbox').on('click' , function(){
 			var that = this;
 			$(this).closest('table').find('tr > td:first-child input:checkbox')
@@ -156,23 +163,15 @@
 				$(this).closest('tr').toggleClass('selected');
 			});
 		});
-	
-		/* $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-		function tooltip_placement(context, source) {
-			var $source = $(source);
-			var $parent = $source.closest('table')
-			var off1 = $parent.offset();
-			var w1 = $parent.width();
-	
-			var off2 = $source.offset();
-			var w2 = $source.width();
-	
-			if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-			return 'left';
-		} */
 	})
 	/*管理员-添加*/
 	$('#member_add').on('click', function(){
+		// 因为添加和编辑公用一套页面，所以每次添加的时候要清空表单
+		var inputItem = $("#adminForm ul li span").find("input[type='text']");
+		for (var i = 0; i < inputItem.length; i++) {
+			inputItem.val("");
+		}
+		
 		layer.open({
 	        type: 1,
 	        title: '添加管理员',
@@ -207,12 +206,31 @@
 					return false;
 				} else {
 					// 1.序列化表单，组装成一个js对象发往后台（不包含id属性）
-					// 2.接收后台的提示信息
-					// 3.若成功则查询一次管理员，失败则继续维持原有页面
+					var formObj = $("#adminForm").serializeArray();
+					var jsonObj = {};
+					$.each(formObj, function(i, item) {
+						if (item.name != "id" && item.name != "sex") {
+							jsonObj[item.name] = item.value;
+						}
+					});
+					$("#man").attr("value","男");
+					$("#women").attr("value","女");
+					// 为jsonObj添加sex属性
+					jsonObj["sex"] = $("input[type='radio']:checked").val();
+					jsonObj = JSON.stringify(jsonObj);
 					$.ajax({
 						type : "post",
-						url : ""
+						contentType :"application/json;charset=UTF-8",
+						url : "${ctx}/sysmgr/admin/saveAdmin",
+						data : jsonObj,
+						dataType : "json",
+						success : function(data) {
+							alert(data.message);
+						}
 					});
+					
+					// 2.接收后台的提示信息
+					// 3.若成功则查询一次管理员，失败则继续维持原有页面
 					layer.alert('添加成功！',{title: '提示框', icon:1,});
 					layer.close(index);	
 				}
@@ -233,9 +251,19 @@
 			yes: function(index,layero){	
 				var num=0;
 		 		var str="";
+		 		// 输入框的name和对应的中文之间的映射关系
+			 	var formMapping = {
+			 		loginName : "用户名",
+			 		username : "真实姓名",
+			 		gender : "性别",
+			 		age : "年龄",
+			 		mobile : "手机",
+			 		email : "邮箱",
+			 		address : "家庭地址"
+			 	};
 		   		$(".add_menber input[type$='text']").each(function(n){
 		        	if($(this).val()==""){
-			   			layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",
+			   			layer.alert(str+=""+formMapping[$(this).attr("name")]+"不能为空！\r\n",
 			   				{title: '提示框',icon:0,}); 
 		    			num++;
 		          		return false;            

@@ -35,4 +35,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 
+	<!-- 新增用户 -->
+	<insert id="saveUser" parameterType="user">
+		INSERT INTO shopping_user(login_name, username, age, sex, password, email,
+			mobile, address, status, is_admin, gmt_create, gmt_modified, is_deleted)
+		VALUES(#{loginName}, #{username}, #{age}, #{sex}, #{password}, #{email},
+			#{mobile}, #{address}, #{status}, #{isAdmin}, #{gmtCreate}, #{gmtModified},
+			#{isDeleted})
+	</insert>
+
 </mapper>

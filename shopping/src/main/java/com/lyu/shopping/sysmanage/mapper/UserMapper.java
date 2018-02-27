@@ -14,10 +14,17 @@ import com.lyu.shopping.sysmanage.entity.User;
 public interface UserMapper {
     
 	/**
-	 * 根据user来查询用户列表
-	 * @param user 根据user中已有的信息查询用户列表
+	 * 根据user来查询管理员列表
+	 * @param user 根据user中已有的信息查询管理员列表
 	 * @return
 	 */
 	List<User> listUser(User user);
+	
+	/**
+	 * 新增用户
+	 * @param user
+	 * @return
+	 */
+	int saveUser(User user);
 	
 }

@@ -1,0 +1,12 @@
+1. 点击checkbox单选按钮的时候，js中并没有获取到选中的checkBox对象的value属性值
+
+原因：前端框架在点击某个按钮时remove掉了value属性（搞了一个多小时，怒!）
+
+解决：在获取属性值之前先添加value属性
+$("#man").attr("value","男");
+$("#women").attr("value","女");
+alert($("input[type='radio']:checked").val());
+
+
+
+
