@@ -44,6 +44,59 @@
 	<script src="${ctxJsAndCss}/assets/layer/layer.js"></script>
 	<script src="${ctxJsAndCss}/assets/laydate/laydate.js"></script>
 	<script src="${ctxJsAndCss}/js/date.js"></script>
+	<script type="text/javascript">
+		var adminMgr = {
+			// 查询管理员列表
+			listAdmin : function() {
+				var username = $("#username").val();
+				var date = $("#start").val();
+				$.ajax({
+					type : "post",
+					url : "${ctx}/sysmgr/admin/listAdmin",
+					data : {"username" : username, "date" : date},
+					dataType : "json",
+					success : function(data) {
+						var htmlTable = "";
+						if (data.length != 0) {
+							for (var i = 0; i < data.length; i++) {
+								htmlTable = htmlTable + "<tr>";
+								
+								htmlTable = htmlTable + "<td><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>";
+								
+								htmlTable = htmlTable + "<td>" + data[i].id + "</td>";
+								
+								htmlTable = htmlTable + "<td>" + data[i].username + "</td>";
+								
+								htmlTable = htmlTable + "<td>" + data[i].sex + "</td>";
+								
+								htmlTable = htmlTable + "<td>" + data[i].mobile + "</td>";
+								
+								htmlTable = htmlTable + "<td>" + data[i].email + "</td>";
+								
+								htmlTable = htmlTable + "<td class=\"text-l\">" + data[i].address + "</td>";
+								
+								htmlTable = htmlTable + "<td>" +  timestampToTime(data[i].gmtCreate) + "</td>";
+								
+								htmlTable = htmlTable + 
+								"<td class=\"td-manage\"> <a title=\"编辑\""+
+								"							onclick=\"member_edit(\'550\')\" href=\"javascript:;\""+
+								"							class=\"btn btn-xs btn-info\"><i"+
+								"								class=\"icon-edit bigger-120\"></i></a> <a title=\"删除\""+
+								"							href=\"javascript:;\" onclick=\"member_del(this,\'1\')\""+
+								"							class=\"btn btn-xs btn-warning\"><i"+
+								"								class=\"icon-trash  bigger-120\"></i></a></td>";
+								
+								htmlTable = htmlTable + "</tr>";
+							}
+						} else {
+							htmlTable = "没有查询到记录";
+						}
+						$("#sample-table").find("tbody").html(htmlTable);
+					}
+				});
+			}
+		}
+	</script>
 </head>
 <body>
 	<div class="page-content clearfix">
@@ -224,14 +277,17 @@
 						url : "${ctx}/sysmgr/admin/saveAdmin",
 						data : jsonObj,
 						dataType : "json",
+						// 2.接收后台的提示信息
 						success : function(data) {
-							alert(data.message);
+							if (data.message == "新增用户成功") {
+								// 3.若成功则查询一次管理员，失败则继续维持原有页面
+								adminMgr.listAdmin();
+								layer.alert('添加管理员成功！',{title: '提示框', icon:1,});
+							} else {
+								layer.alert('添加管理员失败，请联系系统管理员！',{title: '提示框', icon:0,});
+							}
 						}
 					});
-					
-					// 2.接收后台的提示信息
-					// 3.若成功则查询一次管理员，失败则继续维持原有页面
-					layer.alert('添加成功！',{title: '提示框', icon:1,});
 					layer.close(index);	
 				}
 			}
@@ -298,59 +354,6 @@
 	    elem: '#start',
 	    event: 'focus'
 	});
-</script>
-<script type="text/javascript">
-	var adminMgr = {
-		// 查询管理员列表
-		listAdmin : function() {
-			var username = $("#username").val();
-			var date = $("#start").val();
-			$.ajax({
-				type : "post",
-				url : "${ctx}/sysmgr/admin/listAdmin",
-				data : {"username" : username, "date" : date},
-				dataType : "json",
-				success : function(data) {
-					var htmlTable = "";
-					if (data.length != 0) {
-						for (var i = 0; i < data.length; i++) {
-							htmlTable = htmlTable + "<tr>";
-							
-							htmlTable = htmlTable + "<td><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>";
-							
-							htmlTable = htmlTable + "<td>" + data[i].id + "</td>";
-							
-							htmlTable = htmlTable + "<td>" + data[i].username + "</td>";
-							
-							htmlTable = htmlTable + "<td>" + data[i].sex + "</td>";
-							
-							htmlTable = htmlTable + "<td>" + data[i].mobile + "</td>";
-							
-							htmlTable = htmlTable + "<td>" + data[i].email + "</td>";
-							
-							htmlTable = htmlTable + "<td class=\"text-l\">" + data[i].address + "</td>";
-							
-							htmlTable = htmlTable + "<td>" +  timestampToTime(data[i].gmtCreate) + "</td>";
-							
-							htmlTable = htmlTable + 
-							"<td class=\"td-manage\"> <a title=\"编辑\""+
-							"							onclick=\"member_edit(\'550\')\" href=\"javascript:;\""+
-							"							class=\"btn btn-xs btn-info\"><i"+
-							"								class=\"icon-edit bigger-120\"></i></a> <a title=\"删除\""+
-							"							href=\"javascript:;\" onclick=\"member_del(this,\'1\')\""+
-							"							class=\"btn btn-xs btn-warning\"><i"+
-							"								class=\"icon-trash  bigger-120\"></i></a></td>";
-							
-							htmlTable = htmlTable + "</tr>";
-						}
-					} else {
-						htmlTable = "没有查询到记录";
-					}
-					$("#sample-table").find("tbody").html(htmlTable);
-				}
-			});
-		}
-	}
 </script>
 </body>
 </html>
