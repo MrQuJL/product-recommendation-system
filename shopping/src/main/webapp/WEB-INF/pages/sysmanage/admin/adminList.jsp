@@ -101,6 +101,7 @@
 	<div class="add_menber" id="add_menber_style" style="display: none">
 		<form action="#" method="post" id="adminForm">
 			<ul class=" page-content">
+				<li><input name="id" type="hidden" value="" ></li>
 				<li><label class="label_name">用&nbsp;&nbsp;户 &nbsp;名：</label><span
 					class="add_name"><input value="" name="loginName" type="text"
 						class="text_add" /></span>
@@ -205,9 +206,13 @@
 				if(num>0) {
 					return false;
 				} else {
-					// 异步的ajax请求
-					
-					
+					// 1.序列化表单，组装成一个js对象发往后台（不包含id属性）
+					// 2.接收后台的提示信息
+					// 3.若成功则查询一次管理员，失败则继续维持原有页面
+					$.ajax({
+						type : "post",
+						url : ""
+					});
 					layer.alert('添加成功！',{title: '提示框', icon:1,});
 					layer.close(index);	
 				}
@@ -240,6 +245,9 @@
 			  	if(num>0){
 			  		return false;
 			  	} else {
+			  		// 1.清空管理员图层的输入框信息
+			  		// 2.根据id去后台查询一次当前id的用户信息并赋值给页面
+			  		// 3.序列化表单（包含id属性）
 					layer.alert('添加成功！',
 						{title: '提示框',icon:1,}
 					);
@@ -251,6 +259,9 @@
 	/*管理员-删除*/
 	function member_del(obj,id){
 		layer.confirm('确认要删除吗？',function(index){
+			// 1.发送ajax请求删除该id的管理员
+			// 2.成功时重新触发一次查询操作
+			// 3.失败给出相应的提示信息
 			$(obj).parents("tr").remove();
 			layer.msg('已删除!',{icon:1,time:1000});
 		});
