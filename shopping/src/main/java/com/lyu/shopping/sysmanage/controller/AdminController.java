@@ -38,11 +38,20 @@ public class AdminController {
 	}
 	
 	/**
+	 * 处理跳转到管理员个人信息的请求
+	 * @return
+	 */
+	@RequestMapping(value="/adminInfo")
+	public String gotoAdminInfo() {
+		return "sysmanage/admin/adminInfo";
+	}
+	
+	/**
 	 * 处理跳转到首页的请求
 	 * @return
 	 */
 	@RequestMapping(value="/listAdmin")
-	public @ResponseBody List<User> listAdmin(String username, Date date) {
+	public @ResponseBody List<User> listAdmin(String username, String date) {
 		User user = new User();
 		user.setUsername(username);
 		List<User> userList = this.userService.listUser(user);

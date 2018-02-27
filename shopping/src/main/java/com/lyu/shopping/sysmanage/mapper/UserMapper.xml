@@ -6,8 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.lyu.shopping.sysmanage.mapper.UserMapper">
 	<!-- 用户表所有的字段 -->
 	<sql id="all_user_columns">
-		id, login_name, username, password, email, mobile, address,
-		status, is_admin, gmt_create, gmt_modified, is_deleted
+		id, login_name, username, age, sex, password, email, mobile,
+		address, status, is_admin, gmt_create, gmt_modified, is_deleted
 	</sql>
 	
 	<!-- 将通用的sql查询条件抽取出来，成为sql片段给不同的方法用 -->
@@ -21,8 +21,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="password != null">
 			AND password = #{password}
 		</if>
-		<if test="gmtCreate != null">
-			
+		<if test="1 == 1">
+			AND is_admin = 1
 		</if>
 	</sql>
 	

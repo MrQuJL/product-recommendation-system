@@ -52,10 +52,10 @@
 				<div class="search_style">
 					<div class="title_names">搜索查询</div>
 					<ul class="search_content clearfix">
-						<li><label class="l_f">管理员名称</label><input name="" type="text"
+						<li><label class="l_f">管理员名称</label><input id="username" name="username" type="text"
 							class="text_add" placeholder="输入管理员名称" style="width: 400px" /></li>
 						<li><label class="l_f">添加时间</label><input
-							class="inline laydate-icon" id="start" style="margin-left: 10px;"></li>
+							class="inline laydate-icon" id="start" name="date" style="margin-left: 10px;"></li>
 						<li style="width: 90px;">
 							<button type="button" class="btn_search" onclick="adminMgr.listAdmin();">
 								<i class="icon-search"></i>查询
@@ -114,13 +114,11 @@
 						name="form-field-radio" type="radio" checked="checked" class="ace"><span
 						class="lbl">男</span></label>&nbsp;&nbsp;&nbsp; <label><input
 						name="form-field-radio" type="radio" class="ace"><span
-						class="lbl">女</span></label>&nbsp;&nbsp;&nbsp; <label><input
-						name="form-field-radio" type="radio" class="ace"><span
-						class="lbl">保密</span></label>
+						class="lbl">女</span></label>&nbsp;&nbsp;&nbsp;
 			</span>
 				<div class="prompt r_f"></div></li>
-			<li><label class="label_name">固定电话：</label><span
-				class="add_name"><input name="固定电话" type="text"
+			<li><label class="label_name">年龄：</label><span
+				class="add_name"><input name="年龄" type="text"
 					class="text_add" /></span>
 			<div class="prompt r_f"></div></li>
 			<li><label class="label_name">移动电话：</label><span
@@ -135,25 +133,19 @@
 				class="add_name"><input name="家庭住址" type="text"
 					class="text_add" style="width: 350px" /></span>
 			<div class="prompt r_f"></div></li>
-			<li><label class="label_name">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态：</label><span
-				class="add_name"> <label><input
-						name="form-field-radio1" type="radio" checked="checked"
-						class="ace"><span class="lbl">开启</span></label>&nbsp;&nbsp;&nbsp;
-					<label><input name="form-field-radio1" type="radio"
-						class="ace"><span class="lbl">关闭</span></label></span>
-			<div class="prompt r_f"></div></li>
 		</ul>
 	</div>
 <script>
 	jQuery(function($) {
-		var oTable1 = $('#sample-table').dataTable( {
+		/* var oTable1 = $('#sample-table').dataTable( {
 			"aaSorting": [[ 1, "desc" ]],//默认第几个排序
 			"bStateSave": true,//状态保存
 			"aoColumnDefs": [
-		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+		 	//{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
 		  	{"orderable":false,"aTargets":[0,8,9]}// 制定列不参与排序
-			] } );
-				
+			]
+		}); */
+		
 		$('table th input:checkbox').on('click' , function(){
 			var that = this;
 			$(this).closest('table').find('tr > td:first-child input:checkbox')
@@ -161,11 +153,9 @@
 				this.checked = that.checked;
 				$(this).closest('tr').toggleClass('selected');
 			});
-				
 		});
 	
-	
-		$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+		/* $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
 		function tooltip_placement(context, source) {
 			var $source = $(source);
 			var $parent = $source.closest('table')
@@ -177,81 +167,70 @@
 	
 			if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
 			return 'left';
-		}
+		} */
 	})
 	/*管理员-添加*/
-	 $('#member_add').on('click', function(){
-	    layer.open({
+	$('#member_add').on('click', function(){
+		layer.open({
 	        type: 1,
 	        title: '添加管理员',
-			maxmin: true, 
+			maxmin: true,
 			shadeClose: true, //点击遮罩关闭层
 	        area : ['800px' , ''],
 	        content:$('#add_menber_style'),
 			btn:['提交','取消'],
-			yes:function(index,layero){	
-			 var num=0;
-			 var str="";
-	     $(".add_menber input[type$='text']").each(function(n){
-	          if($(this).val()=="")
-	          {
-	               
-				   layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",{
-	                title: '提示框',
-					icon:0,								
-	          }); 
-			    num++;
-	            return false;            
-	          } 
-			 });
-			  if(num>0){  return false;}	 	
-	          else{
-				  layer.alert('添加成功！',{
-	               title: '提示框',				
-				icon:1,		
-				  });
-				   layer.close(index);	
-			  }		  		     				
+			yes:function(index,layero){
+			 	var num=0;
+			 	var str="";
+	     		$(".add_menber input[type$='text']").each(function(n){
+		        	if($(this).val()=="") {
+						layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",
+							{title: '提示框', icon:0,}
+						);
+			    		num++;
+	            		return false;            
+	          		}
+				});
+				if(num>0) {
+					return false;
+				} else {
+					layer.alert('添加成功！',{title: '提示框', icon:1,});
+					layer.close(index);	
+				}
 			}
 	    });
 	});
-	/*管理员-查看*/
-	function member_show(title,url,id,w,h){
-		layer_show(title,url+'#?='+id,w,h);
-	}
+	
 	/*管理员-编辑*/
 	function member_edit(id){
-		  layer.open({
-	        type: 1,
-	        title: '修改管理员信息',
+		layer.open({
+		    type: 1,
+		    title: '修改管理员信息',
 			maxmin: true, 
 			shadeClose:false, //点击遮罩关闭层
-	        area : ['800px' , ''],
-	        content:$('#add_menber_style'),
-			btn:['提交','取消'],
-			yes:function(index,layero){	
-			 var num=0;
-			 var str="";
-	     $(".add_menber input[type$='text']").each(function(n){
-	          if($(this).val()=="")
-	          {
-	               
-				   layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",{
-	                title: '提示框',				
-					icon:0,								
-	          }); 
-			    num++;
-	            return false;            
-	          } 
-			 });
-			  if(num>0){  return false;}	 	
-	          else{
-				  layer.alert('添加成功！',{
-	               title: '提示框',				
-				icon:1,		
-				  });
-				   layer.close(index);	
-			  }		  		     				
+		    area : ['800px' , ''],
+		    content: $('#add_menber_style'),
+			btn: ['提交','取消'],
+			yes: function(index,layero){	
+				var num=0;
+		 		var str="";
+		   		$(".add_menber input[type$='text']").each(function(n){
+		        	if($(this).val()==""){
+			   			layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",
+			   				{title: '提示框',icon:0,}); 
+		    			num++;
+		          		return false;            
+		        	} 
+		 		});
+		   		
+			  	if(num>0){
+			  		return false;
+			  	} else {
+					layer.alert('添加成功！',
+						{title: '提示框',icon:1,}
+					);
+				   	layer.close(index);
+			  	}
 			}
 	    });
 	}
@@ -264,21 +243,20 @@
 	}
 	laydate({
 	    elem: '#start',
-	    event: 'focus' 
+	    event: 'focus'
 	});
 </script>
 <script type="text/javascript">
 	var adminMgr = {
 		listAdmin : function() {
-			var username = "";
-			var date = "2018-02-26";
+			var username = $("#username").val();
+			var date = $("#start").val();
 			$.ajax({
 				type : "post",
 				url : "${ctx}/sysmgr/admin/listAdmin",
-				data : {"username" : username},
+				data : {"username" : username, "date" : date},
 				dataType : "json",
 				success : function(data) {
-					alert(JSON.stringify(data));
 					var htmlTable = "";
 					if (data.length != 0) {
 						for (var i = 0; i < data.length; i++) {
