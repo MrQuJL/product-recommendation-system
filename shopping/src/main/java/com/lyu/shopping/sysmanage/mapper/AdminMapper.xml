@@ -21,6 +21,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="password != null">
 			AND password = #{password}
 		</if>
+		<if test="1 == 1">
+			AND is_deleted = 0
+		</if>
 	</sql>
 	
 	<!-- 查询用户列表 -->
@@ -39,4 +42,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(#{loginName}, #{adminName}, #{age}, #{sex}, #{password}, #{email},
 			#{mobile}, #{address}, #{status}, #{gmtCreate}, #{gmtModified}, #{isDeleted})
 	</insert>
+	
+	<!-- 根据管理员id删除（逻辑删除）管理员 -->
+	<update id="removeAdmin" parameterType="integer">
+		UPDATE shopping_sys_admin SET is_deleted = 1
+		WHERE id = #{adminId}
+	</update>
+	
 </mapper>

@@ -15,7 +15,7 @@ public interface AdminMapper {
     
 	/**
 	 * 根据admin来查询管理员列表
-	 * @param user 根据user中已有的信息查询管理员列表
+	 * @param admin 根据user中已有的信息查询管理员列表
 	 * @return
 	 */
 	List<Admin> listAdmin(Admin admin);
@@ -26,5 +26,12 @@ public interface AdminMapper {
 	 * @return
 	 */
 	int saveAdmin(Admin admin);
+	
+	/**
+	 * 根据管理员id删除（逻辑删除）管理员
+	 * @param adminId 管理员id
+	 * @return
+	 */
+	int removeAdmin(Integer adminId);
 	
 }

@@ -36,6 +36,13 @@ public interface AdminService {
 	boolean saveAdmin(Admin admin);
 	
 	/**
+	 * 根据管理员id删除（逻辑删除）管理员
+	 * @param adminId 管理员id
+	 * @return
+	 */
+	boolean removeAdmin(Integer adminId);
+	
+	/**
 	 * 采用sha1加密算法将密码加密
 	 * @param plainPsd 为经过加密的密码
 	 * @return

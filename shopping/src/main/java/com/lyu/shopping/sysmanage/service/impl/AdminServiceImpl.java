@@ -31,7 +31,7 @@ public class AdminServiceImpl implements AdminService {
 	private static final String DEFAULT_PASSWORD = "123";
 	
 	@Autowired
-	private AdminMapper userMapper;
+	private AdminMapper adminMapper;
 	
 	@Override
 	public Admin loginAdmin(String loginName, String password) {
@@ -42,7 +42,7 @@ public class AdminServiceImpl implements AdminService {
 		user.setLoginName(loginName);
 		
 		// 调用mapper去查询符合条件的用户列表
-		List<Admin> userList = this.userMapper.listAdmin(user);
+		List<Admin> userList = this.adminMapper.listAdmin(user);
 		if (userList.isEmpty()) {
 			return null;
 		}
@@ -59,7 +59,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<Admin> listAdmin(Admin admin) {
-		List<Admin> adminList = this.userMapper.listAdmin(admin);
+		List<Admin> adminList = this.adminMapper.listAdmin(admin);
 		return adminList;
 	}
 	
@@ -72,7 +72,17 @@ public class AdminServiceImpl implements AdminService {
 		user.setGmtModified(new Date());
 		user.setIsDeleted(0);
 		
-		int rows = this.userMapper.saveAdmin(user);
+		int rows = this.adminMapper.saveAdmin(user);
+		if (rows > 0) {
+			return true;
+		}
+		
+		return false;
+	}
+
+	@Override
+	public boolean removeAdmin(Integer adminId) {
+		int rows = this.adminMapper.removeAdmin(adminId);
 		if (rows > 0) {
 			return true;
 		}

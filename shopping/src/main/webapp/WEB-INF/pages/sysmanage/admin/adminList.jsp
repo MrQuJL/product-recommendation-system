@@ -79,10 +79,10 @@
 								
 								htmlTable = htmlTable + 
 								"<td class=\"td-manage\"> <a title=\"编辑\""+
-								"							onclick=\"member_edit(\'550\')\" href=\"javascript:;\""+
+								"							onclick=\"member_edit(" + data[i].id + ")\" href=\"javascript:;\""+
 								"							class=\"btn btn-xs btn-info\"><i"+
 								"								class=\"icon-edit bigger-120\"></i></a> <a title=\"删除\""+
-								"							href=\"javascript:;\" onclick=\"member_del(this,\'1\')\""+
+								"							href=\"javascript:;\" onclick=\"member_del(this," + data[i].id + ")\""+
 								"							class=\"btn btn-xs btn-warning\"><i"+
 								"								class=\"icon-trash  bigger-120\"></i></a></td>";
 								
@@ -344,10 +344,22 @@
 	function member_del(obj,id){
 		layer.confirm('确认要删除吗？',function(index){
 			// 1.发送ajax请求删除该id的管理员
-			// 2.成功时重新触发一次查询操作
-			// 3.失败给出相应的提示信息
-			$(obj).parents("tr").remove();
-			layer.msg('已删除!',{icon:1,time:1000});
+			$.ajax({
+				type : "post",
+				url : "${ctx}/sysmgr/admin/removeAdmin",
+				data : {"adminId" : id},
+				dataType : "json",
+				success : function(data) {
+					if (data.message == "删除管理员成功") {
+						layer.msg(data.message,{icon:1,time:1000});
+						// 2.成功时重新触发一次查询操作
+						adminMgr.listAdmin();
+					} else {
+						// 3.失败给出相应的提示信息
+						layer.msg(data.message,{icon:0,time:1000});
+					}
+				}
+			});
 		});
 	}
 	laydate({
