@@ -22,12 +22,18 @@ public class LogoutAdminController {
 	Logger logger = Logger.getLogger(LogoutAdminController.class);
 	
 	/**
+	 * 管理系统登录页面的uri
+	 */
+	private static final String LOGIN_ADMIN_URI = "loginAdmin";
+	
+	/**
 	 * 处理退出后台管理系统的请求
 	 * @return
 	 */
 	@RequestMapping(value="/logoutAdmin")
 	public String gotoLoginAdmin(HttpSession session) {
 		session.removeAttribute("admin");
-		return "loginAdmin";
+		return LOGIN_ADMIN_URI;
 	}
+	
 }

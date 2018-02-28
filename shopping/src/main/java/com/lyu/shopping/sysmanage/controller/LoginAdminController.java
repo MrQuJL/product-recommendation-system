@@ -33,9 +33,19 @@ public class LoginAdminController {
 	private static final String LOGIN_FAILED_MESSAGE = "登录失败，请输入正确的用户名和密码";
 	
 	/**
-	 * 管理系统登录页面的uri
+	 * 管理系统登录页面的请求
 	 */
 	private static final String LOGIN_ADMIN_URI = "forward:/WEB-INF/pages/loginAdmin.jsp";
+	
+	/**
+	 * 重定向到管理系统主页面的请求
+	 */
+	private static final String ADMIN_MAIN_REQUEST = "redirect:/admin/main";
+	
+	/**
+	 * 管理系统主页面视图名
+	 */
+	private static final String ADMIN_MAIN_URI = "/sysmanage/main/main";
 	
 	@Autowired
 	private AdminService adminService;
@@ -69,7 +79,7 @@ public class LoginAdminController {
 			if (admin != null) {
 				logger.info(loginName + "登录成功");
 				session.setAttribute("admin", admin);
-				return "redirect:/admin/main";
+				return ADMIN_MAIN_REQUEST;
 			} else {
 				model.addAttribute("loginFlag", LOGIN_FAILED_MESSAGE);
 				return LOGIN_ADMIN_URI;
@@ -85,7 +95,7 @@ public class LoginAdminController {
 	 */
 	@RequestMapping(value="/admin/main")
 	public String main() {
-		return "/sysmanage/main/main";
+		return ADMIN_MAIN_URI;
 	}
 	
 }

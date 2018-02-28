@@ -27,9 +27,30 @@ public class AdminController {
 
 	private Logger logger = Logger.getLogger(AdminController.class);
 	
-	private static final String MESSAGE_RIGHT = "新增用户成功";
+	/**
+	 * 前台页面提示信息的属性名称
+	 */
+	private static final String FRONT_TIPS_ATTR = "message";
 	
-	private static final String MESSAGE_ERROR = "新增用户失败";
+	/**
+	 * 新增管理员成功的提示消息
+	 */
+	private static final String SAVE_ADMIN_SUCCESS = "新增管理员成功";
+	
+	/**
+	 * 新增管理员失败的提示信息
+	 */
+	private static final String SAVE_ADMIN_FAILED = "新增管理员失败";
+	
+	/**
+	 * 删除管理员成功的提示消息
+	 */
+	private static final String REMOVE_ADMIN_SUCCESS = "删除管理员成功";
+	
+	/**
+	 * 删除管理员失败的提示消息
+	 */
+	private static final String REMOVE_ADMIN_FAILED = "删除管理员失败";
 	
 	@Autowired
 	private AdminService adminService;
@@ -74,11 +95,30 @@ public class AdminController {
 	public @ResponseBody Map<String, Object> saveAdmin(@RequestBody Admin admin) {
 		Map<String, Object> message = new HashMap<String, Object>();
 		
-		message.put("message", MESSAGE_ERROR);
+		message.put(FRONT_TIPS_ATTR, SAVE_ADMIN_FAILED);
 		if (admin != null) {
 			boolean flag = this.adminService.saveAdmin(admin);
 			if (flag) {
-				message.put("message", MESSAGE_RIGHT);
+				message.put(FRONT_TIPS_ATTR, SAVE_ADMIN_SUCCESS);
+			}
+		}
+		
+		return message;
+	}
+	
+	/**
+	 * 删除（逻辑删除）管理员
+	 * @return
+	 */
+	@RequestMapping(value="/removeAdmin")
+	public @ResponseBody Map<String, Object> removeAdmin(Integer adminId) {
+		Map<String, Object> message = new HashMap<String, Object>();
+		message.put(FRONT_TIPS_ATTR, REMOVE_ADMIN_FAILED);
+		
+		if (adminId != null) {
+			boolean flag = this.adminService.removeAdmin(adminId);
+			if (flag) {
+				message.put(FRONT_TIPS_ATTR, REMOVE_ADMIN_SUCCESS);
 			}
 		}
 		
