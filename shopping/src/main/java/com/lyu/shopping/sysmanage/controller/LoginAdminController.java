@@ -69,7 +69,7 @@ public class LoginAdminController {
 			if (admin != null) {
 				logger.info(loginName + "登录成功");
 				session.setAttribute("admin", admin);
-				return "redirect:/main";
+				return "redirect:/admin/main";
 			} else {
 				model.addAttribute("loginFlag", LOGIN_FAILED_MESSAGE);
 				return LOGIN_ADMIN_URI;
@@ -83,9 +83,9 @@ public class LoginAdminController {
 	 * 跳转到后台管理系统主页面
 	 * @return
 	 */
-	@RequestMapping(value="/main")
+	@RequestMapping(value="/admin/main")
 	public String main() {
-		return "main/main";
+		return "/sysmanage/main/main";
 	}
 	
 }

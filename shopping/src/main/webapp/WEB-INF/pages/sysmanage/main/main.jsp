@@ -196,7 +196,7 @@
 		</script>
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
-				<a href="${ctx}/main" class="navbar-brand">
+				<a href="${ctx}/admin/main" class="navbar-brand">
 					<small>
 						<img src="${ctxJsAndCss}/images/logo.png">
 					</small>

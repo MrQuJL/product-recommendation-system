@@ -20,7 +20,7 @@ public class PageController {
 	 */
 	@RequestMapping(value="/home")
 	public String gotoHome() {
-		return "main/home";
+		return "/sysmanage/main/home";
 	}
 	
 }
