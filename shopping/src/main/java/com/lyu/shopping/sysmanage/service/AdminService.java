@@ -50,6 +50,13 @@ public interface AdminService {
 	boolean removeAdmin(Long adminId);
 	
 	/**
+	 * 修改管理员信息（不包括密码）
+	 * @param admin 要修改的管理员
+	 * @return
+	 */
+	boolean updateAdmin(Admin admin);
+	
+	/**
 	 * 采用sha1加密算法将密码加密
 	 * @param plainPsd 为经过加密的密码
 	 * @return

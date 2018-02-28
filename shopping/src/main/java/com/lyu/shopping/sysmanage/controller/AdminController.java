@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,8 +23,6 @@ import com.lyu.shopping.sysmanage.service.AdminService;
 @Controller
 @RequestMapping(value="/sysmgr/admin")
 public class AdminController {
-
-	private Logger logger = Logger.getLogger(AdminController.class);
 	
 	/**
 	 * 前台页面提示信息的属性名称
@@ -51,6 +48,16 @@ public class AdminController {
 	 * 删除管理员失败的提示消息
 	 */
 	private static final String REMOVE_ADMIN_FAILED = "删除管理员失败";
+	
+	/**
+	 * 修改管理员成功的提示消息
+	 */
+	private static final String UPDATE_ADMIN_SUCCESS = "修改管理员信息成功";
+	
+	/**
+	 * 修改管理员失败的提示消息
+	 */
+	private static final String UPDATE_ADMIN_FAILED = "修改管理员信息失败";
 	
 	@Autowired
 	private AdminService adminService;
@@ -130,6 +137,23 @@ public class AdminController {
 			if (flag) {
 				message.put(FRONT_TIPS_ATTR, REMOVE_ADMIN_SUCCESS);
 			}
+		}
+		
+		return message;
+	}
+	
+	/**
+	 *修改管理员信息
+	 * @return
+	 */
+	@RequestMapping(value="/updateAdmin")
+	public @ResponseBody Map<String, Object> updateAdmin(@RequestBody Admin admin) {
+		Map<String, Object> message = new HashMap<String, Object>();
+		message.put(FRONT_TIPS_ATTR, UPDATE_ADMIN_FAILED);
+		
+		boolean flag = this.adminService.updateAdmin(admin);
+		if (flag) {
+			message.put(FRONT_TIPS_ATTR, UPDATE_ADMIN_SUCCESS);
 		}
 		
 		return message;

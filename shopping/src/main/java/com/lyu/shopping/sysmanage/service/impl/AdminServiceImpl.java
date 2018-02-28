@@ -97,6 +97,27 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
+	public boolean updateAdmin(Admin admin) {
+		if (admin == null) return false;
+		if (admin.getAge() == null || admin.getAge() > 999 || admin.getAge() < 1) {
+			return false;
+		}
+		if (admin.getMobile() == "" || !admin.getMobile().matches("1[0-9]{10}") ||
+			admin.getMobile().length() > 11) {
+			return false;
+		}
+		
+		// 设置管理员的修改时间
+		admin.setGmtModified(new Date());
+		int rows = this.adminMapper.updateAdmin(admin);
+		if (rows > 0) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	@Override
 	public String encryptPsd(String plainPsd) {
 		// 1.获取随机数
 		byte[] salt = EncryptUtils.generateSalt(SALT_SIZE);

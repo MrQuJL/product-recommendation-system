@@ -56,4 +56,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE id = #{adminId}
 	</update>
 	
+	<!-- 修改管理员的信息（不包括密码） -->
+	<update id="updateAdmin" parameterType="admin">
+		UPDATE shopping_sys_admin SET
+		login_name = #{loginName},
+		admin_name = #{adminName},
+		age = #{age},
+		sex = #{sex},
+		email = #{email},
+		mobile = #{mobile},
+		address = #{address},
+		gmt_modified = #{gmtModified}
+		WHERE id = #{id}
+	</update>
+	
 </mapper>

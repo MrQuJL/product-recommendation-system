@@ -285,7 +285,8 @@
 						dataType : "json",
 						// 2.接收后台的提示信息
 						success : function(data) {
-							if (data.message == "新增用户成功") {
+							alert(data.message);
+							if (data.message == "新增管理员成功") {
 								// 3.若成功则查询一次管理员，失败则继续维持原有页面
 								adminMgr.listAdmin();
 								layer.alert('添加管理员成功！',{title: '提示框', icon:1,});
@@ -294,7 +295,7 @@
 							}
 						}
 					});
-					layer.close(index);	
+					layer.close(index);
 				}
 			}
 	    });
@@ -319,7 +320,6 @@
   			data : {"adminId" : id},
   			dataType : "json",
   			success : function(data) {
-  				alert(JSON.stringify(data));
   				$("#id").val(data.id);
   				$("#loginName").val(data.loginName);
   				$("#adminName").val(data.adminName);
@@ -328,11 +328,9 @@
   				$("#email").val(data.email);
   				$("#address").val(data.address);
   				if (data.sex == "男") {
-  					alert("这是男的");
   					$("#man").prop("checked", "checked");
   					$("#women").removeProp("checked");
   				} else {
-  					alert("这是女的");
   					$("#women").prop("checked", "checked");
   					$("#man").removeProp("checked");
   				}
@@ -347,7 +345,7 @@
 		    area : ['800px' , ''],
 		    content: $('#add_menber_style'),
 			btn: ['提交','取消'],
-			yes: function(index,layero){	
+			yes: function(index,layero){
 				var num=0;
 		 		var str="";
 		 		// 输入框的name和对应的中文之间的映射关系
@@ -363,7 +361,7 @@
 		   		$(".add_menber input[type$='text']").each(function(n){
 		        	if($(this).val()==""){
 			   			layer.alert(str+=""+formMapping[$(this).attr("name")]+"不能为空！\r\n",
-			   				{title: '提示框',icon:0,}); 
+			   				{title: '提示框',icon:0,});
 		    			num++;
 		          		return false;            
 		        	} 
@@ -373,10 +371,39 @@
 			  		return false;
 			  	} else {
 			  		// 3.序列化表单（包含id属性）
-					layer.alert('添加成功！',
-						{title: '提示框',icon:1,}
-					);
-				   	layer.close(index);
+			  		var formObj = $("#adminForm").serializeArray();
+					var jsonObj = {};
+					$.each(formObj, function(i, item) {
+						if (item.name != "sex") {
+							jsonObj[item.name] = item.value;
+						}
+					});
+					$("#man").attr("value","男");
+					$("#women").attr("value","女");
+					// 为jsonObj添加sex属性
+					jsonObj["sex"] = $("input[type='radio']:checked").val();
+					jsonObj = JSON.stringify(jsonObj);
+			  		// 发送ajax请求
+			  		$.ajax({
+			  			type : "post",
+			  			contentType : "application/json;charset=UTF-8",
+			  			url : "${ctx}/sysmgr/admin/updateAdmin",
+			  			data : jsonObj,
+			  			dataType : "json",
+			  			success : function(data) {
+			  				if (data.message == "修改管理员信息成功") {
+			  					adminMgr.listAdmin();
+			  					layer.alert('修改管理员信息成功！',
+		  							{title: '提示框',icon:1,}
+		  						);
+			  				} else {
+			  					layer.alert('修改管理员信息失败！',
+		  							{title: '提示框',icon:0,}
+		  						);
+			  				}
+			  				layer.close(index);
+			  			}
+			  		});
 			  	}
 			}
 	    });
