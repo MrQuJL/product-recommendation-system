@@ -48,12 +48,12 @@
 		var adminMgr = {
 			// 查询管理员列表
 			listAdmin : function() {
-				var adminName = $("#adminName").val();
+				var queryAdminName = $("#queryAdminName").val();
 				var date = $("#start").val();
 				$.ajax({
 					type : "post",
 					url : "${ctx}/sysmgr/admin/listAdmin",
-					data : {"adminName" : adminName, "date" : date},
+					data : {"adminName" : queryAdminName, "date" : date},
 					dataType : "json",
 					success : function(data) {
 						var htmlTable = "";
@@ -105,7 +105,7 @@
 				<div class="search_style">
 					<div class="title_names">搜索查询</div>
 					<ul class="search_content clearfix">
-						<li><label class="l_f">管理员名称</label><input id="adminName" name="adminName" type="text"
+						<li><label class="l_f">管理员名称</label><input id="queryAdminName" name="queryAdminName" type="text"
 							class="text_add" placeholder="输入管理员名称" style="width: 400px" /></li>
 						<li><label class="l_f">添加时间</label><input
 							class="inline laydate-icon" id="start" name="date" style="margin-left: 10px;"></li>
@@ -161,15 +161,15 @@
 				<li>
 					<label class="label_name">用&nbsp;&nbsp;户 &nbsp;名：</label>
 					<span class="add_name">
-						<input name="id" type="hidden" value="hhiden" >
-						<input value="" name="loginName" type="text" class="text_add" />
+						<input id="id" name="id" type="hidden">
+						<input id="loginName" name="loginName" type="text" class="text_add" />
 					</span>
 					<div class="prompt r_f"></div>
 				</li>
 				<li>
 					<label class="label_name">真实姓名：</label>
 					<span class="add_name">
-						<input name="adminName" type="text" class="text_add" />
+						<input id="adminName" name="adminName" type="text" class="text_add" />
 					</span>
 					<div class="prompt r_f"></div>
 				</li>
@@ -177,7 +177,7 @@
 					<label class="label_name">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label>
 					<span class="add_name">
 						<label>
-							<input id="man" name="sex" type="radio" checked="checked" value="男" class="ace">
+							<input id="man" name="sex" type="radio" value="男" class="ace">
 							<span class="lbl">男</span>
 						</label>&nbsp;&nbsp;&nbsp;
 						<label>
@@ -188,19 +188,19 @@
 					<div class="prompt r_f"></div>
 				</li>
 				<li><label class="label_name">年龄：</label><span
-					class="add_name"><input name="age" type="text"
+					class="add_name"><input id="age" name="age" type="text"
 						class="text_add" /></span>
 				<div class="prompt r_f"></div></li>
 				<li><label class="label_name">移动电话：</label><span
-					class="add_name"><input name="mobile" type="text"
+					class="add_name"><input id="mobile" name="mobile" type="text"
 						class="text_add" /></span>
 				<div class="prompt r_f"></div></li>
 				<li><label class="label_name">电子邮箱：</label><span
-					class="add_name"><input name="email" type="text"
+					class="add_name"><input id="email" name="email" type="text"
 						class="text_add" /></span>
 				<div class="prompt r_f"></div></li>
 				<li class="adderss"><label class="label_name">家庭住址：</label><span
-					class="add_name"><input name="address" type="text"
+					class="add_name"><input id="address" name="address" type="text"
 						class="text_add" style="width: 350px" /></span>
 				<div class="prompt r_f"></div></li>
 			</ul>
@@ -220,10 +220,16 @@
 	/*管理员-添加*/
 	$('#member_add').on('click', function(){
 		// 因为添加和编辑公用一套页面，所以每次添加的时候要清空表单
-		var inputItem = $("#adminForm ul li span").find("input[type='text']");
-		for (var i = 0; i < inputItem.length; i++) {
-			inputItem.val("");
-		}
+		$("#id").val("");
+		$("#loginName").val("");
+		$("#adminName").val("");
+		$("#age").val("");
+		$("#mobile").val("");
+		$("#email").val("");
+		$("#address").val("");
+		
+		$("#man").attr("checked", "checked");
+		$("#women").removeAttr("checked");
 		
 		layer.open({
 	        type: 1,
@@ -296,6 +302,44 @@
 	
 	/*管理员-编辑*/
 	function member_edit(id){
+		// 1.清空管理员图层的输入框信息
+  		$("#id").val("");
+		$("#loginName").val("");
+		$("#adminName").val("");
+		$("#age").val("");
+		$("#mobile").val("");
+		$("#email").val("");
+		$("#address").val("");
+  		// 2.根据id去后台查询一次当前id的用户信息并赋值给页面
+  		$.ajax({
+  			type : "post",
+  			url : "${ctx}/sysmgr/admin/getAdminByAdminId",
+  			data : {"adminId" : id},
+  			dataType : "json",
+  			success : function(data) {
+  				alert(JSON.stringify(data));
+  				$("#id").val(data.id);
+  				$("#loginName").val(data.loginName);
+  				$("#adminName").val(data.adminName);
+  				$("#age").val(data.age);
+  				$("#mobile").val(data.mobile);
+  				$("#email").val(data.email);
+  				$("#address").val(data.address);
+  				// 填充性别
+  				$("#man").attr("value","男");
+				$("#women").attr("value","女");
+  				if (data.sex == "男") {
+  					alert("这是男的");
+  					$("#man").checked = true;
+  					$("#women").checked = false;
+  				} else {
+  					alert("这是女的");
+  					$("#women").checked = true;
+  					$("#man").checked = false;
+  				}
+  			}
+  		});
+		
 		layer.open({
 		    type: 1,
 		    title: '修改管理员信息',
@@ -329,8 +373,6 @@
 			  	if(num>0){
 			  		return false;
 			  	} else {
-			  		// 1.清空管理员图层的输入框信息
-			  		// 2.根据id去后台查询一次当前id的用户信息并赋值给页面
 			  		// 3.序列化表单（包含id属性）
 					layer.alert('添加成功！',
 						{title: '提示框',icon:1,}

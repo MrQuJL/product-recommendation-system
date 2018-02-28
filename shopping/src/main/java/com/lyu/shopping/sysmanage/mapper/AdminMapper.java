@@ -14,6 +14,13 @@ import com.lyu.shopping.sysmanage.entity.Admin;
 public interface AdminMapper {
     
 	/**
+	 * 通过管理员id获取管理员的详细信息
+	 * @param adminId 管理员id
+	 * @return
+	 */
+	Admin getAdminByAdminId(Long adminId);
+	
+	/**
 	 * 根据admin来查询管理员列表
 	 * @param admin 根据user中已有的信息查询管理员列表
 	 * @return
@@ -32,6 +39,7 @@ public interface AdminMapper {
 	 * @param adminId 管理员id
 	 * @return
 	 */
-	int removeAdmin(Integer adminId);
+	int removeAdmin(Long adminId);
+	
 	
 }

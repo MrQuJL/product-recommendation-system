@@ -4,9 +4,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 
 <mapper namespace="com.lyu.shopping.sysmanage.mapper.AdminMapper">
-	<!-- 管理员表所有的字段 -->
+	<!-- 管理员表所有的字段（除去password字段） -->
 	<sql id="all_admin_columns">
-		id, login_name, admin_name, age, sex, password, email, mobile,
+		id, login_name, admin_name, password, age, sex, email, mobile,
 		address, status, gmt_create, gmt_modified, is_deleted
 	</sql>
 
@@ -26,6 +26,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</sql>
 	
+	<!-- 通过管理员id获取管理员的详细信息 -->
+	<select id="getAdminByAdminId" parameterType="long" resultType="admin">
+		SELECT <include refid="all_admin_columns" />
+		FROM shopping_sys_admin
+		WHERE id = #{adminId}
+	</select>
+	
 	<!-- 查询用户列表 -->
 	<select id="listAdmin" parameterType="admin" resultType="admin">
 		SELECT <include refid="all_admin_columns" />
@@ -43,8 +50,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{mobile}, #{address}, #{status}, #{gmtCreate}, #{gmtModified}, #{isDeleted})
 	</insert>
 	
-	<!-- 根据管理员id删除（逻辑删除）管理员 -->
-	<update id="removeAdmin" parameterType="integer">
+	<!-- 删除管理员，根据管理员id删除（逻辑删除）管理员 -->
+	<update id="removeAdmin" parameterType="long">
 		UPDATE shopping_sys_admin SET is_deleted = 1
 		WHERE id = #{adminId}
 	</update>

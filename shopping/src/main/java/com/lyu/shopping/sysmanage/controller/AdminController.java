@@ -74,6 +74,16 @@ public class AdminController {
 	}
 	
 	/**
+	 * 根据管理员id获取管理员的详细信息
+	 * @return
+	 */
+	@RequestMapping(value="/getAdminByAdminId")
+	public @ResponseBody Admin getAdminByAdminId(Long adminId) {
+		Admin admin = this.adminService.getAdminByAdminId(adminId);
+		return admin;
+	}
+	
+	/**
 	 * 查询管理员列表
 	 * @return
 	 */
@@ -111,7 +121,7 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping(value="/removeAdmin")
-	public @ResponseBody Map<String, Object> removeAdmin(Integer adminId) {
+	public @ResponseBody Map<String, Object> removeAdmin(Long adminId) {
 		Map<String, Object> message = new HashMap<String, Object>();
 		message.put(FRONT_TIPS_ATTR, REMOVE_ADMIN_FAILED);
 		

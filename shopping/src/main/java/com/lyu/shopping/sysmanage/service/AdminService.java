@@ -14,6 +14,13 @@ import com.lyu.shopping.sysmanage.entity.Admin;
 public interface AdminService {
 
 	/**
+	 * 通过管理员id获取管理员的详细信息
+	 * @param adminId 管理员id
+	 * @return
+	 */
+	Admin getAdminByAdminId(Long adminId);
+	
+	/**
 	 * 验证用户是否存在，若存在，继续验证密码是否匹配
 	 * @param loginName 用户登录名称
 	 * @param password 密码
@@ -40,7 +47,7 @@ public interface AdminService {
 	 * @param adminId 管理员id
 	 * @return
 	 */
-	boolean removeAdmin(Integer adminId);
+	boolean removeAdmin(Long adminId);
 	
 	/**
 	 * 采用sha1加密算法将密码加密

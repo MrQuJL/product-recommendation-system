@@ -44,4 +44,17 @@ public class AdminServiceTest {
 		System.out.println(flag);
 	}
 	
+	/**
+	 * 测试根据管理员id查询管理员详细信息
+	 */
+	@Test
+	public void testGetAdminByAdminId() {
+		AdminService adminService = (AdminService) this.application.getBean("adminService");
+		Admin admin  = adminService.getAdminByAdminId(1L);
+		
+		System.out.println(admin);
+	}
+	
+	
+	
 }

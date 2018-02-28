@@ -34,15 +34,21 @@ public class AdminServiceImpl implements AdminService {
 	private AdminMapper adminMapper;
 	
 	@Override
+	public Admin getAdminByAdminId(Long adminId) {
+		Admin admin = this.adminMapper.getAdminByAdminId(adminId);
+		return admin;
+	}
+	
+	@Override
 	public Admin loginAdmin(String loginName, String password) {
 		if (StringUtils.isEmpty(loginName) || StringUtils.isEmpty(password)) {
 			return null;
 		}
-		Admin user = new Admin();
-		user.setLoginName(loginName);
+		Admin admin = new Admin();
+		admin.setLoginName(loginName);
 		
 		// 调用mapper去查询符合条件的用户列表
-		List<Admin> userList = this.adminMapper.listAdmin(user);
+		List<Admin> userList = this.adminMapper.listAdmin(admin);
 		if (userList.isEmpty()) {
 			return null;
 		}
@@ -81,7 +87,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public boolean removeAdmin(Integer adminId) {
+	public boolean removeAdmin(Long adminId) {
 		int rows = this.adminMapper.removeAdmin(adminId);
 		if (rows > 0) {
 			return true;

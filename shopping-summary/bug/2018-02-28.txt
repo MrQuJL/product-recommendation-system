@@ -1,0 +1,12 @@
+1. 无法通过jquery的$("#adminName").val("值")为id为adminName的input赋值（页面无法显示，但是其他的input却可以）
+
+原因：在查询条件里面有一个id为adminName的输入框，在form表单里面也有一个id为adminName的输入框，晕
+
+2. 每次打开模态框都希望性别在"男"上，但是只要选过一次性别，下次再打开模态框的时候就停留在上次选中的性别，通过jquery的attr和removeAttr操作checked属性都只有第一次起效果，后续点击就没有反应了
+
+
+
+
+
+
+
