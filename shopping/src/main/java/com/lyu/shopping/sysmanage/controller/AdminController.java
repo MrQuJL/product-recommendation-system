@@ -35,31 +35,32 @@ public class AdminController {
 	private AdminService adminService;
 	
 	/**
-	 * 处理跳转到管理员列表的请求
+	 * 跳转到管理员列表页面
 	 * @return
 	 */
-	@RequestMapping(value="/adminList")
+	@RequestMapping(value="/gotoAdminList")
 	public String gotoAdminList() {
 		return "sysmanage/admin/adminList";
 	}
 	
 	/**
-	 * 处理跳转到管理员个人信息的请求
+	 * 跳转到管理员个人信息页面
 	 * @return
 	 */
-	@RequestMapping(value="/adminInfo")
+	@RequestMapping(value="/gotoAdminInfo")
 	public String gotoAdminInfo() {
 		return "sysmanage/admin/adminInfo";
 	}
 	
 	/**
-	 * 处理跳转到首页的请求
+	 * 查询管理员列表
 	 * @return
 	 */
 	@RequestMapping(value="/listAdmin")
 	public @ResponseBody List<Admin> listAdmin(String adminName, String date) {
 		Admin admin = new Admin();
 		admin.setAdminName(adminName);
+		// 根据日期查询管理员
 		
 		List<Admin> adminList = this.adminService.listAdmin(admin);
 		return adminList;

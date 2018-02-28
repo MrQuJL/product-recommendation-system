@@ -25,6 +25,11 @@ public class LoginAdminInterceptor implements HandlerInterceptor {
 	Logger logger = Logger.getLogger(LoginAdminInterceptor.class);
 	
 	/**
+	 * 跳转到管理系统登录页面的uri
+	 */
+	private static final String LOGIN_ADMIN_REQUEST_URI = "/gotoLoginAdmin";
+	
+	/**
 	 * 在handler方法执行之前，运行这个方法里面的代码
 	 */
 	@Override
@@ -37,7 +42,7 @@ public class LoginAdminInterceptor implements HandlerInterceptor {
 			return true;
 		}
 		
-		request.getRequestDispatcher("/admin").forward(request, response);
+		request.getRequestDispatcher(LOGIN_ADMIN_REQUEST_URI).forward(request, response);
 		
 		return false;
 	}

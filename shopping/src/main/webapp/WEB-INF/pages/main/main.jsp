@@ -361,10 +361,10 @@
 					<li><a href="#" class="dropdown-toggle"><i class="icon-group"></i><span class="menu-text"> 管理员管理 </span><b class="arrow icon-angle-down"></b></a>
 							<ul class="submenu">
                                 <li class="home">
-                                	<a href="${ctx}/sysmgr/admin/adminList" target="iframe" name="" title="管理员列表" class=""><i class="icon-double-angle-right"></i>管理员列表</a>
+                                	<a href="${ctx}/sysmgr/admin/gotoAdminList" target="iframe" name="" title="管理员列表" class=""><i class="icon-double-angle-right"></i>管理员列表</a>
                                 </li>
 								<li class="home">
-									<a href="${ctx}/sysmgr/admin/adminInfo" target="iframe" name="" title="个人信息" class=""><i class="icon-double-angle-right"></i>个人信息</a>
+									<a href="${ctx}/sysmgr/admin/gotoAdminInfo" target="iframe" name="" title="个人信息" class=""><i class="icon-double-angle-right"></i>个人信息</a>
 								</li>
 							</ul>
 						</li>

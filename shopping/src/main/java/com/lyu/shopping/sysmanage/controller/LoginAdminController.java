@@ -27,24 +27,34 @@ public class LoginAdminController {
 	 */
 	Logger logger = Logger.getLogger(LoginAdminController.class);
 	
+	/**
+	 * 登录失败的错误提示信息
+	 */
+	private static final String LOGIN_FAILED_MESSAGE = "登录失败，请输入正确的用户名和密码";
+	
+	/**
+	 * 管理系统登录页面的uri
+	 */
+	private static final String LOGIN_ADMIN_URI = "forward:/WEB-INF/pages/loginAdmin.jsp";
+	
 	@Autowired
 	private AdminService adminService;
 	
 	/**
-	 * 处理跳转到后台管理系统登录页面的请求
+	 * 跳转到后台管理系统的登录页面
 	 * @return
 	 */
-	@RequestMapping(value="/admin")
+	@RequestMapping(value="/gotoLoginAdmin")
 	public String gotoLoginAdmin() {
 		return "loginAdmin";
 	}
 	
 	/**
-	 * 用来处理登录到后台管理页面的请求
+	 * 处理登录到后台管理页面的请求
 	 * @param loginName 用户登录名
 	 * @param password 用户密码
 	 * @param model 存放页面中的一些属性
-	 * @param session 本次会话
+	 * @param session 会话域
 	 * @return
 	 */
 	@RequestMapping(value="/loginAdmin")
@@ -61,16 +71,16 @@ public class LoginAdminController {
 				session.setAttribute("admin", admin);
 				return "redirect:/main";
 			} else {
-				model.addAttribute("loginFlag", "登录失败，请输入正确的用户名和密码");
-				return "forward:/WEB-INF/pages/loginAdmin.jsp";
+				model.addAttribute("loginFlag", LOGIN_FAILED_MESSAGE);
+				return LOGIN_ADMIN_URI;
 			}
 		}
-		model.addAttribute("loginFlag", "登录失败，请输入正确的用户名和密码");
-		return "forward:/WEB-INF/pages/loginAdmin.jsp";
+		model.addAttribute("loginFlag", LOGIN_FAILED_MESSAGE);
+		return LOGIN_ADMIN_URI;
 	}
 	
 	/**
-	 * 处理跳转到后台管理系统主页面的请求
+	 * 跳转到后台管理系统主页面
 	 * @return
 	 */
 	@RequestMapping(value="/main")
