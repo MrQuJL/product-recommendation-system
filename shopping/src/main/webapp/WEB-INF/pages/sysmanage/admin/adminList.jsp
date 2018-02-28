@@ -228,8 +228,8 @@
 		$("#email").val("");
 		$("#address").val("");
 		
-		$("#man").attr("checked", "checked");
-		$("#women").removeAttr("checked");
+		$("#man").prop("checked", "checked");
+		$("#women").removeProp("checked");
 		
 		layer.open({
 	        type: 1,
@@ -310,6 +310,8 @@
 		$("#mobile").val("");
 		$("#email").val("");
 		$("#address").val("");
+		$("#man").prop("checked", "checked");
+		$("#women").removeProp("checked");
   		// 2.根据id去后台查询一次当前id的用户信息并赋值给页面
   		$.ajax({
   			type : "post",
@@ -325,17 +327,14 @@
   				$("#mobile").val(data.mobile);
   				$("#email").val(data.email);
   				$("#address").val(data.address);
-  				// 填充性别
-  				$("#man").attr("value","男");
-				$("#women").attr("value","女");
   				if (data.sex == "男") {
   					alert("这是男的");
-  					$("#man").checked = true;
-  					$("#women").checked = false;
+  					$("#man").prop("checked", "checked");
+  					$("#women").removeProp("checked");
   				} else {
   					alert("这是女的");
-  					$("#women").checked = true;
-  					$("#man").checked = false;
+  					$("#women").prop("checked", "checked");
+  					$("#man").removeProp("checked");
   				}
   			}
   		});

@@ -4,6 +4,11 @@
 
 2. 每次打开模态框都希望性别在"男"上，但是只要选过一次性别，下次再打开模态框的时候就停留在上次选中的性别，通过jquery的attr和removeAttr操作checked属性都只有第一次起效果，后续点击就没有反应了
 
+原因：高版本的浏览器不兼容jquery的attr和removeAttr函数，需要使用prop和removeProp函数来代替，低版本的浏览器才可以使用attr和removeAttr来修改DOM对象的属性
+
+
+
+
 
 
 
