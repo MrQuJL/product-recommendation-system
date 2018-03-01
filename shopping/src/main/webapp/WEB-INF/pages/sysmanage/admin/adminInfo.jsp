@@ -48,14 +48,14 @@
 						<label class="col-sm-3 control-label no-padding-right"
 							for="form-field-1">性别： </label>
 						<div class="col-sm-9">
-							<span class="sex">${admin.sex}</span>
+							<span class="sex" id="sex">${admin.sex}</span>
 							<div class="add_sex">
 								<label>
-									<input name="form-field-radio" value="男" type="radio" checked="checked" class="ace">
+									<input name="form-field-radio" id="man" value="男" type="radio" checked="checked" class="ace">
 									<span class="lbl">男</span>
-								</label>&nbsp;&nbsp; 
+								</label>&nbsp;&nbsp;
 								<label>
-									<input name="form-field-radio" value="女" type="radio" class="ace">
+									<input name="form-field-radio" id="women" value="女" type="radio" class="ace">
 									<span class="lbl">女</span>
 								</label>
 							</div>
@@ -185,6 +185,14 @@
 		$('#Personal').find('.btn-success').css({
 			'display' : 'block'
 		});
+		var sex = $("#sex").text();
+		if (sex == "男") {
+			$("#man").prop("checked","checked");
+			$("#women").removeProp("checked");
+		} else {
+			$("#women").prop("checked","checked");
+			$("#man").removeProp("checked");
+		}
 	};
 	function save_info() {
 		var num = 0;
@@ -204,12 +212,14 @@
 			return false;
 		} else {
 			// 1.获取表单数据,封装成js对象并用JSON.stringify()转化成JSON字符串
+			var id = ${admin.id};
 			var adminName = $("#adminName").val();
 			var sex = $("input[type='radio']:checked").val();
 			var age = $("#age").val();
 			var mobile = $("#mobile").val();
 			var email = $("#email").val();
 			var jsonObj = {
+				"id" : id,
 				"adminName" : adminName,
 				"sex" : sex,
 				"age" : age,
@@ -220,12 +230,24 @@
 			// 2.发送ajax请求
 			$.ajax({
 				type : "post",
+				contentType : "application/json;charset=utf-8",
 				url : "${ctx}/sysmgr/admin/updateAdmin",
-			});
-			
-			layer.alert('修改成功！', {
-				title : '提示框',
-				icon : 1,
+				data : jsonObj,
+				dataType : "json",
+				success : function(data) {
+					if (data.message == "修改管理员信息成功") {
+						layer.alert(data.message + "！\r\n", {
+							title : '提示框',
+							icon : 1,
+						});
+						location.reload();
+					} else {
+						layer.alert(data.message + "！\r\n", {
+							title : '提示框',
+							icon : 0,
+						});
+					}
+				}
 			});
 			$('#Personal').find('.xinxi').removeClass("hover");
 			$('#Personal').find('.text_info').removeClass("add").attr(
@@ -234,7 +256,6 @@
 				'display' : 'none'
 			});
 			layer.close(index);
-
 		}
 	};
 	//初始化宽度、高度    

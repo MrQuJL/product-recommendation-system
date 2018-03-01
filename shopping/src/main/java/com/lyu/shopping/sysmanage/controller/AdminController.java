@@ -1,10 +1,11 @@
 package com.lyu.shopping.sysmanage.controller;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -171,13 +172,18 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping(value="/updateAdmin")
-	public @ResponseBody Map<String, Object> updateAdmin(@RequestBody Admin admin) {
+	public @ResponseBody Map<String, Object> updateAdmin(@RequestBody Admin admin,
+		HttpSession session) {
+		
 		Map<String, Object> message = new HashMap<String, Object>();
 		message.put(FRONT_TIPS_ATTR, UPDATE_ADMIN_FAILED);
 		
 		boolean flag = this.adminService.updateAdmin(admin);
 		if (flag) {
 			message.put(FRONT_TIPS_ATTR, UPDATE_ADMIN_SUCCESS);
+			// 修改完管理员信息之后要更新session
+			Admin updatedAdmin = this.adminService.getAdminByAdminId(admin.getId());
+			session.setAttribute("admin", updatedAdmin);
 		}
 		
 		return message;
