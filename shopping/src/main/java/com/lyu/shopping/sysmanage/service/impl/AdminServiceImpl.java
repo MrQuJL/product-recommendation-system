@@ -7,6 +7,9 @@ import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.druid.util.StringUtils;
 import com.lyu.shopping.sysmanage.entity.Admin;
@@ -97,20 +100,26 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
+	@Transactional(isolation=Isolation.DEFAULT, propagation = Propagation.REQUIRED)
 	public boolean removeAdminBatch(List<Long> adminIds) {
-		if (adminIds == null || adminIds.size() == 0) {return false;}
-		// 先检查集合中的adminId是否存在
-		
-		
-		int size = adminIds.size();
-		
-		int removeSuccessNums = this.adminMapper.removeAdminBatch(adminIds);
-		
-		if (removeSuccessNums == size) {
-			return true;
+		if (adminIds == null || adminIds.size() == 0) {
+			return false;
 		}
-		
-		return false;
+		// 先检查集合中的adminId是否存在
+		int existAdminNums = this.adminMapper.countAdminInList(adminIds);
+		if (existAdminNums != adminIds.size()) {
+			return false;
+		}
+//		
+//		int size = adminIds.size();
+//		// 批量删除
+//		int removeSuccessNums = this.adminMapper.removeAdminBatch(adminIds);
+//		
+//		if (removeSuccessNums == size) {
+//			return true;
+//		}
+//		
+		return true;
 	}
 	
 	@Override

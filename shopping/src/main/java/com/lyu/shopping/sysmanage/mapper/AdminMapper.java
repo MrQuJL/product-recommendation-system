@@ -14,6 +14,13 @@ import com.lyu.shopping.sysmanage.entity.Admin;
 public interface AdminMapper {
     
 	/**
+	 * 统计既存在于数据库中又存在于集合中的管理员数目
+	 * @param adminIds 页面上传过来的管理员id集合
+	 * @return
+	 */
+	int countAdminInList(List<Long> adminIds);
+	
+	/**
 	 * 通过管理员id获取管理员的详细信息
 	 * @param adminId 管理员id
 	 * @return

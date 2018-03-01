@@ -26,6 +26,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</sql>
 	
+	<!-- 统计既存在于数据库中又存在于集合中的管理员数目 -->
+	<select id="countAdminInList" parameterType="list" resultType="int">
+		SELECT count(1) FROM shopping_sys_admin
+		<where>
+			<foreach collection="list" open="AND id IN (" item="id" 
+				separator="," close=")">#{id}</foreach>
+		</where>
+	</select>
+	
 	<!-- 通过管理员id获取管理员的详细信息 -->
 	<select id="getAdminByAdminId" parameterType="long" resultType="admin">
 		SELECT <include refid="all_admin_columns" />
@@ -60,9 +69,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="removeAdminBatch" parameterType="list">
 		UPDATE shopping_sys_admin SET is_deleted = 1
 		<where>
-			<foreach collection="list" item="id" open="AND id in (" separator="," close=")">
-				#{id}
-			</foreach>
+			<foreach collection="list" item="id" open="AND id in ("
+				separator="," close=")">#{id}</foreach>
 		</where>
 	</update>
 	

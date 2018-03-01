@@ -1,5 +1,8 @@
 package com.lyu.shopping.test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -55,6 +58,23 @@ public class AdminServiceTest {
 		System.out.println(admin);
 	}
 	
-	
+	/**
+	 * 测试根据管理员id查询管理员详细信息
+	 */
+	@Test
+	public void testRemoveAdminBatch() {
+		AdminService adminService = (AdminService) this.application.getBean("adminService");
+		List<Long> adminIds = new ArrayList<Long>();
+		adminIds.add(1L);
+//		adminIds.add(2L);
+		adminIds.add(3L);
+		adminIds.add(4L);
+		adminIds.add(5L);
+		
+		boolean flag  = adminService.removeAdminBatch(adminIds);
+		
+		System.out.println(flag);
+		
+	}
 	
 }
