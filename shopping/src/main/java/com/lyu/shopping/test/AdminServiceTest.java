@@ -1,6 +1,7 @@
 package com.lyu.shopping.test;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
@@ -75,6 +76,15 @@ public class AdminServiceTest {
 		
 		System.out.println(flag);
 		
+	}
+	
+	/**
+	 * 测试将日期转换成秒
+	 */
+	@Test
+	public void testConvertDateToMillion() {
+		Date date = new Date();
+		System.out.println(date.getTime());
 	}
 	
 }

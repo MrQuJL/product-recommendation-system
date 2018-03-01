@@ -25,6 +25,7 @@
 	<script src="${ctxJsAndCss}/assets/js/typeahead-bs2.min.js"></script>
 	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.min.js"></script>
 	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.bootstrap.js"></script>
+	<script src="${ctxJsAndCss}/js/date.js"></script>
 </head>
 <body>
 	<div class="clearfix">
@@ -36,7 +37,7 @@
 						<label class="col-sm-3 control-label no-padding-right"
 							for="form-field-1">用户名： </label>
 						<div class="col-sm-9">
-							<input type="text" name="用户名" id="website-title" value="张小泉"
+							<input type="text" name="用户名" id="website-title" value="${admin.adminName}"
 								class="col-xs-7 text_info" disabled="disabled">
 							&nbsp;&nbsp;&nbsp;<a href="javascript:ovid()"
 								onclick="change_Password()" class="btn btn-warning btn-xs">修改密码</a>
@@ -47,12 +48,16 @@
 						<label class="col-sm-3 control-label no-padding-right"
 							for="form-field-1">性别： </label>
 						<div class="col-sm-9">
-							<span class="sex">男</span>
+							<span class="sex">${admin.sex}</span>
 							<div class="add_sex">
-								<label><input name="form-field-radio" type="radio" checked="checked"
-									class="ace"><span class="lbl">男</span></label>&nbsp;&nbsp; <label><input
-									name="form-field-radio" type="radio" class="ace"><span
-									class="lbl">女</span></label>
+								<label>
+									<input name="form-field-radio" type="radio" checked="checked" class="ace">
+									<span class="lbl">男</span>
+								</label>&nbsp;&nbsp; 
+								<label>
+									<input name="form-field-radio" type="radio" class="ace">
+									<span class="lbl">女</span>
+								</label>
 							</div>
 						</div>
 					</div>
@@ -60,7 +65,7 @@
 						<label class="col-sm-3 control-label no-padding-right"
 							for="form-field-1">年龄： </label>
 						<div class="col-sm-9">
-							<input type="text" name="年龄" id="website-title" value="24"
+							<input type="text" name="年龄" id="website-title" value="${admin.age}"
 								class="col-xs-7 text_info" disabled="disabled">
 						</div>
 					</div>
@@ -69,7 +74,7 @@
 							for="form-field-1">移动电话： </label>
 						<div class="col-sm-9">
 							<input type="text" name="移动电话" id="website-title"
-								value="13567878908" class="col-xs-7 text_info"
+								value="${admin.mobile}" class="col-xs-7 text_info"
 								disabled="disabled">
 						</div>
 					</div>
@@ -78,7 +83,7 @@
 							for="form-field-1">电子邮箱： </label>
 						<div class="col-sm-9">
 							<input type="text" name="电子邮箱" id="website-title"
-								value="567890@qq.com" class="col-xs-7 text_info"
+								value="${admin.email}" class="col-xs-7 text_info"
 								disabled="disabled">
 						</div>
 					</div>
@@ -86,7 +91,7 @@
 						<label class="col-sm-3 control-label no-padding-right"
 							for="form-field-1">注册时间： </label>
 						<div class="col-sm-9">
-							<span>2016-7-5</span>
+							<span id="regDate"></span>
 						</div>
 					</div>
 					<div class="Button_operation clearfix">
@@ -301,5 +306,12 @@
 							});
 
 				});
+	});
+</script>
+<script>
+	$(function() {
+		// 显示用户的注册时间
+		var regDate = ${admin.gmtCreate.getTime()};
+		$("#regDate").html(timestampToTime(regDate));
 	});
 </script>
