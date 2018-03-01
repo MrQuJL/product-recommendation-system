@@ -97,7 +97,7 @@ public class AdminController {
 	@RequestMapping(value="/listAdmin")
 	public @ResponseBody List<Admin> listAdmin(String adminName, String date) {
 		Admin admin = new Admin();
-		admin.setAdminName(adminName);
+		admin.setAdminName(adminName.replace(" ", ""));
 		// 根据日期查询管理员
 		
 		List<Admin> adminList = this.adminService.listAdmin(admin);

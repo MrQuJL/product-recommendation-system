@@ -89,7 +89,7 @@
 								htmlTable = htmlTable + "</tr>";
 							}
 						} else {
-							htmlTable = "没有查询到记录";
+							htmlTable = "<tr><td colspan=" + 9 + ">没有查询到记录</td></tr>";
 						}
 						$("#sample-table").find("tbody").html(htmlTable);
 					}
