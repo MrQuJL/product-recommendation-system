@@ -106,18 +106,18 @@
 					layer.msg("请先选中要删除的管理员!",{icon:0,time:1000});
 					return false;
 				}
-				var ids = new Array();
+				var adminIds = new Array();
 				$.each(checkedBoxs, function() {
-					ids.push($(this).val());
+					adminIds.push($(this).val());
 				});
-				
+				adminIds = JSON.stringify(adminIds);
 				layer.confirm('确认要删除这些管理员吗？',function(index){
 					// 发送ajax请求删除选中的管理员
 					$.ajax({
 						type : "post",
+						contentType : "application/json;charset=UTF-8",
 						url : "${ctx}/sysmgr/admin/removeAdminBatch",
-						contentType : "application/json;charset=utf-8;",
-						data : {"ids" : ids},
+						data : adminIds,
 						dataType : "json",
 						success : function(data) {
 							if (data.message == "删除管理员成功") {

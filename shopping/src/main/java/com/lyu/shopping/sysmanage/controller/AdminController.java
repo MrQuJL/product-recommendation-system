@@ -1,5 +1,6 @@
 package com.lyu.shopping.sysmanage.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lyu.shopping.sysmanage.entity.Admin;
@@ -147,14 +149,15 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping(value="/removeAdminBatch")
-	public @ResponseBody Map<String, Object> removeAdminBatch(@RequestBody List<Long> ids) {
+	public @ResponseBody Map<String, Object> removeAdminBatch(@RequestBody Long[] adminIds) {
+		
 		Map<String, Object> message = new HashMap<String, Object>();
 		message.put(FRONT_TIPS_ATTR, REMOVE_ADMIN_FAILED);
 		
-		if (ids != null && ids.size() > 0) {
+		if (adminIds != null && adminIds.length > 0) {
 			
-//			boolean flag = this.adminService.removeAdmin(adminId);
-			if (false) {
+			boolean flag = this.adminService.removeAdminBatch(Arrays.asList(adminIds));
+			if (flag) {
 				message.put(FRONT_TIPS_ATTR, REMOVE_ADMIN_SUCCESS);
 			}
 		}

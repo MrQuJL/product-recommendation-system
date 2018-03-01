@@ -9,3 +9,31 @@ var ids = new Array();
 $.each(checkedBoxs, function() {
 	ids.push($(this).val());
 });
+
+2. springMVC获取前端发送的数组方法：
+后台写法：
+@RequestMapping(value="/removeAdminBatch")
+public @ResponseBody Map<String, Object> removeAdminBatch(
+	@RequestBody Long[] adminIds) {
+	// 数组的类型Long,String,Integer都可以
+...
+}
+
+前端写法：
+var adminIds = new Array();
+adminIds = JSON.stringify(adminIds);
+$.ajax({
+	type : "post",
+	contentType : "application/json;charset=UTF-8",
+	url : "${ctx}/sysmgr/admin/removeAdminBatch",
+	data : adminIds,
+	dataType : "json",
+	success : function(data) {
+	...
+	}
+});
+
+
+
+
+

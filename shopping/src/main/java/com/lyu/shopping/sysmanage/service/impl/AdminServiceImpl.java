@@ -110,16 +110,15 @@ public class AdminServiceImpl implements AdminService {
 		if (existAdminNums != adminIds.size()) {
 			return false;
 		}
-//		
-//		int size = adminIds.size();
-//		// 批量删除
-//		int removeSuccessNums = this.adminMapper.removeAdminBatch(adminIds);
-//		
-//		if (removeSuccessNums == size) {
-//			return true;
-//		}
-//		
-		return true;
+		
+		// 批量删除
+		int removeSuccessNums = this.adminMapper.removeAdminBatch(adminIds);
+		
+		if (removeSuccessNums == existAdminNums) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	@Override
