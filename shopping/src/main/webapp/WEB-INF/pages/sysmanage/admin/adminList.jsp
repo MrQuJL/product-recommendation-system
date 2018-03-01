@@ -400,9 +400,22 @@
 			   			layer.alert(str+=""+formMapping[$(this).attr("name")]+"不能为空！\r\n",
 			   				{title: '提示框',icon:0,});
 		    			num++;
-		          		return false;            
+		          		return false;
 		        	} 
 		 		});
+		   		// 校验表单
+		   		var age = $("#age").val();
+		   		var retAge = /^[0-9]{1,3}$/;
+		   		if (!retAge.test(age)) {
+		   			layer.alert("年龄违法！\r\n",{title: '提示框',icon:0,});
+		   			return false;
+		   		}
+		   		var mobile = $("#mobile").val();
+		   		var retMobile = /^[1][0-9]{10}$/;
+		   		if (!retMobile.test(mobile)) {
+		   			layer.alert("手机号码格式错误！\r\n",{title: '提示框',icon:0,});
+		   			return false;
+		   		}
 		   		
 			  	if(num>0){
 			  		return false;

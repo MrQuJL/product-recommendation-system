@@ -37,7 +37,7 @@
 						<label class="col-sm-3 control-label no-padding-right"
 							for="form-field-1">用户名： </label>
 						<div class="col-sm-9">
-							<input type="text" name="用户名" id="website-title" value="${admin.adminName}"
+							<input type="text" name="用户名" id="adminName" value="${admin.adminName}"
 								class="col-xs-7 text_info" disabled="disabled">
 							&nbsp;&nbsp;&nbsp;<a href="javascript:ovid()"
 								onclick="change_Password()" class="btn btn-warning btn-xs">修改密码</a>
@@ -51,11 +51,11 @@
 							<span class="sex">${admin.sex}</span>
 							<div class="add_sex">
 								<label>
-									<input name="form-field-radio" type="radio" checked="checked" class="ace">
+									<input name="form-field-radio" value="男" type="radio" checked="checked" class="ace">
 									<span class="lbl">男</span>
 								</label>&nbsp;&nbsp; 
 								<label>
-									<input name="form-field-radio" type="radio" class="ace">
+									<input name="form-field-radio" value="女" type="radio" class="ace">
 									<span class="lbl">女</span>
 								</label>
 							</div>
@@ -65,7 +65,7 @@
 						<label class="col-sm-3 control-label no-padding-right"
 							for="form-field-1">年龄： </label>
 						<div class="col-sm-9">
-							<input type="text" name="年龄" id="website-title" value="${admin.age}"
+							<input type="text" name="年龄" id="age" value="${admin.age}"
 								class="col-xs-7 text_info" disabled="disabled">
 						</div>
 					</div>
@@ -73,7 +73,7 @@
 						<label class="col-sm-3 control-label no-padding-right"
 							for="form-field-1">移动电话： </label>
 						<div class="col-sm-9">
-							<input type="text" name="移动电话" id="website-title"
+							<input type="text" name="移动电话" id="mobile"
 								value="${admin.mobile}" class="col-xs-7 text_info"
 								disabled="disabled">
 						</div>
@@ -82,7 +82,7 @@
 						<label class="col-sm-3 control-label no-padding-right"
 							for="form-field-1">电子邮箱： </label>
 						<div class="col-sm-9">
-							<input type="text" name="电子邮箱" id="website-title"
+							<input type="text" name="电子邮箱" id="email"
 								value="${admin.email}" class="col-xs-7 text_info"
 								disabled="disabled">
 						</div>
@@ -203,7 +203,26 @@
 		if (num > 0) {
 			return false;
 		} else {
-
+			// 1.获取表单数据,封装成js对象并用JSON.stringify()转化成JSON字符串
+			var adminName = $("#adminName").val();
+			var sex = $("input[type='radio']:checked").val();
+			var age = $("#age").val();
+			var mobile = $("#mobile").val();
+			var email = $("#email").val();
+			var jsonObj = {
+				"adminName" : adminName,
+				"sex" : sex,
+				"age" : age,
+				"mobile" : mobile,
+				"email" : email
+			}
+			jsonObj = JSON.stringify(jsonObj);
+			// 2.发送ajax请求
+			$.ajax({
+				type : "post",
+				url : "${ctx}/sysmgr/admin/updateAdmin",
+			});
+			
 			layer.alert('修改成功！', {
 				title : '提示框',
 				icon : 1,

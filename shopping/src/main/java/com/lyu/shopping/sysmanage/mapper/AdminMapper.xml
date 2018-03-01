@@ -76,15 +76,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 修改管理员的信息（不包括密码） -->
 	<update id="updateAdmin" parameterType="admin">
-		UPDATE shopping_sys_admin SET
-		login_name = #{loginName},
-		admin_name = #{adminName},
-		age = #{age},
-		sex = #{sex},
-		email = #{email},
-		mobile = #{mobile},
-		address = #{address},
-		gmt_modified = #{gmtModified}
+		UPDATE shopping_sys_admin
+		<set>
+			<if test = "loginName != null">
+				login_name = #{loginName},
+			</if>
+			<if test = "adminName != null">
+				admin_name = #{adminName},
+			</if>
+			<if test = "age != null">
+				age = #{age},
+			</if>
+			<if test = "sex != null">
+				sex = #{sex},
+			</if>
+			<if test = "email != null">
+				email = #{email},
+			</if>
+			<if test = "mobile != null">
+				mobile = #{mobile},
+			</if>
+			<if test = "address != null">
+				address = #{address},
+			</if>
+			<if test = "gmtModified != null">
+				gmt_modified = #{gmtModified},
+			</if>
+		</set>
 		WHERE id = #{id}
 	</update>
 	
