@@ -42,6 +42,13 @@ public interface AdminMapper {
 	int removeAdmin(Long adminId);
 	
 	/**
+	 * 批量删除管理员
+	 * @param adminIds
+	 * @return
+	 */
+	int removeAdminBatch(List<Long> adminIds);
+	
+	/**
 	 * 修改管理员的信息（不包括密码）
 	 * @param admin 要修改的管理员
 	 * @return

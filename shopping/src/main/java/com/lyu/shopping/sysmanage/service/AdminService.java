@@ -50,6 +50,13 @@ public interface AdminService {
 	boolean removeAdmin(Long adminId);
 	
 	/**
+	 * 批量删除管理员
+	 * @param adminIds 管理员id集合
+	 * @return
+	 */
+	boolean removeAdminBatch(List<Long> adminIds);
+	
+	/**
 	 * 修改管理员信息（不包括密码）
 	 * @param admin 要修改的管理员
 	 * @return

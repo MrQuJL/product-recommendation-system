@@ -97,6 +97,23 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
+	public boolean removeAdminBatch(List<Long> adminIds) {
+		if (adminIds == null || adminIds.size() == 0) {return false;}
+		// 先检查集合中的adminId是否存在
+		
+		
+		int size = adminIds.size();
+		
+		int removeSuccessNums = this.adminMapper.removeAdminBatch(adminIds);
+		
+		if (removeSuccessNums == size) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	@Override
 	public boolean updateAdmin(Admin admin) {
 		if (admin == null) return false;
 		if (admin.getAge() == null || admin.getAge() > 999 || admin.getAge() < 1) {
@@ -154,5 +171,5 @@ public class AdminServiceImpl implements AdminService {
 		
 		return flag;
 	}
-
+	
 }

@@ -56,6 +56,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE id = #{adminId}
 	</update>
 	
+	<!-- 批量删除管理员 -->
+	<update id="removeAdminBatch" parameterType="list">
+		UPDATE shopping_sys_admin SET is_deleted = 1
+		<where>
+			<foreach collection="list" item="id" open="AND id in (" separator="," close=")">
+				#{id}
+			</foreach>
+		</where>
+	</update>
+	
 	<!-- 修改管理员的信息（不包括密码） -->
 	<update id="updateAdmin" parameterType="admin">
 		UPDATE shopping_sys_admin SET

@@ -61,7 +61,7 @@
 							for (var i = 0; i < data.length; i++) {
 								htmlTable = htmlTable + "<tr>";
 								
-								htmlTable = htmlTable + "<td><label><input type='checkbox' class='ace'><span class='lbl'></span></label></td>";
+								htmlTable = htmlTable + "<td><label><input type='checkbox' value=" + data[i].id + " class='ace'><span class='lbl'></span></label></td>";
 								
 								htmlTable = htmlTable + "<td>" + data[i].id + "</td>";
 								
@@ -94,6 +94,43 @@
 						$("#sample-table").find("tbody").html(htmlTable);
 					}
 				});
+			},
+			// 批量删除管理员
+			removeAdminBatch : function() {
+				// 获取tbody里面所有被选中的checkbox
+				var checkedBoxs = $("#sample-table")
+					.find("tbody")
+					.find("input[type='checkbox']:checked");
+				// 创建数组保存已选中的checkbox的value（id）值
+				if (checkedBoxs.length == 0) {
+					layer.msg("请先选中要删除的管理员!",{icon:0,time:1000});
+					return false;
+				}
+				var ids = new Array();
+				$.each(checkedBoxs, function() {
+					ids.push($(this).val());
+				});
+				
+				layer.confirm('确认要删除这些管理员吗？',function(index){
+					// 发送ajax请求删除选中的管理员
+					$.ajax({
+						type : "post",
+						url : "${ctx}/sysmgr/admin/removeAdminBatch",
+						contentType : "application/json;charset=utf-8;",
+						data : {"ids" : ids},
+						dataType : "json",
+						success : function(data) {
+							if (data.message == "删除管理员成功") {
+								layer.msg(data.message,{icon:1,time:1000});
+								// 2.成功时重新触发一次查询操作
+								adminMgr.listAdmin();
+							} else {
+								// 3.失败给出相应的提示信息
+								layer.msg(data.message,{icon:0,time:1000});
+							}
+						}
+					});
+				});
 			}
 		}
 	</script>
@@ -120,7 +157,7 @@
 				<div class="border clearfix">
 					<span class="l_f"> <a href="javascript:ovid()"
 						id="member_add" class="btn btn-warning"><i class="icon-plus"></i>添加管理员</a>
-						<a href="javascript:ovid()" class="btn btn-danger"><i
+						<a href="javascript:adminMgr.removeAdminBatch();" class="btn btn-danger"><i
 							class="icon-trash"></i>批量删除</a>
 					</span> <span class="r_f">共：<b>2345</b>条
 					</span>

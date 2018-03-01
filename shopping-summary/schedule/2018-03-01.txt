@@ -1,0 +1,11 @@
+1. 获取选中的checkbox的方法：
+
+// 获取tbody里面所有被选中的checkbox
+var checkedBoxs = $("#sample-table")
+	.find("tbody")
+	.find("input[type='checkbox']:checked");
+// 创建数组保存已选中的checkbox的value（id）值
+var ids = new Array();
+$.each(checkedBoxs, function() {
+	ids.push($(this).val());
+});

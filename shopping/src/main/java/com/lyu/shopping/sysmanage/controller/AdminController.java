@@ -143,6 +143,26 @@ public class AdminController {
 	}
 	
 	/**
+	 * 删除（逻辑删除）管理员
+	 * @return
+	 */
+	@RequestMapping(value="/removeAdminBatch")
+	public @ResponseBody Map<String, Object> removeAdminBatch(@RequestBody List<Long> ids) {
+		Map<String, Object> message = new HashMap<String, Object>();
+		message.put(FRONT_TIPS_ATTR, REMOVE_ADMIN_FAILED);
+		
+		if (ids != null && ids.size() > 0) {
+			
+//			boolean flag = this.adminService.removeAdmin(adminId);
+			if (false) {
+				message.put(FRONT_TIPS_ATTR, REMOVE_ADMIN_SUCCESS);
+			}
+		}
+		
+		return message;
+	}
+	
+	/**
 	 *修改管理员信息
 	 * @return
 	 */
