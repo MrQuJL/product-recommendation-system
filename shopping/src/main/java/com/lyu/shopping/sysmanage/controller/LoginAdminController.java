@@ -78,6 +78,7 @@ public class LoginAdminController {
 			Admin admin = this.adminService.loginAdmin(loginName, password);
 			if (admin != null) {
 				logger.info(loginName + "登录成功");
+				admin.setPassword(null);
 				session.setAttribute("admin", admin);
 				return ADMIN_MAIN_REQUEST;
 			} else {
