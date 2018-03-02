@@ -18,7 +18,7 @@ public class PageUtils {
 	 * @return
 	 */
 	public static String pageStr (PageInfo<?> pageInfo, String queryMethod) {
-		StringBuffer buffer = new StringBuffer("<ul class=" + "pagination" + ">");
+		StringBuffer buffer = new StringBuffer("<ul class=\"pagination\">");
 		// 判断当前页是不是首页
 		if (pageInfo.isIsFirstPage() || pageInfo.getPrePage() ==  0) {
 			buffer.append("<li class=\"disabled\"><a href=\"javascript:void(0);\" aria-label=\"Previous\">«</a></li>");
@@ -34,12 +34,12 @@ public class PageUtils {
 			int pageNum = pageInfo.getNavigatepageNums()[i];
 			// pageNum为当前的页码
 			if (pageInfo.getPageNum() == pageNum) {
-				buffer.append("<li class=\"active\"><a href=\"javascript:void(0);>");
+				buffer.append("<li class=\"active\"><a href=\"javascript:\">");
 				buffer.append(pageNum).append("</a></li>");
 			} else {
-				buffer.append("<li class=\"active\"><a href=\"javascript:");
+				buffer.append("<li><a href=\"javascript:");
 				buffer.append(queryMethod).append("(");
-				buffer.append(pageInfo.getPageNum()).append(",");
+				buffer.append(pageNum).append(",");
 				buffer.append(pageInfo.getPageSize()).append(");\">");
 				buffer.append(pageNum).append("</a></li>");
 			}
@@ -47,7 +47,7 @@ public class PageUtils {
 		
 		// 判断是不是尾页
 		if (pageInfo.isIsLastPage() || pageInfo.getNextPage() == 0) {
-			buffer.append("<li><a class=\"disabled\" href=\"javascript:void(0);\" aria-label=\"Next\">»</a></li>");
+			buffer.append("<li class=\"disabled\"><a href=\"javascript:void(0);\" aria-label=\"Next\">»</a></li>");
 		} else {
 			buffer.append("<li><a href=\"javascript:").append(queryMethod).append("(");
 			buffer.append(pageInfo.getNextPage()).append(",");
@@ -58,19 +58,5 @@ public class PageUtils {
 		
 		return buffer.toString();
 	}
-	
-	/*
-    <ul class="pagination">
-    	<li class="disabled"><a href="javascript:void(0);" aria-label="Previous">«</a></li>
-        <li class="active"><a href="javascript:void(0);">1</a></li>
-        <li><a href="javascript:void(0);">2</a></li>
-        <li><a href="javascript:void(0);">3</a></li>
-        <li><a href="javascript:void(0);">4</a></li>
-        <li><a href="javascript:void(0);">5</a></li>
-        <li><a href="javascript:void(0);" aria-label="Next">»</a></li>
- 	</ul>
-	*/
-	
-	
 	
 }

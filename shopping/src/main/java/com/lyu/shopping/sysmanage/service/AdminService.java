@@ -2,6 +2,8 @@ package com.lyu.shopping.sysmanage.service;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
+import com.lyu.shopping.common.dto.PageParam;
 import com.lyu.shopping.sysmanage.entity.Admin;
 
 /**
@@ -29,11 +31,12 @@ public interface AdminService {
 	Admin loginAdmin(String loginName, String password);
 	
 	/**
-	 * 根据用户已知信息查询用户列表
-	 * @param user 用户对象
+	 * 根据用户已知信息分页查询用户列表
+	 * @param admin 用户信息
+	 * @param pageParam 分页对象
 	 * @return
 	 */
-	List<Admin> listAdmin(Admin admin);
+	PageInfo<Admin> listAdmin(Admin admin, PageParam pageParam);
 	
 	/**
 	 * 新增管理严

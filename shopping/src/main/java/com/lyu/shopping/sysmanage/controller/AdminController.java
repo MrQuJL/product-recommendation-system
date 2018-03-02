@@ -13,7 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.github.pagehelper.PageInfo;
+import com.lyu.shopping.common.dto.PageParam;
+import com.lyu.shopping.common.util.PageUtils;
 import com.lyu.shopping.sysmanage.entity.Admin;
 import com.lyu.shopping.sysmanage.service.AdminService;
 
@@ -73,6 +77,11 @@ public class AdminController {
 	 */
 	private static final String UPDATE_PASSWORD_FAILED = "修改管理员密码失败";
 	
+	/**
+	 * 管理员的分页查询方法
+	 */
+	private static final String ADMIN_QUERY_METHOD_PAGE = "adminMgr.listAdmin";
+	
 	@Autowired
 	private AdminService adminService;
 	
@@ -110,13 +119,29 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping(value="/listAdmin")
-	public @ResponseBody List<Admin> listAdmin(String adminName, String date) {
-		Admin admin = new Admin();
-		admin.setAdminName(adminName.replace(" ", ""));
-		// 根据日期查询管理员
+	public @ResponseBody Map<String, Object> listAdmin(String adminName, Integer pageNo,
+		Integer pageSize) {
 		
-		List<Admin> adminList = this.adminService.listAdmin(admin);
-		return adminList;
+		Admin admin = new Admin();
+		// 去除名称中的空格
+		admin.setAdminName(adminName.replace(" ", ""));
+		
+		// 创建分页对象
+		PageParam pageParam = new PageParam(pageNo, pageSize);
+		
+		PageInfo<Admin> pageInfo = this.adminService.listAdmin(admin, pageParam);
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		// 1.获取管理员列表
+		List<Admin> adminList = pageInfo.getList();
+		// 2.获取分页条
+		String pageBar = PageUtils.pageStr(pageInfo, ADMIN_QUERY_METHOD_PAGE);
+		
+		resultMap.put("adminList", adminList);
+		resultMap.put("pageBar", pageBar);
+		
+		return resultMap;
 	}
 	
 	/**

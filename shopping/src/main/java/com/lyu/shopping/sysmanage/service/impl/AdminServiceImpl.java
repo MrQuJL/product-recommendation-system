@@ -12,6 +12,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.druid.util.StringUtils;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.lyu.shopping.common.dto.PageParam;
 import com.lyu.shopping.sysmanage.entity.Admin;
 import com.lyu.shopping.sysmanage.mapper.AdminMapper;
 import com.lyu.shopping.sysmanage.service.AdminService;
@@ -67,9 +70,14 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Admin> listAdmin(Admin admin) {
+	public PageInfo<Admin> listAdmin(Admin admin, PageParam pageParam) {
+		PageHelper.startPage(pageParam.getPageNo(), pageParam.getPageSize());
+		
 		List<Admin> adminList = this.adminMapper.listAdmin(admin);
-		return adminList;
+		
+		PageInfo<Admin> pageInfo = new PageInfo<Admin>(adminList);
+		
+		return pageInfo;
 	}
 	
 	@Override

@@ -19,6 +19,13 @@ public class PageParam {
 	 */
 	private Integer pageSize = 5;
 
+	public PageParam() {}
+
+	public PageParam(Integer pageNo, Integer pageSize) {
+		this.pageNo = pageNo;
+		this.pageSize = pageSize;
+	}
+
 	public Integer getPageNo() {
 		return pageNo;
 	}

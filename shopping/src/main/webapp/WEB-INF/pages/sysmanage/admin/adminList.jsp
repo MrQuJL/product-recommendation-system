@@ -47,16 +47,17 @@
 	<script type="text/javascript">
 		var adminMgr = {
 			// 查询管理员列表
-			listAdmin : function() {
+			listAdmin : function(pageNo, pageSize) {
 				var queryAdminName = $("#queryAdminName").val();
-				var date = $("#start").val();
 				$.ajax({
 					type : "post",
 					url : "${ctx}/sysmgr/admin/listAdmin",
-					data : {"adminName" : queryAdminName, "date" : date},
+					data : {"adminName" : queryAdminName, "pageNo" : pageNo, "pageSize" : pageSize},
 					dataType : "json",
 					success : function(data) {
 						var htmlTable = "";
+						var pageBar = data.pageBar;
+						data = data.adminList;
 						if (data.length != 0) {
 							for (var i = 0; i < data.length; i++) {
 								htmlTable = htmlTable + "<tr>";
@@ -92,6 +93,7 @@
 							htmlTable = "<tr><td colspan=" + 9 + ">没有查询到记录</td></tr>";
 						}
 						$("#sample-table").find("tbody").html(htmlTable);
+						$("#pageBar").html(pageBar);
 					}
 				});
 			},
@@ -123,7 +125,7 @@
 							if (data.message == "删除管理员成功") {
 								layer.msg(data.message,{icon:1,time:1000});
 								// 2.成功时重新触发一次查询操作
-								adminMgr.listAdmin();
+								adminMgr.listAdmin(1, 5);
 							} else {
 								// 3.失败给出相应的提示信息
 								layer.msg(data.message,{icon:0,time:1000});
@@ -144,10 +146,8 @@
 					<ul class="search_content clearfix">
 						<li><label class="l_f">管理员名称</label><input id="queryAdminName" name="queryAdminName" type="text"
 							class="text_add" placeholder="输入管理员名称" style="width: 400px" /></li>
-						<li><label class="l_f">添加时间</label><input
-							class="inline laydate-icon" id="start" name="date" style="margin-left: 10px;"></li>
 						<li style="width: 90px;">
-							<button type="button" class="btn_search" onclick="adminMgr.listAdmin();">
+							<button type="button" class="btn_search" onclick="adminMgr.listAdmin(1, 5);">
 								<i class="icon-search"></i>查询
 							</button>
 						</li>
@@ -187,15 +187,7 @@
 							
 						</tbody>
 					</table>
-			        <ul class="pagination">
-			        	<li class="disabled"><a href="#" aria-label="Previous">«</a></li>
-				        <li class="active"><a href="#">1</a></li>
-				        <li><a href="#">2</a></li>
-				        <li><a href="#">3</a></li>
-				        <li><a href="#">4</a></li>
-				        <li><a href="#">5</a></li>
-				        <li><a href="#" aria-label="Next">»</a></li>
-			     	</ul>
+			        <div id="pageBar"></div>
 				</div>
 			</div>
 		</div>
@@ -334,7 +326,7 @@
 							alert(data.message);
 							if (data.message == "新增管理员成功") {
 								// 3.若成功则查询一次管理员，失败则继续维持原有页面
-								adminMgr.listAdmin();
+								adminMgr.listAdmin(1, 5);
 								layer.alert('添加管理员成功！',{title: '提示框', icon:1,});
 							} else {
 								layer.alert('添加管理员失败，请联系系统管理员！',{title: '提示框', icon:0,});
@@ -451,7 +443,7 @@
 			  			dataType : "json",
 			  			success : function(data) {
 			  				if (data.message == "修改管理员信息成功") {
-			  					adminMgr.listAdmin();
+			  					adminMgr.listAdmin(1, 5);
 			  					layer.alert('修改管理员信息成功！',
 		  							{title: '提示框',icon:1,}
 		  						);
@@ -480,7 +472,7 @@
 					if (data.message == "删除管理员成功") {
 						layer.msg(data.message,{icon:1,time:1000});
 						// 2.成功时重新触发一次查询操作
-						adminMgr.listAdmin();
+						adminMgr.listAdmin(1, 5);
 					} else {
 						// 3.失败给出相应的提示信息
 						layer.msg(data.message,{icon:0,time:1000});
