@@ -106,4 +106,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE id = #{id}
 	</update>
 	
+	<!-- 更新管理员的密码 -->
+	<update id="updatePassword">
+		UPDATE shopping_sys_admin SET password = #{param2}
+		WHERE id = #{param1}
+	</update>
+	
 </mapper>

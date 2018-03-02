@@ -62,4 +62,12 @@ public interface AdminMapper {
 	 */
 	int updateAdmin(Admin admin);
 	
+	/**
+	 * 更新管理员的密码
+	 * @param adminId 管理员id
+	 * @param newPassword 新密码
+	 * @return
+	 */
+	int updatePassword(Long adminId, String newPassword);
+	
 }

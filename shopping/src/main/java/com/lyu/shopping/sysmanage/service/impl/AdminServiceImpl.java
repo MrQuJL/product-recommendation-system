@@ -143,6 +143,37 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
+	@Transactional(isolation=Isolation.DEFAULT, propagation = Propagation.REQUIRED)
+	public boolean updatePassword(Long adminId, String oldPassword,
+			String newPassword, String confirmPassword) {
+		// 1.确定密码用户id是否为空
+		if (StringUtils.isEmpty(oldPassword) || StringUtils.isEmpty(newPassword) || 
+			StringUtils.isEmpty(confirmPassword) || adminId == null) {
+			return false; 
+		}
+		
+		// 2.确定旧密码是否正确
+		String dbPassword = this.adminMapper.getAdminByAdminId(adminId).getPassword();
+		boolean flag = this.validatePsd(oldPassword, dbPassword);
+		if (!flag) {
+			return false;
+		}
+		
+		// 3.确定两次输入的新密码是否一致
+		if (!newPassword.equals(confirmPassword)) {
+			return false;
+		}
+		
+		// 将密码加下密
+		String encryptPassword = encryptPsd(newPassword);
+		int rows = this.adminMapper.updatePassword(adminId, encryptPassword);
+		if (rows > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
 	public String encryptPsd(String plainPsd) {
 		// 1.获取随机数
 		byte[] salt = EncryptUtils.generateSalt(SALT_SIZE);
@@ -179,5 +210,5 @@ public class AdminServiceImpl implements AdminService {
 		
 		return flag;
 	}
-	
+
 }

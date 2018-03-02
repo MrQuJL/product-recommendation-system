@@ -166,15 +166,15 @@
 		<ul class="xg_style">
 			<li>
 				<label class="label_name">原&nbsp;&nbsp;密&nbsp;码</label>
-				<input name="原密码" type="password" class="" id="password">
+				<input name="原密码" type="password" class="" id="oldPsd">
 			</li>
 			<li>
 				<label class="label_name">新&nbsp;&nbsp;密&nbsp;码</label>
-				<input name="新密码" type="password" class="" id="Nes_pas">
+				<input name="新密码" type="password" class="" id="newPsd">
 			</li>
 			<li>
 				<label class="label_name">确认密码</label>
-				<input name="再次确认密码" type="password" class="" id="c_mew_pas">
+				<input name="再次确认密码" type="password" class="" id="confirmPsd">
 			</li>
 		</ul>
 		<!-- <div class="center"> <button class="btn btn-primary" type="button" id="submit">确认修改</button></div>-->
@@ -307,14 +307,32 @@
 					});
 					return false;
 				} else {
-					// 
-					
-					
-					layer.alert('修改成功！', {
-						title : '提示框',
-						icon : 1,
+					// 1. 获取三个密码框中的数据
+					var oldPsd = $("#oldPsd").val();
+					var newPsd = $("#newPsd").val();
+					var confirmPsd = $("#confirmPsd").val();
+					// 2. ajax异步提交
+					$.ajax({
+						type : "post",
+						url : "${ctx}/sysmgr/admin/updatePassword",
+						data : {"oldPsd" : oldPsd, "newPsd" : newPsd, "confirmPsd" : confirmPsd},
+						dataType : "json",
+						success : function(data) {
+							if (data.message == "修改管理员密码成功") {
+								layer.alert('修改管理员密码成功！', {
+									title : '提示框',
+									icon : 1,
+								});
+								layer.close(index);
+							} else {
+								layer.alert('修改管理员密码失败！', {
+									title : '提示框',
+									icon : 0,
+								});
+								layer.close(index);
+							}
+						}
 					});
-					layer.close(index);
 				}
 			}
 		});

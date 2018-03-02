@@ -28,6 +28,11 @@ public class LoginAdminController {
 	Logger logger = Logger.getLogger(LoginAdminController.class);
 	
 	/**
+	 * 存入session中的管理员属性名
+	 */
+	public static final String SESSION_ADMIN_ATTR = "admin";
+	
+	/**
 	 * 登录失败的错误提示信息
 	 */
 	private static final String LOGIN_FAILED_MESSAGE = "登录失败，请输入正确的用户名和密码";
@@ -79,7 +84,7 @@ public class LoginAdminController {
 			if (admin != null) {
 				logger.info(loginName + "登录成功");
 				admin.setPassword(null);
-				session.setAttribute("admin", admin);
+				session.setAttribute(SESSION_ADMIN_ATTR, admin);
 				return ADMIN_MAIN_REQUEST;
 			} else {
 				model.addAttribute("loginFlag", LOGIN_FAILED_MESSAGE);

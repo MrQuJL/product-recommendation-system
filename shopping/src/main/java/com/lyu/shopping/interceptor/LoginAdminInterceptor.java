@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.lyu.shopping.sysmanage.controller.LoginAdminController;
 import com.lyu.shopping.sysmanage.entity.Admin;
 
 /**
@@ -36,7 +37,7 @@ public class LoginAdminInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 		throws Exception {
 		HttpSession session = request.getSession();
-		Admin admin = (Admin) session.getAttribute("admin");
+		Admin admin = (Admin) session.getAttribute(LoginAdminController.SESSION_ADMIN_ATTR);
 		// user不为空表示已经登录过，放行
 		if (admin != null) {
 			return true;

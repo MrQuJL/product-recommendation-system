@@ -64,9 +64,18 @@ public interface AdminService {
 	boolean updateAdmin(Admin admin);
 	
 	/**
+	 * 修改管理员密码
+	 * @param adminId 管理员id
+	 * @param newPassword 新密码
+	 * @return 修改是否成功
+	 */
+	boolean updatePassword(Long adminId, String oldPassword,
+		String newPassword, String confirmPassword);
+	
+	/**
 	 * 采用sha1加密算法将密码加密
-	 * @param plainPsd 为经过加密的密码
-	 * @return
+	 * @param plainPsd 未经过加密的密码
+	 * @return 加密后的面膜
 	 */
 	String encryptPsd(String plainPsd);
 	
@@ -74,7 +83,7 @@ public interface AdminService {
 	 * 验证密码是否正确
 	 * @param plainPsd 未加密的密码
 	 * @param encryptedPsd 加密之后的密码
-	 * @return
+	 * @return 密码是否正确 true 正确 false 错误
 	 */
 	boolean validatePsd(String plainPsd, String encryptedPsd);
 	

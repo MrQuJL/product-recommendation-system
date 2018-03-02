@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -61,6 +62,16 @@ public class AdminController {
 	 * 修改管理员失败的提示消息
 	 */
 	private static final String UPDATE_ADMIN_FAILED = "修改管理员信息失败";
+	
+	/**
+	 * 修改管理员密码成功的提示消息
+	 */
+	private static final String UPDATE_PASSWORD_SUCCESS = "修改管理员密码成功";
+	
+	/**
+	 * 修改管理员密码失败的提示消息
+	 */
+	private static final String UPDATE_PASSWORD_FAILED = "修改管理员密码失败";
 	
 	@Autowired
 	private AdminService adminService;
@@ -184,6 +195,39 @@ public class AdminController {
 			// 修改完管理员信息之后要更新session
 			Admin updatedAdmin = this.adminService.getAdminByAdminId(admin.getId());
 			session.setAttribute("admin", updatedAdmin);
+		}
+		
+		return message;
+	}
+	
+	
+	/**
+	 * 修改管理员密码 
+	 * @param oldPsd 旧密码
+	 * @param newPsd 新密码
+	 * @param confirmPsd 确认的新密码
+	 * @return
+	 */
+	@RequestMapping(value="/updatePassword")
+	public @ResponseBody Map<String, Object> updatePassword(String oldPsd, String newPsd,
+		String confirmPsd, HttpSession session) {
+		
+		Map<String, Object> message = new HashMap<String, Object>();
+		message.put(FRONT_TIPS_ATTR, UPDATE_PASSWORD_FAILED);
+		
+		// 1.确定密码是否为空
+		if (StringUtils.isEmpty(oldPsd) || StringUtils.isEmpty(newPsd) || 
+			StringUtils.isEmpty(confirmPsd)) {
+			return message; 
+		}
+		
+		// 2.更新管理员密码，获取当前管理员id
+		Admin admin = (Admin) session.getAttribute(LoginAdminController.SESSION_ADMIN_ATTR);
+		Long adminId = admin.getId();
+		boolean flag = this.adminService.updatePassword(adminId, oldPsd, newPsd, confirmPsd);
+		
+		if (flag) {
+			message.put(FRONT_TIPS_ATTR, UPDATE_PASSWORD_SUCCESS);
 		}
 		
 		return message;
