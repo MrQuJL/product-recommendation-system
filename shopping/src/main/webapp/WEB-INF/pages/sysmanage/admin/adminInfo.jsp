@@ -164,18 +164,21 @@
 	<!--修改密码样式-->
 	<div class="change_Pass_style" id="change_Pass">
 		<ul class="xg_style">
-			<li><label class="label_name">原&nbsp;&nbsp;密&nbsp;码</label><input
-				name="原密码" type="password" class="" id="password"></li>
-			<li><label class="label_name">新&nbsp;&nbsp;密&nbsp;码</label><input
-				name="新密码" type="password" class="" id="Nes_pas"></li>
-			<li><label class="label_name">确认密码</label><input name="再次确认密码"
-				type="password" class="" id="c_mew_pas"></li>
-
+			<li>
+				<label class="label_name">原&nbsp;&nbsp;密&nbsp;码</label>
+				<input name="原密码" type="password" class="" id="password">
+			</li>
+			<li>
+				<label class="label_name">新&nbsp;&nbsp;密&nbsp;码</label>
+				<input name="新密码" type="password" class="" id="Nes_pas">
+			</li>
+			<li>
+				<label class="label_name">确认密码</label>
+				<input name="再次确认密码" type="password" class="" id="c_mew_pas">
+			</li>
 		</ul>
-		<!--       <div class="center"> <button class="btn btn-primary" type="button" id="submit">确认修改</button></div>-->
+		<!-- <div class="center"> <button class="btn btn-primary" type="button" id="submit">确认修改</button></div>-->
 	</div>
-</body>
-</html>
 <script>
 	//按钮点击事件
 	function modify() {
@@ -236,16 +239,10 @@
 				dataType : "json",
 				success : function(data) {
 					if (data.message == "修改管理员信息成功") {
-						layer.alert(data.message + "！\r\n", {
-							title : '提示框',
-							icon : 1,
-						});
-						location.reload();
+						alert("修改管理员信息成功！");
+						window.parent.location.reload();
 					} else {
-						layer.alert(data.message + "！\r\n", {
-							title : '提示框',
-							icon : 0,
-						});
+						alert("修改管理员信息失败！");
 					}
 				}
 			});
@@ -355,3 +352,5 @@
 		$("#regDate").html(timestampToTime(regDate));
 	});
 </script>
+</body>
+</html>

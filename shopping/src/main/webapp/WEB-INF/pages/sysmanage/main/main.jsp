@@ -210,11 +210,14 @@
 								<em id="time"></em>
 							</span>
 							<span class="user-info">
-								<small>欢迎光临,</small>${admin.adminName}
-								<c:choose>
-									<c:when test="${admin.sex eq '男'}">先生</c:when>
-									<c:otherwise>女士</c:otherwise>
-								</c:choose>
+								<small>欢迎光临</small>
+								<span id="login-hint">${admin.adminName}</span>
+								<span id="login-sex">
+									<c:choose>
+										<c:when test="${admin.sex eq '男'}">先生</c:when>
+										<c:otherwise>女士</c:otherwise>
+									</c:choose>
+								</span>
 							</span> 
 							<i class="icon-caret-down"></i>
 						</a>

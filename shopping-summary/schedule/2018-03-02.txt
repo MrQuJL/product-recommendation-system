@@ -1,0 +1,6 @@
+1. 在iframe中查找父页面元素的方法：
+$('#id', window.parent.document)
+
+
+
+
