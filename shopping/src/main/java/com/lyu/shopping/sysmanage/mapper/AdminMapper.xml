@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 管理员表所有的字段（除去password字段） -->
 	<sql id="all_admin_columns">
 		id, login_name, admin_name, password, age, sex, email, mobile,
-		address, status, gmt_create, gmt_modified, is_deleted
+		address, status, gmt_create, gmt_modified, is_deleted delFlag
 	</sql>
 
 	<!-- 将通用的sql查询条件抽取出来，成为sql片段给不同的方法用 -->
@@ -32,6 +32,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<where>
 			<foreach collection="list" open="AND id IN (" item="id" 
 				separator="," close=")">#{id}</foreach>
+			<if test="1 == 1">
+				AND is_deleted = 0
+			</if>
 		</where>
 	</select>
 	
@@ -39,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getAdminByAdminId" parameterType="long" resultType="admin">
 		SELECT <include refid="all_admin_columns" />
 		FROM shopping_sys_admin
-		WHERE id = #{adminId}
+		WHERE id = #{adminId} AND is_deleted = 0
 	</select>
 	
 	<!-- 查询用户列表 -->
@@ -56,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO shopping_sys_admin(login_name, admin_name, age, sex, password, email,
 			mobile, address, status, gmt_create, gmt_modified, is_deleted)
 		VALUES(#{loginName}, #{adminName}, #{age}, #{sex}, #{password}, #{email},
-			#{mobile}, #{address}, #{status}, #{gmtCreate}, #{gmtModified}, #{isDeleted})
+			#{mobile}, #{address}, #{status}, #{gmtCreate}, #{gmtModified}, #{delFlag})
 	</insert>
 	
 	<!-- 删除管理员，根据管理员id删除（逻辑删除）管理员 -->
@@ -71,6 +74,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<where>
 			<foreach collection="list" item="id" open="AND id in ("
 				separator="," close=")">#{id}</foreach>
+			<if test="1 == 1">
+				AND is_deleted = 0
+			</if>
 		</where>
 	</update>
 	

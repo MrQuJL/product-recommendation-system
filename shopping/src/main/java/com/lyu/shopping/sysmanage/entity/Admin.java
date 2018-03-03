@@ -38,7 +38,7 @@ public class Admin implements Serializable {
 
     private Date gmtModified;
 
-    private Integer isDeleted;
+    private Integer delFlag;
 
 	public Long getId() {
 		return id;
@@ -136,20 +136,20 @@ public class Admin implements Serializable {
 		this.gmtModified = gmtModified;
 	}
 
-	public Integer getIsDeleted() {
-		return isDeleted;
+	public Integer getDelFlag() {
+		return delFlag;
 	}
 
-	public void setIsDeleted(Integer isDeleted) {
-		this.isDeleted = isDeleted;
+	public void setDelFlag(Integer delFlag) {
+		this.delFlag = delFlag;
 	}
 
 	@Override
 	public String toString() {
 		return "Admin [id=" + id + ", loginName=" + loginName + ", adminName=" + adminName + ", password=" + password
 				+ ", email=" + email + ", mobile=" + mobile + ", sex=" + sex + ", age=" + age + ", address=" + address
-				+ ", status=" + status + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", isDeleted="
-				+ isDeleted + "]";
+				+ ", status=" + status + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", delFlag="
+				+ delFlag + "]";
 	}
-
+	
 }

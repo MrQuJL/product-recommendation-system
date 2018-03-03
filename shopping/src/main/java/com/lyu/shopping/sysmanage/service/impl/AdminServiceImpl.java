@@ -87,7 +87,7 @@ public class AdminServiceImpl implements AdminService {
 		user.setStatus(0);
 		user.setGmtCreate(new Date());
 		user.setGmtModified(new Date());
-		user.setIsDeleted(0);
+		user.setDelFlag(0);
 		
 		int rows = this.adminMapper.saveAdmin(user);
 		if (rows > 0) {
