@@ -59,6 +59,10 @@ public class Category1Controller {
 	 */
 	private static final String CATEGORY1_QUERY_METHOD_PAGE = "category1Mgr.listCategory1";
 	
+	/**
+	 * 跳转到一级类目列表页面
+	 * @return
+	 */
 	@RequestMapping(value="/gotoCategory1List")
 	public String gotoCategory1List() {
 		return CATEGORY1_LIST_URI;
