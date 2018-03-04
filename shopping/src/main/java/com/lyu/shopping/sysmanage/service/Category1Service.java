@@ -1,7 +1,7 @@
 package com.lyu.shopping.sysmanage.service;
 
-import java.util.List;
-
+import com.github.pagehelper.PageInfo;
+import com.lyu.shopping.common.dto.PageParam;
 import com.lyu.shopping.sysmanage.entity.Category1;
 
 /**
@@ -17,6 +17,6 @@ public interface Category1Service {
 	 * 查询一级类目的列表
 	 * @return
 	 */
-	List<Category1> listCategory1(Category1 category1);
+	PageInfo<Category1> listCategory1(Category1 category1, PageParam pageParam);
 	
 }

@@ -24,6 +24,7 @@
 	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.min.js"></script>
 	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.bootstrap.js"></script>
 	<script src="${ctxJsAndCss}/assets/layer/layer.js"></script>
+	<script src="${ctxJsAndCss}/js/date.js"></script>
 	<script type="text/javascript">
 		var category1Mgr = {
 			isChecked : false,
@@ -55,6 +56,60 @@
 						$(this).removeProp("checked");
 					});
 				}
+			},
+			// 查询一级类目列表
+			listCategory1 : function(pageNo, pageSize) {
+				var category1Name = $("#category1Name").val();
+				$.ajax({
+					type : "post",
+					url : "${ctx}/sysmgr/category/category1/listCategory1",
+					data : {"category1Name" : category1Name, "pageNo" : pageNo, "pageSize" : pageSize},
+					dataType : "json",
+					success : function(data) {
+						// 获取分页条
+						var pageBar = data.pageBar;
+						// 获取一级类目列表
+						var category1List = data.category1List;
+						// 获取一级类目的总记录数s
+						var listSize = data.listSize;
+						
+						var htmlTable = "";
+						if (category1List.length > 0) {
+							for (var i = 0; i < category1List.length; i++) {
+								htmlTable =
+									htmlTable + "<tr>"+
+									"				<td><label><input type=\"checkbox\" class=\"ace\"><span"+
+									"						class=\"lbl\"></span></label></td>"+
+									"				<td>" + category1List[i].category1Id + "</td>"+
+									"				<td>" + category1List[i].category1Name + "</td>"+
+									"				<td>" + category1List[i].category1Record + "</td>"+
+									"				<td>" + timestampToTime(category1List[i].gmtCreate) + "</td>"+
+									"				<td class=\"td-status\"><span"+
+									"					class=\"label label-success radius\">显示</span></td>"+
+									"				<td class=\"td-manage\">"+
+									"					<a onClick=\"member_stop(this,\'10001\')\""+
+									"						href=\"javascript:;\" title=\"停用\" class=\"btn btn-xs btn-success\">"+
+									"						<i class=\"fa fa-check  bigger-120\"></i>"+
+									"					</a>"+
+									"					<a title=\"编辑\" onclick=\"member_edit(\'编辑\',\'member-add.html\',\'4\',\'\',\'510\')\""+
+									"						href=\"javascript:;\" class=\"btn btn-xs btn-info\">"+
+									"						<i class=\"fa fa-edit bigger-120\"></i>"+
+									"					</a>"+
+									"					<a title=\"删除\" href=\"javascript:;\" onclick=\"member_del(this,\'1\')\""+
+									"						class=\"btn btn-xs btn-warning\">"+
+									"						<i class=\"fa fa-trash  bigger-120\"></i>"+
+									"					</a>"+
+									"				</td>"+
+									"			</tr>";
+							}
+						} else {
+							htmlTable = "<tr><td>没有查询到类目记录</td></tr>";
+						}
+						$("#sample-table tbody").html(htmlTable);
+						$("#totalPage").html(listSize);
+						$("#pageBar").html(pageBar);
+					}
+				});
 			}
 		}
 	</script>
@@ -79,7 +134,7 @@
 					class="btn btn-warning"><i class="fa fa-plus"></i> 添加分类</a> <a
 					href="javascript:ovid()" class="btn btn-danger"><i
 						class="fa fa-trash"></i> 批量删除</a>
-				</span> <span class="r_f">共：<b>5</b>类
+				</span> <span class="r_f">共：<b id="totalPage"></b>类
 				</span>
 			</div>
 			<div class="sort_list">
@@ -128,6 +183,9 @@
 						</tr>
 					</tbody>
 				</table>
+				<div id="pageBar">
+					<!-- 分页条的位置 -->
+				</div>
 			</div>
 		</div>
 	</div>

@@ -1,11 +1,11 @@
 package com.lyu.shopping.test;
 
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.github.pagehelper.PageInfo;
+import com.lyu.shopping.common.dto.PageParam;
 import com.lyu.shopping.sysmanage.entity.Category1;
 import com.lyu.shopping.sysmanage.service.Category1Service;
 
@@ -35,9 +35,13 @@ public class Category1ServiceTest {
 		Category1 category1 = new Category1();
 		category1.setCategory1Name("");
 		
-		List<Category1> category1List = category1Service.listCategory1(category1);
+		PageParam pageParam = new PageParam();
+		pageParam.setPageNo(1);
+		pageParam.setPageNo(5);
 		
-		System.out.println(category1List);
+		PageInfo<Category1> pageInfo = category1Service.listCategory1(category1, pageParam);
+		
+		System.out.println(pageInfo);
 		
 	}
 	

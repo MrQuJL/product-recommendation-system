@@ -1,7 +1,19 @@
 package com.lyu.shopping.sysmanage.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.github.pagehelper.PageInfo;
+import com.lyu.shopping.common.dto.PageParam;
+import com.lyu.shopping.common.util.PageUtils;
+import com.lyu.shopping.sysmanage.entity.Category1;
+import com.lyu.shopping.sysmanage.service.Category1Service;
 
 /**
  * 类描述：处理一级分类的请求
@@ -59,6 +71,9 @@ public class Category1Controller {
 	 */
 	private static final String CATEGORY1_QUERY_METHOD_PAGE = "category1Mgr.listCategory1";
 	
+	@Autowired
+	private Category1Service category1Service;
+	
 	/**
 	 * 跳转到一级类目列表页面
 	 * @return
@@ -73,10 +88,29 @@ public class Category1Controller {
 	 * @return
 	 */
 	@RequestMapping(value="/listCategory1")
-	public String listCategory1() {
+	public @ResponseBody Map<String, Object> listCategory1(String category1Name,
+		Integer pageNo, Integer pageSize) {
 		
+		// 1.创建一级类目对象
+		Category1 category1 = new Category1();
+		category1.setCategory1Name(category1Name);
+		// 2.构造分页对象
+		PageParam pageParam = new PageParam(pageNo, pageSize);
+		// 3.分页查询
+		PageInfo<Category1> pageInfo = category1Service.listCategory1(category1, pageParam);
 		
-		return CATEGORY1_LIST_URI;
+		// 获取一级类目列表
+		List<Category1> category1List = pageInfo.getList();
+		// 获取分页条
+		String pageBar = PageUtils.pageStr(pageInfo, CATEGORY1_QUERY_METHOD_PAGE);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("category1List", category1List);
+		map.put("pageBar", pageBar);
+		map.put("listSize", pageInfo.getTotal());
+		
+		return map;
 	}
 	
 	
