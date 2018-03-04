@@ -21,6 +21,12 @@ public interface AdminMapper {
 	int countAdminInList(List<Long> adminIds);
 	
 	/**
+	 * 统计所有管理员的数目(未删除的)
+	 * @return
+	 */
+	Long countAdmin();
+	
+	/**
 	 * 通过管理员id获取管理员的详细信息
 	 * @param adminId 管理员id
 	 * @return

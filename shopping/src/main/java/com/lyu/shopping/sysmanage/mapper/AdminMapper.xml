@@ -38,6 +38,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 	
+	<!-- 统计所有管理员的数目(未删除的) -->
+	<select id="countAdmin" resultType="long">
+		SELECT COUNT(1) FROM shopping_sys_admin
+		WHERE is_deleted = 0
+	</select>
+	
 	<!-- 通过管理员id获取管理员的详细信息 -->
 	<select id="getAdminByAdminId" parameterType="long" resultType="admin">
 		SELECT <include refid="all_admin_columns" />
@@ -65,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 删除管理员，根据管理员id删除（逻辑删除）管理员 -->
 	<update id="removeAdmin" parameterType="long">
 		UPDATE shopping_sys_admin SET is_deleted = 1
-		WHERE id = #{adminId}
+		WHERE id = #{adminId} AND is_deleted = 0
 	</update>
 	
 	<!-- 批量删除管理员 -->
@@ -109,13 +115,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				gmt_modified = #{gmtModified},
 			</if>
 		</set>
-		WHERE id = #{id}
+		WHERE id = #{id} AND is_deleted = 0
 	</update>
 	
 	<!-- 更新管理员的密码 -->
 	<update id="updatePassword">
 		UPDATE shopping_sys_admin SET password = #{param2}
-		WHERE id = #{param1}
+		WHERE id = #{param1} AND is_deleted = 0
 	</update>
 	
 </mapper>

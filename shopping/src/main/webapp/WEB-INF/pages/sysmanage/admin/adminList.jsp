@@ -57,6 +57,7 @@
 					success : function(data) {
 						var htmlTable = "";
 						var pageBar = data.pageBar;
+						var adminNums = data.adminNums;
 						data = data.adminList;
 						if (data.length != 0) {
 							for (var i = 0; i < data.length; i++) {
@@ -92,8 +93,12 @@
 						} else {
 							htmlTable = "<tr><td colspan=" + 9 + ">没有查询到记录</td></tr>";
 						}
+						// 查询出来的管理员列表
 						$("#sample-table").find("tbody").html(htmlTable);
+						// 查询出的分页条
 						$("#pageBar").html(pageBar);
+						// 查询出的总记录数
+						$("#adminNums").html(adminNums);
 					}
 				});
 			},
@@ -159,7 +164,7 @@
 						id="member_add" class="btn btn-warning"><i class="icon-plus"></i>添加管理员</a>
 						<a href="javascript:adminMgr.removeAdminBatch();" class="btn btn-danger"><i
 							class="icon-trash"></i>批量删除</a>
-					</span> <span class="r_f">共：<b>2345</b>条
+					</span> <span class="r_f">共：<b id="adminNums">0</b>条
 					</span>
 				</div>
 				<!--  -->

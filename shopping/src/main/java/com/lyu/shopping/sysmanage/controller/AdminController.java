@@ -136,9 +136,12 @@ public class AdminController {
 		List<Admin> adminList = pageInfo.getList();
 		// 2.获取分页条
 		String pageBar = PageUtils.pageStr(pageInfo, ADMIN_QUERY_METHOD_PAGE);
+		// 3.获取总的记录数
+		Long adminNums = pageInfo.getTotal();
 		
 		resultMap.put("adminList", adminList);
 		resultMap.put("pageBar", pageBar);
+		resultMap.put("adminNums", adminNums);
 		
 		return resultMap;
 	}

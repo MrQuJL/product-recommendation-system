@@ -40,6 +40,13 @@ public class AdminServiceImpl implements AdminService {
 	private AdminMapper adminMapper;
 	
 	@Override
+	public Long countAdmin() {
+		Long adminNums = this.adminMapper.countAdmin();
+		
+		return adminNums;
+	}
+	
+	@Override
 	public Admin getAdminByAdminId(Long adminId) {
 		Admin admin = this.adminMapper.getAdminByAdminId(adminId);
 		return admin;
