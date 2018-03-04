@@ -70,12 +70,39 @@
 						var pageBar = data.pageBar;
 						// 获取一级类目列表
 						var category1List = data.category1List;
-						// 获取一级类目的总记录数s
+						// 获取一级类目的总记录数
 						var listSize = data.listSize;
 						
 						var htmlTable = "";
 						if (category1List.length > 0) {
 							for (var i = 0; i < category1List.length; i++) {
+								// 标签的样式
+								var labelText = "";
+								// td标签中显示的文字
+								var tdText = "";
+								// 按钮样式
+								var btnStyle = "";
+								// 点击事件是开启还是关闭
+								var btnEvent = "";
+								// 鼠标悬停时的文字
+								var hoverTitle = "";
+								// 
+								var checkOrClose = "";
+								
+								if (category1List[i].showFlag == "1") { // 显示
+									labelText = "label-success";
+									tdText = "显示";
+									btnStyle = "btn-success";
+									btnEvent = "member_stop(this,\'10001\')";
+									hoverTitle = "关闭";
+									checkOrClose = "fa-check";
+								} else { // 已关闭
+									labelText = "label-default";
+									tdText = "已关闭";
+									btnEvent = "member_start(this,\'10001\')";
+									hoverTitle = "显示";
+									checkOrClose = "fa-close";
+								}
 								htmlTable =
 									htmlTable + "<tr>"+
 									"				<td><label><input type=\"checkbox\" class=\"ace\"><span"+
@@ -85,11 +112,11 @@
 									"				<td>" + category1List[i].category1Record + "</td>"+
 									"				<td>" + timestampToTime(category1List[i].gmtCreate) + "</td>"+
 									"				<td class=\"td-status\"><span"+
-									"					class=\"label label-success radius\">显示</span></td>"+
+									"					class=\"label " + labelText + " radius\">" + tdText + "</span></td>"+
 									"				<td class=\"td-manage\">"+
-									"					<a onClick=\"member_stop(this,\'10001\')\""+
-									"						href=\"javascript:;\" title=\"停用\" class=\"btn btn-xs btn-success\">"+
-									"						<i class=\"fa fa-check  bigger-120\"></i>"+
+									"					<a onClick=\" " + btnEvent + " \""+
+									"						href=\"javascript:;\" title=\"  "+ hoverTitle +"  \" class=\"btn btn-xs " + btnStyle + "\">"+
+									"						<i class=\"fa " + checkOrClose + " bigger-120\"></i>"+
 									"					</a>"+
 									"					<a title=\"编辑\" onclick=\"member_edit(\'编辑\',\'member-add.html\',\'4\',\'\',\'510\')\""+
 									"						href=\"javascript:;\" class=\"btn btn-xs btn-info\">"+
@@ -157,30 +184,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><label><input type="checkbox" class="ace"><span
-									class="lbl"></span></label></td>
-							<td>1</td>
-							<td>秋冬羽绒</td>
-							<td>你值得拥有</td>
-							<td>2016-6-29 12:34</td>
-							<td class="td-status"><span
-								class="label label-success radius">显示</span></td>
-							<td class="td-manage">
-								<a onClick="member_stop(this,'10001')"
-									href="javascript:;" title="停用" class="btn btn-xs btn-success">
-									<i class="fa fa-check  bigger-120"></i>
-								</a>
-								<a title="编辑" onclick="member_edit('编辑','member-add.html','4','','510')"
-									href="javascript:;" class="btn btn-xs btn-info">
-									<i class="fa fa-edit bigger-120"></i>
-								</a>
-								<a title="删除" href="javascript:;" onclick="member_del(this,'1')"
-									class="btn btn-xs btn-warning">
-									<i class="fa fa-trash  bigger-120"></i>
-								</a>
-							</td>
-						</tr>
+						
 					</tbody>
 				</table>
 				<div id="pageBar">
@@ -277,55 +281,54 @@
 	};
 	/*广告图片-停用*/
 	function member_stop(obj, id) {
-		layer
-				.confirm(
-						'确认要关闭吗？',
-						{
-							icon : 0,
-						},
-						function(index) {
-							$(obj)
-									.parents("tr")
-									.find(".td-manage")
-									.prepend(
-											'<a style="text-decoration:none" class="btn btn-xs " onClick="member_start(this,id)" href="javascript:;" title="显示"><i class="fa fa-close bigger-120"></i></a>');
-							$(obj)
-									.parents("tr")
-									.find(".td-status")
-									.html(
-											'<span class="label label-defaunt radius">已关闭</span>');
-							$(obj).remove();
-							layer.msg('关闭!', {
-								icon : 5,
-								time : 1000
-							});
-						});
+		layer.confirm(
+			'确认要关闭吗？',
+			{
+				icon : 0,
+			},
+			function(index) {
+				$(obj)
+						.parents("tr")
+						.find(".td-manage")
+						.prepend(
+								'<a style="text-decoration:none" class="btn btn-xs " onClick="member_start(this,id)" href="javascript:;" title="显示"><i class="fa fa-close bigger-120"></i></a>');
+				$(obj)
+						.parents("tr")
+						.find(".td-status")
+						.html(
+								'<span class="label label-defaunt radius">已关闭</span>');
+				$(obj).remove();
+				layer.msg('关闭!', {
+					icon : 5,
+					time : 1000
+				});
+			});
 	}
 	/*广告图片-启用*/
 	function member_start(obj, id) {
 		layer
-				.confirm(
-						'确认要显示吗？',
-						{
-							icon : 0,
-						},
-						function(index) {
-							$(obj)
-									.parents("tr")
-									.find(".td-manage")
-									.prepend(
-											'<a style="text-decoration:none" class="btn btn-xs btn-success" onClick="member_stop(this,id)" href="javascript:;" title="关闭"><i class="fa fa-check  bigger-120"></i></a>');
-							$(obj)
-									.parents("tr")
-									.find(".td-status")
-									.html(
-											'<span class="label label-success radius">显示</span>');
-							$(obj).remove();
-							layer.msg('显示!', {
-								icon : 6,
-								time : 1000
-							});
+			.confirm(
+					'确认要显示吗？',
+					{
+						icon : 0,
+					},
+					function(index) {
+						$(obj)
+								.parents("tr")
+								.find(".td-manage")
+								.prepend(
+										'<a style="text-decoration:none" class="btn btn-xs btn-success" onClick="member_stop(this,id)" href="javascript:;" title="关闭"><i class="fa fa-check  bigger-120"></i></a>');
+						$(obj)
+								.parents("tr")
+								.find(".td-status")
+								.html(
+										'<span class="label label-success radius">显示</span>');
+						$(obj).remove();
+						layer.msg('显示!', {
+							icon : 6,
+							time : 1000
 						});
+					});
 	}
 	/*广告图片-删除*/
 	function member_del(obj, id) {
@@ -359,49 +362,6 @@
 	function AdlistOrders(id) {
 		window.location.href = "Ads_list.html?=" + id;
 	};
-</script>
-<script type="text/javascript">
-	jQuery(function($) {
-		var oTable1 = $('#sample-table').dataTable({
-			"aaSorting" : [ [ 1, "desc" ] ],//默认第几个排序
-			"bStateSave" : true,//状态保存
-			"aoColumnDefs" : [
-			//{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-			{
-				"orderable" : false,
-				"aTargets" : [ 0, 2, 4, 6, 7, ]
-			} // 制定列不参与排序
-			]
-		});
-		$('table th input:checkbox').on(
-				'click',
-				function() {
-					var that = this;
-					$(this).closest('table').find(
-							'tr > td:first-child input:checkbox').each(
-							function() {
-								this.checked = that.checked;
-								$(this).closest('tr').toggleClass('selected');
-							});
-
-				});
-		$('[data-rel="tooltip"]').tooltip({
-			placement : tooltip_placement
-		});
-		function tooltip_placement(context, source) {
-			var $source = $(source);
-			var $parent = $source.closest('table')
-			var off1 = $parent.offset();
-			var w1 = $parent.width();
-
-			var off2 = $source.offset();
-			var w2 = $source.width();
-
-			if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2))
-				return 'right';
-			return 'left';
-		}
-	})
 </script>
 </body>
 </html>
