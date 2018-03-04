@@ -68,4 +68,18 @@ public class Category1Controller {
 		return CATEGORY1_LIST_URI;
 	}
 	
+	/**
+	 * 处理查询一级类目列表的请求
+	 * @return
+	 */
+	@RequestMapping(value="/listCategory1")
+	public String listCategory1() {
+		
+		
+		return CATEGORY1_LIST_URI;
+	}
+	
+	
+	
+	
 }

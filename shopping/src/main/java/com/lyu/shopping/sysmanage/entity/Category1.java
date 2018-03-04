@@ -18,6 +18,8 @@ public class Category1 implements Serializable {
 
     private String category1Name;
 
+    private String category1Record;
+    
     private Date gmtCreate;
 
     private Date gmtModified;
@@ -40,6 +42,14 @@ public class Category1 implements Serializable {
 
 	public void setCategory1Name(String category1Name) {
 		this.category1Name = category1Name;
+	}
+
+	public String getCategory1Record() {
+		return category1Record;
+	}
+
+	public void setCategory1Record(String category1Record) {
+		this.category1Record = category1Record;
 	}
 
 	public Date getGmtCreate() {

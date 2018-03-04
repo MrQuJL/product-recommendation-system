@@ -6,8 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.lyu.shopping.sysmanage.mapper.Category1Mapper">
 	<!-- 一级类目表的所有字段 -->
 	<sql id="all_category1_columns" >
-    	category1_id, category1_name, gmt_create, gmt_modified,
-    	is_show, is_deleted
+    	category1_id, category1_name, category1_record, gmt_create,
+    	gmt_modified, is_show, is_deleted
   	</sql>
 	
 	<!-- 封装了一些一级类目的查询条件 -->
@@ -17,6 +17,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="category1Name != null">
 			category1_name LIKE '%${category1Name}%'
+		</if>
+		<if test="category1Record != null">
+			category1_record LIKE '%${category1Record}%'
 		</if>
 		<if test="gmtCreate != null">
 			gmt_create = #{gmtCreate}
@@ -36,6 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="category1" id="category1ResultMap">
 		<id property="category1Id" column="category1_id" />
 		<result property="category1Name" column="category1_name" />
+		<result property="category1Record" column="category1_record" />
 		<result property="gmtCreate" column="gmt_create" />
 		<result property="gmtModified" column="gmt_modified" />
 		<result property="showFlag" column="is_show" />
