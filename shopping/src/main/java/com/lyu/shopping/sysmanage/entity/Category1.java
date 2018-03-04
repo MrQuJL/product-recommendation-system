@@ -1,10 +1,20 @@
 package com.lyu.shopping.sysmanage.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Category1 {
+/**
+ * 类描述：一级类目实体类
+ * 类名称：com.lyu.shopping.sysmanage.entity.Category1
+ * @author 曲健磊
+ * 2018年3月3日.下午5:46:07
+ * @version V1.0
+ */
+public class Category1 implements Serializable {
 	
-    private Long category1Id;
+	private static final long serialVersionUID = -3429777822800745987L;
+
+	private Long category1Id;
 
     private String category1Name;
 
@@ -12,9 +22,9 @@ public class Category1 {
 
     private Date gmtModified;
 
-    private Boolean isShow;
+    private Boolean showFlag;
 
-    private Boolean isDeleted;
+    private Boolean delFlag;
 
 	public Long getCategory1Id() {
 		return category1Id;
@@ -48,20 +58,20 @@ public class Category1 {
 		this.gmtModified = gmtModified;
 	}
 
-	public Boolean getIsShow() {
-		return isShow;
+	public Boolean getShowFlag() {
+		return showFlag;
 	}
 
-	public void setIsShow(Boolean isShow) {
-		this.isShow = isShow;
+	public void setShowFlag(Boolean showFlag) {
+		this.showFlag = showFlag;
 	}
 
-	public Boolean getIsDeleted() {
-		return isDeleted;
+	public Boolean getDelFlag() {
+		return delFlag;
 	}
 
-	public void setIsDeleted(Boolean isDeleted) {
-		this.isDeleted = isDeleted;
+	public void setDelFlag(Boolean delFlag) {
+		this.delFlag = delFlag;
 	}
-    
+
 }

@@ -146,7 +146,6 @@
 							});
 							return false;
 						}
-	
 						if ($("#c_mew_pas").val() == "") {
 							layer.alert('确认新密码不能为空!', {
 								title : '提示框',
@@ -295,12 +294,18 @@
 							class="icon-edit"></i><span class="menu-text"> 类目管理 </span><b
 							class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
-							<li class="home"><a href="${ctx}/sysmgr/category1"
-								name="Guestbook.html" title="一级类目管理" class="iframeurl"><i
-									class="icon-double-angle-right"></i>一级类目管理</a></li>
-							<li class="home"><a href="${ctx}/sysmgr/category2"
-								name="Feedback.html" title="二级类目管理" class="iframeurl"><i
-									class="icon-double-angle-right"></i>二级类目管理</a></li>
+							<li class="home">
+								<a href="${ctx}/sysmgr/category/category1/gotoCategory1List" target="iframe"
+									name="" title="一级类目管理" class="iframeurl">
+									<i class="icon-double-angle-right"></i>一级类目管理
+								</a>
+							</li>
+							<li class="home">
+								<a href="${ctx}/sysmgr/category/category2/gotoCategory2List" target="iframe"
+									name="" title="二级类目管理" class="iframeurl">
+									<i class="icon-double-angle-right"></i>二级类目管理
+								</a>
+							</li>
 						</ul></li>
 					<li>
 						<a href="#" class="dropdown-toggle">

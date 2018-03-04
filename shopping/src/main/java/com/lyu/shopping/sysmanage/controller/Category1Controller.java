@@ -1,21 +1,7 @@
 package com.lyu.shopping.sysmanage.controller;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.github.pagehelper.PageInfo;
-import com.lyu.shopping.common.dto.PageParam;
-import com.lyu.shopping.common.util.PageUtils;
 
 /**
  * 类描述：处理一级分类的请求
@@ -25,8 +11,13 @@ import com.lyu.shopping.common.util.PageUtils;
  * @version V1.0
  */
 @Controller
-@RequestMapping(value="/sysmgr/category1")
+@RequestMapping(value="/sysmgr/category/category1")
 public class Category1Controller {
+	
+	/**
+	 * 一级分类列表的uri地址
+	 */
+	private static final String CATEGORY1_LIST_URI = "sysmanage/category/category1/category1List";
 	
 	/**
 	 * 前台页面提示信息的属性名称
@@ -68,5 +59,9 @@ public class Category1Controller {
 	 */
 	private static final String CATEGORY1_QUERY_METHOD_PAGE = "category1Mgr.listCategory1";
 	
+	@RequestMapping(value="/gotoCategory1List")
+	public String gotoCategory1List() {
+		return CATEGORY1_LIST_URI;
+	}
 	
 }

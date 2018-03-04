@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/pages/include/taglib.jsp"%>
 <!doctype html>
 <html>
 <head>
@@ -8,23 +9,70 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 	<meta http-equiv="Cache-Control" content="no-siteapp" />
-	<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="css/style.css" />
-	<link href="assets/css/codemirror.css" rel="stylesheet">
-	<link rel="stylesheet" href="assets/css/ace.min.css" />
-	<link rel="stylesheet" href="font/css/font-awesome.min.css" />
+	<!-- css样式 -->
+	<link href="${ctxJsAndCss}/assets/css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="${ctxJsAndCss}/css/style.css" />
+	<link href="${ctxJsAndCss}/assets/css/codemirror.css" rel="stylesheet">
+	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace.min.css" />
+	<link rel="stylesheet" href="${ctxJsAndCss}/font/css/font-awesome.min.css" />
 	<!--[if lte IE 8]>
-		<link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace-ie.min.css" />
 	<![endif]-->
-	<script src="js/jquery-1.9.1.min.js"></script>
-	<script src="assets/js/typeahead-bs2.min.js"></script>
-	<script src="js/lrtk.js"></script>
-	<script src="assets/js/jquery.dataTables.min.js"></script>
-	<script src="assets/js/jquery.dataTables.bootstrap.js"></script>
-	<script src="assets/layer/layer.js"></script>
+	<script src="${ctxJsAndCss}/js/jquery-1.9.1.min.js"></script>
+	<script src="${ctxJsAndCss}/assets/js/typeahead-bs2.min.js"></script>
+	<script src="${ctxJsAndCss}/js/lrtk.js"></script>
+	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.min.js"></script>
+	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.bootstrap.js"></script>
+	<script src="${ctxJsAndCss}/assets/layer/layer.js"></script>
+	<script type="text/javascript">
+		var category1Mgr = {
+			isChecked : false,
+			// 选中或取消选中所有一级类目
+			toggleCheck : function() {
+				// 获取所有的checkbox
+				var boxes = $("#sample-table tbody").find("input[type='checkbox']");
+				// 获取所有的checkbox的数量
+				var allCheckBoxNums = boxes.length;
+				// 先获取选中的checkbox的个数
+				var checkedNums = $("#sample-table tbody")
+					.find("input[type='checkbox']:checked").length;
+				
+				// true表示还未选中,false表示已经选中
+				var toggleCheckBox = $("#toggleCheckBox").prop("checked");
+				
+				// 未选中
+				if (toggleCheckBox) {
+					// 只有全部被选中的情况才把所有的checkbox都取消选中，只要有一个checkbox没有被选中，就全部选中
+					if (allCheckBoxNums != checkedNums) {
+						//alert("将全部选中checkbox");
+						$.each(boxes,function(){
+							$(this).prop("checked","checked");
+						});
+					}
+				} else { // 选中
+					//alert("将会取消所有checkbox的选中");
+					$.each(boxes,function(){
+						$(this).removeProp("checked");
+					});
+				}
+			}
+		}
+	</script>
 </head>
 <body>
 	<div class="page-content clearfix">
+		<div class="search_style">
+			<div class="title_names">搜索查询</div>
+			<ul class="search_content clearfix">
+				<li><label class="l_f">一级类目名称</label><input id="category1Name" name="category1Name" type="text"
+					class="text_add" placeholder="输入一级类目名称" style="width: 400px" /></li>
+				<li style="width: 90px;">
+					<button type="button" class="btn_search" onclick="category1Mgr.listCategory1(1, 5);">
+						<i class="icon-search"></i>查询
+					</button>
+				</li>
+			</ul>
+		</div>
 		<div class="sort_style">
 			<div class="border clearfix">
 				<span class="l_f"> <a href="javascript:ovid()" id="sort_add"
@@ -39,13 +87,16 @@
 					id="sample-table">
 					<thead>
 						<tr>
-							<th width="25px"><label><input type="checkbox"
-									class="ace"><span class="lbl"></span></label></th>
+							<th width="25px">
+								<label>
+									<input id="toggleCheckBox" type="checkbox" class="ace" onclick="category1Mgr.toggleCheck();">
+									<span class="lbl"></span>
+								</label>
+							</th>
 							<th width="50px">ID</th>
-							<th width="100px">分类名称</th>
-							<th width="50px">数量</th>
+							<th width="100px">一级类目名称</th>
 							<th width="350px">描述</th>
-							<th width="180px">加入时间</th>
+							<th width="180px">创建时间</th>
 							<th width="70px">状态</th>
 							<th width="250px">操作</th>
 						</tr>
@@ -55,25 +106,25 @@
 							<td><label><input type="checkbox" class="ace"><span
 									class="lbl"></span></label></td>
 							<td>1</td>
-							<td>幻灯片</td>
-							<td>5</td>
-							<td>首页顶部广告轮播图，大图区别于其他图片</td>
+							<td>秋冬羽绒</td>
+							<td>你值得拥有</td>
 							<td>2016-6-29 12:34</td>
 							<td class="td-status"><span
 								class="label label-success radius">显示</span></td>
-							<td class="td-manage"><a onClick="member_stop(this,'10001')"
-								href="javascript:;" title="停用" class="btn btn-xs btn-success"><i
-									class="fa fa-check  bigger-120"></i></a> <a title="编辑"
-								onclick="member_edit('编辑','member-add.html','4','','510')"
-								href="javascript:;" class="btn btn-xs btn-info"><i
-									class="fa fa-edit bigger-120"></i></a> <a title="删除"
-								href="javascript:;" onclick="member_del(this,'1')"
-								class="btn btn-xs btn-warning"><i
-									class="fa fa-trash  bigger-120"></i></a> <a
-								href="javascript:ovid()" name="Ads_list.html"
-								class="btn btn-xs btn-pink ads_link"
-								onclick="AdlistOrders('561');" title="幻灯片广告列表"><i
-									class="fa  fa-bars  bigger-120"></i></a></td>
+							<td class="td-manage">
+								<a onClick="member_stop(this,'10001')"
+									href="javascript:;" title="停用" class="btn btn-xs btn-success">
+									<i class="fa fa-check  bigger-120"></i>
+								</a>
+								<a title="编辑" onclick="member_edit('编辑','member-add.html','4','','510')"
+									href="javascript:;" class="btn btn-xs btn-info">
+									<i class="fa fa-edit bigger-120"></i>
+								</a>
+								<a title="删除" href="javascript:;" onclick="member_del(this,'1')"
+									class="btn btn-xs btn-warning">
+									<i class="fa fa-trash  bigger-120"></i>
+								</a>
+							</td>
 						</tr>
 					</tbody>
 				</table>
