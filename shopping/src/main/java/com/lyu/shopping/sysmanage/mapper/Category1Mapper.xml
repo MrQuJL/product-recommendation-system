@@ -55,4 +55,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 	
+	<!-- 显示或者隐藏一级类目,参数为1就是显示，参数为0就是隐藏 -->
+	<update id="updateShowFlag">
+		UPDATE shopping_category1 SET is_show = #{param2}
+		WHERE category1_id = #{param1}
+	</update>
+	
 </mapper>

@@ -45,4 +45,17 @@ public class Category1ServiceTest {
 		
 	}
 	
+	/**
+	 * 对显示和隐藏一级类目的测试
+	 */
+	@Test
+	public void testChangeShowFlag() {
+		Category1Service category1Service = (Category1Service) this.application.getBean("category1Service");
+		// 显示一级类目测试
+//		System.out.println(category1Service.showCategory1(2L));
+		// 隐藏一级类目测试
+		System.out.println(category1Service.hideCategory1(2L));
+		
+	}
+	
 }

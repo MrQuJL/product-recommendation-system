@@ -86,20 +86,20 @@
 								var btnEvent = "";
 								// 鼠标悬停时的文字
 								var hoverTitle = "";
-								// 
+								// 开启还是关闭类目
 								var checkOrClose = "";
 								
 								if (category1List[i].showFlag == "1") { // 显示
 									labelText = "label-success";
 									tdText = "显示";
 									btnStyle = "btn-success";
-									btnEvent = "member_stop(this,\'10001\')";
+									btnEvent = "member_stop(this," + category1List[i].category1Id + ")";
 									hoverTitle = "关闭";
 									checkOrClose = "fa-check";
 								} else { // 已关闭
 									labelText = "label-default";
 									tdText = "已关闭";
-									btnEvent = "member_start(this,\'10001\')";
+									btnEvent = "member_start(this," + category1List[i].category1Id  + ")";
 									hoverTitle = "显示";
 									checkOrClose = "fa-close";
 								}
@@ -279,7 +279,7 @@
 			return true;
 		}
 	};
-	/*广告图片-停用*/
+	/*类目-停用*/
 	function member_stop(obj, id) {
 		layer.confirm(
 			'确认要关闭吗？',
@@ -287,24 +287,41 @@
 				icon : 0,
 			},
 			function(index) {
-				$(obj)
-						.parents("tr")
-						.find(".td-manage")
-						.prepend(
-								'<a style="text-decoration:none" class="btn btn-xs " onClick="member_start(this,id)" href="javascript:;" title="显示"><i class="fa fa-close bigger-120"></i></a>');
-				$(obj)
-						.parents("tr")
-						.find(".td-status")
-						.html(
-								'<span class="label label-defaunt radius">已关闭</span>');
-				$(obj).remove();
-				layer.msg('关闭!', {
-					icon : 5,
-					time : 1000
+				
+				$.ajax({
+					type : "post",
+					url : "${ctx}/sysmgr/category/category1/showOrHideCategory1",
+					data : {"changeValue" : 0, "category1Id" : id},
+					dataType : "json",
+					success : function(data) {
+						if (data.message == "success") { // 隐藏该一级类目成功
+							$(obj).parents("tr")
+								.find(".td-manage")
+								.prepend('<a style="text-decoration:none" class="btn btn-xs " onClick="member_start(this,' + id
+									+ ')" href="javascript:;" title="显示"><i class="fa fa-close bigger-120"></i></a>');
+							
+							$(obj).parents("tr")
+								.find(".td-status")
+								.html('<span class="label label-defaunt radius">已关闭</span>');
+							
+							$(obj).remove();
+							layer.msg('关闭!', {
+								icon : 5,
+								time : 1000
+							});
+							// 重新查询一下
+							category1Mgr.listCategory1();
+						} else { // 隐藏该一级类目失败
+							layer.msg('隐藏该一级类目失败，请联系系统管理员!', {
+								icon : 5,
+								time : 1000
+							});
+						}
+					}
 				});
 			});
 	}
-	/*广告图片-启用*/
+	/*类目-启用*/
 	function member_start(obj, id) {
 		layer
 			.confirm(
@@ -313,20 +330,36 @@
 						icon : 0,
 					},
 					function(index) {
-						$(obj)
-								.parents("tr")
-								.find(".td-manage")
-								.prepend(
-										'<a style="text-decoration:none" class="btn btn-xs btn-success" onClick="member_stop(this,id)" href="javascript:;" title="关闭"><i class="fa fa-check  bigger-120"></i></a>');
-						$(obj)
-								.parents("tr")
-								.find(".td-status")
-								.html(
-										'<span class="label label-success radius">显示</span>');
-						$(obj).remove();
-						layer.msg('显示!', {
-							icon : 6,
-							time : 1000
+						
+						$.ajax({
+							type : "post",
+							url : "${ctx}/sysmgr/category/category1/showOrHideCategory1",
+							data : {"changeValue" : 1, "category1Id" : id},
+							dataType : "json",
+							success : function(data) {
+								if (data.message == "success") { // 显示该一级类目成功
+									$(obj).parents("tr")
+										.find(".td-manage")
+										.prepend('<a style="text-decoration:none" class="btn btn-xs btn-success" onClick="member_stop(this,' + id 
+											+ ')" href="javascript:;" title="关闭"><i class="fa fa-check  bigger-120"></i></a>');
+									$(obj).parents("tr")
+										.find(".td-status")
+										.html('<span class="label label-success radius">显示</span>');
+									$(obj).remove();
+									
+									layer.msg('显示!', {
+										icon : 6,
+										time : 1000
+									});
+									// 重新查询一次查询
+									category1Mgr.listCategory1();
+								} else { // 显示该一级类目失败
+									layer.msg('显示该一级类目失败，请联系系统管理员!', {
+										icon : 6,
+										time : 1000
+									});
+								}
+							}
 						});
 					});
 	}

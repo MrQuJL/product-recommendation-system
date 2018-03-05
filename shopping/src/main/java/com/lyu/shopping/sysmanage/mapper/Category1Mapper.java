@@ -19,4 +19,12 @@ public interface Category1Mapper {
 	 */
 	List<Category1> listCategory1(Category1 category1);
 	
+	/**
+	 * 显示或者隐藏一级类目
+	 * @param isShow 值为1就是显示，值为0就是隐藏
+	 * @param category1Id 要修改的一级类目的id
+	 * @return
+	 */
+	int updateShowFlag(Long category1Id, Integer isShow);
+	
 }

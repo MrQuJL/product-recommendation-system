@@ -113,7 +113,29 @@ public class Category1Controller {
 		return map;
 	}
 	
-	
-	
+	/**
+	 * 处理显示或者隐藏一级类目的请求
+	 * @return
+	 */
+	@RequestMapping(value="/showOrHideCategory1")
+	public @ResponseBody Map<String, Object> showOrHideCategory1(Integer changeValue,
+		Long category1Id) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap.put("message", "failed");
+		
+		boolean flag = false;
+		if (changeValue.equals(1)) { // 显示该一级类目
+			flag = this.category1Service.showCategory1(category1Id);
+			
+		} else { // 隐藏该二级类目
+			flag = this.category1Service.hideCategory1(category1Id);
+		}
+		if (flag) {
+			resultMap.put("message", "success");
+		}
+		
+		return resultMap;
+	}
 	
 }

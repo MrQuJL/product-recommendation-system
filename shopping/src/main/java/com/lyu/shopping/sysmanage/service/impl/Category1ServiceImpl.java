@@ -22,6 +22,16 @@ import com.lyu.shopping.sysmanage.service.Category1Service;
 @Service("category1Service")
 public class Category1ServiceImpl implements Category1Service {
 
+	/**
+	 * 显示一级类目的标示，在数据库中对应的字段为1
+	 */
+	private static final Integer SHOW_CATEGORY1 = 1;
+	
+	/**
+	 * 隐藏一级类目的标示，在数据库中对应的字段为0
+	 */
+	private static final Integer HIDE_CATEGORY1 = 0;
+	
 	@Autowired
 	private Category1Mapper category1Mapper;
 	
@@ -35,6 +45,24 @@ public class Category1ServiceImpl implements Category1Service {
 		PageInfo<Category1> pageInfo = new PageInfo<Category1>(category1List);
 		
 		return pageInfo;
+	}
+
+	@Override
+	public boolean showCategory1(Long category1Id) {
+		int rows = this.category1Mapper.updateShowFlag(category1Id, SHOW_CATEGORY1);
+		if (rows > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean hideCategory1(Long category1Id) {
+		int rows = this.category1Mapper.updateShowFlag(category1Id, HIDE_CATEGORY1);
+		if (rows > 0) {
+			return true;
+		}
+		return false;
 	}
 
 }

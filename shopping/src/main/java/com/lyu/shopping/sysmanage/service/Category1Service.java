@@ -19,4 +19,18 @@ public interface Category1Service {
 	 */
 	PageInfo<Category1> listCategory1(Category1 category1, PageParam pageParam);
 	
+	/**
+	 * 显示当前一级类目的，is_show属性设置为1
+	 * @param category1Id
+	 * @return
+	 */
+	boolean showCategory1(Long category1Id);
+	
+	/**
+	 * 隐藏当前一级类目的，is_show属性设置为0
+	 * @param category1Id
+	 * @return
+	 */
+	boolean hideCategory1(Long category1Id);
+	
 }
