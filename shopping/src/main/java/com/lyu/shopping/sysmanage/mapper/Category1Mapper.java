@@ -14,6 +14,13 @@ import com.lyu.shopping.sysmanage.entity.Category1;
 public interface Category1Mapper {
     
 	/**
+	 * 根据一级类目的id查询出它的详细信息
+	 * @param category1Id 要查询的一级类目的id
+	 * @return 查询到的一级类目
+	 */
+	Category1 getCategory1ById(Long category1Id);
+	
+	/**
 	 * 查询一级类目的列表
 	 * @return
 	 */

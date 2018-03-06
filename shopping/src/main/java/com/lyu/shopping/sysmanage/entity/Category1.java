@@ -84,4 +84,11 @@ public class Category1 implements Serializable {
 		this.delFlag = delFlag;
 	}
 
+	@Override
+	public String toString() {
+		return "Category1 [category1Id=" + category1Id + ", category1Name=" + category1Name + ", category1Record="
+				+ category1Record + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", showFlag="
+				+ showFlag + ", delFlag=" + delFlag + "]";
+	}
+	
 }

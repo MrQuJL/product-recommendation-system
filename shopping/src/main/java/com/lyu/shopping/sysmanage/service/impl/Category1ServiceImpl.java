@@ -37,6 +37,14 @@ public class Category1ServiceImpl implements Category1Service {
 	private Category1Mapper category1Mapper;
 	
 	@Override
+	public Category1 getCategory1ById(Long category1Id) {
+		
+		Category1 category1 = this.category1Mapper.getCategory1ById(category1Id);
+		
+		return category1;
+	}
+	
+	@Override
 	public PageInfo<Category1> listCategory1(Category1 category1, PageParam pageParam) {
 		// 开启分页
 		PageHelper.startPage(pageParam.getPageNo(), pageParam.getPageSize());

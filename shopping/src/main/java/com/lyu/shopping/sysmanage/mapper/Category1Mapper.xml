@@ -46,6 +46,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="delFlag" column="is_deleted" />
 	</resultMap>
 	
+	<!-- 根据一级类目的id查询出它的详细信息 -->
+	<select id="getCategory1ById" parameterType="long" resultMap="category1ResultMap">
+		SELECT <include refid="all_category1_columns" />
+		FROM shopping_category1
+		WHERE category1_id = #{category1Id}
+	</select>
+	
 	<!-- 查询一级类目的列表 -->
 	<select id="listCategory1" parameterType="category1" resultMap="category1ResultMap">
 		SELECT <include refid="all_category1_columns" />

@@ -140,6 +140,22 @@ public class Category1Controller {
 	}
 	
 	/**
+	 * 处理根据一级类目的id查询出它的详细信息的请求
+	 * @param category1Id
+	 * @return
+	 */
+	@RequestMapping(value="/getCategory1ById")
+	public @ResponseBody Map<String, Object> getCategory1ById(Long category1Id) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		Category1 category1 = this.category1Service.getCategory1ById(category1Id);
+		
+		resultMap.put("category1", category1);
+		
+		return resultMap;
+	}
+	
+	/**
 	 * 处理新增或者修改一级类目的请求
 	 * @param category1
 	 * @return 新增（修改）一级类目成功或者失败的提示信息

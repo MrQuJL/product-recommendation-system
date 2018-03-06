@@ -72,4 +72,16 @@ public class Category1ServiceTest {
 		
 	}
 	
+	/**
+	 * 测试根据 id 获取一级类目的名称
+	 */
+	@Test
+	public void testGetCategory1ById() {
+		Category1Service category1Service = (Category1Service) this.application.getBean("category1Service");
+		Category1 category1 = category1Service.getCategory1ById(1L);
+		
+		System.out.println(category1);
+		
+	}
+	
 }

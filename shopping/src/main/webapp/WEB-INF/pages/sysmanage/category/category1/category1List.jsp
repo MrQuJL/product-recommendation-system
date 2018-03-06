@@ -58,7 +58,7 @@
 			},
 			// 查询一级类目列表
 			listCategory1 : function(pageNo, pageSize) {
-				var category1Name = $("#category1Name").val();
+				var category1Name = $("#queryCategory1Name").val();
 				$.ajax({
 					type : "post",
 					url : "${ctx}/sysmgr/category/category1/listCategory1",
@@ -139,9 +139,24 @@
 			},
 			// 编辑一级类目
 			category1Edit : function (category1Id) {
-				// 和添加功能类似，也要线清空表单
-				
 				// 1.修改一级类目的时候先要通过传入的id去后台查询一下当前类目的详细信息，然后赋值到页面
+				$.ajax({
+					type : "post",
+					url : "${ctx}/sysmgr/category/category1/getCategory1ById",
+					data : {"category1Id" : category1Id},
+					dataType : "json",
+					success : function(data) {
+						var category1 = data.category1;
+						$("#category1Id").val(category1.category1Id);
+						$("#category1Name").val(category1.category1Name);
+						$("#category1Record").val(category1.category1Record);
+						if (category1.showFlag == 1) { // 显示
+							$("#show").prop("checked","checked");
+						} else { // 隐藏
+							$("#hide").prop("checked","checked");
+						}
+					}
+				});
 				
 				layer.open({
 					type : 1,
@@ -216,7 +231,7 @@
 		<div class="search_style">
 			<div class="title_names">搜索查询</div>
 			<ul class="search_content clearfix">
-				<li><label class="l_f">一级类目名称</label><input id="category1Name" name="category1Name" type="text"
+				<li><label class="l_f">一级类目名称</label><input id="queryCategory1Name" name="category1Name" type="text"
 					class="text_add" placeholder="输入一级类目名称" style="width: 400px" /></li>
 				<li style="width: 90px;">
 					<button type="button" class="btn_search" onclick="category1Mgr.listCategory1(1, 5);">
