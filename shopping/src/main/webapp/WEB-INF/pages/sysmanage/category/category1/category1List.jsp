@@ -121,7 +121,7 @@
 									"						href=\"javascript:;\" class=\"btn btn-xs btn-info\">"+
 									"						<i class=\"fa fa-edit bigger-120\"></i>"+
 									"					</a>"+
-									"					<a title=\"删除\" href=\"javascript:;\" onclick=\"member_del(this,\'1\')\""+
+									"					<a title=\"删除\" href=\"javascript:;\" onclick=\"member_del(this," + category1List[i].category1Id + ")\""+
 									"						class=\"btn btn-xs btn-warning\">"+
 									"						<i class=\"fa fa-trash  bigger-120\"></i>"+
 									"					</a>"+
@@ -204,12 +204,12 @@
 								dataType : "json",
 								success : function(data) {
 									if (data.message == "修改一级分类成功") {
+										category1Mgr.listCategory1(1, 5);
 										layer.alert('修改一级分类成功！', {
 											title : '提示框',
 											icon : 1,
 										});
 										layer.close(index);
-										category1Mgr.listCategory1(1, 5);
 									} else {
 										layer.alert('修改一级分类失败，请联系系统管理员！', {
 											title : '提示框',
@@ -420,7 +420,6 @@
 				icon : 0,
 			},
 			function(index) {
-				
 				$.ajax({
 					type : "post",
 					url : "${ctx}/sysmgr/category/category1/showOrHideCategory1",
@@ -501,10 +500,25 @@
 		layer.confirm('确认要删除吗？', {
 			icon : 0,
 		}, function(index) {
-			$(obj).parents("tr").remove();
-			layer.msg('已删除!', {
-				icon : 1,
-				time : 1000
+			$.ajax({
+				type : "post",
+				url : "${ctx}/sysmgr/category/category1/removeCategory1",
+				data : {"category1Id" : id},
+				dataType : "json",
+				success : function(data) {
+					if (data.message == "删除一级分类成功") {
+						layer.msg('删除一级类目成功!', {
+							icon : 1,
+							time : 1000
+						});
+						category1Mgr.listCategory1(1, 5);
+					} else {
+						layer.msg('删除一级类目失败，请联系系统管理员!', {
+							icon : 0,
+							time : 1000
+						});
+					}
+				}
 			});
 		});
 	}

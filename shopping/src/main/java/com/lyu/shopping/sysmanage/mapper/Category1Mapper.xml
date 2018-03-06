@@ -13,25 +13,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 封装了一些一级类目的查询条件 -->
 	<sql id="query_category1_sql">
 		<if test="category1Id != null">
-			category1_id = #{category1Id}
+			AND category1_id = #{category1Id}
 		</if>
 		<if test="category1Name != null">
-			category1_name LIKE '%${category1Name}%'
+			AND category1_name LIKE '%${category1Name}%'
 		</if>
 		<if test="category1Record != null">
-			category1_record LIKE '%${category1Record}%'
+			AND category1_record LIKE '%${category1Record}%'
 		</if>
 		<if test="gmtCreate != null">
-			gmt_create = #{gmtCreate}
+			AND gmt_create = #{gmtCreate}
 		</if>
 		<if test="gmtModified != null">
-			gmt_modified = #{gmtModified}
+			AND gmt_modified = #{gmtModified}
 		</if>
 		<if test="showFlag != null">
-			is_show = #{showFlag}
+			AND is_show = #{showFlag}
 		</if>
-		<if test="delFlag != null">
-			is_deleted = #{delFlag}
+		<if test="1 == 1">
+			AND is_deleted = 0
 		</if>
 	</sql>
 	
@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getCategory1ById" parameterType="long" resultMap="category1ResultMap">
 		SELECT <include refid="all_category1_columns" />
 		FROM shopping_category1
-		WHERE category1_id = #{category1Id}
+		WHERE category1_id = #{category1Id} AND is_deleted = 0
 	</select>
 	
 	<!-- 查询一级类目的列表 -->
@@ -65,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 显示或者隐藏一级类目,参数为1就是显示，参数为0就是隐藏 -->
 	<update id="updateShowFlag">
 		UPDATE shopping_category1 SET is_show = #{param2}
-		WHERE category1_id = #{param1}
+		WHERE category1_id = #{param1} AND is_deleted = 0
 	</update>
 	
 	<!-- 添加一级类目 -->
@@ -98,6 +98,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				AND category1_id = #{category1Id}
 			</if>
 		</where>
+	</update>
+	
+	<!-- 删除一级类目（逻辑删除） -->
+	<update id="removeCategory1" parameterType="long">
+		UPDATE shopping_category1
+		SET is_deleted = 1
+		WHERE category1_id = #{category1Id}
 	</update>
 	
 </mapper>

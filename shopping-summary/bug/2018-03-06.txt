@@ -13,5 +13,8 @@ was expecting ('true', 'false' or 'null')
 解决：修改 data 的值为如下即可：
 data : category1Obj
 
+2. 删除一级类目后触发重新查询一级类目列表的js函数，但是并没有成功
+
+原因：使用的分页查询，但是没有出入相应的页数和每页的记录数
 
 

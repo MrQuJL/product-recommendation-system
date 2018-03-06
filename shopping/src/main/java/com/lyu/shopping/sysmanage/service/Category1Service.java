@@ -53,4 +53,12 @@ public interface Category1Service {
 	 * @return 成功则返回 true ，失败则返回 false
 	 */
 	boolean updateCategory1(Category1 category1);
+	
+	/**
+	 * 根据id删除一级类目
+	 * @param category1Id 待删除的一级类目id
+	 * @return 删除成功则返回true，失败则返回false
+	 */
+	boolean removeCategory1(Long category1Id);
+	
 }

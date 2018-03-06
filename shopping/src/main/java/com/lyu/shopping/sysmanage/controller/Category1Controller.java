@@ -94,7 +94,7 @@ public class Category1Controller {
 		
 		// 1.创建一级类目对象
 		Category1 category1 = new Category1();
-		category1.setCategory1Name(category1Name);
+		category1.setCategory1Name(category1Name == null ? "" : category1Name);
 		// 2.构造分页对象
 		PageParam pageParam = new PageParam(pageNo, pageSize);
 		// 3.分页查询
@@ -163,6 +163,7 @@ public class Category1Controller {
 	@RequestMapping(value="/saveCategory1")
 	public @ResponseBody Map<String, Object> saveCategory1(@RequestBody Category1 category1) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
 		boolean flag = false;
 		if (category1.getCategory1Id() == null) { // id为空说明是新增一级类目
 			resultMap.put(FRONT_TIPS_ATTR, SAVE_CATEGORY1_FAILED);
@@ -176,6 +177,20 @@ public class Category1Controller {
 			if (flag) {
 				resultMap.put(FRONT_TIPS_ATTR, UPDATE_CATEGORY1_SUCCESS);
 			}
+		}
+		
+		return resultMap;
+	}
+	
+	@RequestMapping(value="/removeCategory1")
+	public @ResponseBody Map<String, Object> removeCategory1(Long category1Id) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap.put(FRONT_TIPS_ATTR, REMOVE_CATEGORY1_FAILED);
+		
+		boolean flag = this.category1Service.removeCategory1(category1Id);
+		if (flag) {
+			resultMap.put(FRONT_TIPS_ATTR, REMOVE_CATEGORY1_SUCCESS);
 		}
 		
 		return resultMap;

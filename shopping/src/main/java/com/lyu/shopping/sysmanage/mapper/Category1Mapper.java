@@ -48,4 +48,11 @@ public interface Category1Mapper {
 	 */
 	int updateCategory1(Category1 category1);
 	
+	/**
+	 * 删除一级类目（逻辑删除）
+	 * @param category1Id 待删除的一级类目的id
+	 * @return 受影响的行数
+	 */
+	int removeCategory1(Long category1Id);
+	
 }

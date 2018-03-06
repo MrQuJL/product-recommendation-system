@@ -111,4 +111,19 @@ public class Category1ServiceImpl implements Category1Service {
 		return false;
 	}
 
+	@Override
+	public boolean removeCategory1(Long category1Id) {
+		if (category1Id == null) {
+			return false;
+		}
+		
+		int rows = this.category1Mapper.removeCategory1(category1Id);
+		
+		if (rows > 0) {
+			return true;
+		}
+		
+		return false;
+	}
+
 }
