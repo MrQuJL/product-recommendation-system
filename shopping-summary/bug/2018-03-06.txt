@@ -1,0 +1,17 @@
+1. 通过ajax向后台发送json格式的字符串时，报如下异常：
+
+2018/03/06/11:00:37 WARN  [http-nio-8080-exec-9] org.springframework.web.servlet.handler.
+AbstractHandlerExceptionResolver.logException(AbstractHandlerExceptionResolver.java:186)
+- Handler execution resulted in exception: Could not read document: Unrecognized token 'category1':
+was expecting ('true', 'false' or 'null')
+ at [Source: java.io.PushbackInputStream@405f3ed3; line: 1, column: 11]; nested exception is 
+ com.fasterxml.jackson.core.JsonParseException: Unrecognized token 'category1': was expecting ('true', 'false' or 'null')
+ at [Source: java.io.PushbackInputStream@405f3ed3; line: 1, column: 11]
+
+原因：通过ajax发送的数据格式如下 data : {"category1" : category1Obj}，如果只发送一个对象不要使用这种 key-value 的格式写，直接写上对象名就可以
+
+解决：修改 data 的值为如下即可：
+data : category1Obj
+
+
+

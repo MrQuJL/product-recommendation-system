@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -132,7 +133,30 @@ public class Category1Controller {
 			flag = this.category1Service.hideCategory1(category1Id);
 		}
 		if (flag) {
-			resultMap.put("message", "success");
+			resultMap.put(FRONT_TIPS_ATTR, "success");
+		}
+		
+		return resultMap;
+	}
+	
+	/**
+	 * 处理新增或者修改一级类目的请求
+	 * @param category1
+	 * @return 新增（修改）一级类目成功或者失败的提示信息
+	 */
+	@RequestMapping(value="/saveCategory1")
+	public @ResponseBody Map<String, Object> saveCategory1(@RequestBody Category1 category1) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		boolean flag = false;
+		if (category1.getCategory1Id() == null) { // id为空说明是新增一级类目
+			resultMap.put(FRONT_TIPS_ATTR, SAVE_CATEGORY1_FAILED);
+			flag = this.category1Service.saveCategory1(category1);
+			if (flag) {
+				resultMap.put(FRONT_TIPS_ATTR, SAVE_CATEGORY1_SUCCESS);
+			}
+		} else { // id不为空说明是修改一级类目
+			
+			
 		}
 		
 		return resultMap;

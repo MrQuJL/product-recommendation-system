@@ -37,7 +37,6 @@
 				// 先获取选中的checkbox的个数
 				var checkedNums = $("#sample-table tbody")
 					.find("input[type='checkbox']:checked").length;
-				
 				// true表示还未选中,false表示已经选中
 				var toggleCheckBox = $("#toggleCheckBox").prop("checked");
 				
@@ -194,39 +193,54 @@
 		</div>
 	</div>
 	<!--添加分类-->
-	<div class="sort_style_add margin" id="sort_style_add"
-		style="display: none">
+	<div class="sort_style_add margin" id="sort_style_add" style="display: none">
 		<div class="">
-			<ul>
-				<li><label class="label_name">分类名称</label>
-				<div class="col-sm-9">
-						<input name="分类名称" type="text" id="form-field-1" placeholder=""
-							class="col-xs-10 col-sm-5">
-					</div></li>
-				<li><label class="label_name">分类说明</label>
-				<div class="col-sm-9">
-						<textarea name="分类说明" class="form-control" id="form-field-8"
-							placeholder="" onkeyup="checkLength(this);"></textarea>
-						<span class="wordage">剩余字数：<span id="sy"
-							style="color: Red;">200</span>字
+			<form action="#" id="saveCategory1Form">
+				<ul>
+					<li>
+						<input name="category1Id" type="hidden" value="" >
+						<label class="label_name">分类名称</label>
+						<div class="col-sm-9">
+							<input name="category1Name" type="text" id="form-field-1" placeholder=""
+								class="col-xs-10 col-sm-5">
+						</div>
+					</li>
+					<li>
+						<label class="label_name">分类说明</label>
+						<div class="col-sm-9">
+							<textarea name="category1Record" class="form-control" id="form-field-8"
+								placeholder="" onkeyup="checkLength(this);"></textarea>
+							<span class="wordage">剩余字数：
+								<span id="sy" style="color: Red;">200</span>字
+							</span>
+						</div>
+					</li>
+					<li>
+						<label class="label_name">分类状态</label>
+						<span class="add_content"> &nbsp;&nbsp;
+							<label>
+								<input name="showFlag" type="radio" checked="checked"
+									class="ace" value="1">
+								<span class="lbl">显示</span>
+							</label>&nbsp;&nbsp;&nbsp;
+							<label>
+								<input name="showFlag" type="radio" class="ace" value="0">
+								<span class="lbl">隐藏</span>
+							</label>
 						</span>
-					</div></li>
-				<li><label class="label_name">分类状态</label> <span
-					class="add_content"> &nbsp;&nbsp;<label><input
-							name="form-field-radio1" type="radio" checked="checked"
-							class="ace"><span class="lbl">显示</span></label>&nbsp;&nbsp;&nbsp;
-						<label><input name="form-field-radio1" type="radio"
-							class="ace"><span class="lbl">隐藏</span></label></span></li>
-			</ul>
+					</li>
+				</ul>
+			</form>
 		</div>
 	</div>
 <script type="text/javascript">
+	// 添加一级类目
 	$('#sort_add').on(
 			'click',
 			function() {
 				layer.open({
 					type : 1,
-					title : '添加分类',
+					title : '添加一级类目',
 					maxmin : true,
 					shadeClose : false, //点击遮罩关闭层
 					area : [ '750px', '' ],
@@ -252,11 +266,38 @@
 						if (num > 0) {
 							return false;
 						} else {
-							layer.alert('添加成功！', {
-								title : '提示框',
-								icon : 1,
+							// 1.序列化一级类目表单
+							var jsonObj = $("#saveCategory1Form").serializeArray();
+							// 2.构造js对象
+							var category1Obj = {};
+							$.each(jsonObj,function(i, item){
+								category1Obj[item.name] = item.value;
 							});
-							layer.close(index);
+							// 3.转化成json格式的字符串
+							category1Obj = JSON.stringify(category1Obj);
+							// 4.向后台发送ajax请求
+							$.ajax({
+								type : "post",
+								contentType : "application/json;charset=utf-8;",
+								url : "${ctx}/sysmgr/category/category1/saveCategory1",
+								data : category1Obj,
+								dataType : "json",
+								success : function(data) {
+									if (data.message == "新增一级分类成功") {
+										layer.alert('添加一级分类成功！', {
+											title : '提示框',
+											icon : 1,
+										});
+										layer.close(index);
+									} else {
+										layer.alert('添加一级分类失败！', {
+											title : '提示框',
+											icon : 0,
+										});
+										layer.close(index);
+									}
+								}
+							});
 						}
 					}
 				});
@@ -363,7 +404,7 @@
 						});
 					});
 	}
-	/*广告图片-删除*/
+	/*类目-删除*/
 	function member_del(obj, id) {
 		layer.confirm('确认要删除吗？', {
 			icon : 0,

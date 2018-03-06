@@ -77,8 +77,6 @@ public class Category1ServiceImpl implements Category1Service {
 		// 设置与一级类目相关的初始化值
 		category1.setGmtCreate(new Date());
 		category1.setGmtModified(new Date());
-		// 默认显示该一级类目
-		category1.setShowFlag(1);
 		// 默认不删除，即删除字段为0
 		category1.setDelFlag(0);
 		
