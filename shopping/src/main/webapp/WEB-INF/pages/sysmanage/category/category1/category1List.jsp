@@ -198,17 +198,17 @@
 			<form action="#" id="saveCategory1Form">
 				<ul>
 					<li>
-						<input name="category1Id" type="hidden" value="" >
+						<input id="category1Id" name="category1Id" type="hidden" value="" >
 						<label class="label_name">分类名称</label>
 						<div class="col-sm-9">
-							<input name="category1Name" type="text" id="form-field-1" placeholder=""
+							<input id="category1Name" name="category1Name" type="text" id="form-field-1" placeholder=""
 								class="col-xs-10 col-sm-5">
 						</div>
 					</li>
 					<li>
 						<label class="label_name">分类说明</label>
 						<div class="col-sm-9">
-							<textarea name="category1Record" class="form-control" id="form-field-8"
+							<textarea id="category1Record" name="category1Record" class="form-control" id="form-field-8"
 								placeholder="" onkeyup="checkLength(this);"></textarea>
 							<span class="wordage">剩余字数：
 								<span id="sy" style="color: Red;">200</span>字
@@ -219,12 +219,12 @@
 						<label class="label_name">分类状态</label>
 						<span class="add_content"> &nbsp;&nbsp;
 							<label>
-								<input name="showFlag" type="radio" checked="checked"
+								<input id="show" name="showFlag" type="radio" checked="checked"
 									class="ace" value="1">
 								<span class="lbl">显示</span>
 							</label>&nbsp;&nbsp;&nbsp;
 							<label>
-								<input name="showFlag" type="radio" class="ace" value="0">
+								<input id="hide" name="showFlag" type="radio" class="ace" value="0">
 								<span class="lbl">隐藏</span>
 							</label>
 						</span>
@@ -238,6 +238,11 @@
 	$('#sort_add').on(
 			'click',
 			function() {
+				// 先清空表单中上一次添加类目之后的残留数据
+				$("#category1Id").val("");
+				$("#category1Name").val("");
+				$("#category1Record").val("");
+				$("#show").prop("checked", "checked");
 				layer.open({
 					type : 1,
 					title : '添加一级类目',
@@ -289,8 +294,9 @@
 											icon : 1,
 										});
 										layer.close(index);
+										category1Mgr.listCategory1(1, 5);
 									} else {
-										layer.alert('添加一级分类失败！', {
+										layer.alert('添加一级分类失败，请联系系统管理员！', {
 											title : '提示框',
 											icon : 0,
 										});
@@ -304,7 +310,7 @@
 			})
 
 	function checkLength(which) {
-		var maxChars = 200; //
+		var maxChars = 200; // 备注最大的长度
 		if (which.value.length > maxChars) {
 			layer.open({
 				icon : 2,
