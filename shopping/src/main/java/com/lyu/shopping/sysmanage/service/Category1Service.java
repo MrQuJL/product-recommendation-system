@@ -15,22 +15,29 @@ public interface Category1Service {
 	
 	/**
 	 * 查询一级类目的列表
-	 * @return
+	 * @return 封装有一级类目列表的 PageInfo
 	 */
 	PageInfo<Category1> listCategory1(Category1 category1, PageParam pageParam);
 	
 	/**
 	 * 显示当前一级类目的，is_show属性设置为1
 	 * @param category1Id
-	 * @return
+	 * @return true 则修改成功，false 则修改失败
 	 */
 	boolean showCategory1(Long category1Id);
 	
 	/**
 	 * 隐藏当前一级类目的，is_show属性设置为0
 	 * @param category1Id
-	 * @return
+	 * @return true 则修改成功，false 则修改失败
 	 */
 	boolean hideCategory1(Long category1Id);
+	
+	/**
+	 * 添加一级类目
+	 * @param category1 要添加的一级类目
+	 * @return true 表示添加成功，false 表示添加失败
+	 */
+	boolean saveCategory1(Category1 category1);
 	
 }

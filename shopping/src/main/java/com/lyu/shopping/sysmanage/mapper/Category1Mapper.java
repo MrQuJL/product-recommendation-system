@@ -27,4 +27,11 @@ public interface Category1Mapper {
 	 */
 	int updateShowFlag(Long category1Id, Integer isShow);
 	
+	/**
+	 * 添加一级类目
+	 * @param category1
+	 * @return
+	 */
+	int saveCategory1(Category1 category1);
+	
 }

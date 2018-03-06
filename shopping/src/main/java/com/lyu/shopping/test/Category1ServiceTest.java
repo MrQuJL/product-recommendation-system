@@ -52,9 +52,23 @@ public class Category1ServiceTest {
 	public void testChangeShowFlag() {
 		Category1Service category1Service = (Category1Service) this.application.getBean("category1Service");
 		// 显示一级类目测试
-//		System.out.println(category1Service.showCategory1(2L));
+		// System.out.println(category1Service.showCategory1(2L));
 		// 隐藏一级类目测试
 		System.out.println(category1Service.hideCategory1(2L));
+		
+	}
+	
+	/**
+	 * 测试添加一级类目
+	 */
+	@Test
+	public void testSaveCategory1() {
+		Category1 category1 = new Category1();
+		category1.setCategory1Name("测试类目");
+		category1.setCategory1Record("测试类目的备注");
+		Category1Service category1Service = (Category1Service) this.application.getBean("category1Service");
+		boolean flag = category1Service.saveCategory1(category1);
+		System.out.println(flag);
 		
 	}
 	

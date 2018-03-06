@@ -1,5 +1,6 @@
 package com.lyu.shopping.sysmanage.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,31 @@ public class Category1ServiceImpl implements Category1Service {
 		if (rows > 0) {
 			return true;
 		}
+		return false;
+	}
+
+	@Override
+	public boolean saveCategory1(Category1 category1) {
+		// 数据的合法性判断
+		if (category1 == null || category1.getCategory1Name() == null 
+			|| category1.getCategory1Name() == "") {
+			return false;
+		}
+		
+		// 设置与一级类目相关的初始化值
+		category1.setGmtCreate(new Date());
+		category1.setGmtModified(new Date());
+		// 默认显示该一级类目
+		category1.setShowFlag(1);
+		// 默认不删除，即删除字段为0
+		category1.setDelFlag(0);
+		
+		int rows = this.category1Mapper.saveCategory1(category1);
+		
+		if (rows > 0) {
+			return true;
+		}
+		
 		return false;
 	}
 

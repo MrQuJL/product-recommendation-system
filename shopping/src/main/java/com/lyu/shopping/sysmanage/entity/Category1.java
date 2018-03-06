@@ -24,9 +24,9 @@ public class Category1 implements Serializable {
 
     private Date gmtModified;
 
-    private Boolean showFlag;
+    private Integer showFlag;
 
-    private Boolean delFlag;
+    private Integer delFlag;
 
 	public Long getCategory1Id() {
 		return category1Id;
@@ -68,19 +68,19 @@ public class Category1 implements Serializable {
 		this.gmtModified = gmtModified;
 	}
 
-	public Boolean getShowFlag() {
+	public Integer getShowFlag() {
 		return showFlag;
 	}
 
-	public void setShowFlag(Boolean showFlag) {
+	public void setShowFlag(Integer showFlag) {
 		this.showFlag = showFlag;
 	}
 
-	public Boolean getDelFlag() {
+	public Integer getDelFlag() {
 		return delFlag;
 	}
 
-	public void setDelFlag(Boolean delFlag) {
+	public void setDelFlag(Integer delFlag) {
 		this.delFlag = delFlag;
 	}
 

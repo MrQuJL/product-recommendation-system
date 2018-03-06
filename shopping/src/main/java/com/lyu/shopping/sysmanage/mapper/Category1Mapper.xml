@@ -61,4 +61,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE category1_id = #{param1}
 	</update>
 	
+	<!-- 添加一级类目 -->
+	<insert id="saveCategory1" parameterType="category1">
+		INSERT INTO shopping_category1(category1_name, category1_record,
+			gmt_create, gmt_modified, is_show, is_deleted)
+		VALUES(#{category1Name}, #{category1Record}, #{gmtCreate}, #{gmtModified},
+			#{showFlag}, #{delFlag})
+	</insert>
+	
 </mapper>
