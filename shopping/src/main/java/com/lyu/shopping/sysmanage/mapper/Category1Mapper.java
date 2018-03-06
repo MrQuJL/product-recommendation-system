@@ -41,4 +41,11 @@ public interface Category1Mapper {
 	 */
 	int saveCategory1(Category1 category1);
 	
+	/**
+	 * 修改一级类目
+	 * @param category1
+	 * @return
+	 */
+	int updateCategory1(Category1 category1);
+	
 }

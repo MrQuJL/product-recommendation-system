@@ -97,4 +97,18 @@ public class Category1ServiceImpl implements Category1Service {
 		return false;
 	}
 
+	@Override
+	public boolean updateCategory1(Category1 category1) {
+		if (category1 == null || category1.getCategory1Id() == null) {
+			return false;
+		}
+		// 设置修改的时间
+		category1.setGmtModified(new Date());
+		int rows = this.category1Mapper.updateCategory1(category1);
+		if (rows > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

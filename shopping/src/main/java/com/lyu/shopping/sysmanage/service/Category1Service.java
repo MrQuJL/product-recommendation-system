@@ -47,4 +47,10 @@ public interface Category1Service {
 	 */
 	boolean saveCategory1(Category1 category1);
 	
+	/**
+	 * 修改一级类目
+	 * @param category1 要修改的一级类目
+	 * @return 成功则返回 true ，失败则返回 false
+	 */
+	boolean updateCategory1(Category1 category1);
 }

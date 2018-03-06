@@ -76,4 +76,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{showFlag}, #{delFlag})
 	</insert>
 	
+	<!-- 修改一级类目 -->
+	<update id="updateCategory1" parameterType="category1">
+		UPDATE shopping_category1
+		<set>
+			<if test="category1Name != null">
+				category1_name = #{category1Name},
+			</if>
+			<if test="category1Record != null">
+				category1_record = #{category1Record},
+			</if>
+			<if test="showFlag != null">
+				is_show = #{showFlag},
+			</if>
+			<if test="gmtModified != null">
+				gmt_modified = #{gmtModified},
+			</if>
+		</set>
+		<where>
+			<if test="category1Id != null">
+				AND category1_id = #{category1Id}
+			</if>
+		</where>
+	</update>
+	
 </mapper>

@@ -171,8 +171,11 @@ public class Category1Controller {
 				resultMap.put(FRONT_TIPS_ATTR, SAVE_CATEGORY1_SUCCESS);
 			}
 		} else { // id不为空说明是修改一级类目
-			
-			
+			resultMap.put(FRONT_TIPS_ATTR, UPDATE_CATEGORY1_FAILED);
+			flag = this.category1Service.updateCategory1(category1);
+			if (flag) {
+				resultMap.put(FRONT_TIPS_ATTR, UPDATE_CATEGORY1_SUCCESS);
+			}
 		}
 		
 		return resultMap;
