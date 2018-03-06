@@ -117,7 +117,7 @@
 									"						href=\"javascript:;\" title=\"  "+ hoverTitle +"  \" class=\"btn btn-xs " + btnStyle + "\">"+
 									"						<i class=\"fa " + checkOrClose + " bigger-120\"></i>"+
 									"					</a>"+
-									"					<a title=\"编辑\" onclick=\"member_edit(\'编辑\',\'member-add.html\',\'4\',\'\',\'510\')\""+
+									"					<a title=\"编辑\" onclick=\"category1Mgr.category1Edit(" + category1List[i].category1Id + ")\" "+
 									"						href=\"javascript:;\" class=\"btn btn-xs btn-info\">"+
 									"						<i class=\"fa fa-edit bigger-120\"></i>"+
 									"					</a>"+
@@ -134,6 +134,77 @@
 						$("#sample-table tbody").html(htmlTable);
 						$("#totalPage").html(listSize);
 						$("#pageBar").html(pageBar);
+					}
+				});
+			},
+			// 编辑一级类目
+			category1Edit : function (category1Id) {
+				// 和添加功能类似，也要线清空表单
+				
+				// 1.修改一级类目的时候先要通过传入的id去后台查询一下当前类目的详细信息，然后赋值到页面
+				
+				layer.open({
+					type : 1,
+					title : '修改一级类目',
+					maxmin : true,
+					shadeClose : false, //点击遮罩关闭层
+					area : [ '750px', '' ],
+					content : $('#sort_style_add'),
+					btn : [ '提交', '取消' ],
+					yes : function(index, layero) {
+						var num = 0;
+						var str = "";
+						$(".sort_style_add input[type$='text']").each(
+								function(n) {
+									if ($(this).val() == "") {
+
+										layer.alert(str += ""
+												+ $(this).attr("name")
+												+ "不能为空！\r\n", {
+											title : '提示框',
+											icon : 0,
+										});
+										num++;
+										return false;
+									}
+								});
+						if (num > 0) {
+							return false;
+						} else {
+							// 1.序列化一级类目表单
+							var jsonObj = $("#saveCategory1Form").serializeArray();
+							// 2.构造js对象
+							var category1Obj = {};
+							$.each(jsonObj,function(i, item){
+								category1Obj[item.name] = item.value;
+							});
+							// 3.转化成json格式的字符串
+							category1Obj = JSON.stringify(category1Obj);
+							// 4.向后台发送ajax请求
+							$.ajax({
+								type : "post",
+								contentType : "application/json;charset=utf-8;",
+								url : "${ctx}/sysmgr/category/category1/saveCategory1",
+								data : category1Obj,
+								dataType : "json",
+								success : function(data) {
+									if (data.message == "修改一级分类成功") {
+										layer.alert('修改一级分类成功！', {
+											title : '提示框',
+											icon : 1,
+										});
+										layer.close(index);
+										category1Mgr.listCategory1(1, 5);
+									} else {
+										layer.alert('修改一级分类失败，请联系系统管理员！', {
+											title : '提示框',
+											icon : 0,
+										});
+										layer.close(index);
+									}
+								}
+							});
+						}
 					}
 				});
 			}

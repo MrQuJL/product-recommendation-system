@@ -60,12 +60,12 @@ public class Category1Controller {
 	/**
 	 * 修改一级分类成功的提示消息
 	 */
-	private static final String UPDATE_CATEGORY1_SUCCESS = "修改一级分类信息成功";
+	private static final String UPDATE_CATEGORY1_SUCCESS = "修改一级分类成功";
 	
 	/**
 	 * 修改一级分类失败的提示消息
 	 */
-	private static final String UPDATE_CATEGORY1_FAILED = "修改一级分类信息失败";
+	private static final String UPDATE_CATEGORY1_FAILED = "修改一级分类失败";
 	
 	/**
 	 * 一级分类的分页查询方法
