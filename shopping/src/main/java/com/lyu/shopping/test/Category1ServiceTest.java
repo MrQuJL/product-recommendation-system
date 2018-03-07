@@ -1,5 +1,8 @@
 package com.lyu.shopping.test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -81,6 +84,26 @@ public class Category1ServiceTest {
 		Category1 category1 = category1Service.getCategory1ById(1L);
 		
 		System.out.println(category1);
+		
+	}
+	
+	/**
+	 * 测试统计数据库中存在于集合中一级类目的个数
+	 */
+	@Test
+	public void testCountCategory1InList() {
+		Category1Service category1Service = (Category1Service) this.application.getBean("category1Service");
+		
+		List<Long> category1Ids = new ArrayList<Long>();
+		category1Ids.add(6L);
+		category1Ids.add(7L);
+		category1Ids.add(8L);
+		category1Ids.add(9L);
+//		category1Ids.add(10L);
+		
+		boolean flag = category1Service.removeCategory1Batch(category1Ids);
+		
+		System.out.println(flag);
 		
 	}
 	

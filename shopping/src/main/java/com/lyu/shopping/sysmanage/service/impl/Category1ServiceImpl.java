@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -127,15 +130,23 @@ public class Category1ServiceImpl implements Category1Service {
 	}
 
 	@Override
+	@Transactional(isolation=Isolation.DEFAULT, propagation = Propagation.REQUIRED)
 	public boolean removeCategory1Batch(List<Long> category1Ids) {
-		
+		// 合法性判断
+		if (category1Ids == null || category1Ids.size() == 0) {
+			return false;
+		}
 		// 1.先查询集合中的id是否存在于数据库中,判断集合中的数据是否已经被删除
-		
+		int size = category1Ids.size();
+		int rows = this.category1Mapper.countCategory1InList(category1Ids);
+		if (size != rows) {
+			return false;
+		}
 		
 		// 3.批量删除集合中的一级类目
 		
 		
-		return false;
+		return true;
 	}
 
 }
