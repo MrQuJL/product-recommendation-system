@@ -49,6 +49,17 @@ public class Category1ServiceImpl implements Category1Service {
 	
 	@Override
 	public PageInfo<Category1> listCategory1(Category1 category1, PageParam pageParam) {
+		// 如果没有传入分页信息：页数和每页的size，则默认第一页，每页5条
+		if (category1 == null) {
+			return null;
+		}
+		if (pageParam == null || pageParam.getPageNo() == null ||
+			pageParam.getPageSize() == null) {
+			pageParam = new PageParam();
+			pageParam.setPageNo(1);
+			pageParam.setPageSize(5);
+		}
+		
 		// 开启分页
 		PageHelper.startPage(pageParam.getPageNo(), pageParam.getPageSize());
 		// 查询一级类目列表

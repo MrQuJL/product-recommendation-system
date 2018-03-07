@@ -474,7 +474,7 @@
 								time : 1000
 							});
 							// 重新查询一下
-							category1Mgr.listCategory1();
+							category1Mgr.listCategory1(1, 5);
 						} else { // 隐藏该一级类目失败
 							layer.msg('隐藏该一级类目失败，请联系系统管理员!', {
 								icon : 5,
@@ -516,7 +516,7 @@
 										time : 1000
 									});
 									// 重新查询一次查询
-									category1Mgr.listCategory1();
+									category1Mgr.listCategory1(1, 5);
 								} else { // 显示该一级类目失败
 									layer.msg('显示该一级类目失败，请联系系统管理员!', {
 										icon : 6,
