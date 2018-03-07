@@ -1,5 +1,6 @@
 package com.lyu.shopping.sysmanage.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,6 +57,16 @@ public class Category1Controller {
 	 * 删除一级分类失败的提示消息
 	 */
 	private static final String REMOVE_CATEGORY1_FAILED = "删除一级分类失败";
+	
+	/**
+	 * 删除一级分类成功的提示消息
+	 */
+	private static final String REMOVE_CATEGORY1_BATCH_SUCCESS = "批量删除一级分类成功";
+	
+	/**
+	 * 删除一级分类失败的提示消息
+	 */
+	private static final String REMOVE_CATEGORY1_BATCH_FAILED = "批量删除一级分类失败";
 	
 	/**
 	 * 修改一级分类成功的提示消息
@@ -182,6 +193,11 @@ public class Category1Controller {
 		return resultMap;
 	}
 	
+	/**
+	 * 删除category1Id的一级类目
+	 * @param category1Id 待删除的一级类目id
+	 * @return 返回给前台的提示信息
+	 */
 	@RequestMapping(value="/removeCategory1")
 	public @ResponseBody Map<String, Object> removeCategory1(Long category1Id) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -195,5 +211,26 @@ public class Category1Controller {
 		
 		return resultMap;
 	}
+	
+	/**
+	 * 处理批量删除一级类目的请求
+	 * @param category1Ids 待删除的一级类目id集合
+	 * @return 删除成功或者失败的提示信息
+	 */
+	@RequestMapping(value="/removeCategory1Batch")
+	public @ResponseBody Map<String, Object> removeCategory1Batch(@RequestBody Long[] category1Ids) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put(FRONT_TIPS_ATTR, REMOVE_CATEGORY1_BATCH_FAILED);
+		
+		if (category1Ids != null && category1Ids.length > 0) {
+			boolean flag = this.category1Service.removeCategory1Batch(Arrays.asList(category1Ids));
+			if (flag) {
+				resultMap.put(FRONT_TIPS_ATTR, REMOVE_CATEGORY1_BATCH_SUCCESS);
+			}
+		}
+		
+		return resultMap;
+	}
+	
 	
 }

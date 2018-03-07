@@ -144,7 +144,10 @@ public class Category1ServiceImpl implements Category1Service {
 		}
 		
 		// 3.批量删除集合中的一级类目
-		
+		rows = this.category1Mapper.removeCategory1Batch(category1Ids);
+		if (rows != size) {
+			return false;
+		}
 		
 		return true;
 	}
