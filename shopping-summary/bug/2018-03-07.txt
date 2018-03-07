@@ -5,3 +5,11 @@ Duplicate entry '12' for key 'idx_category1_name';
 虽然页面上没有显示重复的原数据，但是数据库中仍然存在原数据，导致后台报异常
 
 解决：修改索引的类型为普通索引
+
+2. 前台向后台提交数组类型的参数时，后台报错
+
+原因：前台没有将js数组转换成json格式的字符串导致
+后台springMVC无法识别参数
+
+解决：先将获取到的数组通过JSON.stringify()解析成json格式的字符串
+category1IdArray = JSON.stringify(category1IdArray);

@@ -104,7 +104,7 @@
 								}
 								htmlTable =
 									htmlTable + "<tr>"+
-									"				<td><label><input type=\"checkbox\" class=\"ace\"><span"+
+									"				<td><label><input type=\"checkbox\" class=\"ace\" value=" +category1List[i].category1Id + "><span"+
 									"						class=\"lbl\"></span></label></td>"+
 									"				<td>" + category1List[i].category1Id + "</td>"+
 									"				<td>" + category1List[i].category1Name + "</td>"+
@@ -222,6 +222,38 @@
 						}
 					}
 				});
+			},
+			// 批量删除一级类目
+			removeCategory1Batch : function() {
+				// 1.获取选中的一级类目
+				var checkBoxs = $("#sample-table")
+					.find("tbody")
+					.find("input[type='checkbox']:checked");
+				var category1IdArray = new Array();
+				$.each(checkBoxs,function(){
+					category1IdArray.push($(this).val());
+				});
+				category1IdArray = JSON.stringify(category1IdArray);
+				layer.confirm('确认要删除这些一级类目吗？',function(index){
+					// 2.发送ajax请求进行批量删除
+					$.ajax({
+						type : "post",
+						contentType : "application/json;charset=UTF-8",
+						url : "${ctx}/sysmgr/category/category1/removeCategory1Batch",
+						data : category1IdArray,
+						dataType : "json",
+						success : function(data) {
+							if (data.message == "批量删除一级分类成功") {
+								layer.msg(data.message,{icon:1,time:1000});
+								// 3.删除成功重新查询列表
+								category1Mgr.listCategory1(1, 5);
+							} else {
+								// 4.删除失败给出提示信息
+								layer.msg(data.message,{icon:0,time:1000});
+							}
+						}
+					});
+				});
 			}
 		}
 	</script>
@@ -244,7 +276,7 @@
 			<div class="border clearfix">
 				<span class="l_f"> <a href="javascript:ovid()" id="sort_add"
 					class="btn btn-warning"><i class="fa fa-plus"></i> 添加分类</a> <a
-					href="javascript:ovid()" class="btn btn-danger"><i
+					href="javascript:category1Mgr.removeCategory1Batch();" class="btn btn-danger"><i
 						class="fa fa-trash"></i> 批量删除</a>
 				</span> <span class="r_f">共：<b id="totalPage"></b>类
 				</span>
