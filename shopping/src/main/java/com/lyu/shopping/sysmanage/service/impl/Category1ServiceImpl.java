@@ -126,4 +126,16 @@ public class Category1ServiceImpl implements Category1Service {
 		return false;
 	}
 
+	@Override
+	public boolean removeCategory1Batch(List<Long> category1Ids) {
+		
+		// 1.先查询集合中的id是否存在于数据库中,判断集合中的数据是否已经被删除
+		
+		
+		// 3.批量删除集合中的一级类目
+		
+		
+		return false;
+	}
+
 }

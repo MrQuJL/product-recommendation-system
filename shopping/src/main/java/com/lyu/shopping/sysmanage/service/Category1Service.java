@@ -1,5 +1,7 @@
 package com.lyu.shopping.sysmanage.service;
 
+import java.util.List;
+
 import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
 import com.lyu.shopping.sysmanage.entity.Category1;
@@ -60,5 +62,12 @@ public interface Category1Service {
 	 * @return 删除成功则返回true，失败则返回false
 	 */
 	boolean removeCategory1(Long category1Id);
+	
+	/**
+	 * 批量删除一级类目
+	 * @param category1Ids 要删除的一级类目集合
+	 * @return true表示批量删除成功，false表示失败
+	 */
+	boolean removeCategory1Batch(List<Long> category1Ids);
 	
 }

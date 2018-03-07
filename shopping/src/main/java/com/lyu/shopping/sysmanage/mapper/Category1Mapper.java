@@ -21,6 +21,13 @@ public interface Category1Mapper {
 	Category1 getCategory1ById(Long category1Id);
 	
 	/**
+	 * 统计数据库中存在于集合中一级类目的个数
+	 * @param category1Ids 一级类目的id
+	 * @return 数据库中存在于 category1Ids 中的一级类目的数量
+	 */
+	int countCategory1InList(List<Long> category1Ids);
+	
+	/**
 	 * 查询一级类目的列表
 	 * @return
 	 */
@@ -54,5 +61,12 @@ public interface Category1Mapper {
 	 * @return 受影响的行数
 	 */
 	int removeCategory1(Long category1Id);
+	
+	/**
+	 * 批量删除集合中的一级类目
+	 * @param category1Ids 待删除的一级类目集合
+	 * @return 删除成功的记录
+	 */
+	int removeCategory1Batch(List<Long> category1Ids);
 	
 }

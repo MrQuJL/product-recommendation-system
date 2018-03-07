@@ -53,6 +53,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE category1_id = #{category1Id} AND is_deleted = 0
 	</select>
 	
+	<!-- 统计数据库中存在于集合中一级类目的个数 -->
+	<select id="countCategory1InList" parameterType="list" resultType="integer">
+		SELECT COUNT(1) FROM shopping_category1
+		<where>
+			<foreach collection="list" open="AND category1_id IN ("
+				item="id" close=")" separator=",">
+				#{id}
+			</foreach>
+			<if test="1 == 1">
+				AND is_deleted = 0
+			</if>
+		</where>
+	</select>
+	
 	<!-- 查询一级类目的列表 -->
 	<select id="listCategory1" parameterType="category1" resultMap="category1ResultMap">
 		SELECT <include refid="all_category1_columns" />
@@ -105,6 +119,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE shopping_category1
 		SET is_deleted = 1
 		WHERE category1_id = #{category1Id}
+	</update>
+	
+	<!-- 批量删除集合中的一级类目 -->
+	<update id="removeCategory1Batch" parameterType="list">
+		UPDATE shopping_category1 SET is_deleted = 1
+		<where>
+			<foreach collection="list" open="AND category1_id IN(" 
+				item="id" close=")" separator=",">
+				#{id}
+			</foreach>
+			<if test="1 == 1">
+				AND is_deleted = 0
+			</if>
+		</where>
 	</update>
 	
 </mapper>
