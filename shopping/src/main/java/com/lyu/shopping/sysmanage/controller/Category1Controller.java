@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -91,7 +93,10 @@ public class Category1Controller {
 	 * @return
 	 */
 	@RequestMapping(value="/gotoCategory1List")
-	public String gotoCategory1List() {
+	public String gotoCategory1List(HttpSession session) {
+		// 在跳转到一级类目页面时加载所有的一级类目名称
+		List<String> category1Names = this.category1Service.listAllCategory1Name();
+		session.setAttribute("category1Names", category1Names);
 		return CATEGORY1_LIST_URI;
 	}
 	
@@ -105,7 +110,10 @@ public class Category1Controller {
 		
 		// 1.创建一级类目对象
 		Category1 category1 = new Category1();
-		category1.setCategory1Name(category1Name == null ? "" : category1Name);
+		if (category1Name.equals("所有一级类目")) {
+			category1Name = null;
+		}
+		category1.setCategory1Name(category1Name);
 		// 2.构造分页对象
 		PageParam pageParam = new PageParam(pageNo, pageSize);
 		// 3.分页查询

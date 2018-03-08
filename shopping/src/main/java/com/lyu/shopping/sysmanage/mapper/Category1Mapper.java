@@ -28,8 +28,15 @@ public interface Category1Mapper {
 	int countCategory1InList(List<Long> category1Ids);
 	
 	/**
-	 * 查询一级类目的列表
-	 * @return
+	 * 查询出所有的一级类目的名称
+	 * @return 查询到的所有的一级类目的名称
+	 */
+	List<String> listAllCategory1Name();
+	
+	/**
+	 * 查询一级类目的详细列表
+	 * @param category1 查询的条件
+	 * @return 符合查询条件的一级类目列表
 	 */
 	List<Category1> listCategory1(Category1 category1);
 	
@@ -43,15 +50,15 @@ public interface Category1Mapper {
 	
 	/**
 	 * 添加一级类目
-	 * @param category1
-	 * @return
+	 * @param category1 要添加的一级类目
+	 * @return 受影响的行数1表示添加成功，否则添加失败
 	 */
 	int saveCategory1(Category1 category1);
 	
 	/**
 	 * 修改一级类目
-	 * @param category1
-	 * @return
+	 * @param category1  要修改的一级类目
+	 * @return 受影响的行数1表示修改成功，否则修改失败
 	 */
 	int updateCategory1(Category1 category1);
 	

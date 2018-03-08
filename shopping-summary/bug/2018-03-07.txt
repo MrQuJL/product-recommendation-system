@@ -13,3 +13,10 @@ Duplicate entry '12' for key 'idx_category1_name';
 
 解决：先将获取到的数组通过JSON.stringify()解析成json格式的字符串
 category1IdArray = JSON.stringify(category1IdArray);
+
+3. 两个相等的字符串判断出来的结果是不相等
+
+原因：直接使用 == 判断
+
+解决：使用 equals 方法来判断两个字符串是否相等
+

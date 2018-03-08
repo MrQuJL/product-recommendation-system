@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND category1_id = #{category1Id}
 		</if>
 		<if test="category1Name != null">
-			AND category1_name LIKE '%${category1Name}%'
+			AND category1_name = #{category1Name}
 		</if>
 		<if test="category1Record != null">
 			AND category1_record LIKE '%${category1Record}%'
@@ -65,6 +65,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				AND is_deleted = 0
 			</if>
 		</where>
+	</select>
+	
+	<!-- 查询出所有的一级类目的名称 -->
+	<select id="listAllCategory1Name" resultType="string">
+		SELECT category1_name
+		FROM shopping_category1
+		WHERE is_deleted = 0
+		ORDER BY category1_id
 	</select>
 	
 	<!-- 查询一级类目的列表 -->
