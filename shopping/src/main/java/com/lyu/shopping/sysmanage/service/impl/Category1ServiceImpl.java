@@ -40,6 +40,12 @@ public class Category1ServiceImpl implements Category1Service {
 	private Category1Mapper category1Mapper;
 	
 	@Override
+	public List<String> listAllCategory1Name() {
+		List<String> category1Names = this.category1Mapper.listAllCategory1Name();
+		return category1Names;
+	}
+	
+	@Override
 	public Category1 getCategory1ById(Long category1Id) {
 		
 		Category1 category1 = this.category1Mapper.getCategory1ById(category1Id);

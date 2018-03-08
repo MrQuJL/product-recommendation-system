@@ -15,10 +15,12 @@
 	<link href="${ctxJsAndCss}/assets/css/codemirror.css" rel="stylesheet">
 	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace.min.css" />
 	<link rel="stylesheet" href="${ctxJsAndCss}/font/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="${ctxJsAndCss}/css/select2.min.css" />
 	<!--[if lte IE 8]>
 		<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace-ie.min.css" />
 	<![endif]-->
 	<script src="${ctxJsAndCss}/js/jquery-1.9.1.min.js"></script>
+	<script src="${ctxJsAndCss}/js/select2.min.js"></script>
 	<script src="${ctxJsAndCss}/assets/js/typeahead-bs2.min.js"></script>
 	<script src="${ctxJsAndCss}/js/lrtk.js"></script>
 	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.min.js"></script>
@@ -129,7 +131,7 @@
 									"			</tr>";
 							}
 						} else {
-							htmlTable = "<tr><td>没有查询到类目记录</td></tr>";
+							htmlTable = "<tr><td colspan=7>没有查询到类目记录</td></tr>";
 						}
 						$("#sample-table tbody").html(htmlTable);
 						$("#totalPage").html(listSize);
@@ -233,6 +235,10 @@
 				$.each(checkBoxs,function(){
 					category1IdArray.push($(this).val());
 				});
+				if (category1IdArray.length == 0) {
+					layer.msg("请先选择要删除的一级类目！",{icon:0,time:1000});
+					return false;
+				}
 				category1IdArray = JSON.stringify(category1IdArray);
 				layer.confirm('确认要删除这些一级类目吗？',function(index){
 					// 2.发送ajax请求进行批量删除
@@ -263,8 +269,22 @@
 		<div class="search_style">
 			<div class="title_names">搜索查询</div>
 			<ul class="search_content clearfix">
-				<li><label class="l_f">一级类目名称</label><input id="queryCategory1Name" name="category1Name" type="text"
-					class="text_add" placeholder="输入一级类目名称" style="width: 400px" /></li>
+				<li>
+					<label class="l_f" style="margin-right:10px;margin-top:2px;">一级类目名称</label>
+					<!-- 
+					<input id="queryCategory1Name" name="category1Name" type="text"
+						class="text_add" placeholder="输入一级类目名称" style="width: 400px" />
+					 -->	
+					<!-- 此处修改为下拉列表select2 -->	
+					<select id="queryCategory1Name" name="category1Name" class="text_add" 
+						style="width:200px;margin-left:0;">
+						<option value="所有一级类目">所有一级类目</option>
+				        <c:forEach items="${category1Names}" var="category1Name">
+				        	<option value="${category1Name}">${category1Name}</option>
+				        </c:forEach>
+				    </select>
+				    
+				</li>
 				<li style="width: 90px;">
 					<button type="button" class="btn_search" onclick="category1Mgr.listCategory1(1, 5);">
 						<i class="icon-search"></i>查询
@@ -574,6 +594,9 @@
 	function AdlistOrders(id) {
 		window.location.href = "Ads_list.html?=" + id;
 	};
+</script>
+<script>
+    $(document).ready(function() { $("#queryCategory1Name").select2(); });
 </script>
 </body>
 </html>

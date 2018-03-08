@@ -23,6 +23,12 @@ public interface Category1Service {
 	Category1 getCategory1ById(Long category1Id);
 	
 	/**
+	 * 查询出所有的一级类目的名称
+	 * @return 查询到的所有的一级类目的名称
+	 */
+	List<String> listAllCategory1Name();
+	
+	/**
 	 * 查询一级类目的列表
 	 * @return 封装有一级类目列表的 PageInfo
 	 */

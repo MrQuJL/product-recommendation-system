@@ -6038,7 +6038,7 @@ textarea,input[type="text"],input[type="password"],input[type="datetime"],input[
   background-color: #fff;
   border: 1px solid #d5d5d5;
   padding: 5px 4px;
-  margin-left:10px;
+  margin-left:0px;
   line-height: 1.2;
   font-size: 14px;
   font-family: inherit;
@@ -8384,7 +8384,7 @@ th .lbl:only-child,td .lbl:only-child
 {
   border-top: 1px solid #DDD;
   border-bottom: 1px solid #DDD;
-  font-family:"新宋体"
+  font-family:"鏂板畫浣�"
 }
 
 .dataTables_wrapper .row:last-child
@@ -8400,7 +8400,7 @@ th .lbl:only-child,td .lbl:only-child
 
 }
 
-.table.table-bordered tbody tr td {word-wrap:break-word; word-break:break-all;vertical-align:middle; font-family:"新宋体"; text-align:center;}
+.table.table-bordered tbody tr td {word-wrap:break-word; word-break:break-all;vertical-align:middle; font-family:"鏂板畫浣�"; text-align:center;}
 .table.table-bordered tbody tr td a{ color:#F60}
 .table.table-bordered tbody tr td.fg{ padding:0px; line-height:30px;}
 .table.table-bordered tbody tr td.fg p.fg-1{border-bottom:1px solid #ddd}
