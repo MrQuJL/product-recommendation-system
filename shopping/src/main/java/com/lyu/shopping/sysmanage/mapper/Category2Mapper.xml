@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper   
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com.lyu.shopping.sysmanage.mapper.Category2Mapper">
+	<!-- 一级类目表的所有字段 -->
+	<sql id="all_category1_columns" >
+    	category1_id, category1_name, category1_record, gmt_create,
+    	gmt_modified, is_show, is_deleted
+  	</sql>
+	
+	<!-- 封装了一些一级类目的查询条件 -->
+	<sql id="query_category1_sql">
+		<if test="category1Id != null">
+			AND category1_id = #{category1Id}
+		</if>
+		<if test="category1Name != null">
+			AND category1_name = #{category1Name}
+		</if>
+		<if test="category1Record != null">
+			AND category1_record LIKE '%${category1Record}%'
+		</if>
+		<if test="gmtCreate != null">
+			AND gmt_create = #{gmtCreate}
+		</if>
+		<if test="gmtModified != null">
+			AND gmt_modified = #{gmtModified}
+		</if>
+		<if test="showFlag != null">
+			AND is_show = #{showFlag}
+		</if>
+		<if test="1 == 1">
+			AND is_deleted = 0
+		</if>
+	</sql>
+	
+	<!-- 一级类目表与对应的pojo类之间的映射 -->
+	<resultMap type="category1" id="category1ResultMap">
+		<id property="category1Id" column="category1_id" />
+		<result property="category1Name" column="category1_name" />
+		<result property="category1Record" column="category1_record" />
+		<result property="gmtCreate" column="gmt_create" />
+		<result property="gmtModified" column="gmt_modified" />
+		<result property="showFlag" column="is_show" />
+		<result property="delFlag" column="is_deleted" />
+	</resultMap>
+	
+	<!-- 根据一级类目的id查询出它的详细信息 -->
+	<select id="getCategory1ById" parameterType="long" resultMap="category1ResultMap">
+		SELECT <include refid="all_category1_columns" />
+		FROM shopping_category1
+		WHERE category1_id = #{category1Id} AND is_deleted = 0
+	</select>
+	
+	<!-- 统计数据库中存在于集合中一级类目的个数 -->
+	<select id="countCategory1InList" parameterType="list" resultType="integer">
+		SELECT COUNT(1) FROM shopping_category1
+		<where>
+			<foreach collection="list" open="AND category1_id IN ("
+				item="id" close=")" separator=",">
+				#{id}
+			</foreach>
+			<if test="1 == 1">
+				AND is_deleted = 0
+			</if>
+		</where>
+	</select>
+	
+	<!-- 查询出所有的一级类目的名称 -->
+	<select id="listAllCategory1Name" resultType="string">
+		SELECT category1_name
+		FROM shopping_category1
+		WHERE is_deleted = 0
+		ORDER BY category1_id
+	</select>
+	
+	<!-- 查询一级类目的列表 -->
+	<select id="listCategory1" parameterType="category1" resultMap="category1ResultMap">
+		SELECT <include refid="all_category1_columns" />
+		FROM shopping_category1
+		<where>
+			<include refid="query_category1_sql" />
+		</where>
+	</select>
+	
+	<!-- 显示或者隐藏一级类目,参数为1就是显示，参数为0就是隐藏 -->
+	<update id="updateShowFlag">
+		UPDATE shopping_category1 SET is_show = #{param2}
+		WHERE category1_id = #{param1} AND is_deleted = 0
+	</update>
+	
+	<!-- 添加一级类目 -->
+	<insert id="saveCategory1" parameterType="category1">
+		INSERT INTO shopping_category1(category1_name, category1_record,
+			gmt_create, gmt_modified, is_show, is_deleted)
+		VALUES(#{category1Name}, #{category1Record}, #{gmtCreate}, #{gmtModified},
+			#{showFlag}, #{delFlag})
+	</insert>
+	
+	<!-- 修改一级类目 -->
+	<update id="updateCategory1" parameterType="category1">
+		UPDATE shopping_category1
+		<set>
+			<if test="category1Name != null">
+				category1_name = #{category1Name},
+			</if>
+			<if test="category1Record != null">
+				category1_record = #{category1Record},
+			</if>
+			<if test="showFlag != null">
+				is_show = #{showFlag},
+			</if>
+			<if test="gmtModified != null">
+				gmt_modified = #{gmtModified},
+			</if>
+		</set>
+		<where>
+			<if test="category1Id != null">
+				AND category1_id = #{category1Id}
+			</if>
+		</where>
+	</update>
+	
+	<!-- 删除一级类目（逻辑删除） -->
+	<update id="removeCategory1" parameterType="long">
+		UPDATE shopping_category1
+		SET is_deleted = 1
+		WHERE category1_id = #{category1Id}
+	</update>
+	
+	<!-- 批量删除集合中的一级类目 -->
+	<update id="removeCategory1Batch" parameterType="list">
+		UPDATE shopping_category1 SET is_deleted = 1
+		<where>
+			<foreach collection="list" open="AND category1_id IN(" 
+				item="id" close=")" separator=",">
+				#{id}
+			</foreach>
+			<if test="1 == 1">
+				AND is_deleted = 0
+			</if>
+		</where>
+	</update>
+	
+</mapper>

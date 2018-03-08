@@ -252,6 +252,7 @@
 							if (data.message == "批量删除一级分类成功") {
 								layer.msg(data.message,{icon:1,time:1000});
 								// 3.删除成功重新查询列表
+								location.reload();
 								category1Mgr.listCategory1(1, 5);
 							} else {
 								// 4.删除失败给出提示信息
@@ -514,7 +515,6 @@
 						icon : 0,
 					},
 					function(index) {
-						
 						$.ajax({
 							type : "post",
 							url : "${ctx}/sysmgr/category/category1/showOrHideCategory1",
@@ -563,6 +563,7 @@
 							icon : 1,
 							time : 1000
 						});
+						location.reload();
 						category1Mgr.listCategory1(1, 5);
 					} else {
 						layer.msg('删除一级类目失败，请联系系统管理员!', {
