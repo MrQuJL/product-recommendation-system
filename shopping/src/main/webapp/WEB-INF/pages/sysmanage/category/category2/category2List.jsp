@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>一级分类管理</title>
+	<title>二级分类管理</title>
 	<meta name="renderer" content="webkit|ie-comp|ie-stand">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
@@ -30,7 +30,7 @@
 	<script type="text/javascript">
 		var category1Mgr = {
 			isChecked : false,
-			// 选中或取消选中所有一级类目
+			// 选中或取消选中所有二级类目
 			toggleCheck : function() {
 				// 获取所有的checkbox
 				var boxes = $("#sample-table tbody").find("input[type='checkbox']");
@@ -58,7 +58,7 @@
 					});
 				}
 			},
-			// 查询一级类目列表
+			// 查询二级类目列表
 			listCategory1 : function(pageNo, pageSize) {
 				var category1Name = $("#queryCategory1Name").val();
 				$.ajax({
@@ -69,9 +69,9 @@
 					success : function(data) {
 						// 获取分页条
 						var pageBar = data.pageBar;
-						// 获取一级类目列表
+						// 获取二级类目列表
 						var category1List = data.category1List;
-						// 获取一级类目的总记录数
+						// 获取二级类目的总记录数
 						var listSize = data.listSize;
 						
 						var htmlTable = "";
@@ -139,9 +139,9 @@
 					}
 				});
 			},
-			// 编辑一级类目
+			// 编辑二级类目
 			category1Edit : function (category1Id) {
-				// 1.修改一级类目的时候先要通过传入的id去后台查询一下当前类目的详细信息，然后赋值到页面
+				// 1.修改二级类目的时候先要通过传入的id去后台查询一下当前类目的详细信息，然后赋值到页面
 				$.ajax({
 					type : "post",
 					url : "${ctx}/sysmgr/category/category1/getCategory1ById",
@@ -162,7 +162,7 @@
 				
 				layer.open({
 					type : 1,
-					title : '修改一级类目',
+					title : '修改二级类目',
 					maxmin : true,
 					shadeClose : false, //点击遮罩关闭层
 					area : [ '750px', '' ],
@@ -188,7 +188,7 @@
 						if (num > 0) {
 							return false;
 						} else {
-							// 1.序列化一级类目表单
+							// 1.序列化二级类目表单
 							var jsonObj = $("#saveCategory1Form").serializeArray();
 							// 2.构造js对象
 							var category1Obj = {};
@@ -205,15 +205,15 @@
 								data : category1Obj,
 								dataType : "json",
 								success : function(data) {
-									if (data.message == "修改一级分类成功") {
+									if (data.message == "修改二级分类成功") {
 										category1Mgr.listCategory1(1, 5);
-										layer.alert('修改一级分类成功！', {
+										layer.alert('修改二级分类成功！', {
 											title : '提示框',
 											icon : 1,
 										});
 										layer.close(index);
 									} else {
-										layer.alert('修改一级分类失败，请联系系统管理员！', {
+										layer.alert('修改二级分类失败，请联系系统管理员！', {
 											title : '提示框',
 											icon : 0,
 										});
@@ -225,9 +225,9 @@
 					}
 				});
 			},
-			// 批量删除一级类目
+			// 批量删除二级类目
 			removeCategory1Batch : function() {
-				// 1.获取选中的一级类目
+				// 1.获取选中的二级类目
 				var checkBoxs = $("#sample-table")
 					.find("tbody")
 					.find("input[type='checkbox']:checked");
@@ -236,11 +236,11 @@
 					category1IdArray.push($(this).val());
 				});
 				if (category1IdArray.length == 0) {
-					layer.msg("请先选择要删除的一级类目！",{icon:0,time:1000});
+					layer.msg("请先选择要删除的二级类目！",{icon:0,time:1000});
 					return false;
 				}
 				category1IdArray = JSON.stringify(category1IdArray);
-				layer.confirm('确认要删除这些一级类目吗？',function(index){
+				layer.confirm('确认要删除这些二级类目吗？',function(index){
 					// 2.发送ajax请求进行批量删除
 					$.ajax({
 						type : "post",
@@ -249,7 +249,7 @@
 						data : category1IdArray,
 						dataType : "json",
 						success : function(data) {
-							if (data.message == "批量删除一级分类成功") {
+							if (data.message == "批量删除二级分类成功") {
 								layer.msg(data.message,{icon:1,time:1000});
 								// 3.删除成功重新查询列表
 								location.reload();
@@ -271,15 +271,15 @@
 			<div class="title_names">搜索查询</div>
 			<ul class="search_content clearfix">
 				<li>
-					<label class="l_f" style="margin-right:10px;margin-top:2px;">一级类目名称</label>
+					<label class="l_f" style="margin-right:10px;margin-top:2px;">二级类目名称</label>
 					<!-- 
 					<input id="queryCategory1Name" name="category1Name" type="text"
-						class="text_add" placeholder="输入一级类目名称" style="width: 400px" />
+						class="text_add" placeholder="输入二级类目名称" style="width: 400px" />
 					 -->	
 					<!-- 此处修改为下拉列表select2 -->	
 					<select id="queryCategory1Name" name="category1Name" class="text_add" 
 						style="width:200px;margin-left:0;">
-						<option value="所有一级类目">所有一级类目</option>
+						<option value="所有二级类目">所有二级类目</option>
 				        <c:forEach items="${category1Names}" var="category1Name">
 				        	<option value="${category1Name}">${category1Name}</option>
 				        </c:forEach>
@@ -314,7 +314,7 @@
 								</label>
 							</th>
 							<th width="50px">ID</th>
-							<th width="100px">一级类目名称</th>
+							<th width="100px">二级类目名称</th>
 							<th width="350px">描述</th>
 							<th width="180px">创建时间</th>
 							<th width="70px">状态</th>
@@ -373,7 +373,7 @@
 		</div>
 	</div>
 <script type="text/javascript">
-	// 添加一级类目
+	// 添加二级类目
 	$('#sort_add').on(
 			'click',
 			function() {
@@ -384,7 +384,7 @@
 				$("#show").prop("checked", "checked");
 				layer.open({
 					type : 1,
-					title : '添加一级类目',
+					title : '添加二级类目',
 					maxmin : true,
 					shadeClose : false, //点击遮罩关闭层
 					area : [ '750px', '' ],
@@ -410,7 +410,7 @@
 						if (num > 0) {
 							return false;
 						} else {
-							// 1.序列化一级类目表单
+							// 1.序列化二级类目表单
 							var jsonObj = $("#saveCategory1Form").serializeArray();
 							// 2.构造js对象
 							var category1Obj = {};
@@ -427,15 +427,15 @@
 								data : category1Obj,
 								dataType : "json",
 								success : function(data) {
-									if (data.message == "新增一级分类成功") {
-										layer.alert('添加一级分类成功！', {
+									if (data.message == "新增二级分类成功") {
+										layer.alert('添加二级分类成功！', {
 											title : '提示框',
 											icon : 1,
 										});
 										layer.close(index);
 										category1Mgr.listCategory1(1, 5);
 									} else {
-										layer.alert('添加一级分类失败，请联系系统管理员！', {
+										layer.alert('添加二级分类失败，请联系系统管理员！', {
 											title : '提示框',
 											icon : 0,
 										});
@@ -479,7 +479,7 @@
 					data : {"changeValue" : 0, "category1Id" : id},
 					dataType : "json",
 					success : function(data) {
-						if (data.message == "success") { // 隐藏该一级类目成功
+						if (data.message == "success") { // 隐藏该二级类目成功
 							$(obj).parents("tr")
 								.find(".td-manage")
 								.prepend('<a style="text-decoration:none" class="btn btn-xs " onClick="member_start(this,' + id
@@ -496,8 +496,8 @@
 							});
 							// 重新查询一下
 							category1Mgr.listCategory1(1, 5);
-						} else { // 隐藏该一级类目失败
-							layer.msg('隐藏该一级类目失败，请联系系统管理员!', {
+						} else { // 隐藏该二级类目失败
+							layer.msg('隐藏该二级类目失败，请联系系统管理员!', {
 								icon : 5,
 								time : 1000
 							});
@@ -521,7 +521,7 @@
 							data : {"changeValue" : 1, "category1Id" : id},
 							dataType : "json",
 							success : function(data) {
-								if (data.message == "success") { // 显示该一级类目成功
+								if (data.message == "success") { // 显示该二级类目成功
 									$(obj).parents("tr")
 										.find(".td-manage")
 										.prepend('<a style="text-decoration:none" class="btn btn-xs btn-success" onClick="member_stop(this,' + id 
@@ -537,8 +537,8 @@
 									});
 									// 重新查询一次查询
 									category1Mgr.listCategory1(1, 5);
-								} else { // 显示该一级类目失败
-									layer.msg('显示该一级类目失败，请联系系统管理员!', {
+								} else { // 显示该二级类目失败
+									layer.msg('显示该二级类目失败，请联系系统管理员!', {
 										icon : 6,
 										time : 1000
 									});
@@ -558,15 +558,15 @@
 				data : {"category1Id" : id},
 				dataType : "json",
 				success : function(data) {
-					if (data.message == "删除一级分类成功") {
-						layer.msg('删除一级类目成功!', {
+					if (data.message == "删除二级分类成功") {
+						layer.msg('删除二级类目成功!', {
 							icon : 1,
 							time : 1000
 						});
 						location.reload();
 						category1Mgr.listCategory1(1, 5);
 					} else {
-						layer.msg('删除一级类目失败，请联系系统管理员!', {
+						layer.msg('删除二级类目失败，请联系系统管理员!', {
 							icon : 0,
 							time : 1000
 						});
