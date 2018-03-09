@@ -139,7 +139,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				category2_record = #{category2Record},
 			</if>
 			<if test="category1Id != null">
-				category1_record = #{category1Id},
+				category1_id = #{category1Id},
 			</if>
 			<if test="showFlag != null">
 				is_show = #{showFlag},

@@ -19,7 +19,7 @@ public interface Category2Mapper {
 	 * @param category2Id 要查询的二级类目的id
 	 * @return 查询到的二级类目
 	 */
-	Category2 getCategory2ById(Long category2Id);
+	Category2DTO getCategory2ById(Long category2Id);
 	
 	/**
 	 * 统计数据库中存在于集合中二级类目的个数

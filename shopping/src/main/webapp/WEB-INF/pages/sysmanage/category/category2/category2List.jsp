@@ -153,6 +153,7 @@
 						$("#category2Id").val(category2.category2Id);
 						$("#category2Name").val(category2.category2Name);
 						$("#category2Record").val(category2.category2Record);
+						$("#category1Id").val(category2.category1Id);
 						if (category2.showFlag == 1) { // 显示
 							$("#show").prop("checked","checked");
 						} else { // 隐藏

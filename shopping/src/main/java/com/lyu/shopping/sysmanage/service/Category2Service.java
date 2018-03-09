@@ -21,7 +21,7 @@ public interface Category2Service {
 	 * @param category2Id 要查询的二级类目的id
 	 * @return 查询到的二级类目
 	 */
-	Category2 getCategory2ById(Long category2Id);
+	Category2DTO getCategory2ById(Long category2Id);
 	
 	/**
 	 * 查询出所有的二级类目的名称

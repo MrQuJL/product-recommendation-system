@@ -47,11 +47,10 @@ public class Category2ServiceImpl implements Category2Service {
 	}
 	
 	@Override
-	public Category2 getCategory2ById(Long category2Id) {
-		
-		Category2 category2 = this.category2Mapper.getCategory2ById(category2Id);
-		
-		return category2;
+	public Category2DTO getCategory2ById(Long category2Id) {
+		// category2DTO中还包括一级类目的名称
+		Category2DTO category2DTO = this.category2Mapper.getCategory2ById(category2Id);
+		return category2DTO;
 	}
 	
 	@Override

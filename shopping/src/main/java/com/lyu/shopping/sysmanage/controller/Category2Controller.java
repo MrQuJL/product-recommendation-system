@@ -183,7 +183,7 @@ public class Category2Controller {
 	public @ResponseBody Map<String, Object> getCategory2ById(Long category2Id) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
-		Category2 category2 = this.category2Service.getCategory2ById(category2Id);
+		Category2DTO category2 = this.category2Service.getCategory2ById(category2Id);
 		
 		resultMap.put("category2", category2);
 		
