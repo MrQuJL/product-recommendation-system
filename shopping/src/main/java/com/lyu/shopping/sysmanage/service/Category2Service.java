@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
+import com.lyu.shopping.sysmanage.dto.Category2DTO;
 import com.lyu.shopping.sysmanage.entity.Category2;
 
 /**
@@ -32,7 +33,7 @@ public interface Category2Service {
 	 * 查询二级类目的列表
 	 * @return 封装有二级类目列表的 PageInfo
 	 */
-	PageInfo<Category2> listCategory2(Category2 category2, PageParam pageParam);
+	PageInfo<Category2DTO> listCategory2Page(Category2 category2, PageParam pageParam);
 	
 	/**
 	 * 显示当前二级类目的，is_show属性设置为1

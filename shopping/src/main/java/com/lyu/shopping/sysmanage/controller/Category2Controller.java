@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
 import com.lyu.shopping.common.util.PageUtils;
+import com.lyu.shopping.sysmanage.dto.Category2DTO;
 import com.lyu.shopping.sysmanage.entity.Category1;
 import com.lyu.shopping.sysmanage.entity.Category2;
 import com.lyu.shopping.sysmanage.service.Category1Service;
@@ -132,10 +133,10 @@ public class Category2Controller {
 		// 2.构造分页对象
 		PageParam pageParam = new PageParam(pageNo, pageSize);
 		// 3.分页查询
-		PageInfo<Category2> pageInfo = category2Service.listCategory2(category2, pageParam);
+		PageInfo<Category2DTO> pageInfo = category2Service.listCategory2Page(category2, pageParam);
 		
 		// 获取二级类目列表
-		List<Category2> category2List = pageInfo.getList();
+		List<Category2DTO> category2List = pageInfo.getList();
 		// 获取分页条
 		String pageBar = PageUtils.pageStr(pageInfo, CATEGORY2_QUERY_METHOD_PAGE);
 		

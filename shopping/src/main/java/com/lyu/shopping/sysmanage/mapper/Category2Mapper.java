@@ -2,6 +2,7 @@ package com.lyu.shopping.sysmanage.mapper;
 
 import java.util.List;
 
+import com.lyu.shopping.sysmanage.dto.Category2DTO;
 import com.lyu.shopping.sysmanage.entity.Category2;
 
 /**
@@ -37,9 +38,9 @@ public interface Category2Mapper {
 	/**
 	 * 查询二级类目的详细列表
 	 * @param category2 查询的条件
-	 * @return 符合查询条件的二级类目列表
+	 * @return 符合查询条件的二级类目的dto列表
 	 */
-	List<Category2> listCategory2(Category2 category2);
+	List<Category2DTO> listCategory2(Category2 category2);
 	
 	/**
 	 * 显示或者隐藏二级类目

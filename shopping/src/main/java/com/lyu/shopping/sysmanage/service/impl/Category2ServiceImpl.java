@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
+import com.lyu.shopping.sysmanage.dto.Category2DTO;
 import com.lyu.shopping.sysmanage.entity.Category2;
 import com.lyu.shopping.sysmanage.mapper.Category2Mapper;
 import com.lyu.shopping.sysmanage.service.Category2Service;
@@ -54,7 +55,7 @@ public class Category2ServiceImpl implements Category2Service {
 	}
 	
 	@Override
-	public PageInfo<Category2> listCategory2(Category2 category2, PageParam pageParam) {
+	public PageInfo<Category2DTO> listCategory2Page(Category2 category2, PageParam pageParam) {
 		// 如果没有传入分页信息：页数和每页的size，则默认第一页，每页5条
 		if (category2 == null) {
 			return null;
@@ -69,9 +70,9 @@ public class Category2ServiceImpl implements Category2Service {
 		// 开启分页
 		PageHelper.startPage(pageParam.getPageNo(), pageParam.getPageSize());
 		// 查询二级类目列表
-		List<Category2> category2List = this.category2Mapper.listCategory2(category2);
+		List<Category2DTO> category2List = this.category2Mapper.listCategory2(category2);
 		// 构造分页信息对象
-		PageInfo<Category2> pageInfo = new PageInfo<Category2>(category2List);
+		PageInfo<Category2DTO> pageInfo = new PageInfo<Category2DTO>(category2List);
 		
 		return pageInfo;
 	}

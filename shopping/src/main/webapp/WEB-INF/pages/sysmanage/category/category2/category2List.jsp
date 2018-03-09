@@ -110,6 +110,7 @@
 									"						class=\"lbl\"></span></label></td>"+
 									"				<td>" + category2List[i].category2Id + "</td>"+
 									"				<td>" + category2List[i].category2Name + "</td>"+
+									"				<td>" + category2List[i].category1Name + "</td>"+
 									"				<td>" + category2List[i].category2Record + "</td>"+
 									"				<td>" + timestampToTime(category2List[i].gmtCreate) + "</td>"+
 									"				<td class=\"td-status\"><span"+
@@ -321,6 +322,7 @@
 							</th>
 							<th width="50px">ID</th>
 							<th width="100px">二级类目名称</th>
+							<th width="100px">所属一级类目</th>
 							<th width="350px">描述</th>
 							<th width="180px">创建时间</th>
 							<th width="70px">状态</th>
