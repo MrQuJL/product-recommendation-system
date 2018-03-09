@@ -54,7 +54,16 @@ public class Category1ServiceImpl implements Category1Service {
 	}
 	
 	@Override
-	public PageInfo<Category1> listCategory1(Category1 category1, PageParam pageParam) {
+	public List<Category1> listCategory1(Category1 category1) {
+		
+		// 查询一级类目列表
+		List<Category1> category1List = this.category1Mapper.listCategory1(category1);
+		
+		return category1List;
+	}
+	
+	@Override
+	public PageInfo<Category1> listCategory1Page(Category1 category1, PageParam pageParam) {
 		// 如果没有传入分页信息：页数和每页的size，则默认第一页，每页5条
 		if (category1 == null) {
 			return null;

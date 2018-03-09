@@ -117,7 +117,7 @@ public class Category1Controller {
 		// 2.构造分页对象
 		PageParam pageParam = new PageParam(pageNo, pageSize);
 		// 3.分页查询
-		PageInfo<Category1> pageInfo = category1Service.listCategory1(category1, pageParam);
+		PageInfo<Category1> pageInfo = category1Service.listCategory1Page(category1, pageParam);
 		
 		// 获取一级类目列表
 		List<Category1> category1List = pageInfo.getList();

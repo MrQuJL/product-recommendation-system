@@ -21,6 +21,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="category2Record != null">
 			AND category2_record LIKE '%${category2Record}%'
 		</if>
+		<if test="category1Id != null">
+			AND category1_id = #{category1Id}
+		</if>
 		<if test="gmtCreate != null">
 			AND gmt_create = #{gmtCreate}
 		</if>

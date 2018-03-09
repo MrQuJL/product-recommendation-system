@@ -42,7 +42,7 @@ public class Category1ServiceTest {
 		pageParam.setPageNo(1);
 		pageParam.setPageNo(5);
 		
-		PageInfo<Category1> pageInfo = category1Service.listCategory1(category1, pageParam);
+		PageInfo<Category1> pageInfo = category1Service.listCategory1Page(category1, pageParam);
 		
 		System.out.println(pageInfo);
 		
@@ -104,6 +104,17 @@ public class Category1ServiceTest {
 		boolean flag = category1Service.removeCategory1Batch(category1Ids);
 		
 		System.out.println(flag);
+		
+	}
+	
+	// 测试查询一级类目列表
+	@Test
+	public void testListCategory1() {
+		Category1Service category1Service = (Category1Service) this.application.getBean("category1Service");
+		
+		List<Category1> category1List = category1Service.listCategory1(null);
+		
+		System.out.println(category1List.size());
 		
 	}
 	

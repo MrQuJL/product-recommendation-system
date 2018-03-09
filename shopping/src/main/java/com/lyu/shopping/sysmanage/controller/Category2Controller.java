@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
 import com.lyu.shopping.common.util.PageUtils;
+import com.lyu.shopping.sysmanage.entity.Category1;
 import com.lyu.shopping.sysmanage.entity.Category2;
 import com.lyu.shopping.sysmanage.service.Category1Service;
 import com.lyu.shopping.sysmanage.service.Category2Service;
@@ -101,10 +102,11 @@ public class Category2Controller {
 		// 在跳转到二级类目页面时加载所有的二级类目名称
 		List<String> category2Names = this.category2Service.listAllCategory2Name();
 		// 同时也加载所有的一级类目，便于查询
-		List<String> category1Names = this.category1Service.listAllCategory1Name();
+		List<Category1> category1List = this.category1Service.listCategory1(null);
 		
 		session.setAttribute("category2Names", category2Names);
-		session.setAttribute("category1Names", category1Names);
+		session.setAttribute("category1List", category1List);
+		
 		return CATEGORY2_LIST_URI;
 	}
 	
@@ -114,14 +116,19 @@ public class Category2Controller {
 	 */
 	@RequestMapping(value="/listCategory2")
 	public @ResponseBody Map<String, Object> listCategory2(String category2Name,
-		Integer pageNo, Integer pageSize) {
+		Long category1Id, Integer pageNo, Integer pageSize) {
 		
 		// 1.创建二级类目对象
 		Category2 category2 = new Category2();
 		if (category2Name.equals("所有二级类目")) {
 			category2Name = null;
 		}
+		if (category1Id.equals(0L)) {
+			category1Id = null;
+		}
+		
 		category2.setCategory2Name(category2Name);
+		category2.setCategory1Id(category1Id);
 		// 2.构造分页对象
 		PageParam pageParam = new PageParam(pageNo, pageSize);
 		// 3.分页查询

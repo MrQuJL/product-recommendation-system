@@ -29,10 +29,19 @@ public interface Category1Service {
 	List<String> listAllCategory1Name();
 	
 	/**
-	 * 查询一级类目的列表
+	 * 查询满足条件的一级类目列表，如果category1为空则查询所有的一级类目
+	 * @param category1 查询的条件
+	 * @return 满足条件的一级类目
+	 */
+	List<Category1> listCategory1(Category1 category1);
+	
+	/**
+	 * 分页查询一级类目的列表
+	 * @param category1 查询的条件
+	 * @param pageParam 分页信息包括第几页，每页几条
 	 * @return 封装有一级类目列表的 PageInfo
 	 */
-	PageInfo<Category1> listCategory1(Category1 category1, PageParam pageParam);
+	PageInfo<Category1> listCategory1Page(Category1 category1, PageParam pageParam);
 	
 	/**
 	 * 显示当前一级类目的，is_show属性设置为1

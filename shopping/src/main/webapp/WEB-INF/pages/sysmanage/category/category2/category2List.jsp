@@ -52,7 +52,6 @@
 						});
 					}
 				} else { // 选中
-					//alert("将会取消所有checkbox的选中");
 					$.each(boxes,function(){
 						$(this).removeProp("checked");
 					});
@@ -61,10 +60,11 @@
 			// 查询二级类目列表
 			listCategory2 : function(pageNo, pageSize) {
 				var category2Name = $("#queryCategory2Name").val();
+				var category1Id = $("#queryCategory1").val();
 				$.ajax({
 					type : "post",
 					url : "${ctx}/sysmgr/category/category2/listCategory2",
-					data : {"category2Name" : category2Name, "pageNo" : pageNo, "pageSize" : pageSize},
+					data : {"category2Name" : category2Name, "category1Id" : category1Id, "pageNo" : pageNo, "pageSize" : pageSize},
 					dataType : "json",
 					success : function(data) {
 						// 获取分页条
@@ -284,11 +284,11 @@
 				<li>
 					<label class="l_f" style="margin-right:10px;margin-top:2px;">一级类目名称</label>
 					<!-- 此处修改为下拉列表select2 -->
-					<select id="queryCategory1Name" name="category1Name" class="text_add" 
+					<select id="queryCategory1" name="category1" class="text_add" 
 						style="width:200px;margin-left:0;">
-						<option value="所有一级类目">所有一级类目</option>
-				        <c:forEach items="${category1Names}" var="category1Name">
-				        	<option value="${category1Name}">${category1Name}</option>
+						<option value="0">所有一级类目</option>
+				        <c:forEach items="${category1List}" var="category1">
+				        	<option value="${category1.category1Id}">${category1.category1Name}</option>
 				        </c:forEach>
 				    </select>
 				</li>
@@ -594,7 +594,6 @@
 			"color" : "#4c8fbd",
 			"cursor" : "pointer"
 		});
-		//parent.$('.Current_page').html("<a href='javascript:void(0)' name="+herf+">" + cnames + "</a>");
 		parent.layer.close(index);
 
 	});
@@ -605,7 +604,7 @@
 <script>
     $(document).ready(function() { 
     	$("#queryCategory2Name").select2(); 
-    	$("#queryCategory1Name").select2(); 
+    	$("#queryCategory1").select2(); 
     });
 </script>
 </body>
