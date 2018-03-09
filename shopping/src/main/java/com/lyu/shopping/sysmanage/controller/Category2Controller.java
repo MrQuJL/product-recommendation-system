@@ -17,6 +17,7 @@ import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
 import com.lyu.shopping.common.util.PageUtils;
 import com.lyu.shopping.sysmanage.entity.Category2;
+import com.lyu.shopping.sysmanage.service.Category1Service;
 import com.lyu.shopping.sysmanage.service.Category2Service;
 
 /**
@@ -88,6 +89,9 @@ public class Category2Controller {
 	@Autowired
 	private Category2Service category2Service;
 	
+	@Autowired
+	private Category1Service category1Service;
+	
 	/**
 	 * 跳转到二级类目列表页面
 	 * @return
@@ -96,7 +100,11 @@ public class Category2Controller {
 	public String gotoCategory2List(HttpSession session) {
 		// 在跳转到二级类目页面时加载所有的二级类目名称
 		List<String> category2Names = this.category2Service.listAllCategory2Name();
+		// 同时也加载所有的一级类目，便于查询
+		List<String> category1Names = this.category1Service.listAllCategory1Name();
+		
 		session.setAttribute("category2Names", category2Names);
+		session.setAttribute("category1Names", category1Names);
 		return CATEGORY2_LIST_URI;
 	}
 	

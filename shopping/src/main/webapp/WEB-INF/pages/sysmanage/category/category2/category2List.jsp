@@ -272,10 +272,6 @@
 			<ul class="search_content clearfix">
 				<li>
 					<label class="l_f" style="margin-right:10px;margin-top:2px;">二级类目名称</label>
-					<!-- 
-					<input id="queryCategory2Name" name="category2Name" type="text"
-						class="text_add" placeholder="输入二级类目名称" style="width: 400px" />
-					 -->	
 					<!-- 此处修改为下拉列表select2 -->	
 					<select id="queryCategory2Name" name="category2Name" class="text_add" 
 						style="width:200px;margin-left:0;">
@@ -284,7 +280,17 @@
 				        	<option value="${category2Name}">${category2Name}</option>
 				        </c:forEach>
 				    </select>
-				    
+				</li>
+				<li>
+					<label class="l_f" style="margin-right:10px;margin-top:2px;">一级类目名称</label>
+					<!-- 此处修改为下拉列表select2 -->
+					<select id="queryCategory1Name" name="category1Name" class="text_add" 
+						style="width:200px;margin-left:0;">
+						<option value="所有一级类目">所有一级类目</option>
+				        <c:forEach items="${category1Names}" var="category1Name">
+				        	<option value="${category1Name}">${category1Name}</option>
+				        </c:forEach>
+				    </select>
 				</li>
 				<li style="width: 90px;">
 					<button type="button" class="btn_search" onclick="category2Mgr.listCategory2(1, 5);">
@@ -597,7 +603,10 @@
 	};
 </script>
 <script>
-    $(document).ready(function() { $("#queryCategory2Name").select2(); });
+    $(document).ready(function() { 
+    	$("#queryCategory2Name").select2(); 
+    	$("#queryCategory1Name").select2(); 
+    });
 </script>
 </body>
 </html>
