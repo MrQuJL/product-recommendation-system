@@ -124,7 +124,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="saveCategory2" parameterType="category2">
 		INSERT INTO shopping_category2(category2_name, category2_record,
 			category1_id, gmt_create, gmt_modified, is_show, is_deleted)
-		VALUES(#{category2Name}, #{category2Record}, #{category1Id}
+		VALUES(#{category2Name}, #{category2Record}, #{category1Id},
 			#{gmtCreate}, #{gmtModified}, #{showFlag}, #{delFlag})
 	</insert>
 	

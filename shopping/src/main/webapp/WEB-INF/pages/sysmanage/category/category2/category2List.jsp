@@ -347,14 +347,25 @@
 					<li>
 						<input id="category2Id" name="category2Id" type="hidden" value="" >
 						<label class="label_name">分类名称</label>
-						<div class="col-sm-9">
+						<div class="col-sm-6">
 							<input id="category2Name" name="category2Name" type="text" id="form-field-1" placeholder=""
-								class="col-xs-10 col-sm-5">
+								class="col-xs-9 col-sm-8">
+						</div>
+					</li>
+					<li>
+						<label class="label_name">所属一级类目</label>
+						<div class="col-sm-8">
+							<select id="category1Id" name="category1Id" class="text_add" 
+								style="width:200px;margin-left:0;">
+						        <c:forEach items="${category1List}" var="category1">
+						        	<option value="${category1.category1Id}">${category1.category1Name}</option>
+						        </c:forEach>
+						    </select>
 						</div>
 					</li>
 					<li>
 						<label class="label_name">分类说明</label>
-						<div class="col-sm-9">
+						<div class="col-sm-8">
 							<textarea id="category2Record" name="category2Record" class="form-control" id="form-field-8"
 								placeholder="" onkeyup="checkLength(this);"></textarea>
 							<span class="wordage">剩余字数：
