@@ -28,7 +28,7 @@
 	<script src="${ctxJsAndCss}/assets/layer/layer.js"></script>
 	<script src="${ctxJsAndCss}/js/date.js"></script>
 	<script type="text/javascript">
-		var category1Mgr = {
+		var category2Mgr = {
 			isChecked : false,
 			// 选中或取消选中所有二级类目
 			toggleCheck : function() {
@@ -59,24 +59,24 @@
 				}
 			},
 			// 查询二级类目列表
-			listCategory1 : function(pageNo, pageSize) {
-				var category1Name = $("#queryCategory1Name").val();
+			listCategory2 : function(pageNo, pageSize) {
+				var category2Name = $("#queryCategory2Name").val();
 				$.ajax({
 					type : "post",
-					url : "${ctx}/sysmgr/category/category1/listCategory1",
-					data : {"category1Name" : category1Name, "pageNo" : pageNo, "pageSize" : pageSize},
+					url : "${ctx}/sysmgr/category/category2/listCategory2",
+					data : {"category2Name" : category2Name, "pageNo" : pageNo, "pageSize" : pageSize},
 					dataType : "json",
 					success : function(data) {
 						// 获取分页条
 						var pageBar = data.pageBar;
 						// 获取二级类目列表
-						var category1List = data.category1List;
+						var category2List = data.category2List;
 						// 获取二级类目的总记录数
 						var listSize = data.listSize;
 						
 						var htmlTable = "";
-						if (category1List.length > 0) {
-							for (var i = 0; i < category1List.length; i++) {
+						if (category2List.length > 0) {
+							for (var i = 0; i < category2List.length; i++) {
 								// 标签的样式
 								var labelText = "";
 								// td标签中显示的文字
@@ -90,28 +90,28 @@
 								// 开启还是关闭类目
 								var checkOrClose = "";
 								
-								if (category1List[i].showFlag == "1") { // 显示
+								if (category2List[i].showFlag == "1") { // 显示
 									labelText = "label-success";
 									tdText = "显示";
 									btnStyle = "btn-success";
-									btnEvent = "member_stop(this," + category1List[i].category1Id + ")";
+									btnEvent = "member_stop(this," + category2List[i].category2Id + ")";
 									hoverTitle = "关闭";
 									checkOrClose = "fa-check";
 								} else { // 已关闭
 									labelText = "label-default";
 									tdText = "已关闭";
-									btnEvent = "member_start(this," + category1List[i].category1Id  + ")";
+									btnEvent = "member_start(this," + category2List[i].category2Id  + ")";
 									hoverTitle = "显示";
 									checkOrClose = "fa-close";
 								}
 								htmlTable =
 									htmlTable + "<tr>"+
-									"				<td><label><input type=\"checkbox\" class=\"ace\" value=" +category1List[i].category1Id + "><span"+
+									"				<td><label><input type=\"checkbox\" class=\"ace\" value=" +category2List[i].category2Id + "><span"+
 									"						class=\"lbl\"></span></label></td>"+
-									"				<td>" + category1List[i].category1Id + "</td>"+
-									"				<td>" + category1List[i].category1Name + "</td>"+
-									"				<td>" + category1List[i].category1Record + "</td>"+
-									"				<td>" + timestampToTime(category1List[i].gmtCreate) + "</td>"+
+									"				<td>" + category2List[i].category2Id + "</td>"+
+									"				<td>" + category2List[i].category2Name + "</td>"+
+									"				<td>" + category2List[i].category2Record + "</td>"+
+									"				<td>" + timestampToTime(category2List[i].gmtCreate) + "</td>"+
 									"				<td class=\"td-status\"><span"+
 									"					class=\"label " + labelText + " radius\">" + tdText + "</span></td>"+
 									"				<td class=\"td-manage\">"+
@@ -119,11 +119,11 @@
 									"						href=\"javascript:;\" title=\"  "+ hoverTitle +"  \" class=\"btn btn-xs " + btnStyle + "\">"+
 									"						<i class=\"fa " + checkOrClose + " bigger-120\"></i>"+
 									"					</a>"+
-									"					<a title=\"编辑\" onclick=\"category1Mgr.category1Edit(" + category1List[i].category1Id + ")\" "+
+									"					<a title=\"编辑\" onclick=\"category2Mgr.category2Edit(" + category2List[i].category2Id + ")\" "+
 									"						href=\"javascript:;\" class=\"btn btn-xs btn-info\">"+
 									"						<i class=\"fa fa-edit bigger-120\"></i>"+
 									"					</a>"+
-									"					<a title=\"删除\" href=\"javascript:;\" onclick=\"member_del(this," + category1List[i].category1Id + ")\""+
+									"					<a title=\"删除\" href=\"javascript:;\" onclick=\"member_del(this," + category2List[i].category2Id + ")\""+
 									"						class=\"btn btn-xs btn-warning\">"+
 									"						<i class=\"fa fa-trash  bigger-120\"></i>"+
 									"					</a>"+
@@ -140,19 +140,19 @@
 				});
 			},
 			// 编辑二级类目
-			category1Edit : function (category1Id) {
+			category2Edit : function (category2Id) {
 				// 1.修改二级类目的时候先要通过传入的id去后台查询一下当前类目的详细信息，然后赋值到页面
 				$.ajax({
 					type : "post",
-					url : "${ctx}/sysmgr/category/category1/getCategory1ById",
-					data : {"category1Id" : category1Id},
+					url : "${ctx}/sysmgr/category/category2/getCategory2ById",
+					data : {"category2Id" : category2Id},
 					dataType : "json",
 					success : function(data) {
-						var category1 = data.category1;
-						$("#category1Id").val(category1.category1Id);
-						$("#category1Name").val(category1.category1Name);
-						$("#category1Record").val(category1.category1Record);
-						if (category1.showFlag == 1) { // 显示
+						var category2 = data.category2;
+						$("#category2Id").val(category2.category2Id);
+						$("#category2Name").val(category2.category2Name);
+						$("#category2Record").val(category2.category2Record);
+						if (category2.showFlag == 1) { // 显示
 							$("#show").prop("checked","checked");
 						} else { // 隐藏
 							$("#hide").prop("checked","checked");
@@ -189,24 +189,24 @@
 							return false;
 						} else {
 							// 1.序列化二级类目表单
-							var jsonObj = $("#saveCategory1Form").serializeArray();
+							var jsonObj = $("#saveCategory2Form").serializeArray();
 							// 2.构造js对象
-							var category1Obj = {};
+							var category2Obj = {};
 							$.each(jsonObj,function(i, item){
-								category1Obj[item.name] = item.value;
+								category2Obj[item.name] = item.value;
 							});
 							// 3.转化成json格式的字符串
-							category1Obj = JSON.stringify(category1Obj);
+							category2Obj = JSON.stringify(category2Obj);
 							// 4.向后台发送ajax请求
 							$.ajax({
 								type : "post",
 								contentType : "application/json;charset=utf-8;",
-								url : "${ctx}/sysmgr/category/category1/saveCategory1",
-								data : category1Obj,
+								url : "${ctx}/sysmgr/category/category2/saveCategory2",
+								data : category2Obj,
 								dataType : "json",
 								success : function(data) {
 									if (data.message == "修改二级分类成功") {
-										category1Mgr.listCategory1(1, 5);
+										category2Mgr.listCategory2(1, 5);
 										layer.alert('修改二级分类成功！', {
 											title : '提示框',
 											icon : 1,
@@ -226,34 +226,34 @@
 				});
 			},
 			// 批量删除二级类目
-			removeCategory1Batch : function() {
+			removeCategory2Batch : function() {
 				// 1.获取选中的二级类目
 				var checkBoxs = $("#sample-table")
 					.find("tbody")
 					.find("input[type='checkbox']:checked");
-				var category1IdArray = new Array();
+				var category2IdArray = new Array();
 				$.each(checkBoxs,function(){
-					category1IdArray.push($(this).val());
+					category2IdArray.push($(this).val());
 				});
-				if (category1IdArray.length == 0) {
+				if (category2IdArray.length == 0) {
 					layer.msg("请先选择要删除的二级类目！",{icon:0,time:1000});
 					return false;
 				}
-				category1IdArray = JSON.stringify(category1IdArray);
+				category2IdArray = JSON.stringify(category2IdArray);
 				layer.confirm('确认要删除这些二级类目吗？',function(index){
 					// 2.发送ajax请求进行批量删除
 					$.ajax({
 						type : "post",
 						contentType : "application/json;charset=UTF-8",
-						url : "${ctx}/sysmgr/category/category1/removeCategory1Batch",
-						data : category1IdArray,
+						url : "${ctx}/sysmgr/category/category2/removeCategory2Batch",
+						data : category2IdArray,
 						dataType : "json",
 						success : function(data) {
 							if (data.message == "批量删除二级分类成功") {
 								layer.msg(data.message,{icon:1,time:1000});
 								// 3.删除成功重新查询列表
 								location.reload();
-								category1Mgr.listCategory1(1, 5);
+								category2Mgr.listCategory2(1, 5);
 							} else {
 								// 4.删除失败给出提示信息
 								layer.msg(data.message,{icon:0,time:1000});
@@ -273,21 +273,21 @@
 				<li>
 					<label class="l_f" style="margin-right:10px;margin-top:2px;">二级类目名称</label>
 					<!-- 
-					<input id="queryCategory1Name" name="category1Name" type="text"
+					<input id="queryCategory2Name" name="category2Name" type="text"
 						class="text_add" placeholder="输入二级类目名称" style="width: 400px" />
 					 -->	
 					<!-- 此处修改为下拉列表select2 -->	
-					<select id="queryCategory1Name" name="category1Name" class="text_add" 
+					<select id="queryCategory2Name" name="category2Name" class="text_add" 
 						style="width:200px;margin-left:0;">
 						<option value="所有二级类目">所有二级类目</option>
-				        <c:forEach items="${category1Names}" var="category1Name">
-				        	<option value="${category1Name}">${category1Name}</option>
+				        <c:forEach items="${category2Names}" var="category2Name">
+				        	<option value="${category2Name}">${category2Name}</option>
 				        </c:forEach>
 				    </select>
 				    
 				</li>
 				<li style="width: 90px;">
-					<button type="button" class="btn_search" onclick="category1Mgr.listCategory1(1, 5);">
+					<button type="button" class="btn_search" onclick="category2Mgr.listCategory2(1, 5);">
 						<i class="icon-search"></i>查询
 					</button>
 				</li>
@@ -297,7 +297,7 @@
 			<div class="border clearfix">
 				<span class="l_f"> <a href="javascript:ovid()" id="sort_add"
 					class="btn btn-warning"><i class="fa fa-plus"></i> 添加分类</a> <a
-					href="javascript:category1Mgr.removeCategory1Batch();" class="btn btn-danger"><i
+					href="javascript:category2Mgr.removeCategory2Batch();" class="btn btn-danger"><i
 						class="fa fa-trash"></i> 批量删除</a>
 				</span> <span class="r_f">共：<b id="totalPage"></b>类
 				</span>
@@ -309,7 +309,7 @@
 						<tr>
 							<th width="25px">
 								<label>
-									<input id="toggleCheckBox" type="checkbox" class="ace" onclick="category1Mgr.toggleCheck();">
+									<input id="toggleCheckBox" type="checkbox" class="ace" onclick="category2Mgr.toggleCheck();">
 									<span class="lbl"></span>
 								</label>
 							</th>
@@ -334,20 +334,20 @@
 	<!--添加分类-->
 	<div class="sort_style_add margin" id="sort_style_add" style="display: none">
 		<div class="">
-			<form action="#" id="saveCategory1Form">
+			<form action="#" id="saveCategory2Form">
 				<ul>
 					<li>
-						<input id="category1Id" name="category1Id" type="hidden" value="" >
+						<input id="category2Id" name="category2Id" type="hidden" value="" >
 						<label class="label_name">分类名称</label>
 						<div class="col-sm-9">
-							<input id="category1Name" name="category1Name" type="text" id="form-field-1" placeholder=""
+							<input id="category2Name" name="category2Name" type="text" id="form-field-1" placeholder=""
 								class="col-xs-10 col-sm-5">
 						</div>
 					</li>
 					<li>
 						<label class="label_name">分类说明</label>
 						<div class="col-sm-9">
-							<textarea id="category1Record" name="category1Record" class="form-control" id="form-field-8"
+							<textarea id="category2Record" name="category2Record" class="form-control" id="form-field-8"
 								placeholder="" onkeyup="checkLength(this);"></textarea>
 							<span class="wordage">剩余字数：
 								<span id="sy" style="color: Red;">200</span>字
@@ -378,9 +378,9 @@
 			'click',
 			function() {
 				// 先清空表单中上一次添加类目之后的残留数据
-				$("#category1Id").val("");
-				$("#category1Name").val("");
-				$("#category1Record").val("");
+				$("#category2Id").val("");
+				$("#category2Name").val("");
+				$("#category2Record").val("");
 				$("#show").prop("checked", "checked");
 				layer.open({
 					type : 1,
@@ -411,20 +411,20 @@
 							return false;
 						} else {
 							// 1.序列化二级类目表单
-							var jsonObj = $("#saveCategory1Form").serializeArray();
+							var jsonObj = $("#saveCategory2Form").serializeArray();
 							// 2.构造js对象
-							var category1Obj = {};
+							var category2Obj = {};
 							$.each(jsonObj,function(i, item){
-								category1Obj[item.name] = item.value;
+								category2Obj[item.name] = item.value;
 							});
 							// 3.转化成json格式的字符串
-							category1Obj = JSON.stringify(category1Obj);
+							category2Obj = JSON.stringify(category2Obj);
 							// 4.向后台发送ajax请求
 							$.ajax({
 								type : "post",
 								contentType : "application/json;charset=utf-8;",
-								url : "${ctx}/sysmgr/category/category1/saveCategory1",
-								data : category1Obj,
+								url : "${ctx}/sysmgr/category/category2/saveCategory2",
+								data : category2Obj,
 								dataType : "json",
 								success : function(data) {
 									if (data.message == "新增二级分类成功") {
@@ -433,7 +433,7 @@
 											icon : 1,
 										});
 										layer.close(index);
-										category1Mgr.listCategory1(1, 5);
+										category2Mgr.listCategory2(1, 5);
 									} else {
 										layer.alert('添加二级分类失败，请联系系统管理员！', {
 											title : '提示框',
@@ -475,8 +475,8 @@
 			function(index) {
 				$.ajax({
 					type : "post",
-					url : "${ctx}/sysmgr/category/category1/showOrHideCategory1",
-					data : {"changeValue" : 0, "category1Id" : id},
+					url : "${ctx}/sysmgr/category/category2/showOrHideCategory2",
+					data : {"changeValue" : 0, "category2Id" : id},
 					dataType : "json",
 					success : function(data) {
 						if (data.message == "success") { // 隐藏该二级类目成功
@@ -495,7 +495,7 @@
 								time : 1000
 							});
 							// 重新查询一下
-							category1Mgr.listCategory1(1, 5);
+							category2Mgr.listCategory2(1, 5);
 						} else { // 隐藏该二级类目失败
 							layer.msg('隐藏该二级类目失败，请联系系统管理员!', {
 								icon : 5,
@@ -517,8 +517,8 @@
 					function(index) {
 						$.ajax({
 							type : "post",
-							url : "${ctx}/sysmgr/category/category1/showOrHideCategory1",
-							data : {"changeValue" : 1, "category1Id" : id},
+							url : "${ctx}/sysmgr/category/category2/showOrHideCategory2",
+							data : {"changeValue" : 1, "category2Id" : id},
 							dataType : "json",
 							success : function(data) {
 								if (data.message == "success") { // 显示该二级类目成功
@@ -536,7 +536,7 @@
 										time : 1000
 									});
 									// 重新查询一次查询
-									category1Mgr.listCategory1(1, 5);
+									category2Mgr.listCategory2(1, 5);
 								} else { // 显示该二级类目失败
 									layer.msg('显示该二级类目失败，请联系系统管理员!', {
 										icon : 6,
@@ -554,8 +554,8 @@
 		}, function(index) {
 			$.ajax({
 				type : "post",
-				url : "${ctx}/sysmgr/category/category1/removeCategory1",
-				data : {"category1Id" : id},
+				url : "${ctx}/sysmgr/category/category2/removeCategory2",
+				data : {"category2Id" : id},
 				dataType : "json",
 				success : function(data) {
 					if (data.message == "删除二级分类成功") {
@@ -564,7 +564,7 @@
 							time : 1000
 						});
 						location.reload();
-						category1Mgr.listCategory1(1, 5);
+						category2Mgr.listCategory2(1, 5);
 					} else {
 						layer.msg('删除二级类目失败，请联系系统管理员!', {
 							icon : 0,
@@ -597,7 +597,7 @@
 	};
 </script>
 <script>
-    $(document).ready(function() { $("#queryCategory1Name").select2(); });
+    $(document).ready(function() { $("#queryCategory2Name").select2(); });
 </script>
 </body>
 </html>

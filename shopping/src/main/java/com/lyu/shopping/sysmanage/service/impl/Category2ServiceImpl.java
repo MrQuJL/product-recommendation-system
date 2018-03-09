@@ -12,51 +12,51 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
-import com.lyu.shopping.sysmanage.entity.Category1;
-import com.lyu.shopping.sysmanage.mapper.Category1Mapper;
+import com.lyu.shopping.sysmanage.entity.Category2;
+import com.lyu.shopping.sysmanage.mapper.Category2Mapper;
 import com.lyu.shopping.sysmanage.service.Category2Service;
 
 /**
- * 类描述：一级类目服务接口的实现类
- * 类名称：com.lyu.shopping.sysmanage.service.impl.Category1ServiceImpl
+ * 类描述：二级类目服务接口的实现类
+ * 类名称：com.lyu.shopping.sysmanage.service.impl.Category2ServiceImpl
  * @author 曲健磊
- * 2018年3月4日.下午8:56:46
+ * 2018年3月9日.上午9:33:53
  * @version V1.0
  */
 @Service("category2Service")
 public class Category2ServiceImpl implements Category2Service {
 
 	/**
-	 * 显示一级类目的标示，在数据库中对应的字段为1
+	 * 显示二级类目的标示，在数据库中对应的字段为1
 	 */
 	private static final Integer SHOW_CATEGORY1 = 1;
 	
 	/**
-	 * 隐藏一级类目的标示，在数据库中对应的字段为0
+	 * 隐藏二级类目的标示，在数据库中对应的字段为0
 	 */
 	private static final Integer HIDE_CATEGORY1 = 0;
 	
 	@Autowired
-	private Category1Mapper category1Mapper;
+	private Category2Mapper category2Mapper;
 	
 	@Override
-	public List<String> listAllCategory1Name() {
-		List<String> category1Names = this.category1Mapper.listAllCategory1Name();
-		return category1Names;
+	public List<String> listAllCategory2Name() {
+		List<String> category2Names = this.category2Mapper.listAllCategory2Name();
+		return category2Names;
 	}
 	
 	@Override
-	public Category1 getCategory1ById(Long category1Id) {
+	public Category2 getCategory2ById(Long category2Id) {
 		
-		Category1 category1 = this.category1Mapper.getCategory1ById(category1Id);
+		Category2 category2 = this.category2Mapper.getCategory2ById(category2Id);
 		
-		return category1;
+		return category2;
 	}
 	
 	@Override
-	public PageInfo<Category1> listCategory1(Category1 category1, PageParam pageParam) {
+	public PageInfo<Category2> listCategory2(Category2 category2, PageParam pageParam) {
 		// 如果没有传入分页信息：页数和每页的size，则默认第一页，每页5条
-		if (category1 == null) {
+		if (category2 == null) {
 			return null;
 		}
 		if (pageParam == null || pageParam.getPageNo() == null ||
@@ -68,17 +68,17 @@ public class Category2ServiceImpl implements Category2Service {
 		
 		// 开启分页
 		PageHelper.startPage(pageParam.getPageNo(), pageParam.getPageSize());
-		// 查询一级类目列表
-		List<Category1> category1List = this.category1Mapper.listCategory1(category1);
+		// 查询二级类目列表
+		List<Category2> category2List = this.category2Mapper.listCategory2(category2);
 		// 构造分页信息对象
-		PageInfo<Category1> pageInfo = new PageInfo<Category1>(category1List);
+		PageInfo<Category2> pageInfo = new PageInfo<Category2>(category2List);
 		
 		return pageInfo;
 	}
 
 	@Override
-	public boolean showCategory1(Long category1Id) {
-		int rows = this.category1Mapper.updateShowFlag(category1Id, SHOW_CATEGORY1);
+	public boolean showCategory2(Long category2Id) {
+		int rows = this.category2Mapper.updateShowFlag(category2Id, SHOW_CATEGORY1);
 		if (rows > 0) {
 			return true;
 		}
@@ -86,8 +86,8 @@ public class Category2ServiceImpl implements Category2Service {
 	}
 
 	@Override
-	public boolean hideCategory1(Long category1Id) {
-		int rows = this.category1Mapper.updateShowFlag(category1Id, HIDE_CATEGORY1);
+	public boolean hideCategory2(Long category2Id) {
+		int rows = this.category2Mapper.updateShowFlag(category2Id, HIDE_CATEGORY1);
 		if (rows > 0) {
 			return true;
 		}
@@ -95,20 +95,20 @@ public class Category2ServiceImpl implements Category2Service {
 	}
 
 	@Override
-	public boolean saveCategory1(Category1 category1) {
+	public boolean saveCategory2(Category2 category2) {
 		// 数据的合法性判断
-		if (category1 == null || category1.getCategory1Name() == null 
-			|| category1.getCategory1Name() == "") {
+		if (category2 == null || category2.getCategory2Name() == null 
+			|| category2.getCategory2Name() == "") {
 			return false;
 		}
 		
-		// 设置与一级类目相关的初始化值
-		category1.setGmtCreate(new Date());
-		category1.setGmtModified(new Date());
+		// 设置与二级类目相关的初始化值
+		category2.setGmtCreate(new Date());
+		category2.setGmtModified(new Date());
 		// 默认不删除，即删除字段为0
-		category1.setDelFlag(0);
+		category2.setDelFlag(0);
 		
-		int rows = this.category1Mapper.saveCategory1(category1);
+		int rows = this.category2Mapper.saveCategory2(category2);
 		
 		if (rows > 0) {
 			return true;
@@ -118,13 +118,13 @@ public class Category2ServiceImpl implements Category2Service {
 	}
 
 	@Override
-	public boolean updateCategory1(Category1 category1) {
-		if (category1 == null || category1.getCategory1Id() == null) {
+	public boolean updateCategory2(Category2 category2) {
+		if (category2 == null || category2.getCategory2Id() == null) {
 			return false;
 		}
 		// 设置修改的时间
-		category1.setGmtModified(new Date());
-		int rows = this.category1Mapper.updateCategory1(category1);
+		category2.setGmtModified(new Date());
+		int rows = this.category2Mapper.updateCategory2(category2);
 		if (rows > 0) {
 			return true;
 		}
@@ -132,12 +132,12 @@ public class Category2ServiceImpl implements Category2Service {
 	}
 
 	@Override
-	public boolean removeCategory1(Long category1Id) {
-		if (category1Id == null) {
+	public boolean removeCategory2(Long category2Id) {
+		if (category2Id == null) {
 			return false;
 		}
 		
-		int rows = this.category1Mapper.removeCategory1(category1Id);
+		int rows = this.category2Mapper.removeCategory2(category2Id);
 		
 		if (rows > 0) {
 			return true;
@@ -148,20 +148,20 @@ public class Category2ServiceImpl implements Category2Service {
 
 	@Override
 	@Transactional(isolation=Isolation.DEFAULT, propagation = Propagation.REQUIRED)
-	public boolean removeCategory1Batch(List<Long> category1Ids) {
+	public boolean removeCategory2Batch(List<Long> category2Ids) {
 		// 合法性判断
-		if (category1Ids == null || category1Ids.size() == 0) {
+		if (category2Ids == null || category2Ids.size() == 0) {
 			return false;
 		}
 		// 1.先查询集合中的id是否存在于数据库中,判断集合中的数据是否已经被删除
-		int size = category1Ids.size();
-		int rows = this.category1Mapper.countCategory1InList(category1Ids);
+		int size = category2Ids.size();
+		int rows = this.category2Mapper.countCategory2InList(category2Ids);
 		if (size != rows) {
 			return false;
 		}
 		
-		// 3.批量删除集合中的一级类目
-		rows = this.category1Mapper.removeCategory1Batch(category1Ids);
+		// 3.批量删除集合中的二级类目
+		rows = this.category2Mapper.removeCategory2Batch(category2Ids);
 		if (rows != size) {
 			return false;
 		}

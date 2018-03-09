@@ -2,7 +2,6 @@ package com.lyu.shopping.sysmanage.mapper;
 
 import java.util.List;
 
-import com.lyu.shopping.sysmanage.entity.Category1;
 import com.lyu.shopping.sysmanage.entity.Category2;
 
 /**
@@ -29,6 +28,7 @@ public interface Category2Mapper {
 	int countCategory2InList(List<Long> category2Ids);
 	
 	/**
+	 * TODO 待完成
 	 * 查询出所有的二级类目的名称
 	 * @return 查询到的所有的二级类目的名称
 	 */

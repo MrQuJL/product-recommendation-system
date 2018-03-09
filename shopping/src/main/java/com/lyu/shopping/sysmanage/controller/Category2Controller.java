@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
 import com.lyu.shopping.common.util.PageUtils;
-import com.lyu.shopping.sysmanage.entity.Category1;
+import com.lyu.shopping.sysmanage.entity.Category2;
 import com.lyu.shopping.sysmanage.service.Category2Service;
 
 /**
@@ -93,9 +93,9 @@ public class Category2Controller {
 	 * @return
 	 */
 	@RequestMapping(value="/gotoCategory2List")
-	public String gotoCategory1List(HttpSession session) {
+	public String gotoCategory2List(HttpSession session) {
 		// 在跳转到二级类目页面时加载所有的二级类目名称
-		List<String> category2Names = this.category2Service.listAllCategory1Name();
+		List<String> category2Names = this.category2Service.listAllCategory2Name();
 		session.setAttribute("category2Names", category2Names);
 		return CATEGORY2_LIST_URI;
 	}
@@ -104,29 +104,29 @@ public class Category2Controller {
 	 * 处理查询二级类目列表的请求
 	 * @return
 	 */
-	@RequestMapping(value="/listCategory1")
-	public @ResponseBody Map<String, Object> listCategory1(String category1Name,
+	@RequestMapping(value="/listCategory2")
+	public @ResponseBody Map<String, Object> listCategory2(String category2Name,
 		Integer pageNo, Integer pageSize) {
 		
 		// 1.创建二级类目对象
-		Category1 category1 = new Category1();
-		if (category1Name.equals("所有二级类目")) {
-			category1Name = null;
+		Category2 category2 = new Category2();
+		if (category2Name.equals("所有二级类目")) {
+			category2Name = null;
 		}
-		category1.setCategory1Name(category1Name);
+		category2.setCategory2Name(category2Name);
 		// 2.构造分页对象
 		PageParam pageParam = new PageParam(pageNo, pageSize);
 		// 3.分页查询
-		PageInfo<Category1> pageInfo = category2Service.listCategory1(category1, pageParam);
+		PageInfo<Category2> pageInfo = category2Service.listCategory2(category2, pageParam);
 		
 		// 获取二级类目列表
-		List<Category1> category1List = pageInfo.getList();
+		List<Category2> category2List = pageInfo.getList();
 		// 获取分页条
 		String pageBar = PageUtils.pageStr(pageInfo, CATEGORY2_QUERY_METHOD_PAGE);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("category1List", category1List);
+		map.put("category2List", category2List);
 		map.put("pageBar", pageBar);
 		map.put("listSize", pageInfo.getTotal());
 		
@@ -137,19 +137,19 @@ public class Category2Controller {
 	 * 处理显示或者隐藏二级类目的请求
 	 * @return
 	 */
-	@RequestMapping(value="/showOrHideCategory1")
-	public @ResponseBody Map<String, Object> showOrHideCategory1(Integer changeValue,
-		Long category1Id) {
+	@RequestMapping(value="/showOrHideCategory2")
+	public @ResponseBody Map<String, Object> showOrHideCategory2(Integer changeValue,
+		Long category2Id) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		
 		resultMap.put("message", "failed");
 		
 		boolean flag = false;
 		if (changeValue.equals(1)) { // 显示该二级类目
-			flag = this.category2Service.showCategory1(category1Id);
+			flag = this.category2Service.showCategory2(category2Id);
 			
 		} else { // 隐藏该二级类目
-			flag = this.category2Service.hideCategory1(category1Id);
+			flag = this.category2Service.hideCategory2(category2Id);
 		}
 		if (flag) {
 			resultMap.put(FRONT_TIPS_ATTR, "success");
@@ -160,39 +160,39 @@ public class Category2Controller {
 	
 	/**
 	 * 处理根据二级类目的id查询出它的详细信息的请求
-	 * @param category1Id
+	 * @param category2Id
 	 * @return
 	 */
-	@RequestMapping(value="/getCategory1ById")
-	public @ResponseBody Map<String, Object> getCategory1ById(Long category1Id) {
+	@RequestMapping(value="/getCategory2ById")
+	public @ResponseBody Map<String, Object> getCategory2ById(Long category2Id) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
-		Category1 category1 = this.category2Service.getCategory1ById(category1Id);
+		Category2 category2 = this.category2Service.getCategory2ById(category2Id);
 		
-		resultMap.put("category1", category1);
+		resultMap.put("category2", category2);
 		
 		return resultMap;
 	}
 	
 	/**
 	 * 处理新增或者修改二级类目的请求
-	 * @param category1
+	 * @param category2
 	 * @return 新增（修改）二级类目成功或者失败的提示信息
 	 */
-	@RequestMapping(value="/saveCategory1")
-	public @ResponseBody Map<String, Object> saveCategory1(@RequestBody Category1 category1) {
+	@RequestMapping(value="/saveCategory2")
+	public @ResponseBody Map<String, Object> saveCategory2(@RequestBody Category2 category2) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
 		boolean flag = false;
-		if (category1.getCategory1Id() == null) { // id为空说明是新增二级类目
+		if (category2.getCategory2Id() == null) { // id为空说明是新增二级类目
 			resultMap.put(FRONT_TIPS_ATTR, SAVE_CATEGORY2_FAILED);
-			flag = this.category2Service.saveCategory1(category1);
+			flag = this.category2Service.saveCategory2(category2);
 			if (flag) {
 				resultMap.put(FRONT_TIPS_ATTR, SAVE_CATEGORY2_SUCCESS);
 			}
 		} else { // id不为空说明是修改二级类目
 			resultMap.put(FRONT_TIPS_ATTR, UPDATE_CATEGORY2_FAILED);
-			flag = this.category2Service.updateCategory1(category1);
+			flag = this.category2Service.updateCategory2(category2);
 			if (flag) {
 				resultMap.put(FRONT_TIPS_ATTR, UPDATE_CATEGORY2_SUCCESS);
 			}
@@ -202,17 +202,17 @@ public class Category2Controller {
 	}
 	
 	/**
-	 * 删除category1Id的二级类目
-	 * @param category1Id 待删除的二级类目id
+	 * 删除category2Id的二级类目
+	 * @param category2Id 待删除的二级类目id
 	 * @return 返回给前台的提示信息
 	 */
-	@RequestMapping(value="/removeCategory1")
-	public @ResponseBody Map<String, Object> removeCategory1(Long category1Id) {
+	@RequestMapping(value="/removeCategory2")
+	public @ResponseBody Map<String, Object> removeCategory2(Long category2Id) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
 		resultMap.put(FRONT_TIPS_ATTR, REMOVE_CATEGORY2_FAILED);
 		
-		boolean flag = this.category2Service.removeCategory1(category1Id);
+		boolean flag = this.category2Service.removeCategory2(category2Id);
 		if (flag) {
 			resultMap.put(FRONT_TIPS_ATTR, REMOVE_CATEGORY2_SUCCESS);
 		}
@@ -222,16 +222,16 @@ public class Category2Controller {
 	
 	/**
 	 * 处理批量删除二级类目的请求
-	 * @param category1Ids 待删除的二级类目id集合
+	 * @param category2Ids 待删除的二级类目id集合
 	 * @return 删除成功或者失败的提示信息
 	 */
-	@RequestMapping(value="/removeCategory1Batch")
-	public @ResponseBody Map<String, Object> removeCategory1Batch(@RequestBody Long[] category1Ids) {
+	@RequestMapping(value="/removeCategory2Batch")
+	public @ResponseBody Map<String, Object> removeCategory2Batch(@RequestBody Long[] category2Ids) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put(FRONT_TIPS_ATTR, REMOVE_CATEGORY2_BATCH_FAILED);
 		
-		if (category1Ids != null && category1Ids.length > 0) {
-			boolean flag = this.category2Service.removeCategory1Batch(Arrays.asList(category1Ids));
+		if (category2Ids != null && category2Ids.length > 0) {
+			boolean flag = this.category2Service.removeCategory2Batch(Arrays.asList(category2Ids));
 			if (flag) {
 				resultMap.put(FRONT_TIPS_ATTR, REMOVE_CATEGORY2_BATCH_SUCCESS);
 			}
