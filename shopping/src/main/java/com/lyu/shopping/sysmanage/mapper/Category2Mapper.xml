@@ -89,7 +89,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<where>
 			B.category1_id = A.category1_id
 			AND A.is_deleted = 0
-			<include refid="query_category2_sql" />
+			<if test="category2Id != null">
+				AND category2_id = #{category2Id}
+			</if>
+			<if test="category2Name != null">
+				AND category2_name = #{category2Name}
+			</if>
+			<if test="category2Record != null">
+				AND category2_record LIKE '%${category2Record}%'
+			</if>
+			<if test="category1Id != null">
+				AND A.category1_id = #{category1Id}
+			</if>
+			<if test="gmtCreate != null">
+				AND gmt_create = #{gmtCreate}
+			</if>
+			<if test="gmtModified != null">
+				AND gmt_modified = #{gmtModified}
+			</if>
+			<if test="showFlag != null">
+				AND is_show = #{showFlag}
+			</if>
 		</where>
 		ORDER BY A.category2_id
 	</select>

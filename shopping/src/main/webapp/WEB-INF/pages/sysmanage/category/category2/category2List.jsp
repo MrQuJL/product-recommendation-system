@@ -132,7 +132,7 @@
 									"			</tr>";
 							}
 						} else {
-							htmlTable = "<tr><td colspan=7>没有查询到类目记录</td></tr>";
+							htmlTable = "<tr><td colspan=8>没有查询到类目记录</td></tr>";
 						}
 						$("#sample-table tbody").html(htmlTable);
 						$("#totalPage").html(listSize);
