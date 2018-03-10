@@ -40,6 +40,21 @@
 
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/谷本系数.png)
 
+## UserCF的原理
+	
+	1. 分析各个用户对 item 的评价（衡量的维度可以是浏览记录、购买记录等），列出用户和 item 之间的矩阵。
+	2. 依据用户对 item 的评价计算得出所有用户之间的相似度（采用余弦相似度度量公式）。
+	3. 选出与当前用户最相似的 N 个用户。
+	4. 将这 N 个用户评价最高并且当前用户又没有浏览过的 item 推荐给当前用户。
+	![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/UserCF.jpg)
 
-## 基于相似度的推荐系统
+## ItemCF的原理
+
+	1. 分析各个用户对 item 的浏览记录，列出 item 和用户之间的矩阵。
+	2. 依据浏览记录了分析得出所有 item 之间的相似度（任然采用余弦相似度度量公式）。
+	3. 对于当前用户正在浏览的 item，找出与之相似度最高的item。
+	4. 将这 N 个 item 推荐给用户。
+	![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/ItemCF.jpg)
+
+
 
