@@ -26,12 +26,20 @@
 
 * 欧式距离
 	欧式距离是使用较多的相似性的度量方法，在kMeans中就使用到欧式距离作为相似项的发现。
+![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/欧几里得距离.jpg)
 
 * 皮尔逊相关系数(Pearson Correlation)
 	皮尔逊相似性的度量对量级不敏感。
+![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/皮尔逊相关系数.jpg)
 
 * 余弦相似度(Cosine Similarity)
 	余弦相似度有着与皮尔逊相似度同样的性质，对量级不敏感，是计算两个向量的夹角。
+![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/余弦相似度.jpg)
+
+* 谷本系数(Tanimoto)
+
+![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/谷本系数.jpg)
+
 
 ## 基于相似度的推荐系统
 
