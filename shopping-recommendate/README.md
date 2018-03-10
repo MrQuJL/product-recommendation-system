@@ -24,19 +24,19 @@
 
 相似度的度量方法主要有以下三种：
 
-* 欧式距离
+* 欧式距离<br/>
 	欧式距离是使用较多的相似性的度量方法，在kMeans中就使用到欧式距离作为相似项的发现。
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/欧几里得距离.png)
 
-* 皮尔逊相关系数(Pearson Correlation)
+* 皮尔逊相关系数(Pearson Correlation)<br/>
 	皮尔逊相似性的度量对量级不敏感。
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/皮尔逊相关系数.png)
 
-* 余弦相似度(Cosine Similarity)
-	余弦相似度有着与皮尔逊相似度同样的性质，对量级不敏感，是计算两个向量的夹角。
+* 余弦相似度(Cosine Similarity)<br/>
+	计算两个向量夹角的余弦，余弦值越接近1，就表明夹角越接近0度，也就是两个向量越相似，夹角等于0，说明两个向量相等，这就叫余弦相似性。
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/余弦相似度.png)
 
-* 谷本系数(Tanimoto)
+* 谷本系数(Tanimoto)<br/>
 
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/谷本系数.png)
 
