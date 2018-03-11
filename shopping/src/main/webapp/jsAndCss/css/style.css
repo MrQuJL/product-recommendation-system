@@ -389,7 +389,7 @@ body
 .formControls{ float:left; width:250px; margin-left:10px; }
 .formControls textarea{ width:390px; height:100px; resize: none  }
 .Operate_cont{ padding:10px;}
-#products_list .table_menu_list{ float:right; margin-left:230px;overflow:auto; position:absolute}
+#products_list .table_menu_list{ /*float:right; margin-left:230px;*/overflow:auto; position:absolute}
 #products_list .table_menu_list.Widescreen{ width:100%; margin-left:0px}
 #products_list {
 	overflow: hidden;

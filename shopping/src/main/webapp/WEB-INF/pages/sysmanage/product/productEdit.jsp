@@ -21,8 +21,8 @@
 	      <link rel="stylesheet" href="${ctxJsAndCss}/Widget/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
 	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/font-awesome.min.css" />
 	<!--[if IE 7]>
-			  <link rel="stylesheet" href="${ctxJsAndCss}/assets/css/font-awesome-ie7.min.css" />
-			<![endif]-->
+	  <link rel="stylesheet" href="${ctxJsAndCss}/assets/css/font-awesome-ie7.min.css" />
+	<![endif]-->
 	<link href="${ctxJsAndCss}/Widget/icheck/icheck.css" rel="stylesheet" type="text/css" />
 	<link href="${ctxJsAndCss}/Widget/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
 	<script src="${ctxJsAndCss}/js/jquery-1.9.1.min.js"></script>   
@@ -153,18 +153,6 @@
 				</div>
 			</div>
 		</div>
-         <div class="clearfix cl">
-         <label class="form-label col-2">详细内容：</label>
-			<div class="formControls col-10">
-				<script id="editor" type="text/plain" style="width:100%;height:400px;"></script> 
-             </div>
-        </div>
-        <div class="clearfix cl">
-         <label class="form-label col-2">允许评论：</label>
-			<div class="formControls col-2 skin-minimal">
-			 <div class="check-box" style=" margin-top:9px"><input type="checkbox" id="checkbox-1"><label for="checkbox-1">&nbsp;</label></div>
-             </div>
-        </div>
 		<div class="clearfix cl">
 			<div class="Button_operation">
 				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="icon-save "></i>保存并提交审核</button>

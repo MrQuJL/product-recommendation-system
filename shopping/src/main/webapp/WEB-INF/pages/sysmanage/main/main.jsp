@@ -319,6 +319,11 @@
 									<i class="icon-double-angle-right"></i>产品列表
 								</a>
 							</li>
+							<li class="home">
+								<a href="${ctx}/sysmgr/product/gotoProductEdit" name="" target="iframe" title="编辑产品" class="iframeurl">
+									<i class="icon-double-angle-right"></i>编辑产品
+								</a>
+							</li>
 						</ul>
 					</li>
 					<li><a href="#" class="dropdown-toggle"><i
