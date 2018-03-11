@@ -9,30 +9,30 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 	<meta http-equiv="Cache-Control" content="no-siteapp" />
 	<title>产品列表</title>
-    <link href="${ctxjsAndCss}/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="${ctxjsAndCss}/css/style.css" rel="stylesheet" type="text/css" />       
-    <link href="${ctxjsAndCss}/assets/css/ace.min.css" rel="stylesheet" type="text/css" />
-    <link href="${ctxjsAndCss}/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="${ctxjsAndCss}/Widget/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css" rel="stylesheet" >
-    <link href="${ctxjsAndCss}/Widget/icheck/icheck.css" rel="stylesheet" type="text/css" />   
+    <link href="${ctxJsAndCss}/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="${ctxJsAndCss}/css/style.css" rel="stylesheet" type="text/css" />       
+    <link href="${ctxJsAndCss}/assets/css/ace.min.css" rel="stylesheet" type="text/css" />
+    <link href="${ctxJsAndCss}/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="${ctxJsAndCss}/Widget/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css" rel="stylesheet" >
+    <link href="${ctxJsAndCss}/Widget/icheck/icheck.css" rel="stylesheet" type="text/css" />   
 	<!--[if IE 7]>
-	  <link href="${ctxjsAndCss}/assets/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
+	  <link href="${ctxJsAndCss}/assets/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
 	<![endif]-->
 	    <!--[if lte IE 8]>
-	  <link href="${ctxjsAndCss}/assets/css/ace-ie.min.css" rel="stylesheet" type="text/css" />
+	  <link href="${ctxJsAndCss}/assets/css/ace-ie.min.css" rel="stylesheet" type="text/css" />
 	<![endif]-->
-	<script src="${ctxjsAndCss}/js/jquery-1.9.1.min.js"></script>   
-	<script src="${ctxjsAndCss}/assets/js/bootstrap.min.js"></script>
-	<script src="${ctxjsAndCss}/assets/js/typeahead-bs2.min.js"></script>
+	<script src="${ctxJsAndCss}/js/jquery-1.9.1.min.js"></script>   
+	<script src="${ctxJsAndCss}/assets/js/bootstrap.min.js"></script>
+	<script src="${ctxJsAndCss}/assets/js/typeahead-bs2.min.js"></script>
 	<!-- page specific plugin scripts -->
-	<script src="${ctxjsAndCss}/assets/js/jquery.dataTables.min.js"></script>
-	<script src="${ctxjsAndCss}/assets/js/jquery.dataTables.bootstrap.js"></script>
-    <!--<script src="${ctxjsAndCss}/js/H-ui.js"></script>--> 
+	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.min.js"></script>
+	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.bootstrap.js"></script>
+    <!--<script src="${ctxJsAndCss}/js/H-ui.js"></script>--> 
     <!--<script src="js/H-ui.admin.js"></script>--> 
-    <script src="${ctxjsAndCss}/assets/layer/layer.js"></script>
-    <script src="${ctxjsAndCss}/assets/laydate/laydate.js"></script>
-    <script src="${ctxjsAndCss}/Widget/zTree/js/jquery.ztree.all-3.5.min.js"></script> 
-    <script src="${ctxjsAndCss}/js/lrtk.js"></script>
+    <script src="${ctxJsAndCss}/assets/layer/layer.js"></script>
+    <script src="${ctxJsAndCss}/assets/laydate/laydate.js"></script>
+    <script src="${ctxJsAndCss}/Widget/zTree/js/jquery.ztree.all-3.5.min.js"></script> 
+    <script src="${ctxJsAndCss}/js/lrtk.js"></script>
 </head>
 <body>
 <div class=" page-content clearfix">
@@ -47,7 +47,7 @@
     </div>
      <div class="border clearfix">
        <span class="l_f">
-        <a href="picture-add.html" title="添加商品" class="btn btn-warning Order_form"><i class="icon-plus"></i>添加商品</a>
+        <a href="${ctx}/sysmgr/product/gotoProductEdit" title="添加商品" class="btn btn-warning Order_form"><i class="icon-plus"></i>添加商品</a>
         <a href="javascript:ovid()" class="btn btn-danger"><i class="icon-trash"></i>批量删除</a>
        </span>
        <span class="r_f">共：<b>2334</b>件商品</span>

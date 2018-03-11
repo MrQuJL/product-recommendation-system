@@ -14,8 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value="/sysmgr/product")
 public class ProductController {
 	
-	
+	/**
+	 * 商品列表页面的URI
+	 */
 	private static final String PRODUCT_LIST_URI = "/sysmanage/product/productList";
+	
+	/**
+	 * 商品编辑页面的URI
+	 */
+	private static final String PRODUCT_EDIT_URI = "/sysmanage/product/productEdit";
 	
 	/**
 	 * 处理前往商品列表页面的请求
@@ -26,6 +33,13 @@ public class ProductController {
 		return PRODUCT_LIST_URI;
 	}
 	
-	
+	/**
+	 * 处理前往商品编辑页面的请求
+	 * @return
+	 */
+	@RequestMapping(value="/gotoProductEdit")
+	public String gotoProductEdit() {
+		return PRODUCT_EDIT_URI;
+	}
 	
 }
