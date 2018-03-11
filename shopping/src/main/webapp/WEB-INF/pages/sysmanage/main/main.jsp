@@ -7,17 +7,17 @@
 	<title>网站后台管理系统</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<!-- css样式 -->
-	<link href="${ctxJsAndCss}/assets/css/bootstrap.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/font-awesome.min.css" />
+	<link href="${ctxJsAndCss}/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/font-awesome.min.css" type="text/css" />
 	<!--[if IE 7]>
-	  <link rel="stylesheet" href="${ctxJsAndCss}/assets/css/font-awesome-ie7.min.css" />
+	  <link rel="stylesheet" href="${ctxJsAndCss}/assets/css/font-awesome-ie7.min.css" type="text/css" />
 	<![endif]-->
-	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace.min.css" />
-	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace-rtl.min.css" />
-	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace-skins.min.css" />
-    <link rel="stylesheet" href="${ctxJsAndCss}/css/style.css"/>
+	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace.min.css" type="text/css" />
+	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace-rtl.min.css" type="text/css" />
+	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace-skins.min.css" type="text/css" />
+    <link rel="stylesheet" href="${ctxJsAndCss}/css/style.css" type="text/css" />
 	<!--[if lte IE 8]>
-	  <link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace-ie.min.css" />
+	  <link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace-ie.min.css" type="text/css" />
 	<![endif]-->
 	<!-- js脚本 -->
 	<script src="${ctxJsAndCss}/assets/js/ace-extra.min.js"></script>
@@ -315,18 +315,8 @@
 						</a>
 						<ul class="submenu">
 							<li class="home">
-								<a href="javascript:void(0)" name="Products_List.html" title="产品类表" class="iframeurl">
-									<i class="icon-double-angle-right"></i>产品类表
-								</a>
-							</li>
-							<li class="home">
-								<a href="javascript:void(0)" name="Brand_Manage.html" title="品牌管理" class="iframeurl">
-									<i class="icon-double-angle-right"></i>品牌管理
-								</a>
-							</li>
-							<li class="home">
-								<a href="javascript:void(0)" name="Category_Manage.html" title="分类管理" class="iframeurl">
-									<i class="icon-double-angle-right"></i>分类管理
+								<a href="${ctx}/sysmgr/product/gotoProductList" name="" target="iframe" title="产品列表" class="iframeurl">
+									<i class="icon-double-angle-right"></i>产品列表
 								</a>
 							</li>
 						</ul>

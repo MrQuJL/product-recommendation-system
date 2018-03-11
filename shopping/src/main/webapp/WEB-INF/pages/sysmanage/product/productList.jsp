@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/pages/include/taglib.jsp"%>
 <!doctype html>
 <html>
 <head>
@@ -6,32 +7,32 @@
 	<meta name="renderer" content="webkit|ie-comp|ie-stand">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-	<meta http-equiv="Cache-Control" content="no-siteapp" /> 
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/style.css"/>       
-    <link rel="stylesheet" href="assets/css/ace.min.css" />
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="Widget/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
-    <link href="Widget/icheck/icheck.css" rel="stylesheet" type="text/css" />   
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<title>产品列表</title>
+    <link href="${ctxjsAndCss}/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="${ctxjsAndCss}/css/style.css" rel="stylesheet" type="text/css" />       
+    <link href="${ctxjsAndCss}/assets/css/ace.min.css" rel="stylesheet" type="text/css" />
+    <link href="${ctxjsAndCss}/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="${ctxjsAndCss}/Widget/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css" rel="stylesheet" >
+    <link href="${ctxjsAndCss}/Widget/icheck/icheck.css" rel="stylesheet" type="text/css" />   
 	<!--[if IE 7]>
-	  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+	  <link href="${ctxjsAndCss}/assets/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
 	<![endif]-->
 	    <!--[if lte IE 8]>
-	  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+	  <link href="${ctxjsAndCss}/assets/css/ace-ie.min.css" rel="stylesheet" type="text/css" />
 	<![endif]-->
-	<script src="js/jquery-1.9.1.min.js"></script>   
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/typeahead-bs2.min.js"></script>
+	<script src="${ctxjsAndCss}/js/jquery-1.9.1.min.js"></script>   
+	<script src="${ctxjsAndCss}/assets/js/bootstrap.min.js"></script>
+	<script src="${ctxjsAndCss}/assets/js/typeahead-bs2.min.js"></script>
 	<!-- page specific plugin scripts -->
-	<script src="assets/js/jquery.dataTables.min.js"></script>
-	<script src="assets/js/jquery.dataTables.bootstrap.js"></script>
-    <script type="text/javascript" src="js/H-ui.js"></script> 
-    <script type="text/javascript" src="js/H-ui.admin.js"></script> 
-    <script src="assets/layer/layer.js" type="text/javascript" ></script>
-    <script src="assets/laydate/laydate.js" type="text/javascript"></script>
-    <script type="text/javascript" src="Widget/zTree/js/jquery.ztree.all-3.5.min.js"></script> 
-    <script src="js/lrtk.js" type="text/javascript" ></script>
-<title>产品列表</title>
+	<script src="${ctxjsAndCss}/assets/js/jquery.dataTables.min.js"></script>
+	<script src="${ctxjsAndCss}/assets/js/jquery.dataTables.bootstrap.js"></script>
+    <!--<script src="${ctxjsAndCss}/js/H-ui.js"></script>--> 
+    <!--<script src="js/H-ui.admin.js"></script>--> 
+    <script src="${ctxjsAndCss}/assets/layer/layer.js"></script>
+    <script src="${ctxjsAndCss}/assets/laydate/laydate.js"></script>
+    <script src="${ctxjsAndCss}/Widget/zTree/js/jquery.ztree.all-3.5.min.js"></script> 
+    <script src="${ctxjsAndCss}/js/lrtk.js"></script>
 </head>
 <body>
 <div class=" page-content clearfix">

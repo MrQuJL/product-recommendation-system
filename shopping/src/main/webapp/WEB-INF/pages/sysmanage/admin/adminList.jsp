@@ -39,8 +39,8 @@
 	<!-- page specific plugin scripts -->
 	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.min.js"></script>
 	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.bootstrap.js"></script>
-	<script src="${ctxJsAndCss}/js/H-ui.js"></script>
-	<script src="${ctxJsAndCss}/js/H-ui.admin.js"></script>
+	<!--<script src="${ctxJsAndCss}/js/H-ui.js"></script>
+	<script src="${ctxJsAndCss}/js/H-ui.admin.js"></script>-->
 	<script src="${ctxJsAndCss}/assets/layer/layer.js"></script>
 	<script src="${ctxJsAndCss}/assets/laydate/laydate.js"></script>
 	<script src="${ctxJsAndCss}/js/date.js"></script>
