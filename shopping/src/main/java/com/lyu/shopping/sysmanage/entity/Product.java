@@ -39,6 +39,8 @@ public class Product implements Serializable {
 	
 	private Date gmtModified;
 	
+	private Integer showFlag;
+	
 	private Integer delFlag;
 
 	public Long getProductId() {
@@ -135,6 +137,14 @@ public class Product implements Serializable {
 
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
+	}
+	
+	public Integer getShowFlag() {
+		return showFlag;
+	}
+
+	public void setShowFlag(Integer showFlag) {
+		this.showFlag = showFlag;
 	}
 
 	public Integer getDelFlag() {
