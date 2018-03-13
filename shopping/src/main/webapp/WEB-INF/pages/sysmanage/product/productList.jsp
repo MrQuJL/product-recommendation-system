@@ -303,8 +303,8 @@
 		</div>
 		<div class="sort_style">
 			<div class="border clearfix">
-				<span class="l_f"> <a href="javascript:ovid()" id="sort_add"
-					class="btn btn-warning"><i class="fa fa-plus"></i> 添加分类</a> <a
+				<span class="l_f"> <a href="${ctx}/sysmgr/product/gotoProductEdit" id="sort_add"
+					class="btn btn-warning"><i class="fa fa-plus"></i>添加商品</a> <a
 					href="javascript:category2Mgr.removeCategory2Batch();" class="btn btn-danger"><i
 						class="fa fa-trash"></i> 批量删除</a>
 				</span> <span class="r_f">共：<b id="totalPage"></b>类
