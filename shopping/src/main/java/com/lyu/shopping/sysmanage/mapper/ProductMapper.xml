@@ -39,9 +39,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="productDTO" id="productResultMap">
 		<id property="productId" column="product_id" />
 		<result property="productName" column="product_name" />
-		<result property="productRecord" column="product_record" />
 		<result property="category1Id" column="category1_id" />
-		<result property="category1Name" column="category1_name" />
+		<result property="category2Id" column="category2_id" />
+		<result property="purchasePrice" column="purchase_price" />
+		<result property="salePrice" column="sale_price" />
+		<result property="inventory" column="inventory" />
+		<result property="hits" column="hits" />
+		<result property="imgSrc" column="img_src" />
+		<result property="description" column="description" />
 		<result property="gmtCreate" column="gmt_create" />
 		<result property="gmtModified" column="gmt_modified" />
 		<result property="showFlag" column="is_show" />
@@ -82,7 +87,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		B.category1_name, C.category2_name
 		FROM shopping_product A, shopping_category1 B, shopping_category2 C
 		<where>
-			B.category1_id = A.category1_id
+			AND A.category1_id = B.category1_id
+			AND A.category2_id = C.category2_id
 			AND A.is_deleted = 0
 			<if test="productId != null">
 				AND product_id = #{productId}
@@ -95,12 +101,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 			<if test="category1Id != null">
 				AND A.category1_id = #{category1Id}
-			</if>
-			<if test="gmtCreate != null">
-				AND gmt_create = #{gmtCreate}
-			</if>
-			<if test="gmtModified != null">
-				AND gmt_modified = #{gmtModified}
 			</if>
 			<if test="showFlag != null">
 				AND is_show = #{showFlag}
