@@ -77,6 +77,16 @@ public class AdminController {
 	private static final String UPDATE_PASSWORD_FAILED = "修改管理员密码失败";
 	
 	/**
+	 * 管理员列表页面的URI
+	 */
+	private static final String ADMIN_LIST_URI = "sysmanage/admin/adminList";
+	
+	/**
+	 * 管理员个人信息页面的URI
+	 */
+	private static final String ADMIN_INFO_URI = "sysmanage/admin/adminInfo";
+	
+	/**
 	 * 管理员的分页查询方法
 	 */
 	private static final String ADMIN_QUERY_METHOD_PAGE = "adminMgr.listAdmin";
@@ -90,7 +100,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/gotoAdminList")
 	public String gotoAdminList() {
-		return "sysmanage/admin/adminList";
+		return ADMIN_LIST_URI;
 	}
 	
 	/**
@@ -99,8 +109,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/gotoAdminInfo")
 	public String gotoAdminInfo() {
-		
-		return "sysmanage/admin/adminInfo";
+		return ADMIN_INFO_URI;
 	}
 	
 	/**
