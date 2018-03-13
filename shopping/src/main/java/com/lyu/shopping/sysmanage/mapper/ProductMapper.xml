@@ -89,6 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<where>
 			AND A.category1_id = B.category1_id
 			AND A.category2_id = C.category2_id
+			AND A.is_show = 1
 			AND A.is_deleted = 0
 			<if test="productId != null">
 				AND product_id = #{productId}
@@ -96,14 +97,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="productName != null">
 				AND product_name = #{productName}
 			</if>
-			<if test="productRecord != null">
-				AND product_record LIKE '%${productRecord}%'
-			</if>
 			<if test="category1Id != null">
 				AND A.category1_id = #{category1Id}
 			</if>
-			<if test="showFlag != null">
-				AND is_show = #{showFlag}
+			<if test="category2Id != null">
+				AND A.category2_id = #{category2Id}
 			</if>
 		</where>
 		ORDER BY A.product_id

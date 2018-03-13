@@ -2,6 +2,7 @@ package com.lyu.shopping.sysmanage.mapper;
 
 import java.util.List;
 
+import com.lyu.shopping.sysmanage.dto.ProductDTO;
 import com.lyu.shopping.sysmanage.entity.Product;
 
 /**
@@ -18,6 +19,6 @@ public interface ProductMapper {
 	 * @param product 要查询的商品需满足的条件
 	 * @return 满足条件的商品列表
 	 */
-	List<Product> listProduct(Product product);
+	List<ProductDTO> listProduct(Product product);
 	
 }

@@ -32,5 +32,11 @@ public class ProductDTO extends Product {
 	public void setCategory2Name(String category2Name) {
 		this.category2Name = category2Name;
 	}
+
+	@Override
+	public String toString() {
+		return super.toString() + 
+			"ProductDTO [category1Name=" + category1Name + ", category2Name=" + category2Name + "]";
+	}
 	
 }

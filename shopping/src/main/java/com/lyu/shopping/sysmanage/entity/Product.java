@@ -154,5 +154,14 @@ public class Product implements Serializable {
 	public void setDelFlag(Integer delFlag) {
 		this.delFlag = delFlag;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", productName=" + productName + ", category1Id=" + category1Id
+				+ ", category2Id=" + category2Id + ", purchasePrice=" + purchasePrice + ", salePrice=" + salePrice
+				+ ", inventory=" + inventory + ", hits=" + hits + ", imgSrc=" + imgSrc + ", description=" + description
+				+ ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", showFlag=" + showFlag + ", delFlag="
+				+ delFlag + "]";
+	}
+
 }
