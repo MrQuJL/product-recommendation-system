@@ -28,9 +28,9 @@
 	<script src="${ctxJsAndCss}/assets/layer/layer.js"></script>
 	<script src="${ctxJsAndCss}/js/date.js"></script>
 	<script type="text/javascript">
-		var category2Mgr = {
+		var productMgr = {
 			isChecked : false,
-			// 选中或取消选中所有二级类目
+			// 选中或取消选中所有商品
 			toggleCheck : function() {
 				// 获取所有的checkbox
 				var boxes = $("#sample-table tbody").find("input[type='checkbox']");
@@ -57,26 +57,26 @@
 					});
 				}
 			},
-			// 查询二级类目列表
-			listCategory2 : function(pageNo, pageSize) {
-				var category2Name = $("#queryCategory2Name").val();
+			// 查询商品列表
+			listProduct : function(pageNo, pageSize) {
+				var productName = $("#queryProductName").val();
 				var category1Id = $("#queryCategory1").val();
 				$.ajax({
 					type : "post",
-					url : "${ctx}/sysmgr/category/category2/listCategory2",
-					data : {"category2Name" : category2Name, "category1Id" : category1Id, "pageNo" : pageNo, "pageSize" : pageSize},
+					url : "${ctx}/sysmgr/category/product/listProduct",
+					data : {"productName" : productName, "category1Id" : category1Id, "pageNo" : pageNo, "pageSize" : pageSize},
 					dataType : "json",
 					success : function(data) {
 						// 获取分页条
 						var pageBar = data.pageBar;
-						// 获取二级类目列表
-						var category2List = data.category2List;
-						// 获取二级类目的总记录数
+						// 获取商品列表
+						var productList = data.productList;
+						// 获取商品的总记录数
 						var listSize = data.listSize;
 						
 						var htmlTable = "";
-						if (category2List.length > 0) {
-							for (var i = 0; i < category2List.length; i++) {
+						if (productList.length > 0) {
+							for (var i = 0; i < productList.length; i++) {
 								// 标签的样式
 								var labelText = "";
 								// td标签中显示的文字
@@ -90,29 +90,29 @@
 								// 开启还是关闭类目
 								var checkOrClose = "";
 								
-								if (category2List[i].showFlag == "1") { // 显示
+								if (productList[i].showFlag == "1") { // 显示
 									labelText = "label-success";
 									tdText = "显示";
 									btnStyle = "btn-success";
-									btnEvent = "member_stop(this," + category2List[i].category2Id + ")";
+									btnEvent = "member_stop(this," + productList[i].productId + ")";
 									hoverTitle = "关闭";
 									checkOrClose = "fa-check";
 								} else { // 已关闭
 									labelText = "label-default";
 									tdText = "已关闭";
-									btnEvent = "member_start(this," + category2List[i].category2Id  + ")";
+									btnEvent = "member_start(this," + productList[i].productId  + ")";
 									hoverTitle = "显示";
 									checkOrClose = "fa-close";
 								}
 								htmlTable =
 									htmlTable + "<tr>"+
-									"				<td><label><input type=\"checkbox\" class=\"ace\" value=" +category2List[i].category2Id + "><span"+
+									"				<td><label><input type=\"checkbox\" class=\"ace\" value=" +productList[i].productId + "><span"+
 									"						class=\"lbl\"></span></label></td>"+
-									"				<td>" + category2List[i].category2Id + "</td>"+
-									"				<td>" + category2List[i].category2Name + "</td>"+
-									"				<td>" + category2List[i].category1Name + "</td>"+
-									"				<td>" + category2List[i].category2Record + "</td>"+
-									"				<td>" + timestampToTime(category2List[i].gmtCreate) + "</td>"+
+									"				<td>" + productList[i].productId + "</td>"+
+									"				<td>" + productList[i].productName + "</td>"+
+									"				<td>" + productList[i].category1Name + "</td>"+
+									"				<td>" + productList[i].productRecord + "</td>"+
+									"				<td>" + timestampToTime(productList[i].gmtCreate) + "</td>"+
 									"				<td class=\"td-status\"><span"+
 									"					class=\"label " + labelText + " radius\">" + tdText + "</span></td>"+
 									"				<td class=\"td-manage\">"+
@@ -120,11 +120,11 @@
 									"						href=\"javascript:;\" title=\"  "+ hoverTitle +"  \" class=\"btn btn-xs " + btnStyle + "\">"+
 									"						<i class=\"fa " + checkOrClose + " bigger-120\"></i>"+
 									"					</a>"+
-									"					<a title=\"编辑\" onclick=\"category2Mgr.category2Edit(" + category2List[i].category2Id + ")\" "+
+									"					<a title=\"编辑\" onclick=\"productMgr.productEdit(" + productList[i].productId + ")\" "+
 									"						href=\"javascript:;\" class=\"btn btn-xs btn-info\">"+
 									"						<i class=\"fa fa-edit bigger-120\"></i>"+
 									"					</a>"+
-									"					<a title=\"删除\" href=\"javascript:;\" onclick=\"member_del(this," + category2List[i].category2Id + ")\""+
+									"					<a title=\"删除\" href=\"javascript:;\" onclick=\"member_del(this," + productList[i].productId + ")\""+
 									"						class=\"btn btn-xs btn-warning\">"+
 									"						<i class=\"fa fa-trash  bigger-120\"></i>"+
 									"					</a>"+
@@ -140,21 +140,21 @@
 					}
 				});
 			},
-			// 编辑二级类目
-			category2Edit : function (category2Id) {
-				// 1.修改二级类目的时候先要通过传入的id去后台查询一下当前类目的详细信息，然后赋值到页面
+			// 编辑商品
+			productEdit : function (productId) {
+				// 1.修改商品的时候先要通过传入的id去后台查询一下当前类目的详细信息，然后赋值到页面
 				$.ajax({
 					type : "post",
-					url : "${ctx}/sysmgr/category/category2/getCategory2ById",
-					data : {"category2Id" : category2Id},
+					url : "${ctx}/sysmgr/category/product/getProductById",
+					data : {"productId" : productId},
 					dataType : "json",
 					success : function(data) {
-						var category2 = data.category2;
-						$("#category2Id").val(category2.category2Id);
-						$("#category2Name").val(category2.category2Name);
-						$("#category2Record").val(category2.category2Record);
-						$("#category1Id").val(category2.category1Id);
-						if (category2.showFlag == 1) { // 显示
+						var product = data.product;
+						$("#productId").val(product.productId);
+						$("#productName").val(product.productName);
+						$("#productRecord").val(product.productRecord);
+						$("#category1Id").val(product.category1Id);
+						if (product.showFlag == 1) { // 显示
 							$("#show").prop("checked","checked");
 						} else { // 隐藏
 							$("#hide").prop("checked","checked");
@@ -164,7 +164,7 @@
 				
 				layer.open({
 					type : 1,
-					title : '修改二级类目',
+					title : '修改商品',
 					maxmin : true,
 					shadeClose : false, //点击遮罩关闭层
 					area : [ '750px', '' ],
@@ -190,32 +190,32 @@
 						if (num > 0) {
 							return false;
 						} else {
-							// 1.序列化二级类目表单
-							var jsonObj = $("#saveCategory2Form").serializeArray();
+							// 1.序列化商品表单
+							var jsonObj = $("#saveProductForm").serializeArray();
 							// 2.构造js对象
-							var category2Obj = {};
+							var productObj = {};
 							$.each(jsonObj,function(i, item){
-								category2Obj[item.name] = item.value;
+								productObj[item.name] = item.value;
 							});
 							// 3.转化成json格式的字符串
-							category2Obj = JSON.stringify(category2Obj);
+							productObj = JSON.stringify(productObj);
 							// 4.向后台发送ajax请求
 							$.ajax({
 								type : "post",
 								contentType : "application/json;charset=utf-8;",
-								url : "${ctx}/sysmgr/category/category2/saveCategory2",
-								data : category2Obj,
+								url : "${ctx}/sysmgr/category/product/saveProduct",
+								data : productObj,
 								dataType : "json",
 								success : function(data) {
-									if (data.message == "修改二级分类成功") {
-										category2Mgr.listCategory2(1, 5);
-										layer.alert('修改二级分类成功！', {
+									if (data.message == "修改商品成功") {
+										productMgr.listProduct(1, 5);
+										layer.alert('修改商品成功！', {
 											title : '提示框',
 											icon : 1,
 										});
 										layer.close(index);
 									} else {
-										layer.alert('修改二级分类失败，请联系系统管理员！', {
+										layer.alert('修改商品失败，请联系系统管理员！', {
 											title : '提示框',
 											icon : 0,
 										});
@@ -227,35 +227,35 @@
 					}
 				});
 			},
-			// 批量删除二级类目
-			removeCategory2Batch : function() {
-				// 1.获取选中的二级类目
+			// 批量删除商品
+			removeProductBatch : function() {
+				// 1.获取选中的商品
 				var checkBoxs = $("#sample-table")
 					.find("tbody")
 					.find("input[type='checkbox']:checked");
-				var category2IdArray = new Array();
+				var productIdArray = new Array();
 				$.each(checkBoxs,function(){
-					category2IdArray.push($(this).val());
+					productIdArray.push($(this).val());
 				});
-				if (category2IdArray.length == 0) {
-					layer.msg("请先选择要删除的二级类目！",{icon:0,time:1000});
+				if (productIdArray.length == 0) {
+					layer.msg("请先选择要删除的商品！",{icon:0,time:1000});
 					return false;
 				}
-				category2IdArray = JSON.stringify(category2IdArray);
-				layer.confirm('确认要删除这些二级类目吗？',function(index){
+				productIdArray = JSON.stringify(productIdArray);
+				layer.confirm('确认要删除这些商品吗？',function(index){
 					// 2.发送ajax请求进行批量删除
 					$.ajax({
 						type : "post",
 						contentType : "application/json;charset=UTF-8",
-						url : "${ctx}/sysmgr/category/category2/removeCategory2Batch",
-						data : category2IdArray,
+						url : "${ctx}/sysmgr/category/product/removeProductBatch",
+						data : productIdArray,
 						dataType : "json",
 						success : function(data) {
 							if (data.message == "批量删除二级分类成功") {
 								layer.msg(data.message,{icon:1,time:1000});
 								// 3.删除成功重新查询列表
 								location.reload();
-								category2Mgr.listCategory2(1, 5);
+								productMgr.listProduct(1, 5);
 							} else {
 								// 4.删除失败给出提示信息
 								layer.msg(data.message,{icon:0,time:1000});
@@ -273,13 +273,13 @@
 			<div class="title_names">搜索查询</div>
 			<ul class="search_content clearfix">
 				<li>
-					<label class="l_f" style="margin-right:10px;margin-top:2px;">二级类目名称</label>
+					<label class="l_f" style="margin-right:10px;margin-top:2px;">商品名称</label>
 					<!-- 此处修改为下拉列表select2 -->	
-					<select id="queryCategory2Name" name="category2Name" class="text_add" 
+					<select id="queryProductName" name="productName" class="text_add" 
 						style="width:200px;margin-left:0;">
-						<option value="所有二级类目">所有二级类目</option>
-				        <c:forEach items="${category2Names}" var="category2Name">
-				        	<option value="${category2Name}">${category2Name}</option>
+						<option value="所有商品">所有商品</option>
+				        <c:forEach items="${productNames}" var="productName">
+				        	<option value="${productName}">${productName}</option>
 				        </c:forEach>
 				    </select>
 				</li>
@@ -295,7 +295,7 @@
 				    </select>
 				</li>
 				<li style="width: 90px;">
-					<button type="button" class="btn_search" onclick="category2Mgr.listCategory2(1, 5);">
+					<button type="button" class="btn_search" onclick="productMgr.listProduct(1, 5);">
 						<i class="icon-search"></i>查询
 					</button>
 				</li>
@@ -305,7 +305,7 @@
 			<div class="border clearfix">
 				<span class="l_f"> <a href="${ctx}/sysmgr/product/gotoProductEdit" id="sort_add"
 					class="btn btn-warning"><i class="fa fa-plus"></i>添加商品</a> <a
-					href="javascript:category2Mgr.removeCategory2Batch();" class="btn btn-danger"><i
+					href="javascript:productMgr.removeProductBatch();" class="btn btn-danger"><i
 						class="fa fa-trash"></i> 批量删除</a>
 				</span> <span class="r_f">共：<b id="totalPage"></b>类
 				</span>
@@ -317,15 +317,16 @@
 						<tr>
 							<th width="25px">
 								<label>
-									<input id="toggleCheckBox" type="checkbox" class="ace" onclick="category2Mgr.toggleCheck();">
+									<input id="toggleCheckBox" type="checkbox" class="ace" onclick="productMgr.toggleCheck();">
 									<span class="lbl"></span>
 								</label>
 							</th>
-							<th width="50px">ID</th>
-							<th width="100px">二级类目名称</th>
-							<th width="100px">所属一级类目</th>
-							<th width="350px">描述</th>
-							<th width="180px">创建时间</th>
+							<th width="50px">商品编号</th>
+							<th width="100px">商品名称</th>
+							<th width="100px">所属二级类目</th>
+							<th width="100px">市场价</th>
+							<th width="350px">销售价</th>
+							<th width="180px">添加时间</th>
 							<th width="70px">状态</th>
 							<th width="250px">操作</th>
 						</tr>
@@ -343,13 +344,13 @@
 	<!--添加分类-->
 	<div class="sort_style_add margin" id="sort_style_add" style="display: none">
 		<div class="">
-			<form action="#" id="saveCategory2Form">
+			<form action="#" id="saveProductForm">
 				<ul>
 					<li>
-						<input id="category2Id" name="category2Id" type="hidden" value="" >
+						<input id="productId" name="productId" type="hidden" value="" >
 						<label class="label_name">分类名称</label>
 						<div class="col-sm-6">
-							<input id="category2Name" name="category2Name" type="text" id="form-field-1" placeholder=""
+							<input id="productName" name="productName" type="text" id="form-field-1" placeholder=""
 								class="col-xs-9 col-sm-8">
 						</div>
 					</li>
@@ -367,7 +368,7 @@
 					<li>
 						<label class="label_name">分类说明</label>
 						<div class="col-sm-8">
-							<textarea id="category2Record" name="category2Record" class="form-control" id="form-field-8"
+							<textarea id="productRecord" name="productRecord" class="form-control" id="form-field-8"
 								placeholder="" onkeyup="checkLength(this);"></textarea>
 							<span class="wordage">剩余字数：
 								<span id="sy" style="color: Red;">200</span>字
@@ -393,18 +394,18 @@
 		</div>
 	</div>
 <script type="text/javascript">
-	// 添加二级类目
+	// 添加商品
 	$('#sort_add').on(
 			'click',
 			function() {
 				// 先清空表单中上一次添加类目之后的残留数据
-				$("#category2Id").val("");
-				$("#category2Name").val("");
-				$("#category2Record").val("");
+				$("#productId").val("");
+				$("#productName").val("");
+				$("#productRecord").val("");
 				$("#show").prop("checked", "checked");
 				layer.open({
 					type : 1,
-					title : '添加二级类目',
+					title : '添加商品',
 					maxmin : true,
 					shadeClose : false, //点击遮罩关闭层
 					area : [ '750px', '' ],
@@ -430,21 +431,21 @@
 						if (num > 0) {
 							return false;
 						} else {
-							// 1.序列化二级类目表单
-							var jsonObj = $("#saveCategory2Form").serializeArray();
+							// 1.序列化商品表单
+							var jsonObj = $("#saveProductForm").serializeArray();
 							// 2.构造js对象
-							var category2Obj = {};
+							var productObj = {};
 							$.each(jsonObj,function(i, item){
-								category2Obj[item.name] = item.value;
+								productObj[item.name] = item.value;
 							});
 							// 3.转化成json格式的字符串
-							category2Obj = JSON.stringify(category2Obj);
+							productObj = JSON.stringify(productObj);
 							// 4.向后台发送ajax请求
 							$.ajax({
 								type : "post",
 								contentType : "application/json;charset=utf-8;",
-								url : "${ctx}/sysmgr/category/category2/saveCategory2",
-								data : category2Obj,
+								url : "${ctx}/sysmgr/category/product/saveProduct",
+								data : productObj,
 								dataType : "json",
 								success : function(data) {
 									if (data.message == "新增二级分类成功") {
@@ -453,7 +454,7 @@
 											icon : 1,
 										});
 										layer.close(index);
-										category2Mgr.listCategory2(1, 5);
+										productMgr.listProduct(1, 5);
 									} else {
 										layer.alert('添加二级分类失败，请联系系统管理员！', {
 											title : '提示框',
@@ -495,11 +496,11 @@
 			function(index) {
 				$.ajax({
 					type : "post",
-					url : "${ctx}/sysmgr/category/category2/showOrHideCategory2",
-					data : {"changeValue" : 0, "category2Id" : id},
+					url : "${ctx}/sysmgr/category/product/showOrHideProduct",
+					data : {"changeValue" : 0, "productId" : id},
 					dataType : "json",
 					success : function(data) {
-						if (data.message == "success") { // 隐藏该二级类目成功
+						if (data.message == "success") { // 隐藏该商品成功
 							$(obj).parents("tr")
 								.find(".td-manage")
 								.prepend('<a style="text-decoration:none" class="btn btn-xs " onClick="member_start(this,' + id
@@ -515,9 +516,9 @@
 								time : 1000
 							});
 							// 重新查询一下
-							category2Mgr.listCategory2(1, 5);
-						} else { // 隐藏该二级类目失败
-							layer.msg('隐藏该二级类目失败，请联系系统管理员!', {
+							productMgr.listProduct(1, 5);
+						} else { // 隐藏该商品失败
+							layer.msg('隐藏该商品失败，请联系系统管理员!', {
 								icon : 5,
 								time : 1000
 							});
@@ -537,11 +538,11 @@
 					function(index) {
 						$.ajax({
 							type : "post",
-							url : "${ctx}/sysmgr/category/category2/showOrHideCategory2",
-							data : {"changeValue" : 1, "category2Id" : id},
+							url : "${ctx}/sysmgr/category/product/showOrHideProduct",
+							data : {"changeValue" : 1, "productId" : id},
 							dataType : "json",
 							success : function(data) {
-								if (data.message == "success") { // 显示该二级类目成功
+								if (data.message == "success") { // 显示该商品成功
 									$(obj).parents("tr")
 										.find(".td-manage")
 										.prepend('<a style="text-decoration:none" class="btn btn-xs btn-success" onClick="member_stop(this,' + id 
@@ -556,9 +557,9 @@
 										time : 1000
 									});
 									// 重新查询一次查询
-									category2Mgr.listCategory2(1, 5);
-								} else { // 显示该二级类目失败
-									layer.msg('显示该二级类目失败，请联系系统管理员!', {
+									productMgr.listProduct(1, 5);
+								} else { // 显示该商品失败
+									layer.msg('显示该商品失败，请联系系统管理员!', {
 										icon : 6,
 										time : 1000
 									});
@@ -574,19 +575,19 @@
 		}, function(index) {
 			$.ajax({
 				type : "post",
-				url : "${ctx}/sysmgr/category/category2/removeCategory2",
-				data : {"category2Id" : id},
+				url : "${ctx}/sysmgr/category/product/removeProduct",
+				data : {"productId" : id},
 				dataType : "json",
 				success : function(data) {
 					if (data.message == "删除二级分类成功") {
-						layer.msg('删除二级类目成功!', {
+						layer.msg('删除商品成功!', {
 							icon : 1,
 							time : 1000
 						});
 						location.reload();
-						category2Mgr.listCategory2(1, 5);
+						productMgr.listProduct(1, 5);
 					} else {
-						layer.msg('删除二级类目失败，请联系系统管理员!', {
+						layer.msg('删除商品失败，请联系系统管理员!', {
 							icon : 0,
 							time : 1000
 						});
@@ -617,7 +618,7 @@
 </script>
 <script>
     $(document).ready(function() { 
-    	$("#queryCategory2Name").select2(); 
+    	$("#queryProductName").select2(); 
     	$("#queryCategory1").select2(); 
     });
 </script>

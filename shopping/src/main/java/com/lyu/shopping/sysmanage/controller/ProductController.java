@@ -1,7 +1,15 @@
 package com.lyu.shopping.sysmanage.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.lyu.shopping.sysmanage.entity.Product;
 
 /**
  * 类描述：用于处理对商品的一些请求
@@ -41,5 +49,27 @@ public class ProductController {
 	public String gotoProductEdit() {
 		return PRODUCT_EDIT_URI;
 	}
+	
+	/**
+	 * 处理查询商品的请求
+	 * @param product 封装了要查询的商品需要满足的条件
+	 * @param pageNum 第几页
+	 * @param pageSize 每页多少条
+	 * @return 封装有商品列表以及分页信息的map集合
+	 */
+	@RequestMapping(value="/listProduct/{pageNum}/{pageSize}")
+	public @ResponseBody Map<String, Object> listProduct(@RequestBody Product product,
+		@PathVariable(value="pageNum") Integer pageNum, @PathVariable(value="pageSize") Integer pageSize) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		
+		
+		
+		return map;
+	}
+	
+	
+	
+	
 	
 }
