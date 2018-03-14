@@ -14,6 +14,7 @@ import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
 import com.lyu.shopping.sysmanage.entity.Category1;
 import com.lyu.shopping.sysmanage.mapper.Category1Mapper;
+import com.lyu.shopping.sysmanage.mapper.Category2Mapper;
 import com.lyu.shopping.sysmanage.service.Category1Service;
 
 /**
@@ -38,6 +39,9 @@ public class Category1ServiceImpl implements Category1Service {
 	
 	@Autowired
 	private Category1Mapper category1Mapper;
+	
+	@Autowired
+	private Category2Mapper category2Mapper;
 	
 	@Override
 	public List<String> listAllCategory1Name() {
@@ -141,8 +145,15 @@ public class Category1ServiceImpl implements Category1Service {
 	}
 
 	@Override
+	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED)
 	public boolean removeCategory1(Long category1Id) {
 		if (category1Id == null) {
+			return false;
+		}
+		// 在删除一级类目之前先判断一级类目下是否有子类目
+		int category2Num = this.category2Mapper.countCategory2UnderCategory1(category1Id);
+		if (category2Num > 0) {
+			// 存在二级类目则不能删除一级类目
 			return false;
 		}
 		
