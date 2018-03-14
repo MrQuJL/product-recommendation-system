@@ -31,10 +31,6 @@
 	计算两个向量夹角的余弦，余弦值越接近1，就表明夹角越接近0度，也就是两个向量越相似，夹角等于0，说明两个向量相等，这就叫余弦相似性。
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/余弦相似度.png)
 
-* **谷本系数(Tanimoto)**<br/>
-
-![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/谷本系数.png)
-
 ## UserCF的原理
 1. 分析各个用户对 item 的评价（衡量的维度可以是浏览记录、购买记录等），列出用户和 item 之间的矩阵。
 2. 依据用户对 item 的评价计算得出所有用户之间的相似度（采用余弦相似度度量公式）。
