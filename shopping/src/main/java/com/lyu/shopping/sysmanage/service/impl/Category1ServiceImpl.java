@@ -37,6 +37,11 @@ public class Category1ServiceImpl implements Category1Service {
 	 */
 	private static final Integer HIDE_CATEGORY1 = 0;
 	
+	/**
+	 * 是否是因为一级类目下有子类目而导致的删除失败，true表示由子类目，false表示无子类目
+	 */
+	public static boolean childFlag = false;
+	
 	@Autowired
 	private Category1Mapper category1Mapper;
 	
@@ -147,6 +152,9 @@ public class Category1ServiceImpl implements Category1Service {
 	@Override
 	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED)
 	public boolean removeCategory1(Long category1Id) {
+		// 默认没有子类目
+		Category1ServiceImpl.childFlag = false;
+		
 		if (category1Id == null) {
 			return false;
 		}
@@ -154,6 +162,7 @@ public class Category1ServiceImpl implements Category1Service {
 		int category2Num = this.category2Mapper.countCategory2UnderCategory1(category1Id);
 		if (category2Num > 0) {
 			// 存在二级类目则不能删除一级类目
+			Category1ServiceImpl.childFlag = true;
 			return false;
 		}
 		
@@ -178,6 +187,18 @@ public class Category1ServiceImpl implements Category1Service {
 		int rows = this.category1Mapper.countCategory1InList(category1Ids);
 		if (size != rows) {
 			return false;
+		}
+		
+		// 2.判断传入的一级类目下是否有子类目，有则不能删除
+		// 默认没有子类目
+		Category1ServiceImpl.childFlag = false;
+		for (Long category1Id : category1Ids) {
+			int category2Num = this.category2Mapper.countCategory2UnderCategory1(category1Id);
+			if (category2Num > 0) {
+				// 存在二级类目则不能删除一级类目
+				Category1ServiceImpl.childFlag = true;
+				return false;
+			}
 		}
 		
 		// 3.批量删除集合中的一级类目

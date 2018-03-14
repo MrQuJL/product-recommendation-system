@@ -76,7 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 测试所属一级类目为category1Id的二级类目的数量 -->
-	<select id="countCategory2UnderCategory1" parameterType="long">
+	<select id="countCategory2UnderCategory1" parameterType="long" resultType="integer">
 		SELECT COUNT(*) FROM shopping_category2
 		WHERE category1_id = #{category1Id}
 	</select>

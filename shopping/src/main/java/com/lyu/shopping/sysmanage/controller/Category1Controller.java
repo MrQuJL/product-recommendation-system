@@ -18,6 +18,7 @@ import com.lyu.shopping.common.dto.PageParam;
 import com.lyu.shopping.common.util.PageUtils;
 import com.lyu.shopping.sysmanage.entity.Category1;
 import com.lyu.shopping.sysmanage.service.Category1Service;
+import com.lyu.shopping.sysmanage.service.impl.Category1ServiceImpl;
 
 /**
  * 类描述：处理一级分类的请求
@@ -59,6 +60,11 @@ public class Category1Controller {
 	 * 删除一级分类失败的提示消息
 	 */
 	private static final String REMOVE_CATEGORY1_FAILED = "删除一级分类失败";
+	
+	/**
+	 * 因为一级类目下面有子类目而删除失败
+	 */
+	private static final String REMOVE_CATEGORY1_FAILED_CHILDS = "一级类目下面有子类目";
 	
 	/**
 	 * 删除一级分类成功的提示消息
@@ -215,6 +221,8 @@ public class Category1Controller {
 		boolean flag = this.category1Service.removeCategory1(category1Id);
 		if (flag) {
 			resultMap.put(FRONT_TIPS_ATTR, REMOVE_CATEGORY1_SUCCESS);
+		} else if (Category1ServiceImpl.childFlag) { // 是因为一级类目下有子类目而导致的删除失败
+			resultMap.put(FRONT_TIPS_ATTR, REMOVE_CATEGORY1_FAILED_CHILDS);
 		}
 		
 		return resultMap;
@@ -234,6 +242,8 @@ public class Category1Controller {
 			boolean flag = this.category1Service.removeCategory1Batch(Arrays.asList(category1Ids));
 			if (flag) {
 				resultMap.put(FRONT_TIPS_ATTR, REMOVE_CATEGORY1_BATCH_SUCCESS);
+			} else if (Category1ServiceImpl.childFlag) { // 是因为一级类目下面有子类目导致的删除失败
+				resultMap.put(FRONT_TIPS_ATTR, REMOVE_CATEGORY1_FAILED_CHILDS);
 			}
 		}
 		
