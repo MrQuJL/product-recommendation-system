@@ -1,15 +1,22 @@
 package com.lyu.shopping.sysmanage.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageInfo;
+import com.lyu.shopping.common.dto.PageParam;
+import com.lyu.shopping.common.util.PageUtils;
+import com.lyu.shopping.sysmanage.dto.ProductDTO;
 import com.lyu.shopping.sysmanage.entity.Product;
+import com.lyu.shopping.sysmanage.service.ProductService;
 
 /**
  * 类描述：用于处理对商品的一些请求
@@ -31,6 +38,25 @@ public class ProductController {
 	 * 商品编辑页面的URI
 	 */
 	private static final String PRODUCT_EDIT_URI = "/sysmanage/product/productEdit";
+	
+	/**
+	 * 前台封装的分页查询商品的方法
+	 */
+	private static final String PRODUCT_QUERY_METHOD_PAGE = "productMgr.listProduct";
+	
+	/**
+	 * 前台商品列表对象的属性名
+	 */
+	private static final String FRONT_PRODUCTLIST_ATTR = "productList";
+	
+	/**
+	 * 前台分页条对象的属性名
+	 */
+	private static final String FRONT_PAGEBAR_ATTR = "pageBar";
+	
+	
+	@Autowired
+	private ProductService productService;
 	
 	/**
 	 * 处理前往商品列表页面的请求
@@ -62,14 +88,21 @@ public class ProductController {
 		@PathVariable(value="pageNum") Integer pageNum, @PathVariable(value="pageSize") Integer pageSize) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
+		PageParam pageParam = new PageParam(pageNum, pageSize);
+		if (pageNum == null || pageSize == null) {
+			pageParam = null;
+		}
 		
+		PageInfo<ProductDTO> productInfo = this.productService.listProductPage(product, pageParam);
+		// 1.获取商品列表
+		List<ProductDTO> productList = productInfo.getList();
+		// 2.获取分页条
+		String pageBar = PageUtils.pageStr(productInfo, PRODUCT_QUERY_METHOD_PAGE);
 		
+		map.put(FRONT_PRODUCTLIST_ATTR, productList);
+		map.put(FRONT_PAGEBAR_ATTR, pageBar);
 		
 		return map;
 	}
-	
-	
-	
-	
 	
 }

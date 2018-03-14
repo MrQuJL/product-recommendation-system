@@ -32,6 +32,12 @@ public class ProductServiceImpl implements ProductService {
 		if (product == null) {
 			return null;
 		}
+		if (product.getProductName().equals("all")) {
+			product.setProductName(null);
+		}
+		if (product.getCategory1Id().equals(0L)) {
+			product.setCategory1Id(null);
+		}
 		if (pageParam == null) {
 			pageParam = new PageParam(1,5);
 		}

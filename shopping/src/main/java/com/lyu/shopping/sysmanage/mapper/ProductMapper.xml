@@ -91,9 +91,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND A.category2_id = C.category2_id
 			AND A.is_show = 1
 			AND A.is_deleted = 0
-			<if test="productId != null">
-				AND product_id = #{productId}
-			</if>
 			<if test="productName != null">
 				AND product_name = #{productName}
 			</if>

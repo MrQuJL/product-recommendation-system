@@ -61,11 +61,19 @@
 			listProduct : function(pageNo, pageSize) {
 				var productName = $("#queryProductName").val();
 				var category1Id = $("#queryCategory1").val();
+				var product = {
+					"productName" : productName,
+					"category1Id" : category1Id
+				};
+				product = JSON.stringify(product);
+				var pageNum = 1;
+				var pageSize = 5;
 				$.ajax({
 					type : "post",
-					url : "${ctx}/sysmgr/category/product/listProduct",
-					data : {"productName" : productName, "category1Id" : category1Id, "pageNo" : pageNo, "pageSize" : pageSize},
+					url : "${ctx}/sysmgr/product/listProduct/" + pageNum + "/" + pageSize,
+					data : product,
 					dataType : "json",
+					contentType : "application/json;charset=utf-8",
 					success : function(data) {
 						// 获取分页条
 						var pageBar = data.pageBar;
@@ -111,7 +119,9 @@
 									"				<td>" + productList[i].productId + "</td>"+
 									"				<td>" + productList[i].productName + "</td>"+
 									"				<td>" + productList[i].category1Name + "</td>"+
-									"				<td>" + productList[i].productRecord + "</td>"+
+									"				<td>" + productList[i].category2Name + "</td>"+
+									"				<td>" + productList[i].purchasePrice + "</td>"+
+									"				<td>" + productList[i].salePrice + "</td>"+
 									"				<td>" + timestampToTime(productList[i].gmtCreate) + "</td>"+
 									"				<td class=\"td-status\"><span"+
 									"					class=\"label " + labelText + " radius\">" + tdText + "</span></td>"+
@@ -277,7 +287,7 @@
 					<!-- 此处修改为下拉列表select2 -->	
 					<select id="queryProductName" name="productName" class="text_add" 
 						style="width:200px;margin-left:0;">
-						<option value="所有商品">所有商品</option>
+						<option value="all">所有商品</option>
 				        <c:forEach items="${productNames}" var="productName">
 				        	<option value="${productName}">${productName}</option>
 				        </c:forEach>
@@ -323,9 +333,10 @@
 							</th>
 							<th width="50px">商品编号</th>
 							<th width="100px">商品名称</th>
-							<th width="100px">所属二级类目</th>
+							<th width="150px">所属一级类目</th>
+							<th width="150px">所属二级类目</th>
 							<th width="100px">市场价</th>
-							<th width="350px">销售价</th>
+							<th width="100px">销售价</th>
 							<th width="180px">添加时间</th>
 							<th width="70px">状态</th>
 							<th width="250px">操作</th>
