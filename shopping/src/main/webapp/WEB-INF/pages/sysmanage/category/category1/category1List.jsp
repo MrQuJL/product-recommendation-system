@@ -59,8 +59,11 @@
 				}
 			},
 			// 查询一级类目列表
-			listCategory1 : function(pageNo, pageSize) {
-				var category1Name = $("#queryCategory1Name").val();
+			listCategory1 : function(pageNo, pageSize, conditionFlag) { // 是否是条件查询
+				var category1Name = null;
+				if (conditionFlag) { // 是条件查询
+					category1Name = $("#queryCategory1Name").val();;
+				}
 				$.ajax({
 					type : "post",
 					url : "${ctx}/sysmgr/category/category1/listCategory1",
@@ -206,7 +209,7 @@
 								dataType : "json",
 								success : function(data) {
 									if (data.message == "修改一级分类成功") {
-										category1Mgr.listCategory1(1, 5);
+										category1Mgr.listCategory1(1, 5, true);
 										layer.alert('修改一级分类成功！', {
 											title : '提示框',
 											icon : 1,
@@ -252,8 +255,7 @@
 							if (data.message == "批量删除一级分类成功") {
 								layer.msg(data.message,{icon:1,time:1000});
 								// 3.删除成功重新查询列表
-								location.reload();
-								category1Mgr.listCategory1(1, 5);
+								category1Mgr.listCategory1(1, 5, true);
 							} else if (data.message == "一级类目下面有子类目") {
 								layer.msg("类目下有子类目，请先删除子类目！",{icon:0,time:1000});
 							} else {
@@ -289,7 +291,7 @@
 				    
 				</li>
 				<li style="width: 90px;">
-					<button type="button" class="btn_search" onclick="category1Mgr.listCategory1(1, 5);">
+					<button type="button" class="btn_search" onclick="category1Mgr.listCategory1(1, 5, true);">
 						<i class="icon-search"></i>查询
 					</button>
 				</li>
@@ -435,7 +437,7 @@
 											icon : 1,
 										});
 										layer.close(index);
-										category1Mgr.listCategory1(1, 5);
+										category1Mgr.listCategory1(1, 5, false);
 									} else {
 										layer.alert('添加一级分类失败，请联系系统管理员！', {
 											title : '提示框',
@@ -497,7 +499,7 @@
 								time : 1000
 							});
 							// 重新查询一下
-							category1Mgr.listCategory1(1, 5);
+							category1Mgr.listCategory1(1, 5, true);
 						} else { // 隐藏该一级类目失败
 							layer.msg('隐藏该一级类目失败，请联系系统管理员!', {
 								icon : 5,
@@ -538,7 +540,7 @@
 										time : 1000
 									});
 									// 重新查询一次查询
-									category1Mgr.listCategory1(1, 5);
+									category1Mgr.listCategory1(1, 5, true);
 								} else { // 显示该一级类目失败
 									layer.msg('显示该一级类目失败，请联系系统管理员!', {
 										icon : 6,
@@ -565,8 +567,7 @@
 							icon : 1,
 							time : 1000
 						});
-						location.reload();
-						category1Mgr.listCategory1(1, 5);
+						category1Mgr.listCategory1(1, 5, false);
 					} else if (data.message == "一级类目下面有子类目") {
 						layer.msg('当前类目下有子类目，请先删除子类目!', {
 							icon : 0,

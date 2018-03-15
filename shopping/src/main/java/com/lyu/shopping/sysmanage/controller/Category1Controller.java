@@ -116,7 +116,7 @@ public class Category1Controller {
 		
 		// 1.创建一级类目对象
 		Category1 category1 = new Category1();
-		if (category1Name.equals("所有一级类目")) {
+		if (category1Name == null || category1Name.equals("") || category1Name.equals("所有一级类目")) {
 			category1Name = null;
 		}
 		category1.setCategory1Name(category1Name);

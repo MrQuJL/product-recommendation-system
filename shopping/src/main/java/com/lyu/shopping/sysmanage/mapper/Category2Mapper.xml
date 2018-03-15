@@ -78,7 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 测试所属一级类目为category1Id的二级类目的数量 -->
 	<select id="countCategory2UnderCategory1" parameterType="long" resultType="integer">
 		SELECT COUNT(*) FROM shopping_category2
-		WHERE category1_id = #{category1Id}
+		WHERE category1_id = #{category1Id} AND is_deleted = 0;
 	</select>
 	
 	<!-- 查询出所有的二级类目的名称 -->

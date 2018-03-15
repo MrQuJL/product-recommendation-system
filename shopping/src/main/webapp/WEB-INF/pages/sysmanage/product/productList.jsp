@@ -61,9 +61,11 @@
 			listProduct : function(pageNo, pageSize) {
 				var productName = $("#queryProductName").val();
 				var category1Id = $("#queryCategory1").val();
+				var category2Id = $("#queryCategory2").val();
 				var product = {
 					"productName" : productName,
-					"category1Id" : category1Id
+					"category1Id" : category1Id,
+					"category2Id" : category2Id
 				};
 				product = JSON.stringify(product);
 				var pageNum = 1;
@@ -84,6 +86,7 @@
 						
 						var htmlTable = "";
 						if (productList.length > 0) {
+							alert("查询到的记录数大于0");
 							for (var i = 0; i < productList.length; i++) {
 								// 标签的样式
 								var labelText = "";
@@ -142,6 +145,7 @@
 									"			</tr>";
 							}
 						} else {
+							alert("查询到的记录数不大于0");
 							htmlTable = "<tr><td colspan=8>没有查询到类目记录</td></tr>";
 						}
 						$("#sample-table tbody").html(htmlTable);
