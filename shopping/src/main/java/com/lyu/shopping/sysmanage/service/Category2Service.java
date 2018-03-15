@@ -30,6 +30,13 @@ public interface Category2Service {
 	List<String> listAllCategory2Name();
 	
 	/**
+	 * 查询满足条件的二级类目列表
+	 * @param category2 封装的查询条件
+	 * @return 满足查询条件的二级类目列表
+	 */
+	List<Category2DTO> listCategory2(Category2 category2);
+	
+	/**
 	 * 查询二级类目的列表
 	 * @return 封装有二级类目列表的 PageInfo
 	 */

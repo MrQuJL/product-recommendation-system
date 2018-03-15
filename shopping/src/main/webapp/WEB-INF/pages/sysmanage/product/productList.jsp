@@ -304,6 +304,17 @@
 				        </c:forEach>
 				    </select>
 				</li>
+				<li>
+					<label class="l_f" style="margin-right:10px;margin-top:2px;">二级类目名称</label>
+					<!-- 此处修改为下拉列表select2 -->
+					<select id="queryCategory2" name="category2" class="text_add" 
+						style="width:200px;margin-left:0;">
+						<option value="0">所有二级类目</option>
+				        <c:forEach items="${category2List}" var="category2">
+				        	<option value="${category2.category2Id}">${category2.category2Name}</option>
+				        </c:forEach>
+				    </select>
+				</li>
 				<li style="width: 90px;">
 					<button type="button" class="btn_search" onclick="productMgr.listProduct(1, 5);">
 						<i class="icon-search"></i>查询
@@ -350,58 +361,6 @@
 					<!-- 分页条的位置 -->
 				</div>
 			</div>
-		</div>
-	</div>
-	<!--添加分类-->
-	<div class="sort_style_add margin" id="sort_style_add" style="display: none">
-		<div class="">
-			<form action="#" id="saveProductForm">
-				<ul>
-					<li>
-						<input id="productId" name="productId" type="hidden" value="" >
-						<label class="label_name">分类名称</label>
-						<div class="col-sm-6">
-							<input id="productName" name="productName" type="text" id="form-field-1" placeholder=""
-								class="col-xs-9 col-sm-8">
-						</div>
-					</li>
-					<li>
-						<label class="label_name">所属一级类目</label>
-						<div class="col-sm-8">
-							<select id="category1Id" name="category1Id" class="text_add" 
-								style="width:200px;margin-left:0;">
-						        <c:forEach items="${category1List}" var="category1">
-						        	<option value="${category1.category1Id}">${category1.category1Name}</option>
-						        </c:forEach>
-						    </select>
-						</div>
-					</li>
-					<li>
-						<label class="label_name">分类说明</label>
-						<div class="col-sm-8">
-							<textarea id="productRecord" name="productRecord" class="form-control" id="form-field-8"
-								placeholder="" onkeyup="checkLength(this);"></textarea>
-							<span class="wordage">剩余字数：
-								<span id="sy" style="color: Red;">200</span>字
-							</span>
-						</div>
-					</li>
-					<li>
-						<label class="label_name">分类状态</label>
-						<span class="add_content"> &nbsp;&nbsp;
-							<label>
-								<input id="show" name="showFlag" type="radio" checked="checked"
-									class="ace" value="1">
-								<span class="lbl">显示</span>
-							</label>&nbsp;&nbsp;&nbsp;
-							<label>
-								<input id="hide" name="showFlag" type="radio" class="ace" value="0">
-								<span class="lbl">隐藏</span>
-							</label>
-						</span>
-					</li>
-				</ul>
-			</form>
 		</div>
 	</div>
 <script type="text/javascript">
@@ -629,8 +588,9 @@
 </script>
 <script>
     $(document).ready(function() { 
-    	$("#queryProductName").select2(); 
-    	$("#queryCategory1").select2(); 
+    	$("#queryProductName").select2();
+    	$("#queryCategory1").select2();
+    	$("#queryCategory2").select2();
     });
 </script>
 </body>

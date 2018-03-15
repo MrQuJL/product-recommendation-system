@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,8 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
 import com.lyu.shopping.common.util.PageUtils;
+import com.lyu.shopping.sysmanage.dto.Category2DTO;
 import com.lyu.shopping.sysmanage.dto.ProductDTO;
+import com.lyu.shopping.sysmanage.entity.Category1;
 import com.lyu.shopping.sysmanage.entity.Product;
+import com.lyu.shopping.sysmanage.service.Category1Service;
+import com.lyu.shopping.sysmanage.service.Category2Service;
 import com.lyu.shopping.sysmanage.service.ProductService;
 
 /**
@@ -54,6 +60,11 @@ public class ProductController {
 	 */
 	private static final String FRONT_PAGEBAR_ATTR = "pageBar";
 	
+	@Autowired
+	private Category1Service category1Service;
+	
+	@Autowired
+	private Category2Service category2Service;
 	
 	@Autowired
 	private ProductService productService;
@@ -63,7 +74,15 @@ public class ProductController {
 	 * @return
 	 */
 	@RequestMapping(value="/gotoProductList")
-	public String gotoProductList() {
+	public String gotoProductList(HttpSession session) {
+		// 在进入商品列表页面时加载所有的一级类目，二级类目，商品名称
+		List<Category1> category1List = category1Service.listCategory1(null);
+		
+		List<Category2DTO> category2List = category2Service.listCategory2(null);
+		
+		session.setAttribute("category1List", category1List);
+		session.setAttribute("category2List", category2List);
+		
 		return PRODUCT_LIST_URI;
 	}
 	

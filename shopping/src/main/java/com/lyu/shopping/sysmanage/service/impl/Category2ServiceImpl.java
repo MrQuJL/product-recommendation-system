@@ -41,16 +41,23 @@ public class Category2ServiceImpl implements Category2Service {
 	private Category2Mapper category2Mapper;
 	
 	@Override
+	public Category2DTO getCategory2ById(Long category2Id) {
+		// category2DTO中还包括一级类目的名称
+		Category2DTO category2DTO = this.category2Mapper.getCategory2ById(category2Id);
+		return category2DTO;
+	}
+	
+	@Override
 	public List<String> listAllCategory2Name() {
 		List<String> category2Names = this.category2Mapper.listAllCategory2Name();
 		return category2Names;
 	}
 	
 	@Override
-	public Category2DTO getCategory2ById(Long category2Id) {
-		// category2DTO中还包括一级类目的名称
-		Category2DTO category2DTO = this.category2Mapper.getCategory2ById(category2Id);
-		return category2DTO;
+	public List<Category2DTO> listCategory2(Category2 category2) {
+		List<Category2DTO> category2List = this.category2Mapper.listCategory2(category2);
+		
+		return category2List;
 	}
 	
 	@Override

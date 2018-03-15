@@ -51,7 +51,7 @@
 3. 找出用户和 item 之间相似度最高的前 N 个 item。
 4. 将这个 N 个 item推荐给用户。<br/>
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/content.png)
-用户和 item 分解成的向量如图：<br/>
+<br/>用户和 item 分解成的向量如图：<br/>
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/vector.png)
 
 
