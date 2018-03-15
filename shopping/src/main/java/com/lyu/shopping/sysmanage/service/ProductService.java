@@ -1,5 +1,7 @@
 package com.lyu.shopping.sysmanage.service;
 
+import java.util.List;
+
 import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
 import com.lyu.shopping.sysmanage.dto.ProductDTO;
@@ -21,5 +23,11 @@ public interface ProductService {
 	 * @return 封装有分页信息的商品DTO列表，包括商品的一级类目名称和商品的二级类目名称
 	 */
 	PageInfo<ProductDTO> listProductPage(Product product, PageParam pageParam);
+	
+	/**
+	 * 查询出所有商品的名称
+	 * @return
+	 */
+	List<String> listAllProductName();
 	
 }

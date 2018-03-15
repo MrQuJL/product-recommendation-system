@@ -403,7 +403,7 @@ body
 .Resolution .order_style .search_style{ width:1366px}
 /**************添加产品信息样式***************/
 #add_picture{ padding:0px 0px; margin:0px;}
-#add_picture .page_right_style{ overflow: auto; position:fixed;left:220px; }
+#add_picture .page_right_style{ overflow: auto;}
 #add_picture .page_right_style.Widescreen{ left:0px}
 #form-article-add{ padding:20px 0px;}
 #form-article-add .cl{ margin-bottom:15px; position:relative; min-height:35px; width:100%; left:0px}

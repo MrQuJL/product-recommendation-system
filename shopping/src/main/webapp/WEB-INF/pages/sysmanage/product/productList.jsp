@@ -11,14 +11,12 @@
 	<meta http-equiv="Cache-Control" content="no-siteapp" />
 	<!-- css样式 -->
 	<link href="${ctxJsAndCss}/assets/css/bootstrap.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="${ctxJsAndCss}/css/style.css" />
+	<link href="${ctxJsAndCss}/css/style.css" rel="stylesheet" />
 	<link href="${ctxJsAndCss}/assets/css/codemirror.css" rel="stylesheet">
-	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace.min.css" />
-	<link rel="stylesheet" href="${ctxJsAndCss}/font/css/font-awesome.min.css" />
-	<link rel="stylesheet" href="${ctxJsAndCss}/css/select2.min.css" />
-	<!--[if lte IE 8]>
-		<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace-ie.min.css" />
-	<![endif]-->
+	<link href="${ctxJsAndCss}/assets/css/ace.min.css" rel="stylesheet" />
+	<link href="${ctxJsAndCss}/font/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="${ctxJsAndCss}/css/select2.min.css" rel="stylesheet" />
+	<!-- js脚本 -->
 	<script src="${ctxJsAndCss}/js/jquery-1.9.1.min.js"></script>
 	<script src="${ctxJsAndCss}/js/select2.min.js"></script>
 	<script src="${ctxJsAndCss}/assets/js/typeahead-bs2.min.js"></script>
@@ -86,7 +84,6 @@
 						
 						var htmlTable = "";
 						if (productList.length > 0) {
-							alert("查询到的记录数大于0");
 							for (var i = 0; i < productList.length; i++) {
 								// 标签的样式
 								var labelText = "";
@@ -145,8 +142,7 @@
 									"			</tr>";
 							}
 						} else {
-							alert("查询到的记录数不大于0");
-							htmlTable = "<tr><td colspan=8>没有查询到类目记录</td></tr>";
+							htmlTable = "<tr><td colspan=10>没有查询到类目记录</td></tr>";
 						}
 						$("#sample-table tbody").html(htmlTable);
 						$("#totalPage").html(listSize);
@@ -595,6 +591,7 @@
     	$("#queryProductName").select2();
     	$("#queryCategory1").select2();
     	$("#queryCategory2").select2();
+    	
     });
 </script>
 </body>

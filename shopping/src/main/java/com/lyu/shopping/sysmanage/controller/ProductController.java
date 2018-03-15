@@ -77,21 +77,27 @@ public class ProductController {
 	public String gotoProductList(HttpSession session) {
 		// 在进入商品列表页面时加载所有的一级类目，二级类目，商品名称
 		List<Category1> category1List = category1Service.listCategory1(null);
-		
 		List<Category2DTO> category2List = category2Service.listCategory2(null);
+		List<String> productNames = productService.listAllProductName();
 		
 		session.setAttribute("category1List", category1List);
 		session.setAttribute("category2List", category2List);
+		session.setAttribute("productNames", productNames);
 		
 		return PRODUCT_LIST_URI;
 	}
-	
+
 	/**
 	 * 处理前往商品编辑页面的请求
+	 * 进入商品编辑列表时根据修改或者新增标识来对页面进行初始化
 	 * @return
 	 */
 	@RequestMapping(value="/gotoProductEdit")
 	public String gotoProductEdit() {
+		
+		
+		
+		
 		return PRODUCT_EDIT_URI;
 	}
 	

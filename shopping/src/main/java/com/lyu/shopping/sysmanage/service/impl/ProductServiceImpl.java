@@ -38,6 +38,9 @@ public class ProductServiceImpl implements ProductService {
 		if (product.getCategory1Id().equals(0L)) {
 			product.setCategory1Id(null);
 		}
+		if (product.getCategory2Id().equals(0L)) {
+			product.setCategory2Id(null);
+		}
 		if (pageParam == null) {
 			pageParam = new PageParam(1,5);
 		}
@@ -50,6 +53,14 @@ public class ProductServiceImpl implements ProductService {
 		PageInfo<ProductDTO> productInfo = new PageInfo<ProductDTO>(productList);
 		
 		return productInfo;
+	}
+
+	@Override
+	public List<String> listAllProductName() {
+		
+		List<String> productNames = this.productMapper.listAllProductName();
+		
+		return productNames;
 	}
 
 }

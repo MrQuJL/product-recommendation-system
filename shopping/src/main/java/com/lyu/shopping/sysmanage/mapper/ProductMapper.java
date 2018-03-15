@@ -21,4 +21,10 @@ public interface ProductMapper {
 	 */
 	List<ProductDTO> listProduct(Product product);
 	
+	/**
+	 * 查询出所有商品的名称
+	 * @return
+	 */
+	List<String> listAllProductName();
+	
 }
