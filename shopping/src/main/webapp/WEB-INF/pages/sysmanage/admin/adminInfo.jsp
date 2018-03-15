@@ -9,15 +9,13 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta http-equiv="Cache-Control" content="no-siteapp" />
 	<!-- css样式 -->
+	<link href="${ctxJsAndCss}/font/css/font-awesome.min.css" rel="stylesheet" />
 	<link href="${ctxJsAndCss}/assets/css/bootstrap.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="${ctxJsAndCss}/css/style.css" />
 	<link href="${ctxJsAndCss}/assets/css/codemirror.css" rel="stylesheet">
-	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace.min.css" />
-	<link rel="stylesheet" href="${ctxJsAndCss}/font/css/font-awesome.min.css" />
-	<!--[if lte IE 8]>
-	  <link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace-ie.min.css" />
-	<![endif]-->
+	<link href="${ctxJsAndCss}/assets/css/ace.min.css" rel="stylesheet" />
+	<link href="${ctxJsAndCss}/css/style.css" rel="stylesheet" />
 	<!-- js脚本 -->
+	<script src="${ctxJsAndCss}/js/date.js"></script>
 	<script src="${ctxJsAndCss}/js/jquery-1.9.1.min.js"></script>
 	<script src="${ctxJsAndCss}/assets/layer/layer.js"></script>
 	<script src="${ctxJsAndCss}/assets/laydate/laydate.js"></script>
@@ -25,7 +23,6 @@
 	<script src="${ctxJsAndCss}/assets/js/typeahead-bs2.min.js"></script>
 	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.min.js"></script>
 	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.bootstrap.js"></script>
-	<script src="${ctxJsAndCss}/js/date.js"></script>
 </head>
 <body>
 	<div class="clearfix">

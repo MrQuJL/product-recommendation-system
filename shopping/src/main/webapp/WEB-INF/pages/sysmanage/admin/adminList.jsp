@@ -6,31 +6,14 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>管理员列表</title>
 	<link href="${ctxJsAndCss}/assets/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="${ctxJsAndCss}/css/style.css" rel="stylesheet" />
 	<link href="${ctxJsAndCss}/assets/css/codemirror.css" rel="stylesheet">
 	<link href="${ctxJsAndCss}/assets/css/ace.min.css" rel="stylesheet" />
 	<link href="${ctxJsAndCss}/assets/css/font-awesome.min.css" rel="stylesheet" />
-	<!--[if IE 7]>
-	  <link href="${ctxJsAndCss}/assets/css/font-awesome-ie7.min.css" rel="stylesheet" />
-	<![endif]-->
-	<!--[if lte IE 8]>
-	  <link href="${ctxJsAndCss}/assets/css/ace-ie.min.css" rel="stylesheet" />
-	<![endif]-->
+	<link href="${ctxJsAndCss}/css/style.css" rel="stylesheet" />
 	<script src="${ctxJsAndCss}/assets/js/jquery.min.js"></script>
-	<!-- <![endif]-->
-	<!--[if IE]>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<![endif]-->
-	<!--[if !IE]> -->
 	<script type="text/javascript">
 	window.jQuery || document.write("<script src='${ctxJsAndCss}/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 	</script>
-	<!-- <![endif]-->
-	<!--[if IE]>
-	<script type="text/javascript">
-	window.jQuery || document.write("<script src='${ctxJsAndCss}/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-	</script>
-	<![endif]-->
 	<script type="text/javascript">
 	if("ontouchend" in document) document.write("<script src='${ctxJsAndCss}/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 	</script>
@@ -39,8 +22,6 @@
 	<!-- page specific plugin scripts -->
 	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.min.js"></script>
 	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.bootstrap.js"></script>
-	<!--<script src="${ctxJsAndCss}/js/H-ui.js"></script>
-	<script src="${ctxJsAndCss}/js/H-ui.admin.js"></script>-->
 	<script src="${ctxJsAndCss}/assets/layer/layer.js"></script>
 	<script src="${ctxJsAndCss}/assets/laydate/laydate.js"></script>
 	<script src="${ctxJsAndCss}/js/date.js"></script>

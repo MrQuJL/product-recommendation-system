@@ -3,8 +3,8 @@
 <link href="${ctxJsAndCss}/assets/css/ace.min.css" rel="stylesheet" />
 <link href="${ctxJsAndCss}/assets/css/ace-rtl.min.css" rel="stylesheet" />
 <link href="${ctxJsAndCss}/assets/css/ace-skins.min.css" rel="stylesheet" />
-<link href="${ctxJsAndCss}/css/style.css" rel="stylesheet" />
 <link href="${ctxJsAndCss}/assets/css/codemirror.css" rel="stylesheet">
+<link href="${ctxJsAndCss}/css/style.css" rel="stylesheet" />
 <link href="${ctxJsAndCss}/font/css/font-awesome.min.css" rel="stylesheet" />
 
 <script src="${ctxJsAndCss}/js/jquery-1.9.1.min.js"></script>
