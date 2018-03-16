@@ -60,6 +60,11 @@ public class ProductController {
 	 */
 	private static final String FRONT_PAGEBAR_ATTR = "pageBar";
 	
+	/**
+	 * 前台分页条对象的属性名
+	 */
+	private static final String FRONT_LISTSIZE_ATTR = "listSize";
+	
 	@Autowired
 	private Category1Service category1Service;
 	
@@ -123,8 +128,11 @@ public class ProductController {
 		List<ProductDTO> productList = productInfo.getList();
 		// 2.获取分页条
 		String pageBar = PageUtils.pageStr(productInfo, PRODUCT_QUERY_METHOD_PAGE);
+		// 3.统计公有多少条记录
+		Long listSize = productInfo.getTotal();
 		
 		map.put(FRONT_PRODUCTLIST_ATTR, productList);
+		map.put(FRONT_LISTSIZE_ATTR, listSize);
 		map.put(FRONT_PAGEBAR_ATTR, pageBar);
 		
 		return map;

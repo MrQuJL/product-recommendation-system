@@ -56,7 +56,7 @@
 				}
 			},
 			// 查询商品列表
-			listProduct : function(pageNo, pageSize) {
+			listProduct : function(pageNum, pageSize) {
 				var productName = $("#queryProductName").val();
 				var category1Id = $("#queryCategory1").val();
 				var category2Id = $("#queryCategory2").val();
@@ -66,8 +66,6 @@
 					"category2Id" : category2Id
 				};
 				product = JSON.stringify(product);
-				var pageNum = 1;
-				var pageSize = 5;
 				$.ajax({
 					type : "post",
 					url : "${ctx}/sysmgr/product/listProduct/" + pageNum + "/" + pageSize,
