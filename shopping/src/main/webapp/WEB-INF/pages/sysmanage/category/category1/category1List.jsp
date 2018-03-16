@@ -255,7 +255,7 @@
 								// 3.删除成功重新查询列表
 								category1Mgr.listCategory1(1, 5, true);
 							} else if (data.message == "一级类目下面有子类目") {
-								layer.msg("类目下有子类目，请先删除子类目！",{icon:0,time:1000});
+								layer.msg("id为" + data.hitIds + "的类目下有子类目，请先删除子类目！",{icon:0,time:3000});
 							} else {
 								// 4.删除失败给出提示信息
 								layer.msg(data.message,{icon:0,time:1000});

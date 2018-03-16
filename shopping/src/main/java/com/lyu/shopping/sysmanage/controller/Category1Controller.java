@@ -239,10 +239,22 @@ public class Category1Controller {
 		resultMap.put(FRONT_TIPS_ATTR, REMOVE_CATEGORY1_BATCH_FAILED);
 		
 		if (category1Ids != null && category1Ids.length > 0) {
+			// 先去查一级类目下是否有二级类目，如果有获取那些命中的二级目录
+			List<Long> hitIds = category1Service.hasSubCategory2(Arrays.asList(category1Ids));
+			if (hitIds == null) { // 传入的数据非法
+				return resultMap;
+			}
+			if (hitIds.size() > 0) { //通知客户端有哪些一级类目下有二级类目
+				resultMap.put(FRONT_TIPS_ATTR, REMOVE_CATEGORY1_FAILED_CHILDS);
+				resultMap.put("hitIds", hitIds);
+				return resultMap;
+			}
+			
+			
 			boolean flag = this.category1Service.removeCategory1Batch(Arrays.asList(category1Ids));
 			if (flag) {
 				resultMap.put(FRONT_TIPS_ATTR, REMOVE_CATEGORY1_BATCH_SUCCESS);
-			} else if (Category1ServiceImpl.childFlag) { // 是因为一级类目下面有子类目导致的删除失败
+			} else { // 是因为一级类目下面有子类目导致的删除失败
 				resultMap.put(FRONT_TIPS_ATTR, REMOVE_CATEGORY1_FAILED_CHILDS);
 			}
 		}
