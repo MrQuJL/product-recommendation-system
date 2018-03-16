@@ -271,6 +271,27 @@
 						}
 					});
 				});
+			},
+			// 1.当一级类目改变时，对应的二级类目进行联动
+			changeCategory1 : function(obj) {
+				var category1Id = obj.value;
+				// 发送异步的ajax请求刷新所属的二级类目列表
+				$.ajax({
+					type : "post",
+					url : "${ctx}/sysmgr/product/changeCategory2",
+					data : {"category1Id" : category1Id},
+					dataType : "json",
+					success : function(data) {
+						var category2List = data.category2List;
+						var optionList = "";
+						optionList = optionList + "<option value='0'>所有二级类目</option>";
+						for (var i = 0; i < category2List.length; i++) {
+							optionList = optionList + "<option value='" + category2List[i].category2Id + "'>" + 
+								category2List[i].category2Name + "</option>";
+						}
+						$("#queryCategory2").html(optionList);
+					}
+				});
 			}
 		}
 	</script>
@@ -295,7 +316,7 @@
 					<label class="l_f" style="margin-right:10px;margin-top:2px;">一级类目名称</label>
 					<!-- 此处修改为下拉列表select2 -->
 					<select id="queryCategory1" name="category1" class="text_add" 
-						style="width:200px;margin-left:0;">
+						style="width:200px;margin-left:0;" onchange="productMgr.changeCategory1(this);">
 						<option value="0">所有一级类目</option>
 				        <c:forEach items="${category1List}" var="category1">
 				        	<option value="${category1.category1Id}">${category1.category1Name}</option>

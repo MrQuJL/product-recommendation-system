@@ -19,6 +19,7 @@ import com.lyu.shopping.common.util.PageUtils;
 import com.lyu.shopping.sysmanage.dto.Category2DTO;
 import com.lyu.shopping.sysmanage.dto.ProductDTO;
 import com.lyu.shopping.sysmanage.entity.Category1;
+import com.lyu.shopping.sysmanage.entity.Category2;
 import com.lyu.shopping.sysmanage.entity.Product;
 import com.lyu.shopping.sysmanage.service.Category1Service;
 import com.lyu.shopping.sysmanage.service.Category2Service;
@@ -54,6 +55,11 @@ public class ProductController {
 	 * 前台商品列表对象的属性名
 	 */
 	private static final String FRONT_PRODUCTLIST_ATTR = "productList";
+	
+	/**
+	 * 进行二级联动的二级类目列表
+	 */
+	private static final String FRONT_CATEGORY2LIST_ATTR = "category2List";
 	
 	/**
 	 * 前台分页条对象的属性名
@@ -115,10 +121,28 @@ public class ProductController {
 	@RequestMapping(value="/gotoProductEdit")
 	public String gotoProductEdit() {
 		
-		
-		
-		
 		return PRODUCT_EDIT_URI;
+	}
+	
+	/**
+	 * 当所选择某个一级类目的时候对相应的二级类目进行联动
+	 * @param category1Id 选中的一级类目
+	 * @return 该一级类目下的二级类目列表
+	 */
+	@RequestMapping("/changeCategory2")
+	public @ResponseBody Map<String, Object> changeCategory2(Long category1Id) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Category2 category2 = new Category2();
+		if (category1Id.equals(0L)) { // 前台传过来的0表示是全部的一级类目，则此时查询的二级类目也是全部的二级类目
+			category2.setCategory1Id(null);
+		} else {
+			category2.setCategory1Id(category1Id);
+		}
+		
+		List<Category2DTO> category2List = this.category2Service.listCategory2(category2);
+		resultMap.put(FRONT_CATEGORY2LIST_ATTR, category2List);
+		
+		return resultMap;
 	}
 	
 	/**
