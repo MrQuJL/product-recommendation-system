@@ -72,6 +72,14 @@ public interface Category1Service {
 	boolean updateCategory1(Category1 category1);
 	
 	/**
+	 * 判断传入的一级类目下是否有二级类目
+	 * @param category1Ids 需要被判断的一级类目id列表
+	 * @return 返回一个二级类目的id列表，size为0表示当前一级类目下没有二级类目，否则，向返回的list集合中
+	 * 添加有二级子类目的一级类目id
+	 */
+	List<Long> hasSubCategory2(List<Long> category1Ids);
+	
+	/**
 	 * 根据id删除一级类目
 	 * @param category1Id 待删除的一级类目id
 	 * @return 删除成功则返回true，失败则返回false

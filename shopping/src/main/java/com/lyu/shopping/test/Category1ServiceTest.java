@@ -118,4 +118,22 @@ public class Category1ServiceTest {
 		
 	}
 	
+	// 测试查询一级类目下是否有二级类目
+	@Test
+	public void testHasSubCategory2() {
+		Category1Service category1Service = (Category1Service) this.application.getBean("category1Service");
+		
+		List<Long> category1Ids = new ArrayList<Long>();
+		category1Ids.add(20L);
+		category1Ids.add(62L);
+		category1Ids.add(111L);
+		
+		List<Long> hitIds = category1Service.hasSubCategory2(category1Ids);
+		
+		for (Long category1Id : hitIds) {
+			System.out.println(category1Id + "命中");
+		}
+		
+	}
+	
 }

@@ -1,5 +1,6 @@
 package com.lyu.shopping.sysmanage.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -150,6 +151,24 @@ public class Category1ServiceImpl implements Category1Service {
 	}
 
 	@Override
+	public List<Long> hasSubCategory2(List<Long> category1Ids) {
+		List<Long> hitCategory1List = new ArrayList<Long>();
+		// 合法性判断
+		if (category1Ids == null || category1Ids.size() == 0) {
+			return null;
+		}
+		
+		for (Long category1Id : category1Ids) {
+			int rows = this.category2Mapper.countCategory2UnderCategory1(category1Id);
+			if (rows > 0) {
+				hitCategory1List.add(category1Id);
+			}
+		}
+		
+		return hitCategory1List;
+	}
+	
+	@Override
 	@Transactional(isolation=Isolation.DEFAULT, propagation=Propagation.REQUIRED)
 	public boolean removeCategory1(Long category1Id) {
 		// 默认没有子类目
@@ -192,13 +211,20 @@ public class Category1ServiceImpl implements Category1Service {
 		// 2.判断传入的一级类目下是否有子类目，有则不能删除
 		// 默认没有子类目
 		Category1ServiceImpl.childFlag = false;
+		// 用一个list来记录有哪些一级类目下有子类目
+		List<Long> category1HasChild = new ArrayList<Long>();
+		// 当一个类目下有子类目就把它加入集合
 		for (Long category1Id : category1Ids) {
 			int category2Num = this.category2Mapper.countCategory2UnderCategory1(category1Id);
 			if (category2Num > 0) {
+				category1HasChild.add(category1Id);
 				// 存在二级类目则不能删除一级类目
 				Category1ServiceImpl.childFlag = true;
-				return false;
 			}
+		}
+		// 如果一级类目下有二级类目返回
+		if (Category1ServiceImpl.childFlag) {
+			return false;
 		}
 		
 		// 3.批量删除集合中的一级类目
