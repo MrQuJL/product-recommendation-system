@@ -505,7 +505,7 @@
 					function(index) {
 						$.ajax({
 							type : "post",
-							url : "${ctx}/sysmgr/product/showOrHideProduct" + "1/" + id,
+							url : "${ctx}/sysmgr/product/showOrHideProduct/" + "1/" + id,
 							dataType : "json",
 							success : function(data) {
 								if (data.message == "success") { // 上架该商品成功

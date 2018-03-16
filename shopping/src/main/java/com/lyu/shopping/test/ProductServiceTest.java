@@ -41,7 +41,6 @@ public class ProductServiceTest {
 		for (ProductDTO tempProductDTO : pageInfo.getList()) {
 			System.out.println(tempProductDTO);
 		}
-		
 	}
 	
 	/**

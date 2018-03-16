@@ -58,12 +58,27 @@ public class ProductController {
 	/**
 	 * 前台分页条对象的属性名
 	 */
-	private static final String FRONT_PAGEBAR_ATTR = "pageBar";
+	private static final String FRONT_LISTSIZE_ATTR = "listSize";
 	
 	/**
 	 * 前台分页条对象的属性名
 	 */
-	private static final String FRONT_LISTSIZE_ATTR = "listSize";
+	private static final String FRONT_PAGEBAR_ATTR = "pageBar";
+	
+	/**
+	 * 前台提示信息的属性名
+	 */
+	private static final String FRONT_MSG_ATTR = "message";
+	
+	/**
+	 * 商品状态修改成功的提示信息
+	 */
+	private static final String FRONT_PRODUCT_STATUS_CHANGE_SUCCESS = "success";
+	
+	/**
+	 * 商品状态修改失败的提示信息
+	 */
+	private static final String FRONT_PRODUCT_STATUS_CHANGE_FAILED = "failed";
 	
 	@Autowired
 	private Category1Service category1Service;
@@ -148,9 +163,24 @@ public class ProductController {
 	public @ResponseBody Map<String, Object> showOrHideProduct(@PathVariable(value="changeValue") Integer changeValue,
 		@PathVariable(value="productId") Long productId) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		
 		if (changeValue.equals(1)) { // 上架商品
+			map.put(FRONT_MSG_ATTR, FRONT_PRODUCT_STATUS_CHANGE_FAILED);
+			boolean flag = this.productService.updateProductStatus(productId, changeValue);
+			if (flag) {
+				map.put(FRONT_MSG_ATTR, FRONT_PRODUCT_STATUS_CHANGE_SUCCESS);
+			}
+			// TODO 为后期业务扩展预留修改的空间
+			
 			
 		} else { // 下架商品
+			map.put(FRONT_MSG_ATTR, FRONT_PRODUCT_STATUS_CHANGE_FAILED);
+			boolean flag = this.productService.updateProductStatus(productId, changeValue);
+			if (flag) {
+				map.put(FRONT_MSG_ATTR, FRONT_PRODUCT_STATUS_CHANGE_SUCCESS);
+			}
+			// TODO 为后期业务扩展预留修改的空间
+			
 			
 		}
 		

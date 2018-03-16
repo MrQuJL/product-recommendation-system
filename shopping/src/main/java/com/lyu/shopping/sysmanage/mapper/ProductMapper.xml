@@ -89,7 +89,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<where>
 			AND A.category1_id = B.category1_id
 			AND A.category2_id = C.category2_id
-			AND A.is_show = 1
 			AND A.is_deleted = 0
 			<if test="productName != null">
 				AND product_name = #{productName}
@@ -107,7 +106,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 上架或者下架商品,参数为1就是上架，参数为0就是下架 -->
 	<update id="updateProductStatus">
 		UPDATE shopping_product SET is_show = #{param2}
-		WHERE product_id = #{param1} AND is_deleted = 0
+		WHERE product_id = #{param1}
 	</update>
 	
 	<!-- 添加商品 -->
