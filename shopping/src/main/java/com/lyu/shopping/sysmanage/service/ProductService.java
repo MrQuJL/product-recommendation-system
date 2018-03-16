@@ -26,8 +26,16 @@ public interface ProductService {
 	
 	/**
 	 * 查询出所有商品的名称
-	 * @return
+	 * @return 所有商品的名称
 	 */
 	List<String> listAllProductName();
+	
+	/**
+	 * 更新商品的状态
+	 * @param productId 要被更新状态的商品id
+	 * @param changeValue 1上架，0下架
+	 * @return 更新成功与否
+	 */
+	boolean updateProductStatus(Long productId, Integer changeValue);
 	
 }

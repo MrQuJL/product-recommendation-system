@@ -23,8 +23,16 @@ public interface ProductMapper {
 	
 	/**
 	 * 查询出所有商品的名称
-	 * @return
+	 * @return 所有商品的名称
 	 */
 	List<String> listAllProductName();
+	
+	/**
+	 * 更新商品的状态
+	 * @param productId 要被更新状态的商品id
+	 * @param changeValue 1上架，0下架
+	 * @return 受影响的行数，1表示更新成功
+	 */
+	int updateProductStatus(Long productId, Integer changeValue);
 	
 }

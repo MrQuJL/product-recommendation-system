@@ -57,10 +57,24 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<String> listAllProductName() {
-		
 		List<String> productNames = this.productMapper.listAllProductName();
 		
 		return productNames;
+	}
+
+	@Override
+	public boolean updateProductStatus(Long productId, Integer changeValue) {
+		// 合法性判断
+		if (productId == null || changeValue == null) {
+			return false;
+		}
+		boolean flag = false;
+		int rows = this.productMapper.updateProductStatus(productId, changeValue);
+		if (rows > 0) {
+			flag = true;
+		}
+		
+		return flag;
 	}
 
 }

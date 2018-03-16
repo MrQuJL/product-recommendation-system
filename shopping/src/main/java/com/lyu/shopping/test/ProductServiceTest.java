@@ -27,12 +27,11 @@ public class ProductServiceTest {
 	}
 	
 	/**
-	 * 测试查询一级类目列表
+	 * 测试查询商品列表
 	 */
 	@Test
 	public void testListProduct() {
-		ProductService productService = (ProductService) 
-			this.application.getBean("productService");
+		ProductService productService = (ProductService) this.application.getBean("productService");
 		
 		Product product = new Product();
 		product.setProductId(1L);;
@@ -41,6 +40,23 @@ public class ProductServiceTest {
 		
 		for (ProductDTO tempProductDTO : pageInfo.getList()) {
 			System.out.println(tempProductDTO);
+		}
+		
+	}
+	
+	/**
+	 * 测试更新商品状态
+	 */
+	@Test
+	public void testUpdateProductStatus() {
+		ProductService productService = (ProductService) this.application.getBean("productService");
+		
+		boolean flag = productService.updateProductStatus(1L, 1);
+		
+		if (flag) {
+			System.out.println("隐藏商品1L成功");
+		} else {
+			System.out.println("隐藏商品1L失败");
 		}
 		
 	}

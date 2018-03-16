@@ -454,21 +454,20 @@
 			return true;
 		}
 	};
-	/*类目-停用*/
+	/*商品-下架*/
 	function member_stop(obj, id) {
 		layer.confirm(
-			'确认要关闭吗？',
+			'确认要下架吗？',
 			{
 				icon : 0,
 			},
 			function(index) {
 				$.ajax({
 					type : "post",
-					url : "${ctx}/sysmgr/category/product/showOrHideProduct",
-					data : {"changeValue" : 0, "productId" : id},
+					url : "${ctx}/sysmgr/product/showOrHideProduct/" + "0/" + id,
 					dataType : "json",
 					success : function(data) {
-						if (data.message == "success") { // 隐藏该商品成功
+						if (data.message == "success") { // 下架该商品成功
 							$(obj).parents("tr")
 								.find(".td-manage")
 								.prepend('<a style="text-decoration:none" class="btn btn-xs " onClick="member_start(this,' + id
@@ -485,8 +484,8 @@
 							});
 							// 重新查询一下
 							productMgr.listProduct(1, 5);
-						} else { // 隐藏该商品失败
-							layer.msg('隐藏该商品失败，请联系系统管理员!', {
+						} else { // 下架该商品失败
+							layer.msg('下架该商品失败，请联系系统管理员!', {
 								icon : 5,
 								time : 1000
 							});
@@ -495,29 +494,28 @@
 				});
 			});
 	}
-	/*类目-启用*/
+	/*商品-上架*/
 	function member_start(obj, id) {
 		layer
 			.confirm(
-					'确认要显示吗？',
+					'确认要上架吗？',
 					{
 						icon : 0,
 					},
 					function(index) {
 						$.ajax({
 							type : "post",
-							url : "${ctx}/sysmgr/category/product/showOrHideProduct",
-							data : {"changeValue" : 1, "productId" : id},
+							url : "${ctx}/sysmgr/product/showOrHideProduct" + "1/" + id,
 							dataType : "json",
 							success : function(data) {
-								if (data.message == "success") { // 显示该商品成功
+								if (data.message == "success") { // 上架该商品成功
 									$(obj).parents("tr")
 										.find(".td-manage")
 										.prepend('<a style="text-decoration:none" class="btn btn-xs btn-success" onClick="member_stop(this,' + id 
-											+ ')" href="javascript:;" title="关闭"><i class="fa fa-check  bigger-120"></i></a>');
+											+ ')" href="javascript:;" title="下架"><i class="fa fa-check  bigger-120"></i></a>');
 									$(obj).parents("tr")
 										.find(".td-status")
-										.html('<span class="label label-success radius">显示</span>');
+										.html('<span class="label label-success radius">上架</span>');
 									$(obj).remove();
 									
 									layer.msg('显示!', {
@@ -526,8 +524,8 @@
 									});
 									// 重新查询一次查询
 									productMgr.listProduct(1, 5);
-								} else { // 显示该商品失败
-									layer.msg('显示该商品失败，请联系系统管理员!', {
+								} else { // 上架该商品失败
+									layer.msg('上架该商品失败，请联系系统管理员!', {
 										icon : 6,
 										time : 1000
 									});
@@ -536,7 +534,7 @@
 						});
 					});
 	}
-	/*类目-删除*/
+	/*商品-删除*/
 	function member_del(obj, id) {
 		layer.confirm('确认要删除吗？', {
 			icon : 0,

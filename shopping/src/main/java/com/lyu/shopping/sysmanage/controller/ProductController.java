@@ -138,4 +138,23 @@ public class ProductController {
 		return map;
 	}
 	
+	/**
+	 * 上架或者下架商品
+	 * @param changeValue 上架下架的标志，0表示下架，1表示上架
+	 * @param productId 要上架/下架的商品id
+	 * @return 上架/下架商品成功/失败的提示消息
+	 */
+	@RequestMapping(value="/showOrHideProduct/{changeValue}/{productId}")
+	public @ResponseBody Map<String, Object> showOrHideProduct(@PathVariable(value="changeValue") Integer changeValue,
+		@PathVariable(value="productId") Long productId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (changeValue.equals(1)) { // 上架商品
+			
+		} else { // 下架商品
+			
+		}
+		
+		return map;
+	}
+	
 }

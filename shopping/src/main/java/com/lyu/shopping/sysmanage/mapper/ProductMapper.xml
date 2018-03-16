@@ -104,8 +104,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY A.product_id
 	</select>
 	
-	<!-- 显示或者隐藏商品,参数为1就是显示，参数为0就是隐藏 -->
-	<update id="updateShowFlag">
+	<!-- 上架或者下架商品,参数为1就是上架，参数为0就是下架 -->
+	<update id="updateProductStatus">
 		UPDATE shopping_product SET is_show = #{param2}
 		WHERE product_id = #{param1} AND is_deleted = 0
 	</update>
