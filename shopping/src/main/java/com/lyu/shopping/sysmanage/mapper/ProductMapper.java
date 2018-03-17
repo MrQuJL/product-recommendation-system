@@ -35,4 +35,12 @@ public interface ProductMapper {
 	 */
 	int updateProductStatus(Long productId, Integer changeValue);
 	
+	/**
+	 * 添加商品
+	 * @param product 要添加的商品
+	 * @return 受影响的行数,返回1表示添加成功
+	 */
+	int saveProduct(Product product);
+	
+	
 }

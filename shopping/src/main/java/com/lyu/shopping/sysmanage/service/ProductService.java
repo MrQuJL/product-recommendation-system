@@ -38,4 +38,11 @@ public interface ProductService {
 	 */
 	boolean updateProductStatus(Long productId, Integer changeValue);
 	
+	/**
+	 * 添加商品
+	 * @param product 要添加的商品
+	 * @return 受影响的行数,返回1表示添加成功
+	 */
+	boolean saveProduct(Product product);
+	
 }

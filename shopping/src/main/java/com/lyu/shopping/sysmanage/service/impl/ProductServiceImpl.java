@@ -1,5 +1,6 @@
 package com.lyu.shopping.sysmanage.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,10 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
-import com.lyu.shopping.sysmanage.dto.Category2DTO;
 import com.lyu.shopping.sysmanage.dto.ProductDTO;
+import com.lyu.shopping.sysmanage.entity.Category2;
 import com.lyu.shopping.sysmanage.entity.Product;
+import com.lyu.shopping.sysmanage.mapper.Category2Mapper;
 import com.lyu.shopping.sysmanage.mapper.ProductMapper;
 import com.lyu.shopping.sysmanage.service.ProductService;
 
@@ -26,6 +28,9 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductMapper productMapper;
+	
+	@Autowired
+	private Category2Mapper category2Mapper;
 	
 	@Override
 	public PageInfo<ProductDTO> listProductPage(Product product, PageParam pageParam) {
@@ -74,6 +79,32 @@ public class ProductServiceImpl implements ProductService {
 			flag = true;
 		}
 		
+		return flag;
+	}
+
+	@Override
+	public boolean saveProduct(Product product) {
+		if (product == null || product.getCategory2Id() == null) {
+			return false;
+		}
+		
+		// 根据二级类目的id找到所属的一级类目
+		Category2 category2 = this.category2Mapper.getCategory2ById(product.getCategory2Id());
+		product.setCategory1Id(category2.getCategory1Id());
+		// 设置商品的点击量
+		product.setHits(0L);
+		// 设置商品的创建时间
+		product.setGmtCreate(new Date());
+		// 设置商品的修改时间
+		product.setGmtModified(new Date());
+		// 设置商品的修改标识
+		product.setDelFlag(0);
+		
+		boolean flag = false;
+		int rows = this.productMapper.saveProduct(product);
+		if (rows > 0) {
+			flag = true;
+		}
 		return flag;
 	}
 

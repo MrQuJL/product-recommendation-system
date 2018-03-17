@@ -60,4 +60,32 @@ public class ProductServiceTest {
 		
 	}
 	
+	/**
+	 * 测试更新商品状态
+	 */
+	@Test
+	public void testSaveProduct() {
+		ProductService productService = (ProductService) this.application.getBean("productService");
+		
+		Product product = new Product();
+		product.setProductName("测试商品");
+		product.setCategory2Id(15L);
+		product.setPurchasePrice(100.0);
+		product.setSalePrice(230.0);
+		product.setInventory(200);
+		product.setImgSrc("/product/c");
+		product.setDescription("测试描述");
+		product.setShowFlag(1);
+		
+		boolean flag = productService.saveProduct(product);
+		
+		if (flag) {
+			System.out.println("添加商品成功");
+		}else {
+			System.out.println("添加商品成功");
+		}
+	}
+	
+	
+	
 }

@@ -13,34 +13,34 @@ import java.util.Date;
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = -9050786795231425743L;
-	
+
 	private Long productId;
-	
+
 	private String productName;
-	
+
 	private Long category1Id;
-	
+
 	private Long category2Id;
-	
+
 	private Double purchasePrice;
-	
+
 	private Double salePrice;
-	
+
 	private Integer inventory;
-	
+
 	// 商品的点击量
 	private Long hits;
-	
+
 	private String imgSrc;
-	
+
 	private String description;
-	
+
 	private Date gmtCreate;
-	
+
 	private Date gmtModified;
-	
+
 	private Integer showFlag;
-	
+
 	private Integer delFlag;
 
 	public Long getProductId() {
@@ -138,7 +138,7 @@ public class Product implements Serializable {
 	public void setGmtModified(Date gmtModified) {
 		this.gmtModified = gmtModified;
 	}
-	
+
 	public Integer getShowFlag() {
 		return showFlag;
 	}
