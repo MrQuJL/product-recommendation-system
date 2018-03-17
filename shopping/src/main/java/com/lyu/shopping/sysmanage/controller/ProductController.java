@@ -1,9 +1,13 @@
 package com.lyu.shopping.sysmanage.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
@@ -209,6 +214,46 @@ public class ProductController {
 		}
 		
 		return map;
+	}
+	
+	/**
+	 * 处理添加或修改商品的请求
+	 * @param product 要被添加或者修改的商品
+	 * @return
+	 */
+	@RequestMapping("/saveProduct")
+	public String saveProduct(MultipartFile uploadFile, HttpServletRequest request) {
+		
+//将我们的文件保存到项目中某个指定的文件加下面
+/*		String rootPath = "upload"
+*/		String rootPath = request.getServletContext().getRealPath("upload");
+		//将上传的图片写入指定的文件
+		if(uploadFile!=null){
+			//获取上传文件的名称
+			String fileName = uploadFile.getOriginalFilename();
+			String suffix = fileName.substring(fileName.lastIndexOf("."));
+			//为了保险起见,我们给上传的图片重新指定一个名称
+			String tempFileName = UUID.randomUUID().toString()+suffix;
+			//获取上传上传的后缀
+			File fileTemp = new File(rootPath);
+			if(!fileTemp.exists()){
+				fileTemp.mkdir();
+			}
+			
+			File file = new File(rootPath+"\\"+tempFileName);
+			try {
+				//讲上传的文件写入指定路径
+				uploadFile.transferTo(file);
+			} catch (IllegalStateException e) {
+ 				e.printStackTrace();
+			} catch (IOException e) {
+ 				e.printStackTrace();
+			}
+			
+			request.setAttribute("uploadFilePath", "upload/"+tempFileName);
+		}
+		
+		return "/goto";
 	}
 	
 }

@@ -35,28 +35,27 @@
 	<script src="${ctxJsAndCss}/assets/laydate/laydate.js"></script>
 	<script src="${ctxJsAndCss}/Widget/icheck/jquery.icheck.min.js"></script>
 	<script src="${ctxJsAndCss}/Widget/Validform/5.3.2/Validform.min.js"></script>
-	<script src="${ctxJsAndCss}/Widget/ueditor/1.4.3/ueditor.config.js"></script>
-	<script src="${ctxJsAndCss}/Widget/ueditor/1.4.3/ueditor.all.min.js"></script>
-	<script src="${ctxJsAndCss}/Widget/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
 	<script src="${ctxJsAndCss}/js/lrtk.js"></script>
+	<script src="${ctxJsAndCss}/js/jquery.form.js"></script>
 </head>
 <body>
 	<div class="clearfix" id="add_picture">
 		<div class="page_style">
 			<div class="type_title" style="font-size:14px;margin-left:24px;margin-top:10px;">添加商品</div>
-			<form action="" method="post" class="form form-horizontal"
-				id="form-article-add">
+			<form action="${ctx}/sysmgr/product/saveProduct" method="post" 
+				class="form form-horizontal" id="form-product-add" enctype="multipart/form-data">
 				<div class=" clearfix cl">
 					<label class="form-label col-6">商品名称：</label>
 					<div class="formControls col-6">
+						<input type="hidden" value="" name="productId" id="productId">
 						<input type="text" class="input-text" value="" placeholder=""
-							id="" name="">
+							id="productName" name="productName">
 					</div>
 				</div>
 				<div class="clearfix cl">
 					<label class="form-label col-6">二级类目：</label>
 					<div class="formControls col-6">
-						<select id="category2Id" name="category2" class="text_add" 
+						<select id="category2Id" name="category2Id" class="text_add" 
 							style="width:168px;margin-left:0;">
 							<option value="0">请选择商品所属类目</option>
 					        <c:forEach items="${category2List}" var="category2">
@@ -65,25 +64,25 @@
 					    </select>
 					</div>
 				</div>
-				<div class=" clearfix cl">
+				<div class="clearfix cl">
 					<label class="form-label col-6">购买价格：</label>
 					<div class="formControls col-6">
 						<input type="text" class="input-text" value="" placeholder=""
-							id="" name="">
+							id="purchasePrice" name="purchasePrice">
 					</div>
 				</div>
 				<div class=" clearfix cl">
 					<label class="form-label col-6">销售价格：</label>
 					<div class="formControls col-6">
 						<input type="text" class="input-text" value="" placeholder=""
-							id="" name="">
+							id="salePrice" name="salePrice">
 					</div>
 				</div>
 				<div class=" clearfix cl">
 					<label class="form-label col-6">商品库存：</label>
 					<div class="formControls col-6">
 						<input type="text" class="input-text" value="" placeholder=""
-							id="" name="">
+							id="inventory" name="inventory">
 					</div>
 				</div>
 				<div class="clearfix cl">
@@ -106,7 +105,7 @@
 				<div class="clearfix cl">
 					<label class="form-label col-2">商品描述：</label>
 					<div class="formControls col-10">
-						<textarea name="" cols="" rows="" class="textarea"
+						<textarea name="description" cols="" rows="" class="textarea"
 							placeholder="说点什么...最少输入10个字符" datatype="*10-100"
 							dragonfly="true" nullmsg="备注不能为空！"
 							onKeyUp="textarealength(this,200)"></textarea>
@@ -120,13 +119,13 @@
 					<label class="form-label col-2">图片上传：</label>
 					<div class="formControls col-10">
 						<!-- 上传文件组件 -->
-						<input id="imgUpload" type="file" />
+						<input id="imgSrc" type="file" name="uploadFile" />
 						<!-- 上传文件组件 -->
 					</div>
 				</div>
 				<div class="clearfix cl">
 					<div class="Button_operation">
-						<button onClick="article_save_submit();"
+						<button onClick=""
 							class="btn btn-primary radius" type="submit">
 							<i class="icon-save "></i>添加
 						</button>
@@ -160,9 +159,6 @@
 				$(".page_right_style").width($(window).width() - 220);
 			});
 		});
-		$(function() {
-			var ue = UE.getEditor('editor');
-		});
 		var code;
 
 		function showCode(str) {
@@ -172,10 +168,53 @@
 			code.append("<li>" + str + "</li>");
 		}
 	</script>
+	
+	<!-- 提交表单 -->
+	<script type="text/javascript">
+		var productMgr = {
+			// 保存(添加或修改)商品
+			saveProduct : function() {
+				// 获取商品id
+				var productId = $("#productId").val();
+				// 获取商品名称
+				var productName = $("#productName").val();
+				// 获取商品所属二级类目
+				var category2Id = $("#category2Id").val();
+				// 获取商品的购买价格
+				var purchasePrice = $("#purchasePrice").val();
+				// 获取商品的销售价格
+				var salePrice = $("#salePrice").val();
+				// 获取商品的状态
+				var showFlag = $("#showFlag").val();
+				// 获取商品描述
+				var description = $("#description").val();
+				
+				// 构造商品对象
+				var product = {
+					
+				};
+				var formObj = $("#form-product-add").serializeArray();
+				$.each(formObj,function(i,item){
+					product[item.name] = item.value;
+				});
+				alert(JSON.stringify(product));
+				
+				$("#form-product-add").ajaxSubmit({
+					type : "post",
+					url : "${ctx}/sysmgr/product/saveProduct",
+					contentType : "application/x-www-form-urlencoded; charset=utf-8",
+					success : function(datas) {
+						alert(data);
+					}
+				});
+			}
+		}
+	</script>
+	
 	<script type="text/javascript">
 		$("#category2Id").select2();
 		//$("#imgUpload").fileinput();
-		$("#imgUpload").fileinput({'showUpload':false, 'previewFileType':'any'});
+		$("#imgSrc").fileinput({'showUpload':false, 'previewFileType':'any'});
 	</script>
 </body>
 </html>
