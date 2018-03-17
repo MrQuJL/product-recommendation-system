@@ -222,11 +222,13 @@ public class ProductController {
 	 * @return
 	 */
 	@RequestMapping("/saveProduct")
-	public String saveProduct(MultipartFile uploadFile, HttpServletRequest request) {
+	public String saveProduct(MultipartFile uploadFile, HttpServletRequest request,
+		Product product) {
 		
-//将我们的文件保存到项目中某个指定的文件加下面
-/*		String rootPath = "upload"
-*/		String rootPath = request.getServletContext().getRealPath("upload");
+		System.out.println(product);
+		
+		//将我们的文件保存到项目中某个指定的文件加下面
+		String rootPath = request.getServletContext().getRealPath("upload");
 		//将上传的图片写入指定的文件
 		if(uploadFile!=null){
 			//获取上传文件的名称

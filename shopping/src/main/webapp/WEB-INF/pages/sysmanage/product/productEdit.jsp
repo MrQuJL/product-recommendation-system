@@ -169,48 +169,6 @@
 		}
 	</script>
 	
-	<!-- 提交表单 -->
-	<script type="text/javascript">
-		var productMgr = {
-			// 保存(添加或修改)商品
-			saveProduct : function() {
-				// 获取商品id
-				var productId = $("#productId").val();
-				// 获取商品名称
-				var productName = $("#productName").val();
-				// 获取商品所属二级类目
-				var category2Id = $("#category2Id").val();
-				// 获取商品的购买价格
-				var purchasePrice = $("#purchasePrice").val();
-				// 获取商品的销售价格
-				var salePrice = $("#salePrice").val();
-				// 获取商品的状态
-				var showFlag = $("#showFlag").val();
-				// 获取商品描述
-				var description = $("#description").val();
-				
-				// 构造商品对象
-				var product = {
-					
-				};
-				var formObj = $("#form-product-add").serializeArray();
-				$.each(formObj,function(i,item){
-					product[item.name] = item.value;
-				});
-				alert(JSON.stringify(product));
-				
-				$("#form-product-add").ajaxSubmit({
-					type : "post",
-					url : "${ctx}/sysmgr/product/saveProduct",
-					contentType : "application/x-www-form-urlencoded; charset=utf-8",
-					success : function(datas) {
-						alert(data);
-					}
-				});
-			}
-		}
-	</script>
-	
 	<script type="text/javascript">
 		$("#category2Id").select2();
 		//$("#imgUpload").fileinput();
