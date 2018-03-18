@@ -131,7 +131,7 @@ public class ProductController {
 	 */
 	@RequestMapping(value="/gotoProductEdit/{productId}")
 	public String gotoProductEdit(@PathVariable(value="productId") Long productId, HttpSession session,
-		HttpRequest request) {
+		HttpServletRequest request) {
 		if (session.getAttribute("category2List") == null) { // 如果没有加载二级类目列表就加载
 			List<Category2DTO> category2List = category2Service.listCategory2(null);
 			session.setAttribute("category2List", category2List);
@@ -139,10 +139,8 @@ public class ProductController {
 		if (productId != -1) { // 为修改商品的请求
 			System.out.println("要修改的商品id：" + productId);
 			// 根据id获取该商品的详细信息
-			
-			
-			
-			
+			Product product = this.productService.getProductByProductId(productId);
+			request.setAttribute("product", product);
 		} else {
 			System.out.println("这是新增商品的请求");
 			

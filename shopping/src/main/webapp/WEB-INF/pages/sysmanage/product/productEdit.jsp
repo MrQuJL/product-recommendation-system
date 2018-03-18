@@ -47,8 +47,8 @@
 				<div class=" clearfix cl">
 					<label class="form-label col-6">商品名称：</label>
 					<div class="formControls col-6">
-						<input type="hidden" value="" name="productId" id="productId">
-						<input type="text" class="input-text" value="" placeholder=""
+						<input type="hidden" value="${product.productId}" name="productId" id="productId">
+						<input type="text" class="input-text" value="${product.productName}" placeholder=""
 							id="productName" name="productName">
 					</div>
 				</div>
@@ -56,7 +56,7 @@
 					<label class="form-label col-6">二级类目：</label>
 					<div class="formControls col-6">
 						<select id="category2Id" name="category2Id" class="text_add" 
-							style="width:168px;margin-left:0;">
+							style="width:168px;margin-left:0;" value="${product.category2Id}">
 					        <c:forEach items="${category2List}" var="category2">
 					        	<option value="${category2.category2Id}">${category2.category2Name}</option>
 					        </c:forEach>
@@ -66,21 +66,21 @@
 				<div class="clearfix cl">
 					<label class="form-label col-6">购买价格：</label>
 					<div class="formControls col-6">
-						<input type="text" class="input-text" value="" placeholder=""
+						<input type="text" class="input-text" value="${product.purchasePrice}" placeholder=""
 							id="purchasePrice" name="purchasePrice">
 					</div>
 				</div>
 				<div class=" clearfix cl">
 					<label class="form-label col-6">销售价格：</label>
 					<div class="formControls col-6">
-						<input type="text" class="input-text" value="" placeholder=""
+						<input type="text" class="input-text" value="${product.salePrice}" placeholder=""
 							id="salePrice" name="salePrice">
 					</div>
 				</div>
 				<div class=" clearfix cl">
 					<label class="form-label col-6">商品库存：</label>
 					<div class="formControls col-6">
-						<input type="text" class="input-text" value="" placeholder=""
+						<input type="text" class="input-text" value="${product.inventory}" placeholder=""
 							id="inventory" name="inventory">
 					</div>
 				</div>
@@ -89,12 +89,21 @@
 					<div class="formControls col-6">
 						<span class="add_content"> &nbsp;&nbsp;
 							<label>
-								<input id="show" name="showFlag" type="radio" checked="checked"
+								<input id="show" name="showFlag" type="radio" 
+								<c:choose>
+									<c:when test="${product.showFlag == 1}">checked="checked"</c:when>
+									<c:otherwise></c:otherwise>
+								</c:choose>
 									class="ace" value="1">
 								<span class="lbl">上架</span>
 							</label>&nbsp;&nbsp;&nbsp;
 							<label>
-								<input id="hide" name="showFlag" type="radio" class="ace" value="0">
+								<input id="hide" name="showFlag" type="radio" 
+								<c:choose>
+									<c:when test="${product.showFlag == 0}">checked="checked"</c:when>
+									<c:otherwise></c:otherwise>
+								</c:choose>
+								class="ace" value="0">
 								<span class="lbl">下架</span>
 							</label>
 						</span>
@@ -107,7 +116,7 @@
 						<textarea name="description" cols="" rows="" class="textarea"
 							placeholder="说点什么...最少输入10个字符" datatype="*10-100"
 							dragonfly="true" nullmsg="备注不能为空！"
-							onKeyUp="textarealength(this,200)"></textarea>
+							onKeyUp="textarealength(this,200)">${product.description}</textarea>
 						<p class="textarea-numberbar">
 							<em class="textarea-length">0</em>/200
 						</p>
@@ -118,7 +127,7 @@
 					<label class="form-label col-2">图片上传：</label>
 					<div class="formControls col-10">
 						<!-- 上传文件组件 -->
-						<input id="imgSrc" type="file" name="uploadFile" />
+						<input id="imgSrc" type="file" name="uploadFile" value="${product.imgSrc}" />
 						<!-- 上传文件组件 -->
 					</div>
 				</div>
