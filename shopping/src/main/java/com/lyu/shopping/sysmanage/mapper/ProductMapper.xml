@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<!-- 根据商品的id查询出它的详细信息 -->
-	<select id="getProductById" parameterType="long" resultMap="productResultMap">
+	<select id="getProductByProductId" parameterType="long" resultMap="productResultMap">
 		SELECT <include refid="all_product_columns" />
 		FROM shopping_product
 		WHERE product_id = #{productId} AND is_deleted = 0

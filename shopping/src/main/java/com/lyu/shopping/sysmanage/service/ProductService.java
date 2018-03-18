@@ -17,6 +17,13 @@ import com.lyu.shopping.sysmanage.entity.Product;
 public interface ProductService {
 	
 	/**
+	 * 根据商品id获取商品的详细信息
+	 * @param productId 要获取的商品id
+	 * @return 商品id为productId的商品的详细信息
+	 */
+	Product getProductByProductId(Long productId);
+	
+	/**
 	 * 分页查询符合条件的商品列表
 	 * @param product 要查询的商品需满足的条件
 	 * @param pageParam 分页信息

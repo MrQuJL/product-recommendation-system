@@ -15,6 +15,13 @@ import com.lyu.shopping.sysmanage.entity.Product;
 public interface ProductMapper {
 	
 	/**
+	 * 根据商品id获取商品的详细信息
+	 * @param productId 要获取的商品id
+	 * @return 商品id为productId的商品的详细信息
+	 */
+	Product getProductByProductId(Long productId);
+	
+	/**
 	 * 查询符合条件的商品列表
 	 * @param product 要查询的商品需满足的条件
 	 * @return 满足条件的商品列表

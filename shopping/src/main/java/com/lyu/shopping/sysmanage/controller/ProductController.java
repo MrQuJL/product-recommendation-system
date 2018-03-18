@@ -1,8 +1,6 @@
 package com.lyu.shopping.sysmanage.controller;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -127,15 +126,28 @@ public class ProductController {
 
 	/**
 	 * 处理前往商品编辑页面的请求
-	 * 进入商品编辑列表时根据修改或者新增标识来对页面进行初始化
+	 * 进入商品编辑列表时根据修改或者新增标识(productId)来对页面进行初始化
 	 * @return
 	 */
-	@RequestMapping(value="/gotoProductEdit")
-	public String gotoProductEdit(HttpSession session) {
-		if (session.getAttribute("category2List") == null) {
+	@RequestMapping(value="/gotoProductEdit/{productId}")
+	public String gotoProductEdit(@PathVariable(value="productId") Long productId, HttpSession session,
+		HttpRequest request) {
+		if (session.getAttribute("category2List") == null) { // 如果没有加载二级类目列表就加载
 			List<Category2DTO> category2List = category2Service.listCategory2(null);
 			session.setAttribute("category2List", category2List);
 		}
+		if (productId != -1) { // 为修改商品的请求
+			System.out.println("要修改的商品id：" + productId);
+			// 根据id获取该商品的详细信息
+			
+			
+			
+			
+		} else {
+			System.out.println("这是新增商品的请求");
+			
+		}
+		
 		return PRODUCT_EDIT_URI;
 	}
 	
@@ -259,7 +271,6 @@ public class ProductController {
 			
 			product.setImgSrc("/images/" + tempFileName);
 			
-//			request.setAttribute("uploadFilePath", tempFileName);
 		}
 		
 		if (product.getProductId() == null) { // 添加商品

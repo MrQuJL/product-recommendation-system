@@ -33,6 +33,17 @@ public class ProductServiceImpl implements ProductService {
 	private Category2Mapper category2Mapper;
 	
 	@Override
+	public Product getProductByProductId(Long productId) {
+		// 如果id为空则为空指针
+		if (productId == null) {
+			return null;
+		}
+		
+		return this.productMapper.getProductByProductId(productId);
+		
+	}
+	
+	@Override
 	public PageInfo<ProductDTO> listProductPage(Product product, PageParam pageParam) {
 		if (product == null) {
 			return null;

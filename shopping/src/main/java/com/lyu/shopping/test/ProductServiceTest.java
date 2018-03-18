@@ -86,6 +86,17 @@ public class ProductServiceTest {
 		}
 	}
 	
-	
+	/**
+	 * 测试根据商品id获取商品的详细信息
+	 */
+	@Test
+	public void testGetProductByProductId() {
+		ProductService productService = (ProductService) this.application.getBean("productService");
+		
+		Product product = productService.getProductByProductId(1L);
+		
+		System.out.println(product);
+		
+	}
 	
 }

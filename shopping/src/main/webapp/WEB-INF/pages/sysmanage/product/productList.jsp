@@ -129,8 +129,8 @@
 									"						href=\"javascript:;\" title=\"  "+ hoverTitle +"  \" class=\"btn btn-xs " + btnStyle + "\">"+
 									"						<i class=\"fa " + checkOrClose + " bigger-120\"></i>"+
 									"					</a>"+
-									"					<a title=\"编辑\" onclick=\"productMgr.productEdit(" + productList[i].productId + ")\" "+
-									"						href=\"javascript:;\" class=\"btn btn-xs btn-info\">"+
+									"					<a title=\"编辑\" "+
+									"						href=\"${ctx}/sysmgr/product/gotoProductEdit/" + productList[i].productId + "\" class=\"btn btn-xs btn-info\">"+
 									"						<i class=\"fa fa-edit bigger-120\"></i>"+
 									"					</a>"+
 									"					<a title=\"删除\" href=\"javascript:;\" onclick=\"member_del(this," + productList[i].productId + ")\""+
@@ -368,6 +368,7 @@
 							<th width="150px">所属二级类目</th>
 							<th width="100px">市场价</th>
 							<th width="100px">销售价</th>
+							<th width="100px">商品图片</th>
 							<th width="180px">添加时间</th>
 							<th width="70px">状态</th>
 							<th width="250px">操作</th>
