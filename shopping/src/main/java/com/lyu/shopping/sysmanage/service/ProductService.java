@@ -52,4 +52,11 @@ public interface ProductService {
 	 */
 	boolean saveProduct(Product product);
 	
+	/**
+	 * 修改商品
+	 * @param product 要修改的商品
+	 * @return true表示修改成功，false表示修改失败
+	 */
+	boolean updateProduct(Product product);
+	
 }

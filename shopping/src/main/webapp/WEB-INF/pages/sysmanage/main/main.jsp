@@ -302,8 +302,8 @@
 								</a>
 							</li>
 							<li class="home">
-								<a href="${ctx}/sysmgr/product/gotoProductEdit/-1" name="" target="iframe" title="编辑产品" class="iframeurl">
-									<i class="icon-double-angle-right"></i>编辑产品
+								<a href="${ctx}/sysmgr/product/gotoProductEdit/-1" name="" target="iframe" title="添加商品" class="iframeurl">
+									<i class="icon-double-angle-right"></i>添加商品
 								</a>
 							</li>
 						</ul>

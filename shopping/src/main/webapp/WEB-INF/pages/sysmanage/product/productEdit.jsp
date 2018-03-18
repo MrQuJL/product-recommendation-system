@@ -122,13 +122,15 @@
 						</p>
 					</div>
 				</div>
-
 				<div class="clearfix cl">
-					<label class="form-label col-2">图片上传：</label>
+					<input type="hidden" name="imgSrc" value="${product.imgSrc}">
+					<label class="form-label col-2">原图片：</label>
+					<img src="${product.imgSrc}" />
+				</div>
+				<div class="clearfix cl">
+					<label class="form-label col-2">新图片上传：</label>
 					<div class="formControls col-10">
-						<!-- 上传文件组件 -->
-						<input id="imgSrc" type="file" name="uploadFile" value="${product.imgSrc}" />
-						<!-- 上传文件组件 -->
+						<input id="imgSrc" type="file" name="uploadFile"/>
 					</div>
 				</div>
 				<div class="clearfix cl">

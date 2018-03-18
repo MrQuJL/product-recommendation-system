@@ -344,7 +344,7 @@
 		</div>
 		<div class="sort_style">
 			<div class="border clearfix">
-				<span class="l_f"> <a href="${ctx}/sysmgr/product/gotoProductEdit" id="sort_add"
+				<span class="l_f"> <a href="${ctx}/sysmgr/product/gotoProductEdit/-1" id="sort_add"
 					class="btn btn-warning"><i class="fa fa-plus"></i>添加商品</a> <a
 					href="javascript:productMgr.removeProductBatch();" class="btn btn-danger"><i
 						class="fa fa-trash"></i> 批量删除</a>

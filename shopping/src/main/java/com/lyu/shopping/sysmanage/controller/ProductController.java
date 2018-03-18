@@ -95,7 +95,7 @@ public class ProductController {
 	/**
 	 * 上传的图片所在的图片服务器的地址
 	 */
-	private static final String IMG_SERVER_PATH = "D:/file";
+	private static final String IMG_SERVER_PATH = "D:/file/product";
 	
 	@Autowired
 	private Category1Service category1Service;
@@ -245,7 +245,8 @@ public class ProductController {
 	public String saveProduct(MultipartFile uploadFile, HttpServletRequest request,
 		Product product) {
 		// 有图片就上传图片
-		if(uploadFile!=null){
+		if(uploadFile != null && uploadFile.getOriginalFilename() != null &&
+			uploadFile.getOriginalFilename() != ""){
 			//获取上传文件的名称
 			String fileName = uploadFile.getOriginalFilename();
 			String suffix = fileName.substring(fileName.lastIndexOf("."));
@@ -253,11 +254,10 @@ public class ProductController {
 			String tempFileName = UUID.randomUUID().toString()+suffix;
 			File fileTemp = new File(IMG_SERVER_PATH);
 			if(!fileTemp.exists()){
-				fileTemp.mkdir();
+				fileTemp.mkdirs();
 			}
 			
 			File file = new File(IMG_SERVER_PATH  + "/" +  tempFileName);
-			System.out.println(IMG_SERVER_PATH + "/" + tempFileName);
 			try {
 				//讲上传的文件写入指定路径
 				uploadFile.transferTo(file);
@@ -267,7 +267,18 @@ public class ProductController {
  				e.printStackTrace();
 			}
 			
-			product.setImgSrc("/images/" + tempFileName);
+			// 先把原来在服务器的图片删掉，再为商品赋新的图片的url
+			System.out.println(product.getImgSrc());
+			// 获取原服务器上图片的存储位置
+			String absolutePath = product.getImgSrc().replaceAll("/images/product", IMG_SERVER_PATH);
+			File originPic = new File(absolutePath);
+			if (originPic.exists()) {
+				originPic.delete();
+			}
+			
+			product.setImgSrc("/images/product/" + tempFileName);
+			
+			
 			
 		}
 		
@@ -283,9 +294,18 @@ public class ProductController {
 			
 		} else { // 修改商品
 			
+			System.out.println("进入修改商品的请求");
+			
+			boolean flag = this.productService.updateProduct(product);
+			
+			if (flag) {
+				System.out.println("修改商品成功");
+			} else {
+				System.out.println("修改商品失败");
+			}
 		}
 		
-		return "redirect:/sysmgr/product/gotoProductEdit";
+		return "redirect:/sysmgr/product/gotoProductEdit/-1";
 	}
 	
 }

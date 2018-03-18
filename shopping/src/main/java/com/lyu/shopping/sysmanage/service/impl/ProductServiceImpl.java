@@ -119,4 +119,30 @@ public class ProductServiceImpl implements ProductService {
 		return flag;
 	}
 
+	@Override
+	public boolean updateProduct(Product product) {
+		if (product == null) {
+			return false;
+		}
+		// 查找二级类目所属的一级类目
+		if (product.getCategory2Id() == null) {
+			return false;
+		}
+		Category2 category2 = this.category2Mapper.getCategory2ById(product.getCategory2Id());
+		product.setCategory1Id(category2.getCategory1Id());
+		// 设置商品的图片地址
+		if (product.getImgSrc() == "") {
+			product.setImgSrc(null);
+		}
+		// 刷新修改时间
+		product.setGmtModified(new Date());
+		
+		boolean flag = false;
+		int rows = this.productMapper.updateProduct(product);
+		if (rows > 0) {
+			flag = true;
+		}
+		return flag;
+	}
+
 }

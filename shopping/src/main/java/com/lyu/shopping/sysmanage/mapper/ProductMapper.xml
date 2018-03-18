@@ -126,14 +126,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="productName != null">
 				product_name = #{productName},
 			</if>
-			<if test="productRecord != null">
-				product_record = #{productRecord},
+			<if test="category2Id != null">
+				category2_id = #{category2Id},
 			</if>
 			<if test="category1Id != null">
 				category1_id = #{category1Id},
 			</if>
+			<if test="purchasePrice != null">
+				purchase_price = #{purchasePrice},
+			</if>
+			<if test="salePrice != null">
+				sale_price = #{salePrice},
+			</if>
+			<if test="inventory != null">
+				inventory = #{inventory},
+			</if>
 			<if test="showFlag != null">
 				is_show = #{showFlag},
+			</if>
+			<if test="description != null">
+				description = #{description},
+			</if>
+			<if test="imgSrc != null">
+				img_src = #{imgSrc},
 			</if>
 			<if test="gmtModified != null">
 				gmt_modified = #{gmtModified},
@@ -141,7 +156,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</set>
 		<where>
 			<if test="productId != null">
-				AND product_id = #{productId}
+				AND product_id = #{productId} AND is_deleted = 0
 			</if>
 		</where>
 	</update>

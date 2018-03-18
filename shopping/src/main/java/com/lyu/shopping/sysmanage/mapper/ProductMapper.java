@@ -49,5 +49,11 @@ public interface ProductMapper {
 	 */
 	int saveProduct(Product product);
 	
+	/**
+	 * 修改商品
+	 * @param product 要修改的商品
+	 * @return 受影响的行数，1表示修改成功
+	 */
+	int updateProduct(Product product);
 	
 }
