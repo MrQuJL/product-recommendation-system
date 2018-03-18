@@ -28,6 +28,7 @@
    	
    	<!--对静态资源文件的访问-->
  	<mvc:resources mapping="/jsAndCss/**" location="/jsAndCss/" />
+ 	<mvc:resources mapping="/product/**" location="/product/" />
    	
    	<!-- springmvc的拦截器 -->
    	<mvc:interceptors>

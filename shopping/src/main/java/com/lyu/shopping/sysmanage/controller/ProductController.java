@@ -91,6 +91,11 @@ public class ProductController {
 	 */
 	private static final String FRONT_PRODUCT_STATUS_CHANGE_FAILED = "failed";
 	
+	/**
+	 * 上传的图片所在的图片服务器的地址
+	 */
+	private static final String IMG_SERVER_PATH = "/product";
+	
 	@Autowired
 	private Category1Service category1Service;
 	
@@ -124,8 +129,11 @@ public class ProductController {
 	 * @return
 	 */
 	@RequestMapping(value="/gotoProductEdit")
-	public String gotoProductEdit() {
-		
+	public String gotoProductEdit(HttpSession session) {
+		if (session.getAttribute("category2List") == null) {
+			List<Category2DTO> category2List = category2Service.listCategory2(null);
+			session.setAttribute("category2List", category2List);
+		}
 		return PRODUCT_EDIT_URI;
 	}
 	
@@ -224,25 +232,20 @@ public class ProductController {
 	@RequestMapping("/saveProduct")
 	public String saveProduct(MultipartFile uploadFile, HttpServletRequest request,
 		Product product) {
-		
-		System.out.println(product);
-		
-		//将我们的文件保存到项目中某个指定的文件加下面
-		String rootPath = request.getServletContext().getRealPath("upload");
-		//将上传的图片写入指定的文件
+		// 有图片就上传图片
 		if(uploadFile!=null){
 			//获取上传文件的名称
 			String fileName = uploadFile.getOriginalFilename();
 			String suffix = fileName.substring(fileName.lastIndexOf("."));
-			//为了保险起见,我们给上传的图片重新指定一个名称
+			//为了保险起见,给上传的图片重新指定一个名称
 			String tempFileName = UUID.randomUUID().toString()+suffix;
 			//获取上传上传的后缀
-			File fileTemp = new File(rootPath);
+			File fileTemp = new File(IMG_SERVER_PATH);
 			if(!fileTemp.exists()){
 				fileTemp.mkdir();
 			}
 			
-			File file = new File(rootPath+"\\"+tempFileName);
+			File file = new File(IMG_SERVER_PATH + "/" + tempFileName);
 			try {
 				//讲上传的文件写入指定路径
 				uploadFile.transferTo(file);
@@ -252,10 +255,26 @@ public class ProductController {
  				e.printStackTrace();
 			}
 			
-			request.setAttribute("uploadFilePath", "upload/"+tempFileName);
+			product.setImgSrc(IMG_SERVER_PATH + "/" + tempFileName);
+			
+//			request.setAttribute("uploadFilePath", tempFileName);
 		}
 		
-		return "/goto";
+		if (product.getProductId() == null) { // 添加商品
+			
+			boolean flag = this.productService.saveProduct(product);
+			
+			if (flag) {
+				System.out.println("添加商品成功");
+			} else {
+				System.out.println("添加商品失败");
+			}
+			
+		} else { // 修改商品
+			
+		}
+		
+		return "redirect:/sysmgr/product/gotoProductEdit";
 	}
 	
 }

@@ -57,7 +57,6 @@
 					<div class="formControls col-6">
 						<select id="category2Id" name="category2Id" class="text_add" 
 							style="width:168px;margin-left:0;">
-							<option value="0">请选择商品所属类目</option>
 					        <c:forEach items="${category2List}" var="category2">
 					        	<option value="${category2.category2Id}">${category2.category2Name}</option>
 					        </c:forEach>
