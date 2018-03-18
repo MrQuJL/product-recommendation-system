@@ -59,4 +59,11 @@ public interface ProductService {
 	 */
 	boolean updateProduct(Product product);
 	
+	/**
+	 * 根据商品id删除商品(逻辑删除)
+	 * @param productId 商品id
+	 * @return true表示删除成功
+	 */
+	boolean removeProduct(Long productId);
+	
 }

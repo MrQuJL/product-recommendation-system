@@ -1,5 +1,6 @@
 package com.lyu.shopping.sysmanage.service.impl;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
+import com.lyu.shopping.sysmanage.controller.ProductController;
 import com.lyu.shopping.sysmanage.dto.ProductDTO;
 import com.lyu.shopping.sysmanage.entity.Category2;
 import com.lyu.shopping.sysmanage.entity.Product;
@@ -141,6 +143,28 @@ public class ProductServiceImpl implements ProductService {
 		int rows = this.productMapper.updateProduct(product);
 		if (rows > 0) {
 			flag = true;
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean removeProduct(Long productId) {
+		if (productId == null) {
+			return false;
+		}
+		boolean flag = false;
+		// 先获取商品的详细信息
+		Product product = this.productMapper.getProductByProductId(productId);
+		// 删除商品
+		int rows = this.productMapper.removeProduct(productId);
+		if (rows > 0) {
+			flag = true;
+			// 删除图片
+			String absolutePath = product.getImgSrc().replaceAll("/images/product", ProductController.IMG_SERVER_PATH);
+			File originPic = new File(absolutePath);
+			if (originPic.exists()) {
+				originPic.delete();
+			}
 		}
 		return flag;
 	}

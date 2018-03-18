@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -93,9 +92,20 @@ public class ProductController {
 	private static final String FRONT_PRODUCT_STATUS_CHANGE_FAILED = "failed";
 	
 	/**
+	 * 商品删除成功的提示信息
+	 */
+	private static final String FRONT_PRODUCT_REMOVE_SUCCESS = "success";
+	
+	/**
+	 * 商品删除失败的提示信息
+	 */
+	private static final String FRONT_PRODUCT_REMOVE_FAILED = "failed";
+	
+	
+	/**
 	 * 上传的图片所在的图片服务器的地址
 	 */
-	private static final String IMG_SERVER_PATH = "D:/file/product";
+	public static final String IMG_SERVER_PATH = "D:/file/product";
 	
 	@Autowired
 	private Category1Service category1Service;
@@ -278,8 +288,6 @@ public class ProductController {
 			
 			product.setImgSrc("/images/product/" + tempFileName);
 			
-			
-			
 		}
 		
 		if (product.getProductId() == null) { // 添加商品
@@ -307,5 +315,26 @@ public class ProductController {
 		
 		return "redirect:/sysmgr/product/gotoProductEdit/-1";
 	}
+	
+	/**
+	 * 处理商品的请求
+	 * @param productId 待删除的商品id
+	 * @return 删除商品成功与否的信息
+	 */
+	@RequestMapping("/removeProduct")
+	public @ResponseBody Map<String, Object> removeProduct(Long productId) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		boolean flag = this.productService.removeProduct(productId);
+		
+		if (flag) {
+			resultMap.put(FRONT_MSG_ATTR, FRONT_PRODUCT_REMOVE_SUCCESS);
+		} else {
+			resultMap.put(FRONT_MSG_ATTR, FRONT_PRODUCT_REMOVE_FAILED);
+		}
+		
+		return resultMap;
+	}
+	
 	
 }

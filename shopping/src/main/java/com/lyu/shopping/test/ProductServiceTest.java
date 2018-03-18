@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.github.pagehelper.PageInfo;
-import com.lyu.shopping.common.dto.PageParam;
 import com.lyu.shopping.sysmanage.dto.ProductDTO;
 import com.lyu.shopping.sysmanage.entity.Product;
 import com.lyu.shopping.sysmanage.service.ProductService;
@@ -73,7 +72,7 @@ public class ProductServiceTest {
 		product.setPurchasePrice(100.0);
 		product.setSalePrice(230.0);
 		product.setInventory(200);
-		product.setImgSrc("/product/c");
+		product.setImgSrc("/www");
 		product.setDescription("测试描述");
 		product.setShowFlag(1);
 		
@@ -96,6 +95,19 @@ public class ProductServiceTest {
 		Product product = productService.getProductByProductId(1L);
 		
 		System.out.println(product);
+		
+	}
+	
+	/**
+	 * 测试逻辑删除商品
+	 */
+	@Test
+	public void testRemoveProductByProductId() {
+		ProductService productService = (ProductService) this.application.getBean("productService");
+		
+		boolean flag = productService.removeProduct(57L);
+		
+		System.out.println(flag);
 		
 	}
 	

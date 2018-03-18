@@ -133,7 +133,7 @@
 									"						href=\"${ctx}/sysmgr/product/gotoProductEdit/" + productList[i].productId + "\" class=\"btn btn-xs btn-info\">"+
 									"						<i class=\"fa fa-edit bigger-120\"></i>"+
 									"					</a>"+
-									"					<a title=\"删除\" href=\"javascript:;\" onclick=\"member_del(this," + productList[i].productId + ")\""+
+									"					<a title=\"删除\" href=\"javascript:;\" onclick=\"product_del(this," + productList[i].productId + ")\""+
 									"						class=\"btn btn-xs btn-warning\">"+
 									"						<i class=\"fa fa-trash  bigger-120\"></i>"+
 									"					</a>"+
@@ -558,22 +558,21 @@
 					});
 	}
 	/*商品-删除*/
-	function member_del(obj, id) {
+	function product_del(obj, id) {
 		layer.confirm('确认要删除吗？', {
 			icon : 0,
 		}, function(index) {
 			$.ajax({
 				type : "post",
-				url : "${ctx}/sysmgr/category/product/removeProduct",
+				url : "${ctx}/sysmgr/product/removeProduct",
 				data : {"productId" : id},
 				dataType : "json",
 				success : function(data) {
-					if (data.message == "删除二级分类成功") {
+					if (data.message == "success") {
 						layer.msg('删除商品成功!', {
 							icon : 1,
 							time : 1000
 						});
-						location.reload();
 						productMgr.listProduct(1, 5);
 					} else {
 						layer.msg('删除商品失败，请联系系统管理员!', {

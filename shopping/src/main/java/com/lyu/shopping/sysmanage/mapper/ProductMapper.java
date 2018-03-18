@@ -56,4 +56,11 @@ public interface ProductMapper {
 	 */
 	int updateProduct(Product product);
 	
+	/**
+	 * 根据商品id删除商品
+	 * @param productId 商品id
+	 * @return 受影响的行数，1表示删除成功
+	 */
+	int removeProduct(Long productId);
+	
 }
