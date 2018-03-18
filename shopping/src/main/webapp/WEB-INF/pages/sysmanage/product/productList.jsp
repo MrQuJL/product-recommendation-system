@@ -120,7 +120,7 @@
 									"				<td>" + productList[i].category2Name + "</td>"+
 									"				<td>" + productList[i].purchasePrice + "</td>"+
 									"				<td>" + productList[i].salePrice + "</td>"+
-									"				<td><img src='/shopping" + productList[i].imgSrc + "' alt='图片' width='100px' height='50px'></td>"+
+									"				<td><img src='" + productList[i].imgSrc + "' alt='图片' width='100px' height='50px'></td>"+
 									"				<td>" + timestampToTime(productList[i].gmtCreate) + "</td>"+
 									"				<td class=\"td-status\"><span"+
 									"					class=\"label " + labelText + " radius\">" + tdText + "</span></td>"+

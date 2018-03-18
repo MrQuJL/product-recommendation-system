@@ -1,6 +1,8 @@
 package com.lyu.shopping.sysmanage.controller;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -94,7 +96,7 @@ public class ProductController {
 	/**
 	 * 上传的图片所在的图片服务器的地址
 	 */
-	private static final String IMG_SERVER_PATH = "/product";
+	private static final String IMG_SERVER_PATH = "D:/file";
 	
 	@Autowired
 	private Category1Service category1Service;
@@ -239,13 +241,13 @@ public class ProductController {
 			String suffix = fileName.substring(fileName.lastIndexOf("."));
 			//为了保险起见,给上传的图片重新指定一个名称
 			String tempFileName = UUID.randomUUID().toString()+suffix;
-			//获取上传上传的后缀
 			File fileTemp = new File(IMG_SERVER_PATH);
 			if(!fileTemp.exists()){
 				fileTemp.mkdir();
 			}
 			
-			File file = new File(IMG_SERVER_PATH + "/" + tempFileName);
+			File file = new File(IMG_SERVER_PATH  + "/" +  tempFileName);
+			System.out.println(IMG_SERVER_PATH + "/" + tempFileName);
 			try {
 				//讲上传的文件写入指定路径
 				uploadFile.transferTo(file);
@@ -255,7 +257,7 @@ public class ProductController {
  				e.printStackTrace();
 			}
 			
-			product.setImgSrc(IMG_SERVER_PATH + "/" + tempFileName);
+			product.setImgSrc("/images/" + tempFileName);
 			
 //			request.setAttribute("uploadFilePath", tempFileName);
 		}
