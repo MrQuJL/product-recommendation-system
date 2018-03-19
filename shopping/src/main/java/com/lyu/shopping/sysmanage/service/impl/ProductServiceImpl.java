@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -167,6 +170,23 @@ public class ProductServiceImpl implements ProductService {
 			}
 		}
 		return flag;
+	}
+
+	@Override
+	@Transactional(isolation=Isolation.DEFAULT,propagation=Propagation.REQUIRED)
+	public boolean removeProductBatch(Long[] productIds) {
+		if (productIds == null || productIds.length == 0) {
+			return false;
+		}
+		
+		for (Long productId : productIds) {
+			int rows = this.productMapper.removeProduct(productId);
+			if (rows < 1) { // 有一个没有删除成功就返回false，事务进行回滚
+				return false;
+			}
+		}
+		
+		return true;
 	}
 
 }

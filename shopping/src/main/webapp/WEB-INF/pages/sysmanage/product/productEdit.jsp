@@ -137,7 +137,7 @@
 					<div class="Button_operation">
 						<button onClick=""
 							class="btn btn-primary radius" type="submit">
-							<i class="icon-save "></i>添加
+							<i class="icon-save "></i>保存
 						</button>
 						<button onClick="layer_close();" class="btn btn-default radius"
 							type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>

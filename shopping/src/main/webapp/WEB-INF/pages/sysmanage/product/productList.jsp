@@ -141,7 +141,7 @@
 									"			</tr>";
 							}
 						} else {
-							htmlTable = "<tr><td colspan=10>没有查询到类目记录</td></tr>";
+							htmlTable = "<tr><td colspan=11>没有查询到类目记录</td></tr>";
 						}
 						$("#sample-table tbody").html(htmlTable);
 						$("#totalPage").html(listSize);
@@ -242,32 +242,32 @@
 				var checkBoxs = $("#sample-table")
 					.find("tbody")
 					.find("input[type='checkbox']:checked");
-				var productIdArray = new Array();
+				var productIds = new Array();
 				$.each(checkBoxs,function(){
-					productIdArray.push($(this).val());
+					productIds.push($(this).val());
 				});
-				if (productIdArray.length == 0) {
+				if (productIds.length == 0) {
 					layer.msg("请先选择要删除的商品！",{icon:0,time:1000});
 					return false;
 				}
-				productIdArray = JSON.stringify(productIdArray);
+				productIds = JSON.stringify(productIds);
 				layer.confirm('确认要删除这些商品吗？',function(index){
 					// 2.发送ajax请求进行批量删除
 					$.ajax({
 						type : "post",
 						contentType : "application/json;charset=UTF-8",
-						url : "${ctx}/sysmgr/category/product/removeProductBatch",
-						data : productIdArray,
+						url : "${ctx}/sysmgr/product/removeProductBatch",
+						data : productIds,
 						dataType : "json",
 						success : function(data) {
-							if (data.message == "批量删除二级分类成功") {
-								layer.msg(data.message,{icon:1,time:1000});
+							if (data.message == "success") {
+								layer.msg("批量删除商品成功",{icon:1,time:1000});
 								// 3.删除成功重新查询列表
 								location.reload();
 								productMgr.listProduct(1, 5);
 							} else {
 								// 4.删除失败给出提示信息
-								layer.msg(data.message,{icon:0,time:1000});
+								layer.msg("批量删除商品失败",{icon:0,time:1000});
 							}
 						}
 					});

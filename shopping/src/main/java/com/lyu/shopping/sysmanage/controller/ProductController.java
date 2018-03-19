@@ -317,7 +317,7 @@ public class ProductController {
 	}
 	
 	/**
-	 * 处理商品的请求
+	 * 处理商品的删除请求
 	 * @param productId 待删除的商品id
 	 * @return 删除商品成功与否的信息
 	 */
@@ -336,5 +336,21 @@ public class ProductController {
 		return resultMap;
 	}
 	
+	/**
+	 * 处理批量删除商品请求
+	 * @param productIds 待删除的商品id数组
+	 * @return 删除商品成功与否的信息
+	 */
+	@RequestMapping("/removeProductBatch")
+	public @ResponseBody Map<String, Object> removeProductBatch(@RequestBody Long[] productIds) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap.put(FRONT_MSG_ATTR, FRONT_PRODUCT_REMOVE_FAILED);
+		boolean flag = this.productService.removeProductBatch(productIds);
+		if (flag) {
+			resultMap.put(FRONT_MSG_ATTR, FRONT_PRODUCT_REMOVE_SUCCESS);
+		}
+		return resultMap;
+	}
 	
 }

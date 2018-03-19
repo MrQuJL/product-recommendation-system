@@ -66,4 +66,11 @@ public interface ProductService {
 	 */
 	boolean removeProduct(Long productId);
 	
+	/**
+	 * 批量删除商品（逻辑）
+	 * @param productIds 要删除的商品的id数组
+	 * @return 删除成功与否，只要有一个删除失败，全部进行回滚，全部成功才返回true
+	 */
+	boolean removeProductBatch(Long[] productIds);
+	
 }
