@@ -180,8 +180,8 @@ public class ProductServiceImpl implements ProductService {
 		}
 		
 		for (Long productId : productIds) {
-			int rows = this.productMapper.removeProduct(productId);
-			if (rows < 1) { // 有一个没有删除成功就返回false，事务进行回滚
+			boolean flag = removeProduct(productId);
+			if (!flag) { // 有一个没有删除成功就返回false，事务进行回滚
 				return false;
 			}
 		}

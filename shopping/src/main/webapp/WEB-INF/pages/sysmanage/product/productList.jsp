@@ -263,7 +263,6 @@
 							if (data.message == "success") {
 								layer.msg("批量删除商品成功",{icon:1,time:1000});
 								// 3.删除成功重新查询列表
-								location.reload();
 								productMgr.listProduct(1, 5);
 							} else {
 								// 4.删除失败给出提示信息
