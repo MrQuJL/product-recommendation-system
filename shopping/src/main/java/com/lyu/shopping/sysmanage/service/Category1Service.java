@@ -35,6 +35,8 @@ public interface Category1Service {
 	 */
 	List<Category1> listCategory1(Category1 category1);
 	
+	
+	
 	/**
 	 * 分页查询一级类目的列表
 	 * @param category1 查询的条件
