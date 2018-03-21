@@ -1,0 +1,6 @@
+1. 当要判断对象的某个属性与某个字符串是否相等的时候，尽量使用"xxx".equals(xxx.getXxx())，这样可以避免报空指针
+
+错误实例:
+if (product.getProductName().equals("all")) {
+    product.setProductName(null);
+}

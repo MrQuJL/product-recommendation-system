@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
+import com.lyu.shopping.sysmanage.dto.Category1DTO;
 import com.lyu.shopping.sysmanage.entity.Category1;
 
 /**
@@ -35,7 +36,12 @@ public interface Category1Service {
 	 */
 	List<Category1> listCategory1(Category1 category1);
 	
-	
+	/**
+	 * 查询一级类目列表，包括每个一级类目下的二级类目列表也要查询出来
+	 * @param category1 封装了查询条件
+	 * @return 满足条件的一级类目数据传输对象列表
+	 */
+	List<Category1DTO> listCategory1DTO(Category1 category1);
 	
 	/**
 	 * 分页查询一级类目的列表

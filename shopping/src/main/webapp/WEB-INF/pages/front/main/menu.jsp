@@ -42,11 +42,11 @@
 <div class="span24">
     <ul class="mainNav">
         <li>
-            <a href="${ pageContext.request.contextPath }/index">首页</a>|
+            <a href="${ctx}/index">首页</a>|
         </li>
         <c:forEach items="${sessionScope.category1List}" var="c">
             <li>
-                <a href="">
+                <a href="${ctx}/findProductListByCategory1Id/${c.category1Id}">
                     ${c.category1Name}
                 </a>
             </li>

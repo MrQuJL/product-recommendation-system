@@ -14,7 +14,7 @@
 <body>
     <div class="container header">
         <!-- 包含进去首页头部的文件 -->
-        <%@ include file="menu.jsp"%>
+        <%@ include file="/WEB-INF/pages/front/main/menu.jsp"%>
     </div>
 
     <div class="container index">

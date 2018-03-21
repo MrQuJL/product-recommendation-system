@@ -9,6 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
+import com.lyu.shopping.sysmanage.dto.Category1DTO;
 import com.lyu.shopping.sysmanage.entity.Category1;
 import com.lyu.shopping.sysmanage.service.Category1Service;
 
@@ -116,6 +117,19 @@ public class Category1ServiceTest {
 		
 		System.out.println(category1List.size());
 		
+	}
+	
+	// 测试查询一级类目DTO列表
+	@Test
+	public void testListCategory1DTO() {
+		Category1Service category1Service = (Category1Service) this.application.getBean("category1Service");
+		
+		List<Category1DTO> category1DTOList = category1Service.listCategory1DTO(null);
+		
+		for (Category1DTO category1DTO : category1DTOList) {
+			System.out.println(category1DTO);
+		}
+		System.out.println();
 	}
 	
 	// 测试查询一级类目下是否有二级类目

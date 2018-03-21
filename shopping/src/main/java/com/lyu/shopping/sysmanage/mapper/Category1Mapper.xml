@@ -9,6 +9,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	category1_id, category1_name, category1_record, gmt_create,
     	gmt_modified, is_show, is_deleted
   	</sql>
+  	
+	<!-- 一级类目表的所有字段的别名 -->
+	<sql id="all_category1_columns_alias" >
+    	A.category1_id, A.category1_name, A.category1_record, A.gmt_create,
+    	A.gmt_modified, A.is_show, A.is_deleted
+  	</sql>
 	
 	<!-- 封装了一些一级类目的查询条件 -->
 	<sql id="query_category1_sql">
@@ -35,6 +41,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</sql>
 	
+	<!-- 封装了一些带别名的一级类目的查询条件 -->
+	<sql id="query_category1_sql_alias">
+		<if test="category1Id != null">
+			AND A.category1_id = #{category1Id}
+		</if>
+		<if test="category1Name != null">
+			AND A.category1_name = #{category1Name}
+		</if>
+		<if test="category1Record != null">
+			AND A.category1_record LIKE '%${category1Record}%'
+		</if>
+		<if test="gmtCreate != null">
+			AND A.gmt_create = #{gmtCreate}
+		</if>
+		<if test="gmtModified != null">
+			AND A.gmt_modified = #{gmtModified}
+		</if>
+		<if test="showFlag != null">
+			AND A.is_show = #{showFlag}
+		</if>
+		<if test="1 == 1">
+			AND A.is_deleted = 0
+		</if>
+	</sql>
+	
 	<!-- 一级类目表与对应的pojo类之间的映射 -->
 	<resultMap type="category1" id="category1ResultMap">
 		<id property="category1Id" column="category1_id" />
@@ -44,6 +75,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="gmtModified" column="gmt_modified" />
 		<result property="showFlag" column="is_show" />
 		<result property="delFlag" column="is_deleted" />
+	</resultMap>
+	
+	<!-- 一级类目表与对应的Category1DTO类之间的映射 -->
+	<resultMap type="category1DTO" id="category1DTOResultMap">
+		<id property="category1Id" column="category1_id" />
+		<result property="category1Name" column="category1_name" />
+		<result property="category1Record" column="category1_record" />
+		<result property="gmtCreate" column="gmt_create" />
+		<result property="gmtModified" column="gmt_modified" />
+		<result property="showFlag" column="is_show" />
+		<result property="delFlag" column="is_deleted" />
+		<collection property="category2List" ofType="Category2">
+		    <id property="category2Id" column="category2_id" />
+		    <result property="category2Name" column="category2_name" />
+		</collection>
 	</resultMap>
 	
 	<!-- 根据一级类目的id查询出它的详细信息 -->
@@ -82,6 +128,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<where>
 			<include refid="query_category1_sql" />
 		</where>
+	</select>
+	
+	<!-- 查询一级类目列表，包括每个一级类目下的二级类目列表也要查询出来 -->
+	<select id="listCategory1DTO" parameterType="category1" resultMap="category1DTOResultMap">
+	    SELECT <include refid="all_category1_columns_alias" />, B.category2_id, B.category2_name
+        FROM shopping_category1 A, shopping_category2 B
+        <where>
+            AND A.category1_id = B.category1_id
+            <include refid="query_category1_sql_alias" />
+        </where>
 	</select>
 	
 	<!-- 显示或者隐藏一级类目,参数为1就是显示，参数为0就是隐藏 -->

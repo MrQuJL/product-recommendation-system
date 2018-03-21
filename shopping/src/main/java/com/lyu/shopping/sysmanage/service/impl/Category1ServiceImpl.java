@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
+import com.lyu.shopping.sysmanage.dto.Category1DTO;
 import com.lyu.shopping.sysmanage.entity.Category1;
 import com.lyu.shopping.sysmanage.mapper.Category1Mapper;
 import com.lyu.shopping.sysmanage.mapper.Category2Mapper;
@@ -70,6 +71,14 @@ public class Category1ServiceImpl implements Category1Service {
 		List<Category1> category1List = this.category1Mapper.listCategory1(category1);
 		
 		return category1List;
+	}
+	
+	@Override
+	public List<Category1DTO> listCategory1DTO(Category1 category1) {
+		
+		List<Category1DTO> category1DTOList = this.category1Mapper.listCategory1DTO(category1);
+		
+		return category1DTOList;
 	}
 	
 	@Override

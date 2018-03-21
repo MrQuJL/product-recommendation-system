@@ -141,11 +141,14 @@ public class Category1Controller {
 	
 	/**
 	 * 处理显示或者隐藏一级类目的请求
-	 * @return
+	 * @param changeValue 1为显示一级类目，0为隐藏一级类目
+	 * @param category1Id 要被修改状态的一级类目的id
+	 * @param session 本次会话
+	 * @return 返回给前台的一些提示信息
 	 */
 	@RequestMapping(value="/showOrHideCategory1")
 	public @ResponseBody Map<String, Object> showOrHideCategory1(Integer changeValue,
-		Long category1Id) {
+		Long category1Id, HttpSession session) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		
 		resultMap.put("message", "failed");
@@ -158,6 +161,7 @@ public class Category1Controller {
 			flag = this.category1Service.hideCategory1(category1Id);
 		}
 		if (flag) {
+			session.setAttribute("category1List", null);
 			resultMap.put(FRONT_TIPS_ATTR, "success");
 		}
 		
