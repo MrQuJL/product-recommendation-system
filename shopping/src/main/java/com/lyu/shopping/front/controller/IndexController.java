@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.github.pagehelper.PageInfo;
+import com.lyu.shopping.common.dto.PageParam;
 import com.lyu.shopping.sysmanage.dto.Category1DTO;
 import com.lyu.shopping.sysmanage.dto.ProductDTO;
 import com.lyu.shopping.sysmanage.entity.Category1;
@@ -75,7 +76,40 @@ public class IndexController {
 		// 2.查询出该一级类目下的所有商品
 		Product product = new Product();
 		product.setCategory1Id(category1Id);
-		PageInfo<ProductDTO> productList = this.productService.listProductPage(product, null);
+		PageParam pageParam = new PageParam(1, 8);
+		PageInfo<ProductDTO> productList = this.productService.listProductPage(product, pageParam);
+		
+		session.setAttribute("productList", productList.getList());
+		
+		return "front/productList";
+	}
+	
+	/**
+	 * 根据二级类目查找该二级类目下的所有商品
+	 * @param session 本次会话域
+	 * @param category2Id 要查询的二级类目的id
+	 * @return 显示指定二级类目下的商品列表的视图名称
+	 */
+	@RequestMapping("/findProductListByCategory2Id/{category2Id}")
+	public String findProductListByCategory2Id(HttpSession session, 
+		@PathVariable("category2Id") Long category2Id) {
+		
+		// 1.查询出所有的一级类目以及一级类目下的二级类目列表，用Category1DTO来接收
+		// 如果缓存为空说明还没有加载过一级类目列表，或者一级类目列表被修改过了，此时需要重新加载一级类目列表
+		@SuppressWarnings("unchecked")
+		List<Category1DTO> category1DTOList = (List<Category1DTO>) session.getAttribute("category1List");
+		if (category1DTOList == null) {
+			Category1 category1 = new Category1();
+			category1.setShowFlag(1);
+			category1DTOList = this.category1Service.listCategory1DTO(category1);
+			session.setAttribute("category1List", category1DTOList);
+		}
+		
+		// 2.查询出该二级类目下的所有商品
+		Product product = new Product();
+		product.setCategory2Id(category2Id);
+		PageParam pageParam = new PageParam(1, 8);
+		PageInfo<ProductDTO> productList = this.productService.listProductPage(product, pageParam);
 		
 		session.setAttribute("productList", productList.getList());
 		
