@@ -116,4 +116,21 @@ public class IndexController {
 		return "front/productList";
 	}
 	
+	/**
+	 * 处理前往商品详情页面的请求
+	 * @param session
+	 * @param productId
+	 * @return
+	 */
+	@RequestMapping("/getProductDetail/{productId}")
+	public String getProductDetail(HttpSession session, @PathVariable("productId") Long productId) {
+		if (productId == null) {
+			return "front/product";
+		}
+		
+		Product product = this.productService.getProductByProductId(productId);
+		session.setAttribute("product", product);
+		return "front/product";
+	}
+	
 }

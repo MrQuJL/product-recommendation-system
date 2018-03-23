@@ -5,8 +5,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>网上商城</title>
-    <link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet" type="text/css" />
-    <link href="${pageContext.request.contextPath}/css/product.css" rel="stylesheet" type="text/css" />
+    <link href="${ctxJsAndCss}/css/common.css" rel="stylesheet" type="text/css" />
+    <link href="${ctxJsAndCss}/css/product.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <div class="container header">
@@ -37,7 +37,7 @@
                 </c:forEach>
             </div>
         </div>
-        
+
         <!-- 右侧边栏的所有二级类目 -->
         <div class="span18 last">
             <!-- 各项商品 -->
@@ -46,7 +46,7 @@
                     <ul>
                         <c:forEach var="p" items="${productList}">
                             <li>
-                                <a href="${ctx}/findByPid/${p.productId}">
+                                <a href="${ctx}/getProductDetail/${p.productId}">
                                     <img src="${p.imgSrc}" width="170" height="170" style="display: inline-block;" />
                                     <span style='color: green'>${p.productName}</span>
                                     <span class="price"> 商城价： ￥${p.salePrice}</span>
@@ -58,90 +58,46 @@
 
                 <!-- 分页 -->
                 <div class="pagination">
-                    <!-- 根据一级分类的cid是不是为空来显示上一页下一页的状况 -->
-                    <c:if test="${cid != null }">
-                        <span>第 <c:out value="${page}" />/<c:out value="${count}" />页
-                        </span>
-                        <!-- 首页 -->
-                        <span><a class="firstPage"
-                            href="${pageContext.request.contextPath}/findByCid/${cid}/1"></a></span>
-                        <c:if test="${page != 1}">
-                            <span><a class="previousPage"
-                                href="${pageContext.request.contextPath}/findByCid/${cid}/<c:out value="${page-1}"/>"></a></span>
-                        </c:if>
-
-                        <c:forEach var="i" begin="1" end="${count }">
-                            <span>
-                               <!-- 如果是当前页则不能够点击 -->
-                               <c:if test="${i == page }">
-                                    <span class="currentPage">${page }</span>
-                               </c:if>
-                               <c:if test="${i != page }">
-                                 <a href="${pageContext.request.contextPath}/findByCid/${cid}/${i}">
-                                    ${i}
-                                 </a>
-                               </c:if>
-                            </span>
-                        </c:forEach>
-
-                        <!-- 下一页 -->
-                        <c:if test="${page !=count }">
-                            <span><a class="nextPage"
-                                href="${pageContext.request.contextPath}/findByCid/${cid}/<c:out value="${page+1}"/>"></a></span>
-                        </c:if>
-
-                        <!-- 尾页 -->
-                        <a class="lastPage"
-                            href="${pageContext.request.contextPath}/findByCid/${cid}/<c:out value="${count}"/>"></a>
-                    </c:if>
-
-                    <!-- 二级分类的上一页和下一页 -->
-                    <c:if test="${csid != null }">
-                        <span>第 <c:out value="${page}" />/<c:out value="${count}" />页
-                        </span>
-
-                        <!-- 首页 -->
+                    <!-- 当前是第几页/共多少页 -->
+                    <span>第 <c:out value="${page}" />/${count}页</span>
+                    <!-- 首页 -->
+                    <span>
+                        <a class="firstPage" href="${ctx}/findByCid/${cid}/1"></a>
+                    </span>
+                    <!-- 上一页 -->
+                    <c:if test="${page != 1}">
                         <span>
-                            <a class="firstPage" href="${pageContext.request.contextPath}/findByCsid/${csid}/1"></a>
+                            <a class="previousPage" href="${ctx}/findByCid/${cid}/${page-1}"></a>
                         </span>
-
-                        <c:if test="${page != 1}">
-                            <span><a class="previousPage"
-                                href="${pageContext.request.contextPath}/findByCsid/${csid}/<c:out value="${page-1}"/>"></a></span>
-                        </c:if>
-
-                        <c:forEach var="i" begin="1" end="${count }">
-                            <span>
-                               <!-- 如果是当前页则不能够点击 -->
-                               <c:if test="${i == page }">
-                                    <span class="currentPage">${page }</span>
-                               </c:if>
-                               <c:if test="${i != page }">
-                                 <a href="${pageContext.request.contextPath}/findByCsid/${csid}/<c:out value="${i}"/>">
-                                    <c:out value="${i}" /></a>
-                                </c:if>
-                            </span>
-                        </c:forEach>
-
-                        <!-- 下一页 -->
-                        <c:if test="${page !=count }">
-                            <span><a class="nextPage"
-                                href="${pageContext.request.contextPath}/findByCsid/${csid}/<c:out value="${page+1}"/>"></a></span>
-                        </c:if>
-
-                        <!-- 尾页 -->
-                        <a class="lastPage"
-                            href="${pageContext.request.contextPath}/findByCsid/${csid}/<c:out value="${count}"/>"></a>
                     </c:if>
+                    <!-- 具体的页数 -->
+                    <c:forEach var="i" begin="1" end="${count }">
+                        <span>
+                           <!-- 如果是当前页则不能够点击 -->
+                           <c:if test="${i == page }">
+                                <span class="currentPage">${page }</span>
+                           </c:if>
+                           <c:if test="${i != page }">
+                             <a href="${ctx}/findByCid/${cid}/${i}">
+                                ${i}
+                             </a>
+                           </c:if>
+                        </span>
+                    </c:forEach>
+
+                    <!-- 下一页 -->
+                    <c:if test="${page != 1 }">
+                        <span>
+                            <a class="nextPage" href="${ctx}/findByCid/${cid}/${page+1}"></a>
+                        </span>
+                    </c:if>
+
+                    <!-- 尾页 -->
+                    <a class="lastPage" href="${ctx}/findByCid/${cid}/${count}"></a>
                 </div>
             </form>
         </div>
     </div>
-    <div class="container footer">
-
-        <%--<div class="span24">
-                <div class="copyright">Copyright © 2017-2017  版权所有</div>
-        </div>--%>
-    </div>
+    <div class="container footer"></div>
 </body>
 </html>
