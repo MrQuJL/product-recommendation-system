@@ -2,6 +2,7 @@ package com.lyu.shopping.front.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,18 +119,30 @@ public class IndexController {
 	
 	/**
 	 * 处理前往商品详情页面的请求
-	 * @param session
+	 * @param request
 	 * @param productId
 	 * @return
 	 */
 	@RequestMapping("/getProductDetail/{productId}")
-	public String getProductDetail(HttpSession session, @PathVariable("productId") Long productId) {
+	public String getProductDetail(HttpSession session, HttpServletRequest request,
+		@PathVariable("productId") Long productId) {
 		if (productId == null) {
 			return "front/product";
 		}
 		
+		// 1.查询出所有的一级类目以及一级类目下的二级类目列表，用Category1DTO来接收
+		// 如果缓存为空说明还没有加载过一级类目列表，或者一级类目列表被修改过了，此时需要重新加载一级类目列表
+		@SuppressWarnings("unchecked")
+		List<Category1DTO> category1DTOList = (List<Category1DTO>) session.getAttribute("category1List");
+		if (category1DTOList == null) {
+			Category1 category1 = new Category1();
+			category1.setShowFlag(1);
+			category1DTOList = this.category1Service.listCategory1DTO(category1);
+			session.setAttribute("category1List", category1DTOList);
+		}
+		
 		Product product = this.productService.getProductByProductId(productId);
-		session.setAttribute("product", product);
+		request.setAttribute("product", product);
 		return "front/product";
 	}
 	

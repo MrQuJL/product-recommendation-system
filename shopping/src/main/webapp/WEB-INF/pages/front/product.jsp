@@ -78,12 +78,12 @@
             </div>
             <div class="info">
                 <dl style="font-size:12px;">全商城实物商品通用</dl>
-                <dl>价格：<del>￥998.00</del>
+                <dl>价格：<del>${product.salePrice + 400 }</del>
                 </dl>
                 <dl>
                     <dt style="vertical-align:bottom">促销价:</dt>
                     <dd>
-                        <span style="color:#FF0036;">￥</span><strong style="vertical-align:bottom">198.00</strong>
+                        <span style="color:#FF0036;">￥</span><strong style="vertical-align:bottom"> ${product.salePrice }</strong>
                         <a target="_blank" title="限时抢购 (2014-07-30 ~ 2015-01-01)">限时抢购</a>
                     </dd>
                 </dl>
@@ -100,7 +100,7 @@
                         </dd>
                         <dd>件</dd>
                         <dd><input id="inventory" type="hidden" value="${product.inventory}"/></dd>
-                        <dd>&nbsp;&nbsp;库存199件</dd>
+                        <dd>&nbsp;&nbsp;库存 ${product.inventory }件</dd>
                     </dl>
                 </div>
                 <div class="buy">

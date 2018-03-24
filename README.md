@@ -44,6 +44,10 @@
 * icheck 带样式的多选框
 
 ## 界面
+### 商城界面
+![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/shopping.png)
+
+### 后台管理页面
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/界面.png)
 
 ## 数据库ER图
