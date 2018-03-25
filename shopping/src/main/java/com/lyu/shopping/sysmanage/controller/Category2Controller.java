@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
 import com.lyu.shopping.common.util.PageUtils;
+import com.lyu.shopping.sysmanage.dto.Category1DTO;
 import com.lyu.shopping.sysmanage.dto.Category2DTO;
 import com.lyu.shopping.sysmanage.entity.Category1;
 import com.lyu.shopping.sysmanage.entity.Category2;
@@ -103,10 +104,10 @@ public class Category2Controller {
 		// 在跳转到二级类目页面时加载所有的二级类目名称
 		List<String> category2Names = this.category2Service.listAllCategory2Name();
 		// 同时也加载所有的一级类目，便于查询
-		List<Category1> category1List = this.category1Service.listCategory1(null);
+		List<Category1DTO> category1DTOList = this.category1Service.listCategory1DTO(null);
 		
 		session.setAttribute("category2Names", category2Names);
-		session.setAttribute("category1List", category1List);
+		session.setAttribute("category1List", category1DTOList);
 		
 		return CATEGORY2_LIST_URI;
 	}

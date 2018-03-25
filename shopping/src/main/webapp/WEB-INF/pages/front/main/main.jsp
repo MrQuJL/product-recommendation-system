@@ -32,11 +32,11 @@
 
                 <ul class="tabContent" style="display: block;">
                     <c:forEach var="p" items="${hList}">
-                        <li><a
-                            href="${pageContext.request.contextPath }/findByPid/<c:out value="${p.pid}"/>"
-                            target="_blank"> <img
-                                src="${pageContext.request.contextPath }/<c:out value="${p.image }"/>"
-                                style="display: block;" /></a></li>
+                        <li>
+                            <a href="${ctx}/findByPid/${p.productId}" target="_blank">
+                                <img src="${ctx}/${p.imgSrc}" style="display: block;" />
+                            </a>
+                        </li>
                     </c:forEach>
                 </ul>
             </div>
@@ -54,12 +54,12 @@
                 </ul>
 
                 <ul class="tabContent" style="display: block;">
-                    <c:forEach items="${nList }" var="p">
-                        <li><a
-                            href="${pageContext.request.contextPath }/findByPid/<c:out value="${p.pid}"/>"
-                            target="_blank"><img
-                                src="${pageContext.request.contextPath}/<c:out value="${p.image}"/>"
-                                style="display: block;" /></a></li>
+                    <c:forEach items="${nList}" var="p">
+                        <li>
+                            <a href="${ctx}/findByPid/${p.productId}" target="_blank">
+                                <img src="${ctx}/${p.imgSrc}" style="display: block;" />
+                            </a>
+                        </li>
                     </c:forEach>
                 </ul>
             </div>

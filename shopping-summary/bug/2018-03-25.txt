@@ -1,0 +1,18 @@
+1. 在后台管理系统查询了商品列表之后，在前台想要查看相应类目下的商品出现如下异常：
+HTTP Status 500 - org.apache.jasper.el.JspPropertyNotFoundException: 
+/WEB-INF/pages/front/productList.jsp(29,24) '${c.category2List}' Property '
+category2List' not found on type com.lyu.shopping.sysmanage.entity.Category1
+
+原因：管理系统查询出来的是一个List<Category1>
+而商城页面需要的是一个List<Category1DTO>
+由于只有Category1DTO中有category2List属性，所以出现如上错误，
+
+解决：后台管理系统查询的时候就直接查询List<Category1DTO>
+
+2. 在后台管理系统删除了某个二级类目后，又出现了这个异常：
+HTTP Status 500 - org.apache.jasper.el.JspPropertyNotFoundException: 
+/WEB-INF/pages/front/productList.jsp(29,24) '${c.category2List}' Property '
+category2List' not found on type com.lyu.shopping.sysmanage.entity.Category1
+
+原因：同bug1，也是在后台加载一级类目列表的时候只加载的List<Category1>
+而商城页面需要List<Category1DTO>

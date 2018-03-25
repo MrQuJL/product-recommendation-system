@@ -31,10 +31,10 @@ public class IndexController {
 
 	@Autowired
 	private Category1Service category1Service;
-	
+
 	@Autowired
 	private ProductService productService;
-	
+
 	/**
 	 * 处理前往商城首页的请求
 	 * @return 商城首页的视图名称
@@ -46,8 +46,16 @@ public class IndexController {
 		category1.setShowFlag(1);
 		List<Category1DTO> category1DTOList = this.category1Service.listCategory1DTO(category1);
 		session.setAttribute("category1List", category1DTOList);
-		
+
 		// 通过基于用户的协同过滤的推荐算法计算出需要给用户推荐出的商品
+		// TODO the most important part of the project !!!
+		// TODO the most important part of the project !!!
+		// TODO the most important part of the project !!!
+		// TODO the most important part of the project !!!
+		// TODO the most important part of the project !!!
+		// TODO the most important part of the project !!!
+		// TODO the most important part of the project !!!
+		// TODO the most important part of the project !!!
 		// TODO the most important part of the project !!!
 		
 		return "front/main/main";
@@ -77,7 +85,7 @@ public class IndexController {
 		// 2.查询出该一级类目下的所有商品
 		Product product = new Product();
 		product.setCategory1Id(category1Id);
-		PageParam pageParam = new PageParam(1, 8);
+		PageParam pageParam = new PageParam(1, 20);
 		PageInfo<ProductDTO> productList = this.productService.listProductPage(product, pageParam);
 		
 		session.setAttribute("productList", productList.getList());
@@ -109,7 +117,7 @@ public class IndexController {
 		// 2.查询出该二级类目下的所有商品
 		Product product = new Product();
 		product.setCategory2Id(category2Id);
-		PageParam pageParam = new PageParam(1, 8);
+		PageParam pageParam = new PageParam(1, 20);
 		PageInfo<ProductDTO> productList = this.productService.listProductPage(product, pageParam);
 		
 		session.setAttribute("productList", productList.getList());

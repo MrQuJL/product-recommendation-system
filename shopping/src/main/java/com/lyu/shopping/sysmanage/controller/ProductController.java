@@ -21,9 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
 import com.lyu.shopping.common.util.PageUtils;
+import com.lyu.shopping.sysmanage.dto.Category1DTO;
 import com.lyu.shopping.sysmanage.dto.Category2DTO;
 import com.lyu.shopping.sysmanage.dto.ProductDTO;
-import com.lyu.shopping.sysmanage.entity.Category1;
 import com.lyu.shopping.sysmanage.entity.Category2;
 import com.lyu.shopping.sysmanage.entity.Product;
 import com.lyu.shopping.sysmanage.service.Category1Service;
@@ -123,7 +123,7 @@ public class ProductController {
 	@RequestMapping(value="/gotoProductList")
 	public String gotoProductList(HttpSession session) {
 		// 在进入商品列表页面时加载所有的一级类目，二级类目，商品名称
-		List<Category1> category1List = category1Service.listCategory1(null);
+		List<Category1DTO> category1List = category1Service.listCategory1DTO(null);
 		List<Category2DTO> category2List = category2Service.listCategory2(null);
 		List<String> productNames = productService.listAllProductName();
 		
