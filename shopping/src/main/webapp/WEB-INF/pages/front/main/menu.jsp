@@ -46,7 +46,7 @@
         </li>
         <c:forEach items="${sessionScope.category1List}" var="c">
             <li>
-                <a href="${ctx}/findProductListByCategory1Id/${c.category1Id}">
+                <a href="${ctx}/findProductListByCategory1Id/${c.category1Id}/1/4">
                     ${c.category1Name}
                 </a>
             </li>

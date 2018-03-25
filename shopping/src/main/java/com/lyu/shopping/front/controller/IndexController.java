@@ -64,12 +64,17 @@ public class IndexController {
 	/**
 	 * 根据一级类目查找该一级类目下的所有商品,以及通过一对多关联查询所有的二级类目
 	 * @param session 本次会话域
+	 * @param request 本次请求域
 	 * @param category1Id 要查询的一级类目的id
+	 * @param pageNum 当前要查询的页数
+	 * @param pageSize 每页的大小
 	 * @return 显示指定一级类目下的商品列表的视图名称
 	 */
-	@RequestMapping("/findProductListByCategory1Id/{category1Id}")
-	public String findProductListByCategory1Id(HttpSession session, 
-		@PathVariable("category1Id") Long category1Id) {
+	@SuppressWarnings("deprecation")
+	@RequestMapping("/findProductListByCategory1Id/{category1Id}/{pageNum}/{pageSize}")
+	public String findProductListByCategory1Id(HttpSession session, HttpServletRequest request,
+		@PathVariable("category1Id") Long category1Id, @PathVariable("pageNum") Integer pageNum,
+		@PathVariable("pageSize") Integer pageSize) {
 		
 		// 1.查询出所有的一级类目以及一级类目下的二级类目列表，用Category1DTO来接收
 		// 如果缓存为空说明还没有加载过一级类目列表，或者一级类目列表被修改过了，此时需要重新加载一级类目列表
@@ -85,10 +90,19 @@ public class IndexController {
 		// 2.查询出该一级类目下的所有商品
 		Product product = new Product();
 		product.setCategory1Id(category1Id);
-		PageParam pageParam = new PageParam(1, 20);
+		PageParam pageParam = new PageParam(pageNum, pageSize);
 		PageInfo<ProductDTO> productList = this.productService.listProductPage(product, pageParam);
-		
 		session.setAttribute("productList", productList.getList());
+		
+		// 3.放置分页条的相关信息
+		request.setAttribute("pageType", "findProductListByCategory1Id"); // 当前是一级类目的分页还是二级类目的分页
+		request.setAttribute("currPage", productList.getPageNum()); // 当前是第几页
+		request.setAttribute("totalPage", productList.getPages()); // 总共有多少页
+		request.setAttribute("firstPage", productList.getFirstPage()); // 首页是第几页
+		request.setAttribute("lastPage", productList.getLastPage()); // 尾页是第几页
+		request.setAttribute("prePage", productList.getPrePage()); // 上一页是第几页
+		request.setAttribute("nextPage", productList.getNextPage()); // 下一页是第几页
+		request.setAttribute("categoryId", category1Id); // 当前类目的id
 		
 		return "front/productList";
 	}
@@ -96,13 +110,17 @@ public class IndexController {
 	/**
 	 * 根据二级类目查找该二级类目下的所有商品
 	 * @param session 本次会话域
+	 * @param request 本次请求域
 	 * @param category2Id 要查询的二级类目的id
+	 * @param pageNum 当前要查询的页数
+	 * @param pageSize 每页的大小
 	 * @return 显示指定二级类目下的商品列表的视图名称
 	 */
-	@RequestMapping("/findProductListByCategory2Id/{category2Id}")
-	public String findProductListByCategory2Id(HttpSession session, 
-		@PathVariable("category2Id") Long category2Id) {
-		
+	@RequestMapping("/findProductListByCategory2Id/{category2Id}/{pageNum}/{pageSize}")
+	public String findProductListByCategory2Id(HttpSession session, HttpServletRequest request,
+		@PathVariable("category2Id") Long category2Id, @PathVariable("pageNum") Integer pageNum,
+		@PathVariable("pageSize") Integer pageSize) {
+
 		// 1.查询出所有的一级类目以及一级类目下的二级类目列表，用Category1DTO来接收
 		// 如果缓存为空说明还没有加载过一级类目列表，或者一级类目列表被修改过了，此时需要重新加载一级类目列表
 		@SuppressWarnings("unchecked")
@@ -117,19 +135,29 @@ public class IndexController {
 		// 2.查询出该二级类目下的所有商品
 		Product product = new Product();
 		product.setCategory2Id(category2Id);
-		PageParam pageParam = new PageParam(1, 20);
+		PageParam pageParam = new PageParam(pageNum, pageSize);
 		PageInfo<ProductDTO> productList = this.productService.listProductPage(product, pageParam);
-		
 		session.setAttribute("productList", productList.getList());
+		
+		// 3.放置分页条的相关信息
+		request.setAttribute("pageType", "findProductListByCategory2Id"); // 当前是二级类目的分页还是二级类目的分页
+		request.setAttribute("currPage", productList.getPageNum()); // 当前是第几页
+		request.setAttribute("totalPage", productList.getPages()); // 总共有多少页
+		request.setAttribute("firstPage", productList.getFirstPage()); // 首页是第几页
+		request.setAttribute("lastPage", productList.getLastPage()); // 尾页是第几页
+		request.setAttribute("prePage", productList.getPrePage()); // 上一页是第几页
+		request.setAttribute("nextPage", productList.getNextPage()); // 下一页是第几页
+		request.setAttribute("categoryId", category2Id); // 当前类目的id
 		
 		return "front/productList";
 	}
 	
 	/**
 	 * 处理前往商品详情页面的请求
-	 * @param request
-	 * @param productId
-	 * @return
+	 * @param session 本次会话域
+	 * @param request 本次请求域
+	 * @param productId 商品的id
+	 * @return 商品详情页面的视图名称
 	 */
 	@RequestMapping("/getProductDetail/{productId}")
 	public String getProductDetail(HttpSession session, HttpServletRequest request,

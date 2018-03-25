@@ -21,14 +21,14 @@
                     <dl>
                         <!-- 一级类目 -->
                         <dt>
-                            <a href="${ctx}/findProductListByCategory1Id/${c.category1Id}">
+                            <a href="${ctx}/findProductListByCategory1Id/${c.category1Id}/1/4">
                                 ${c.category1Name}
                             </a>
                         </dt>
                         <!-- 当前一级类目下的二级类目 -->
                         <c:forEach var="cs" items="${c.category2List}">
                             <dd>
-                                <a href="${ctx}/findProductListByCategory2Id/${cs.category2Id}">
+                                <a href="${ctx}/findProductListByCategory2Id/${cs.category2Id}/1/4">
                                     ${cs.category2Name}
                                 </a>
                             </dd>
@@ -59,19 +59,19 @@
                 <!-- 分页 -->
                 <div class="pagination">
                     <!-- 当前是第几页/共多少页 -->
-                    <span>第 <c:out value="${page}" />/${count}页</span>
+                    <span>第 ${currPage} / ${totalPage} 页</span>
                     <!-- 首页 -->
                     <span>
-                        <a class="firstPage" href="${ctx}/findByCid/${cid}/1"></a>
+                        <a class="firstPage" href="${ctx}/${pageType}/${categoryId}/1/4"> << </a>
                     </span>
                     <!-- 上一页 -->
-                    <c:if test="${page != 1}">
+                    <c:if test="${currPage != 1}">
                         <span>
-                            <a class="previousPage" href="${ctx}/findByCid/${cid}/${page-1}"></a>
+                            <a class="previousPage" href="${ctx}/${pageType}/${categoryId}/${prePage}/4"> < </a>
                         </span>
                     </c:if>
                     <!-- 具体的页数 -->
-                    <c:forEach var="i" begin="1" end="${count }">
+                    <c:forEach var="i" begin="1" end="${count}">
                         <span>
                            <!-- 如果是当前页则不能够点击 -->
                            <c:if test="${i == page }">
@@ -86,14 +86,14 @@
                     </c:forEach>
 
                     <!-- 下一页 -->
-                    <c:if test="${page != 1 }">
+                    <c:if test="${currPage != lastPage}">
                         <span>
-                            <a class="nextPage" href="${ctx}/findByCid/${cid}/${page+1}"></a>
+                            <a class="nextPage" href="${ctx}/${pageType}/${categoryId}/${nextPage}/4"> > </a>
                         </span>
                     </c:if>
 
                     <!-- 尾页 -->
-                    <a class="lastPage" href="${ctx}/findByCid/${cid}/${count}"></a>
+                    <a class="lastPage" href="${ctx}/${pageType}/${categoryId}/${lastPage}/4"> >> </a>
                 </div>
             </form>
         </div>

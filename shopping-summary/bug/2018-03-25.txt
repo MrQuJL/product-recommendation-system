@@ -16,3 +16,10 @@ category2List' not found on type com.lyu.shopping.sysmanage.entity.Category1
 
 原因：同bug1，也是在后台加载一级类目列表的时候只加载的List<Category1>
 而商城页面需要List<Category1DTO>
+
+
+
+
+
+
+
