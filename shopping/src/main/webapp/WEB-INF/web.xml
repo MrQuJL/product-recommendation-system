@@ -17,6 +17,11 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	<!-- 在项目启动的时候设置项目中需要分页条目的默认的每页的大小 -->
+	<listener>
+		<listener-class>com.lyu.shopping.listener.ProductPageListener</listener-class>
+	</listener>
 
 	<!-- 配置springmvc的DispatcherServlet springMVC的ioc容器包括控制层的注册以及涉及到springmvc的相关配置 -->
 	<!--配置前端的控制器 (servlet),拦截所有请求 -->
