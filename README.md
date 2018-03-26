@@ -6,12 +6,12 @@
 
 ## 项目目标
 
-* **商品推荐**：根据不同用户之间的相似性来推荐给用户合适的商品
+* **商品推荐**：根据不同用户之间的相似性来推荐给用户合适的商品**（即将完成）**
 * 购物车管理：用户登录时显示上次添加到购物车中的商品
 * 支付管理：调用第三方支付接口，实现商品的支付
-* 一级类目管理：管理一级类目的相关功能
-* 二级类目管理：管理二级类目的相关功能
-* 商品管理：对商品进行上架，下架，修改信息
+* 一级类目管理：管理一级类目的相关功能**（已完成）**
+* 二级类目管理：管理二级类目的相关功能**（已完成）**
+* 商品管理：对商品进行上架，下架，修改信息**（已完成）**
 * 订单管理：对客户的订单进行处理
 * 客户管理：管理客户，对违规的客户冻结账号
 
@@ -37,11 +37,7 @@
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/商品推荐流程.png)
 
 ## 界面
-### 商城界面
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/shopping.png)
-
-### 后台管理页面
-![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/界面.png)
 
 ## 数据库ER图
 
@@ -59,6 +55,20 @@
 * 订单表
 * 订单明细表
 * 购物车表
+
+## 项目阶段性成果
+
+### 用户相似度计算功能完成（2018-3-26 20:51）
+以下为通过余弦相似度公式计算得出的用户与用户之间的相似度：
+具体的代码实现见<a href="https://github.com/MrQuJL/product-recommendation-system/blob/master/shopping/src/main/java/com/lyu/shopping/recommendate/util/RecommendUtils.java" target="_blank">RecommendUtils.java</a>
+```
+1	2	0.999489144283392
+1	3	0.951009468591049
+1	4	0.6101699194694563
+2	3	0.9514955455298099
+2	4	0.6104817875805268
+3	4	0.6408097907695536
+```
 
 ## 致谢
 感谢您对项目的关注，如果项目中有任何错误或不妥，欢迎指正，我将不胜感激。

@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<!-- 批量定义别名 -->
 		<package name="com.lyu.shopping.sysmanage.entity" />
 		<package name="com.lyu.shopping.sysmanage.dto" />
+		<package name="com.lyu.shopping.recommendate.dto" />
 	</typeAliases>
 	 
 	<!-- 配置pageHelper分页插件 -->
