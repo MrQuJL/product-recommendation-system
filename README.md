@@ -33,15 +33,8 @@
 * mybatis-3.3.1	建立与数据库的会话
 * druid-1.1.16	为监控而生的数据库连接池
 
-### 前台组件
-
-* Html，Css，Js，JQuery 基本的前台组件
-* bootstrap 响应式框架
-* layerUI 弹出层
-* select2 带搜索的下拉框
-* zTree 树形列表
-* My97DatePicker 日期选择控件
-* icheck 带样式的多选框
+## 商品推荐流程
+![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/商品推荐流程.png)
 
 ## 界面
 ### 商城界面
@@ -56,8 +49,8 @@
 
 ## 数据库表设计
 
-* 一级类目点击量表
-* 二级类目点击量表
+* 用户购买行为表
+* 用户相似度表
 * 一级类目表
 * 二级类目表
 * 商品表
