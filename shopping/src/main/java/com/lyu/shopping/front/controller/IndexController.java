@@ -92,10 +92,9 @@ public class IndexController {
 		PageParam pageParam = new PageParam(pageNum, pageSize);
 		PageInfo<ProductDTO> productList = this.productService.listProductPage(product, pageParam);
 		session.setAttribute("productList", productList.getList());
-		
+
 		// 3.放置分页条的相关信息
 		setPageAttribute(request, category1Id, productList, "findProductListByCategory1Id");
-		
 		return "front/productList";
 	}
 
@@ -130,10 +129,10 @@ public class IndexController {
 		PageParam pageParam = new PageParam(pageNum, pageSize);
 		PageInfo<ProductDTO> productList = this.productService.listProductPage(product, pageParam);
 		session.setAttribute("productList", productList.getList());
-		
+
 		// 3.放置分页条的相关信息
 		setPageAttribute(request, category2Id, productList, "findProductListByCategory2Id");
-		
+
 		return "front/productList";
 	}
 
@@ -151,6 +150,14 @@ public class IndexController {
 			return "front/product";
 		}
 
+		// TODO 在用户点击该商品的时候记录用户的此次点击行为
+		// TODO 在用户点击该商品的时候记录用户的此次点击行为
+		// TODO 在用户点击该商品的时候记录用户的此次点击行为
+		// TODO 在用户点击该商品的时候记录用户的此次点击行为
+		// TODO 在用户点击该商品的时候记录用户的此次点击行为
+		// TODO 在用户点击该商品的时候记录用户的此次点击行为
+		// TODO 在用户点击该商品的时候记录用户的此次点击行为
+
 		// 1.查询出所有的一级类目以及一级类目下的二级类目列表，用Category1DTO来接收
 		// 如果缓存为空说明还没有加载过一级类目列表，或者一级类目列表被修改过了，此时需要重新加载一级类目列表
 		@SuppressWarnings("unchecked")
@@ -161,7 +168,7 @@ public class IndexController {
 			category1DTOList = this.category1Service.listCategory1DTO(category1);
 			session.setAttribute("category1List", category1DTOList);
 		}
-		
+
 		Product product = this.productService.getProductByProductId(productId);
 		request.setAttribute("product", product);
 		return "front/product";
