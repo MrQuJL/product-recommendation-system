@@ -10,16 +10,10 @@
 	<link href="${ctxJsAndCss}/assets/css/ace.min.css" rel="stylesheet" />
 	<link href="${ctxJsAndCss}/assets/css/font-awesome.min.css" rel="stylesheet" />
 	<link href="${ctxJsAndCss}/css/style.css" rel="stylesheet" />
+	
 	<script src="${ctxJsAndCss}/assets/js/jquery.min.js"></script>
-	<script type="text/javascript">
-	window.jQuery || document.write("<script src='${ctxJsAndCss}/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
-	</script>
-	<script type="text/javascript">
-	if("ontouchend" in document) document.write("<script src='${ctxJsAndCss}/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-	</script>
 	<script src="${ctxJsAndCss}/assets/js/bootstrap.min.js"></script>
 	<script src="${ctxJsAndCss}/assets/js/typeahead-bs2.min.js"></script>
-	<!-- page specific plugin scripts -->
 	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.min.js"></script>
 	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.bootstrap.js"></script>
 	<script src="${ctxJsAndCss}/assets/layer/layer.js"></script>

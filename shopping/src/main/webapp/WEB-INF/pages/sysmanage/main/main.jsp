@@ -8,17 +8,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<!-- css样式 -->
 	<link href="${ctxJsAndCss}/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/font-awesome.min.css" type="text/css" />
-	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace.min.css" type="text/css" />
-	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace-rtl.min.css" type="text/css" />
-	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace-skins.min.css" type="text/css" />
-    <link rel="stylesheet" href="${ctxJsAndCss}/css/style.css" type="text/css" />
+	<link href="${ctxJsAndCss}/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<link href="${ctxJsAndCss}/assets/css/ace.min.css" rel="stylesheet" type="text/css" />
+	<link href="${ctxJsAndCss}/assets/css/ace-rtl.min.css" rel="stylesheet" type="text/css" />
+	<link href="${ctxJsAndCss}/assets/css/ace-skins.min.css" rel="stylesheet" type="text/css" />
+    <link href="${ctxJsAndCss}/css/style.css" rel="stylesheet" type="text/css" />
 	<!-- js脚本 -->
 	<script src="${ctxJsAndCss}/assets/js/ace-extra.min.js"></script>
 	<script src="${ctxJsAndCss}/js/jquery-1.9.1.min.js"></script>        
-	<script type="text/javascript">
-		if("ontouchend" in document) document.write("<script src='${ctxJsAndCss}/assets/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
-	</script>
 	<script src="${ctxJsAndCss}/assets/js/bootstrap.min.js"></script>
 	<script src="${ctxJsAndCss}/assets/js/typeahead-bs2.min.js"></script>
 	<script src="${ctxJsAndCss}/assets/js/ace-elements.min.js"></script>

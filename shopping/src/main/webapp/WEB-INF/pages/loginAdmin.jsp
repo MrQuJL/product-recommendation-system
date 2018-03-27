@@ -5,25 +5,16 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>登录-商城后台管理系统</title>
+	<link href="${ctxJsAndCss}/assets/css/ace.min.css" rel="stylesheet" />
+	<link href="${ctxJsAndCss}/assets/css/ace-rtl.min.css" rel="stylesheet" />
+	<link href="${ctxJsAndCss}/assets/css/ace-skins.min.css" rel="stylesheet" />
 	<link href="${ctxJsAndCss}/assets/css/bootstrap.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/font-awesome.min.css" />
-	<!--[if IE 7]>
-	  <link rel="stylesheet" href="${ctxJsAndCss}/assets/css/font-awesome-ie7.min.css" />
-	<![endif]-->
-	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace.min.css" />
-	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace-rtl.min.css" />
-	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace-skins.min.css" />
-    <link rel="stylesheet" href="${ctxJsAndCss}/css/style.css"/>
-	<!--[if lte IE 8]>
-	  <link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace-ie.min.css" />
-	<![endif]-->
+	<link href="${ctxJsAndCss}/assets/css/font-awesome.min.css" rel="stylesheet"  />
+    <link href="${ctxJsAndCss}/css/style.css" rel="stylesheet" />
+    <!-- js脚本 -->
 	<script src="${ctxJsAndCss}/assets/js/ace-extra.min.js"></script>
-	<!--[if lt IE 9]>
-	<script src="${ctxJsAndCss}/assets/js/html5shiv.js"></script>
-	<script src="${ctxJsAndCss}/assets/js/respond.min.js"></script>
-	<![endif]-->
+    <script src="${ctxJsAndCss}/assets/layer/layer.js"></script>
 	<script src="${ctxJsAndCss}/js/jquery-1.9.1.min.js"></script>        
-    <script src="${ctxJsAndCss}/assets/layer/layer.js" type="text/javascript"></script>
 </head>
 <body class="login-layout">
 	<div class="logintop">

@@ -20,6 +20,5 @@
 <script src="${ctxJsAndCss}/assets/js/typeahead-bs2.min.js"></script>
 <script src="${ctxJsAndCss}/assets/layer/layer.js"></script>
 <script src="${ctxJsAndCss}/assets/laydate/laydate.js"></script>
-<script src="${ctxJsAndCss}/Widget/Validform/5.3.2/Validform.min.js"></script>
 
 
