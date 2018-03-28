@@ -10,6 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.lyu.shopping.recommendate.dto.UserActiveDTO;
 import com.lyu.shopping.recommendate.dto.UserSimilarityDTO;
 import com.lyu.shopping.recommendate.service.UserActiveService;
+import com.lyu.shopping.recommendate.service.impl.UserSimilarityServiceImpl;
 import com.lyu.shopping.recommendate.util.RecommendUtils;
 
 /**
@@ -40,7 +41,6 @@ public class RecommendateTest {
         for (UserActiveDTO userActiveDTO : userActiveDTOList) {
             System.out.println(userActiveDTO.getUserId() + "\t" + userActiveDTO.getCategory2Id() + "\t" + userActiveDTO.getHits());
         }
-        
     }
     
     /**
@@ -55,7 +55,6 @@ public class RecommendateTest {
         ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> activeMap = RecommendUtils.assembleUserBehavior(userActiveDTOList);
         
         System.out.println(activeMap.size());
-        
     }
     
     /**
@@ -64,6 +63,7 @@ public class RecommendateTest {
     @Test
     public void testCalcSimilarityBetweenUser() {
         UserActiveService userActiveService = (UserActiveService) application.getBean("userActiveService");
+        UserSimilarityServiceImpl userSimilarityService = (UserSimilarityServiceImpl) application.getBean("userSimilarityService");
         // 查询出所有用户对不同二级类目的点击行为
         List<UserActiveDTO> userActiveDTOList = userActiveService.listAllUserActive();
         // 将每个用户对每个二级类目的点击行为封装成一个个map
@@ -77,7 +77,26 @@ public class RecommendateTest {
         // 打印结果    -- 
         for (UserSimilarityDTO usim : similarityList) {
             System.out.println(usim.getUserId() + "\t" + usim.getUserRefId() + "\t" + usim.getSimilarity());
+            boolean flag = userSimilarityService.saveUserSimilarity(usim);
+            if (flag) {
+            	System.out.println("插入数据成功");
+            }
         }
+    }
+    
+    /**
+     * 测试查询用户相似度集合列表
+     */
+    @Test
+    public void testListUserSimilarity() {
+    	
+    	UserSimilarityServiceImpl userSimilarityService = (UserSimilarityServiceImpl) application.getBean("userSimilarityService");
+        
+    	List<UserSimilarityDTO> userSimilarityList = userSimilarityService.listUserSimilarityByUId(2L);
+    	
+    	for (UserSimilarityDTO userSimilarityDTO : userSimilarityList) {
+    		System.out.println(userSimilarityDTO.getUserId() + "\t" + userSimilarityDTO.getUserRefId() + "\t" + userSimilarityDTO.getSimilarity());
+    	}
     }
     
 }

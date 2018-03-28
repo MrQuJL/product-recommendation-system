@@ -1,0 +1,14 @@
+1. 完成向用户相似度表中插入数据
+
+2. 查询某个用户与其他用户的相似度的集合
+
+SELECT <include refid="all_user_similarity_columns" />
+FROM shopping_similarity
+WHERE user_id = #{userId} OR user_ref_id = #{userId}
+
+OR 条件判断就用在这个地方
+
+3. 获取相似度列表中的topN个元素
+
+
+

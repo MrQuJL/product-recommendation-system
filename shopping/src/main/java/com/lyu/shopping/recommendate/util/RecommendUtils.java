@@ -136,14 +136,17 @@ public class RecommendUtils {
     }
     
     /**
-     * 获取某个用户与其他用户之间的相似度列表,只返回相似度最高的topN个
-     * @param userId 用户id
-     * @return userId与其他用户之间的相似度集合
+     * 找出与userId购买行为最相似的topN个用户
+     * @param userId 需要参考的用户id
+     * @param userSimilarityDTO 用户相似度列表
+     * @param topN 与userId相似用户的数量
+     * @return 与usereId最相似的topN个用户
      */
-    public static List<Long> getSimilarityBetweenUsers(Long userId, Integer topN) {
+    public static List<Long> getSimilarityBetweenUsers(Long userId, List<UserSimilarityDTO> userSimilarityDTO, Integer topN) {
         List<Long> similarityList = new ArrayList<Long>();
+        // 1.查询出userId与其他用户的相似度列表
         
-        
+        // 2.通过堆排序找出最高的前N个用户
         
         return similarityList;
     }
