@@ -3,6 +3,7 @@ package com.lyu.shopping.recommendate.util;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -142,11 +143,24 @@ public class RecommendUtils {
      * @param topN 与userId相似用户的数量
      * @return 与usereId最相似的topN个用户
      */
-    public static List<Long> getSimilarityBetweenUsers(Long userId, List<UserSimilarityDTO> userSimilarityDTO, Integer topN) {
-        List<Long> similarityList = new ArrayList<Long>();
-        // 1.查询出userId与其他用户的相似度列表
+    public static List<Long> getSimilarityBetweenUsers(Long userId, List<UserSimilarityDTO> userSimilarityDTOList, Integer topN) {
+    	// 用来记录与userId相似度最高的前N个用户的id
+        List<Long> similarityList = new ArrayList<Long>(topN);
+        // 堆排序找出最高的前N个用户，建立小根堆，遍历的时候当前的这个相似度比堆顶元素大就剔掉堆顶的值，把这个数入堆(把小的都删除干净,所以要建立小根堆)
+        PriorityQueue<UserSimilarityDTO> maxHeap = new PriorityQueue<UserSimilarityDTO>();
         
-        // 2.通过堆排序找出最高的前N个用户
+        for (UserSimilarityDTO userSimilarityDTO : userSimilarityDTOList) {
+        	if (maxHeap.size() < topN) {
+        		maxHeap.offer(userSimilarityDTO);
+        	} else if (maxHeap.peek().getSimilarity() < userSimilarityDTO.getSimilarity()) {
+        		maxHeap.poll();
+        		maxHeap.offer(userSimilarityDTO);
+        	}
+        }
+        // 把得到的最大的相似度的用户的id取出来(不要取它自己)
+        for (UserSimilarityDTO userSimilarityDTO : maxHeap) {
+        	similarityList.add(userSimilarityDTO.getUserId() == userId ? userSimilarityDTO.getUserRefId() : userSimilarityDTO.getUserId());
+        }
         
         return similarityList;
     }
@@ -172,7 +186,6 @@ public class RecommendUtils {
      */
     public static List<Product> findTopNProducts(Long category2Id) {
         List<Product> recommeddateProductList = new ArrayList<Product>();
-        
         
         return recommeddateProductList;
     }

@@ -97,6 +97,29 @@ public class RecommendateTest {
     	for (UserSimilarityDTO userSimilarityDTO : userSimilarityList) {
     		System.out.println(userSimilarityDTO.getUserId() + "\t" + userSimilarityDTO.getUserRefId() + "\t" + userSimilarityDTO.getSimilarity());
     	}
+    	
     }
-    
+ 
+    /**
+     * 测试取出与指定用户相似度最高的前N个用户
+     */
+    @Test
+    public void testGetTopNUser() {
+    	
+    	UserSimilarityServiceImpl userSimilarityService = (UserSimilarityServiceImpl) application.getBean("userSimilarityService");
+        
+    	List<UserSimilarityDTO> userSimilarityList = userSimilarityService.listUserSimilarityByUId(2L);
+    	
+    	for (UserSimilarityDTO userSimilarityDTO : userSimilarityList) {
+    		System.out.println(userSimilarityDTO.getUserId() + "\t" + userSimilarityDTO.getUserRefId() + "\t" + userSimilarityDTO.getSimilarity());
+    	}
+    	List<Long> userIds = RecommendUtils.getSimilarityBetweenUsers(2L, userSimilarityList, 2);
+    	
+    	System.out.println("与" + 2 + "号用户最相似的前2个用户为：");
+    	
+    	for (Long userRefId : userIds) {
+    		System.out.println(userRefId);
+    	}
+    	
+    }
 }
