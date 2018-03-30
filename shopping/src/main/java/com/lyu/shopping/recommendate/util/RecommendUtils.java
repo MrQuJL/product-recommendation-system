@@ -1,6 +1,8 @@
 package com.lyu.shopping.recommendate.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -9,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.lyu.shopping.recommendate.dto.UserActiveDTO;
 import com.lyu.shopping.recommendate.dto.UserSimilarityDTO;
+import com.lyu.shopping.sysmanage.entity.Category2;
 import com.lyu.shopping.sysmanage.entity.Product;
 
 /**
@@ -164,19 +167,71 @@ public class RecommendUtils {
         
         return similarityList;
     }
-    
+
     /**
-     * 从与userId相似的用户集合similarUserList中找出要推荐的商品
+     * 到similarUserList中的用户访问的二级类目中查找userId不经常点击的二级类目中获得被推荐的类目id
      * @param userId 被推荐商品的用户id
      * @param similarUserList 用userId相似的用户集合
-     * @return 可以推荐给userId的商品列表
+     * @param userActiveList 所有用户的浏览行为
+     * @return 可以推荐给userId的二级类目id列表
      */
-    public static List<Product> getRecommendateCategory2(Long userId, List<Long> similarUserList) {
-        List<Product> recommeddateProductList = new ArrayList<Product>();
+    public static List<Long> getRecommendateCategory2(Long userId, List<Long> similarUserList, List<UserActiveDTO> userActiveList) {
+        List<Long> recommeddateProductList = new ArrayList<Long>();
         
+        // userId的浏览行为列表
+        List<UserActiveDTO> userIdActiveList = findUsersBrowsBehavior(userId, userActiveList);
+        // 对userId的浏览行为按照二级类目id排个序，方便后续与推荐的用户的浏览行为中的二级类目的点击次数直接相减，避免时间复杂度为O(n2)
+        Collections.sort(userIdActiveList, new Comparator<UserActiveDTO>(){
+			@Override
+			public int compare(UserActiveDTO o1, UserActiveDTO o2) {
+				return o1.getCategory2Id().compareTo(o2.getCategory2Id());
+			}
+		});
         
+        // 1.从与useId浏览行为相似的每个用户中找出一个推荐的二级类目
+        for (Long refId : similarUserList) {
+        	// 计算当前用户所点击的二级类目次数与被推荐的用户所点击的二级类目的次数的差值
+        	// 找到当前这个用户的浏览行为
+        	List<UserActiveDTO> currActiveList = findUsersBrowsBehavior(refId, userActiveList);
+        	// 排序，同上述理由
+        	Collections.sort(currActiveList, new Comparator<UserActiveDTO>(){
+    			@Override
+    			public int compare(UserActiveDTO o1, UserActiveDTO o2) {
+    				return o1.getCategory2Id().compareTo(o2.getCategory2Id());
+    			}
+    		});
+        	// 记录差值最大的二级类目的id
+        	long maxCategory2 = 0L;
+        	// 记录最大的差值
+        	double maxDifference = 0.0;
+        	for (int i = 0; i < currActiveList.size(); i++) {
+        		double difference = Math.abs(currActiveList.get(i).getHits() - userIdActiveList.get(i).getHits());
+        		if (difference > maxCategory2) {
+        			maxDifference = difference;
+        			maxCategory2 = currActiveList.get(i).getCategory2Id();
+        		}
+        	}
+        	recommeddateProductList.add(maxCategory2);
+        }
         
         return recommeddateProductList;
+    }
+    
+    
+    /**
+     * 找到当前用户的浏览行为列表
+     * @param userId 当前用户id
+     * @param userActiveList 所有用户的浏览行为列表
+     * @return 当前用户的浏览行为列表
+     */
+    public static List<UserActiveDTO> findUsersBrowsBehavior(Long userId, List<UserActiveDTO> userActiveList) {
+    	List<UserActiveDTO> currActiveList = new ArrayList<UserActiveDTO>();
+    	for (UserActiveDTO userActiveDTO : userActiveList) {
+    		if (userActiveDTO.getUserId().equals(userId)) {
+    			currActiveList.add(userActiveDTO);
+    		}
+    	}
+    	return currActiveList;
     }
     
     /**

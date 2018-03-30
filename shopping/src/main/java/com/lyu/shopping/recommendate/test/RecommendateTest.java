@@ -122,4 +122,38 @@ public class RecommendateTest {
     	}
     	
     }
+    
+    /**
+     * 获取被推荐的类目id列表
+     */
+    @Test
+    public void testGetRecommendateCategoy2() {
+    	
+    	UserSimilarityServiceImpl userSimilarityService = (UserSimilarityServiceImpl) application.getBean("userSimilarityService");
+    	
+    	UserActiveService userActiveService = (UserActiveService) application.getBean("userActiveService");
+    	
+    	List<UserSimilarityDTO> userSimilarityList = userSimilarityService.listUserSimilarityByUId(2L);
+    	
+    	List<UserActiveDTO> userActiveList = userActiveService.listAllUserActive();
+    	
+    	for (UserSimilarityDTO userSimilarityDTO : userSimilarityList) {
+    		System.out.println(userSimilarityDTO.getUserId() + "\t" + userSimilarityDTO.getUserRefId() + "\t" + userSimilarityDTO.getSimilarity());
+    	}
+    	List<Long> userIds = RecommendUtils.getSimilarityBetweenUsers(2L, userSimilarityList, 2);
+    	
+    	System.out.println("与" + 2 + "号用户最相似的前2个用户为：");
+    	
+    	for (Long userRefId : userIds) {
+    		System.out.println(userRefId);
+    	}
+    	
+    	List<Long> recommendateCategory2 = RecommendUtils.getRecommendateCategory2(2L, userIds, userActiveList);
+    	
+    	for (Long category2Id : recommendateCategory2) {
+    		System.out.println("被推荐的二级类目：" + category2Id);
+    	}
+    	
+    	
+    }
 }

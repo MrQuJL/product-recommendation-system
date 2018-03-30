@@ -1,7 +1,7 @@
 1. 存入PriorityQueue中的元素必须要实现Comparable接口，
 或者从外部传入Comparator比较器
 
-
+2. 完成二级类目的推荐
 
 
 
