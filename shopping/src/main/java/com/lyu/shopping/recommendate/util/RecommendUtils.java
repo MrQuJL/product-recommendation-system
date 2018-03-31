@@ -187,7 +187,7 @@ public class RecommendUtils {
 				return o1.getCategory2Id().compareTo(o2.getCategory2Id());
 			}
 		});
-        
+
         // 1.从与useId浏览行为相似的每个用户中找出一个推荐的二级类目
         for (Long refId : similarUserList) {
         	// 计算当前用户所点击的二级类目次数与被推荐的用户所点击的二级类目的次数的差值
@@ -205,19 +205,18 @@ public class RecommendUtils {
         	// 记录最大的差值
         	double maxDifference = 0.0;
         	for (int i = 0; i < currActiveList.size(); i++) {
+        		// 求出点击量差值最大的二级类目，即为要推荐的类目
         		double difference = Math.abs(currActiveList.get(i).getHits() - userIdActiveList.get(i).getHits());
-        		if (difference > maxCategory2) {
+        		if (difference > maxDifference) {
         			maxDifference = difference;
         			maxCategory2 = currActiveList.get(i).getCategory2Id();
         		}
         	}
         	recommeddateProductList.add(maxCategory2);
         }
-        
         return recommeddateProductList;
     }
-    
-    
+
     /**
      * 找到当前用户的浏览行为列表
      * @param userId 当前用户id
@@ -233,7 +232,7 @@ public class RecommendUtils {
     	}
     	return currActiveList;
     }
-    
+
     /**
      * 找出当二级类目下点击量最高的前n个商品
      * @param category2Id
