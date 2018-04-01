@@ -1,5 +1,6 @@
 package com.lyu.shopping.recommendate.test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -12,6 +13,9 @@ import com.lyu.shopping.recommendate.dto.UserSimilarityDTO;
 import com.lyu.shopping.recommendate.service.UserActiveService;
 import com.lyu.shopping.recommendate.service.impl.UserSimilarityServiceImpl;
 import com.lyu.shopping.recommendate.util.RecommendUtils;
+import com.lyu.shopping.sysmanage.dto.ProductDTO;
+import com.lyu.shopping.sysmanage.entity.Product;
+import com.lyu.shopping.sysmanage.service.ProductService;
 
 /**
  * 类描述：测试推荐模块中的一些功能
@@ -153,13 +157,48 @@ public class RecommendateTest {
     }
     
     /**
-     * 测试获取被推荐的商品列表
-     * 目标：
+     * 测试获取被推荐的商品列表(从被推荐的二级类目找出点击量最大的商品作为推荐的商品)
      */
     @Test
     public void testGetRecommendateProduct() {
+    	UserSimilarityServiceImpl userSimilarityService = (UserSimilarityServiceImpl) application.getBean("userSimilarityService");
+    	UserActiveService userActiveService = (UserActiveService) application.getBean("userActiveService");
+    	ProductService productService = (ProductService)application.getBean("productService");
     	
+    	// 1.查询出某个用户与其他用户的相似度列表
+    	List<UserSimilarityDTO> userSimilarityList = userSimilarityService.listUserSimilarityByUId(1L);
+    	// 2.获取所有的用户的浏览记录
+    	List<UserActiveDTO> userActiveList = userActiveService.listAllUserActive();
+    	for (UserSimilarityDTO userSimilarityDTO : userSimilarityList) {
+    		System.out.println(userSimilarityDTO.getUserId() + "\t" + userSimilarityDTO.getUserRefId() + "\t" + userSimilarityDTO.getSimilarity());
+    	}
     	
+    	// 3.找出与id为1L的用户浏览行为最相似的前2个用户
+    	List<Long> userIds = RecommendUtils.getSimilarityBetweenUsers(1L, userSimilarityList, 2);
+    	System.out.println("与" + 1 + "号用户最相似的前2个用户为：");
+    	for (Long userRefId : userIds) {
+    		System.out.println(userRefId);
+    	}
+    	
+    	// 4.获取应该推荐给1L用户的二级类目
+    	List<Long> recommendateCategory2 = RecommendUtils.getRecommendateCategory2(1L, userIds, userActiveList);
+    	for (Long category2Id : recommendateCategory2) {
+    		System.out.println("被推荐的二级类目：" + category2Id);
+    	}
+    	
+    	// 5.找出二级类目中的所有商品
+    	List<Product> recommendateProducts = new ArrayList<Product>();
+    	for (Long category2Id : recommendateCategory2) {
+    		List<ProductDTO> productList = productService.listProductByCategory2Id(category2Id);
+    		// 找出当前二级类目中点击量最大的商品
+    		Product maxHitsProduct = RecommendUtils.findMaxHitsProduct(productList);
+    		recommendateProducts.add(maxHitsProduct);
+    	}
+    	
+    	// 6.打印输出
+    	for (Product product : recommendateProducts) {
+    		System.out.println("被推荐的商品：" + product.getProductName());
+    	}
     	
     	
     }

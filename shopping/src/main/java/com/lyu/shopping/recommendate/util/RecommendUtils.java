@@ -238,7 +238,7 @@ public class RecommendUtils {
      * @param productList 商品列表
      * @return 点击量最高的商品
      */
-    public static Product findTopNProducts(List<Product> productList) {
+    public static Product findMaxHitsProduct(List<? extends Product> productList) {
     	if (productList == null || productList.size() == 0) {
     		return null;
     	}
@@ -247,14 +247,12 @@ public class RecommendUtils {
     	// 记录当前点击量最大的商品
     	Product product = null;
         for (Product temp : productList) {
-        	if (temp.getHits() > maxHits) {
+        	if (temp.getHits() >= maxHits) {
         		maxHits = temp.getHits(); 
         		product = temp;
         	}
         }
-        
         return product;
     }
-    
     
 }
