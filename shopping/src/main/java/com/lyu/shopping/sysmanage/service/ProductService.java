@@ -24,6 +24,13 @@ public interface ProductService {
 	Product getProductByProductId(Long productId);
 	
 	/**
+	 * 查找二级类目为category2Id的所有商品列表
+	 * @param category2Id 二级类目id
+	 * @return 该二级类目下的所有商品
+	 */
+	List<ProductDTO> listProductByCategory2Id(Long category2Id);
+	
+	/**
 	 * 分页查询符合条件的商品列表
 	 * @param product 要查询的商品需满足的条件
 	 * @param pageParam 分页信息

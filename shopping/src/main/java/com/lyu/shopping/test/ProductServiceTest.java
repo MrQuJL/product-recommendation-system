@@ -1,5 +1,7 @@
 package com.lyu.shopping.test;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -110,5 +112,18 @@ public class ProductServiceTest {
 		System.out.println(flag);
 		
 	}
+	
+	
+	@Test
+    public void testGetProductByCategory2Id() {
+		ProductService productService = (ProductService) this.application.getBean("productService");
+		
+		List<ProductDTO> productList = productService.listProductByCategory2Id(23L);
+		
+		for (ProductDTO productDTO : productList) {
+			System.out.println(productDTO.getProductName());
+		}
+		
+    }
 	
 }

@@ -48,6 +48,16 @@ public class ProductServiceImpl implements ProductService {
         
     }
     
+	@Override
+	public List<ProductDTO> listProductByCategory2Id(Long category2Id) {
+		
+		Product product = new Product();
+		product.setCategory2Id(category2Id);
+		List<ProductDTO> productList = this.productMapper.listProduct(product);
+		
+		return productList;
+	}
+    
     @Override
     public PageInfo<ProductDTO> listProductPage(Product product, PageParam pageParam) {
         if (product == null) {
