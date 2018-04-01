@@ -234,14 +234,26 @@ public class RecommendUtils {
     }
 
     /**
-     * 找出当二级类目下点击量最高的前n个商品
-     * @param category2Id
-     * @return
+     * 找到当前商品列表中点击量最高的商品
+     * @param productList 商品列表
+     * @return 点击量最高的商品
      */
-    public static List<Product> findTopNProducts(Long category2Id) {
-        List<Product> recommeddateProductList = new ArrayList<Product>();
+    public static Product findTopNProducts(List<Product> productList) {
+    	if (productList == null || productList.size() == 0) {
+    		return null;
+    	}
+    	// 记录当前最大的点击量
+    	Long maxHits = 0L;
+    	// 记录当前点击量最大的商品
+    	Product product = null;
+        for (Product temp : productList) {
+        	if (temp.getHits() > maxHits) {
+        		maxHits = temp.getHits(); 
+        		product = temp;
+        	}
+        }
         
-        return recommeddateProductList;
+        return product;
     }
     
     
