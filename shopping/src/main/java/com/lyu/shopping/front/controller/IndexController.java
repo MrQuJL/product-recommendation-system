@@ -1,5 +1,6 @@
 package com.lyu.shopping.front.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
+import com.lyu.shopping.recommendate.dto.UserActiveDTO;
+import com.lyu.shopping.recommendate.dto.UserSimilarityDTO;
+import com.lyu.shopping.recommendate.service.UserActiveService;
+import com.lyu.shopping.recommendate.service.UserSimilarityService;
+import com.lyu.shopping.recommendate.util.RecommendUtils;
 import com.lyu.shopping.sysmanage.dto.Category1DTO;
 import com.lyu.shopping.sysmanage.dto.ProductDTO;
 import com.lyu.shopping.sysmanage.entity.Category1;
@@ -34,7 +40,13 @@ public class IndexController {
 
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private UserSimilarityService userSimilarityService;
 
+	@Autowired
+	private UserActiveService userActiveService;
+	
 	/**
 	 * 处理前往商城首页的请求
 	 * @return 商城首页的视图名称
@@ -48,15 +60,31 @@ public class IndexController {
 		session.setAttribute("category1List", category1DTOList);
 
 		// 通过基于用户的协同过滤的推荐算法计算出需要给用户推荐出的商品
-		// TODO the most important part of the project !!!
-		// TODO the most important part of the project !!!
-		// TODO the most important part of the project !!!
-		// TODO the most important part of the project !!!
-		// TODO the most important part of the project !!!
-		// TODO the most important part of the project !!!
-		// TODO the most important part of the project !!!
-		// TODO the most important part of the project !!!
-		// TODO the most important part of the project !!!
+		// 1.获取当前登录的用户(先暂时把当前的用户id定为1L，待后续功能完善后再做补充)
+		Long currUId = 1L;
+		
+		// 2.找到当前用户与其他用户的相似度列表
+		List<UserSimilarityDTO> userSimilarityList = this.userSimilarityService.listUserSimilarityByUId(currUId);
+		
+		// 3.找到与当前用户相似度最高的topN个用户
+		Integer topN = 3;
+		List<Long> userIds = RecommendUtils.getSimilarityBetweenUsers(currUId, userSimilarityList, topN);
+		
+		// 4.从这N个用户中先找到应该推荐给用户的二级类目的id
+		List<UserActiveDTO> userActiveList = userActiveService.listAllUserActive();
+		List<Long> category2List = RecommendUtils.getRecommendateCategory2(currUId, userIds, userActiveList);
+		
+		// 5.找到这些二级类目下点击量最大的商品
+		List<Product> recommendateProducts = new ArrayList<Product>();
+    	for (Long category2Id : category2List) {
+    		List<ProductDTO> productList = productService.listProductByCategory2Id(category2Id);
+    		// 找出当前二级类目中点击量最大的商品
+    		Product maxHitsProduct = RecommendUtils.findMaxHitsProduct(productList);
+    		recommendateProducts.add(maxHitsProduct);
+    	}
+    	
+    	// 把待推荐的商品放入session中，便于前台展示
+    	session.setAttribute("recommendateList", recommendateProducts);
 		
 		return "front/main/main";
 	}

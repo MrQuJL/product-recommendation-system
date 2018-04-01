@@ -21,7 +21,7 @@
         <div class="span24">
             <div id="hotProduct" class="hotProduct clearfix">
                 <div class="title">
-                    <strong>热门商品</strong>
+                    <strong>推荐商品</strong>
                     <!-- <a  target="_blank"></a> -->
                 </div>
                 <ul class="tab">
@@ -31,10 +31,10 @@
                 </ul>
 
                 <ul class="tabContent" style="display: block;">
-                    <c:forEach var="p" items="${hList}">
+                    <c:forEach var="p" items="${recommendateList}">
                         <li>
-                            <a href="${ctx}/findByPid/${p.productId}" target="_blank">
-                                <img src="${ctx}/${p.imgSrc}" style="display: block;" />
+                            <a href="${ctx}/getProductDetail/${p.productId}">
+                                <img src="${p.imgSrc}" width="170" height="170" style="display: inline-block;" />
                             </a>
                         </li>
                     </c:forEach>

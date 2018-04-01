@@ -16,6 +16,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   VALUES(#{userId}, #{userRefId}, #{similarity})
 	</insert>
 	
+	<!-- 更新用户相似度数据 -->
+	<update id="updateUserSimilarity" parameterType="userSimilarityDTO">
+	   UPDATE shopping_similarity
+	   SET similarity = #{similarity}
+	   WHERE user_id = #{userId} AND user_ref_id = #{userRefId}
+	</update>
+	
+	<!-- 判断某两个用户之间的相似度是否已经存在 -->
+	<select id="countUserSimilarity" parameterType="userSimilarityDTO" resultType="integer">
+	   SELECT COUNT(*) FROM shopping_similarity
+	   WHERE user_id = #{userId} AND user_ref_id = #{userRefId}
+	   OR user_ref_id = #{userId} AND user_id = #{userRefId}
+	</select>
+	
 	<!-- 查询某个用户与其他用户之间的相似度列表  -->
 	<select id="listUserSimilarityByUId" parameterType="long" resultType="userSimilarityDTO">
 	   SELECT <include refid="all_user_similarity_columns" />

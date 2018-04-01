@@ -78,10 +78,17 @@ public class RecommendateTest {
         // 4.输出计算好的用户之间的相似度
         for (UserSimilarityDTO usim : similarityList) {
             System.out.println(usim.getUserId() + "\t" + usim.getUserRefId() + "\t" + usim.getSimilarity());
-            // 5.将用户与用户之间的相似度存入数据库
-            boolean flag = userSimilarityService.saveUserSimilarity(usim);
-            if (flag) {
-            	System.out.println("插入数据成功");
+            // 5.如果用户之间的相似度已经存在与数据库中就修改，不存在就添加
+            if (userSimilarityService.isExistsUserSimilarity(usim)) { // 修改
+            	boolean flag = userSimilarityService.updateUserSimilarity(usim);
+            	if (flag) {
+                	System.out.println("修改数据成功");
+                }
+            } else { // 新增
+            	boolean flag = userSimilarityService.saveUserSimilarity(usim);
+                if (flag) {
+                	System.out.println("插入数据成功");
+                }
             }
         }
     }
@@ -116,9 +123,9 @@ public class RecommendateTest {
     		System.out.println(userSimilarityDTO.getUserId() + "\t" + userSimilarityDTO.getUserRefId() + "\t" + userSimilarityDTO.getSimilarity());
     	}
     	// 3.获取与id为2L的用户的浏览行为最相似的前2个用户
-    	List<Long> userIds = RecommendUtils.getSimilarityBetweenUsers(2L, userSimilarityList, 2);
+    	List<Long> userIds = RecommendUtils.getSimilarityBetweenUsers(2L, userSimilarityList, 3);
     	// 4.打印输出
-    	System.out.println("与" + 2 + "号用户最相似的前2个用户为：");
+    	System.out.println("与" + 2 + "号用户最相似的前3个用户为：");
     	for (Long userRefId : userIds) {
     		System.out.println(userRefId);
     	}
@@ -129,7 +136,6 @@ public class RecommendateTest {
      */
     @Test
     public void testGetRecommendateCategoy2() {
-    	
     	UserSimilarityServiceImpl userSimilarityService = (UserSimilarityServiceImpl) application.getBean("userSimilarityService");
     	
     	UserActiveService userActiveService = (UserActiveService) application.getBean("userActiveService");
@@ -141,9 +147,9 @@ public class RecommendateTest {
     		System.out.println(userSimilarityDTO.getUserId() + "\t" + userSimilarityDTO.getUserRefId() + "\t" + userSimilarityDTO.getSimilarity());
     	}
     	
-    	// 3.找出与id为1L的用户浏览行为最相似的前2个用户
-    	List<Long> userIds = RecommendUtils.getSimilarityBetweenUsers(1L, userSimilarityList, 2);
-    	System.out.println("与" + 1 + "号用户最相似的前2个用户为：");
+    	// 3.找出与id为1L的用户浏览行为最相似的前3个用户
+    	List<Long> userIds = RecommendUtils.getSimilarityBetweenUsers(1L, userSimilarityList, 3);
+    	System.out.println("与" + 1 + "号用户最相似的前3个用户为：");
     	for (Long userRefId : userIds) {
     		System.out.println(userRefId);
     	}
@@ -174,8 +180,8 @@ public class RecommendateTest {
     	}
     	
     	// 3.找出与id为1L的用户浏览行为最相似的前2个用户
-    	List<Long> userIds = RecommendUtils.getSimilarityBetweenUsers(1L, userSimilarityList, 2);
-    	System.out.println("与" + 1 + "号用户最相似的前2个用户为：");
+    	List<Long> userIds = RecommendUtils.getSimilarityBetweenUsers(1L, userSimilarityList, 3);
+    	System.out.println("与" + 1 + "号用户最相似的前3个用户为：");
     	for (Long userRefId : userIds) {
     		System.out.println(userRefId);
     	}
@@ -199,9 +205,6 @@ public class RecommendateTest {
     	for (Product product : recommendateProducts) {
     		System.out.println("被推荐的商品：" + product.getProductName());
     	}
-    	
-    	
     }
-    
 }
 

@@ -34,6 +34,26 @@ public class UserSimilarityServiceImpl implements UserSimilarityService {
 	}
 
 	@Override
+	public boolean updateUserSimilarity(UserSimilarityDTO userSimilarityDTO) {
+		boolean flag = false;
+		
+		int rows = this.userSimilarityMapper.updateUserSimilarity(userSimilarityDTO);
+		if (rows > 0) {
+			flag = true;
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean isExistsUserSimilarity(UserSimilarityDTO userSimilarityDTO) {
+		int count = this.userSimilarityMapper.countUserSimilarity(userSimilarityDTO);
+		if (count > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
 	public List<UserSimilarityDTO> listUserSimilarityByUId(Long userId) {
 		if (userId == null) {
 			return null;

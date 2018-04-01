@@ -38,7 +38,7 @@
             </div>
         </div>
 
-        <!-- 右侧边栏的所有二级类目 -->
+        <!-- 右边的商品列表 -->
         <div class="span18 last">
             <!-- 各项商品 -->
             <form id="productForm" action="">

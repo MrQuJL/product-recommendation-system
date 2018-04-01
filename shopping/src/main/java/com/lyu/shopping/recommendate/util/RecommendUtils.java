@@ -150,18 +150,30 @@ public class RecommendUtils {
     	// 用来记录与userId相似度最高的前N个用户的id
         List<Long> similarityList = new ArrayList<Long>(topN);
         // 堆排序找出最高的前N个用户，建立小根堆，遍历的时候当前的这个相似度比堆顶元素大就剔掉堆顶的值，把这个数入堆(把小的都删除干净,所以要建立小根堆)
-        PriorityQueue<UserSimilarityDTO> maxHeap = new PriorityQueue<UserSimilarityDTO>();
+        PriorityQueue<UserSimilarityDTO> minHeap = new PriorityQueue<UserSimilarityDTO>(new Comparator<UserSimilarityDTO>(){
+			@Override
+			public int compare(UserSimilarityDTO o1, UserSimilarityDTO o2) {
+				if (o1.getSimilarity() - o2.getSimilarity() > 0) {
+					return 1;
+				} else if (o1.getSimilarity() - o2.getSimilarity() == 0) {
+					return 0;
+				} else {
+					return -1;
+				}
+			}
+        });
         
         for (UserSimilarityDTO userSimilarityDTO : userSimilarityDTOList) {
-        	if (maxHeap.size() < topN) {
-        		maxHeap.offer(userSimilarityDTO);
-        	} else if (maxHeap.peek().getSimilarity() < userSimilarityDTO.getSimilarity()) {
-        		maxHeap.poll();
-        		maxHeap.offer(userSimilarityDTO);
+        	if (minHeap.size() < topN) {
+        		minHeap.offer(userSimilarityDTO);
+        		System.out.println(minHeap.peek().getSimilarity());
+        	} else if (minHeap.peek().getSimilarity() < userSimilarityDTO.getSimilarity()) {
+        		minHeap.poll();
+        		minHeap.offer(userSimilarityDTO);
         	}
         }
         // 把得到的最大的相似度的用户的id取出来(不要取它自己)
-        for (UserSimilarityDTO userSimilarityDTO : maxHeap) {
+        for (UserSimilarityDTO userSimilarityDTO : minHeap) {
         	similarityList.add(userSimilarityDTO.getUserId() == userId ? userSimilarityDTO.getUserRefId() : userSimilarityDTO.getUserId());
         }
         
