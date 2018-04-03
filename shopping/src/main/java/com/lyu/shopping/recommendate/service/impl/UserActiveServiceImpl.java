@@ -21,14 +21,18 @@ public class UserActiveServiceImpl implements UserActiveService {
 	}
 
 	@Override
+	public int getHitsByUserActiveInfo(UserActiveDTO userActieveDTO) {
+		int hits = this.userActiveMapper.getHitsByUserActiveInfo(userActieveDTO);
+		return hits;
+	}
+	
+	@Override
 	public boolean saveUserActive(UserActiveDTO userActiveDTO) {
 		boolean flag = false;
-		
 		int rows = this.userActiveMapper.saveUserActive(userActiveDTO);
 		if (rows > 0) {
 			flag = true;
 		}
-		
 		return flag;
 	}
 

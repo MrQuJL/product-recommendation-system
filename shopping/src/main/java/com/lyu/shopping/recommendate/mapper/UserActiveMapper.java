@@ -20,6 +20,13 @@ public interface UserActiveMapper {
 	List<UserActiveDTO> listAllUserActive();
 	
 	/**
+	 * 根据用户已有的行为信息获取它对某个二级类目的点击量
+	 * @param userActieveDTO 用户的行为数据
+	 * @return 某个用户对某个二级类目的点击量
+	 */
+	int getHitsByUserActiveInfo(UserActiveDTO userActieveDTO);
+	
+	/**
 	 * 统计某个用户的行为记录的条数
 	 * @param userActieveDTO 要查询的用户的行为记录的条件
 	 * @return 1就说明存在这个用户的行为，0说明不存在

@@ -15,6 +15,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   FROM shopping_active
 	</select>
 	
+	<!-- 根据用户已有的行为信息获取它对某个二级类目的点击量 -->
+	<select id="getHitsByUserActiveInfo" parameterType="userActiveDTO" resultType="integer">
+	   SELECT hits FROM shopping_active
+	   WHERE user_id = #{userId} AND category2_id = #{category2Id}
+	</select>
+	
 	<!-- 统计某个用户的行为记录的条数 -->
 	<select id="countUserActive" parameterType="userActiveDTO" resultType="integer">
        	SELECT COUNT(*) FROM shopping_active

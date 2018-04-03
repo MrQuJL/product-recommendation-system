@@ -56,12 +56,11 @@ public class UserActiveServiceTest {
 	}
 	
 	/**
-	 * 测试添加用户行为数据
+	 * 测试统计某个用户的行为记录的条数
 	 */
 	@Test
 	public void testCountUserActive() {
 		UserActiveService userActiveService = (UserActiveService) application.getBean("userActiveService");
-		
 		UserActiveDTO userActiveDTO = new UserActiveDTO();
 		userActiveDTO.setUserId(1L);
 		userActiveDTO.setCategory2Id(36L);
@@ -71,6 +70,25 @@ public class UserActiveServiceTest {
 			System.out.println("存在用户id为：" + userActiveDTO.getUserId() + 
 				",二级类目id为：" + userActiveDTO.getCategory2Id() + "用户行为记录");
 		}
+	}
+	
+	/**
+	 * 测试统计某个用户的行为记录的条数
+	 */
+	@Test
+	public void testGetHitsOfUser() {
+		UserActiveService userActiveService = (UserActiveService) application.getBean("userActiveService");
+		UserActiveDTO userActiveDTO = new UserActiveDTO();
+		Long userId = 1L;
+		Long category2Id = 24L;
+		
+		userActiveDTO.setUserId(userId);
+		userActiveDTO.setCategory2Id(category2Id);
+		
+		int hits = userActiveService.getHitsByUserActiveInfo(userActiveDTO);
+		
+		System.out.println("用户id为：" + userId + "，二级类目id为：" + category2Id + "的点击量为：" + hits);
+		
 	}
 	
 }
