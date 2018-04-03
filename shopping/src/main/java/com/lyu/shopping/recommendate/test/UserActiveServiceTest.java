@@ -55,4 +55,22 @@ public class UserActiveServiceTest {
 		}
 	}
 	
+	/**
+	 * 测试添加用户行为数据
+	 */
+	@Test
+	public void testCountUserActive() {
+		UserActiveService userActiveService = (UserActiveService) application.getBean("userActiveService");
+		
+		UserActiveDTO userActiveDTO = new UserActiveDTO();
+		userActiveDTO.setUserId(1L);
+		userActiveDTO.setCategory2Id(36L);
+		userActiveDTO.setHits(10000L);
+		int rows = userActiveService.countUserActive(userActiveDTO);
+		if (rows >= 1) {
+			System.out.println("存在用户id为：" + userActiveDTO.getUserId() + 
+				",二级类目id为：" + userActiveDTO.getCategory2Id() + "用户行为记录");
+		}
+	}
+	
 }

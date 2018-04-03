@@ -20,6 +20,13 @@ public interface UserActiveMapper {
 	List<UserActiveDTO> listAllUserActive();
 	
 	/**
+	 * 统计某个用户的行为记录的条数
+	 * @param userActieveDTO 要查询的用户的行为记录的条件
+	 * @return 1就说明存在这个用户的行为，0说明不存在
+	 */
+	int countUserActive(UserActiveDTO userActieveDTO);
+	
+	/**
 	 * 向用户行为表中添加一条用户的行为记录
 	 * @param userActive 用户的行为数据
 	 * @return 受影响的行数，1表示插入成功，0表示插入失败

@@ -18,6 +18,13 @@ public interface UserActiveService {
 	 * @return 返回用户的行为数据
 	 */
 	List<UserActiveDTO> listAllUserActive();
+
+	/**
+	 * 统计某个用户的行为记录的条数
+	 * @param userActieveDTO 要查询的用户的行为记录的条件
+	 * @return 1就说明存在这个用户的行为，0说明不存在
+	 */
+	int countUserActive(UserActiveDTO userActieveDTO);
 	
 	/**
 	 * 向用户行为表中添加一条用户的行为记录

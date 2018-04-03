@@ -14,10 +14,9 @@ public class UserActiveServiceImpl implements UserActiveService {
 
 	@Autowired
 	private UserActiveMapper userActiveMapper;
-	
+
 	@Override
 	public List<UserActiveDTO> listAllUserActive() {
-		
 		return userActiveMapper.listAllUserActive();
 	}
 
@@ -31,6 +30,12 @@ public class UserActiveServiceImpl implements UserActiveService {
 		}
 		
 		return flag;
+	}
+
+	@Override
+	public int countUserActive(UserActiveDTO userActieveDTO) {
+		int rows = this.userActiveMapper.countUserActive(userActieveDTO);		
+		return rows;
 	}
 
 }
