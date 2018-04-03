@@ -16,4 +16,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   FROM shopping_active
 	</select>
 	
+	<!-- 向用户行为表中添加一条用户的行为记录 -->
+	<insert id="saveUserActive" parameterType="userActiveDTO">
+	   INSERT INTO shopping_active(user_id, category2_id, hits)
+	   VALUES(#{userId}, #{category2Id}, #{hits})
+	</insert>
+	
 </mapper>

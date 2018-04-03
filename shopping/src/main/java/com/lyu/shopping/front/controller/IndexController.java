@@ -67,7 +67,7 @@ public class IndexController {
 		List<UserSimilarityDTO> userSimilarityList = this.userSimilarityService.listUserSimilarityByUId(currUId);
 		
 		// 3.找到与当前用户相似度最高的topN个用户
-		Integer topN = 3;
+		Integer topN = 5;
 		List<Long> userIds = RecommendUtils.getSimilarityBetweenUsers(currUId, userSimilarityList, topN);
 		
 		// 4.从这N个用户中先找到应该推荐给用户的二级类目的id

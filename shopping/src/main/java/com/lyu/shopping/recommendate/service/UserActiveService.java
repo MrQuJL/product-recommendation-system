@@ -19,4 +19,11 @@ public interface UserActiveService {
 	 */
 	List<UserActiveDTO> listAllUserActive();
 	
+	/**
+	 * 向用户行为表中添加一条用户的行为记录
+	 * @param userActiveDTO 用户的行为数据
+	 * @return true表示添加成功，false表示添加失败
+	 */
+	boolean saveUserActive(UserActiveDTO userActiveDTO);
+	
 }

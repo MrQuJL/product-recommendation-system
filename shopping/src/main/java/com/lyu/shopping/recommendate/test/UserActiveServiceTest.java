@@ -38,4 +38,21 @@ public class UserActiveServiceTest {
 		
 	}
 	
+	/**
+	 * 测试添加用户行为数据
+	 */
+	@Test
+	public void testSaveUserActive() {
+		UserActiveService userActiveService = (UserActiveService) application.getBean("userActiveService");
+		
+		UserActiveDTO userActiveDTO = new UserActiveDTO();
+		userActiveDTO.setUserId(1L);
+		userActiveDTO.setCategory2Id(1111L);
+		userActiveDTO.setHits(10000L);
+		boolean flag = userActiveService.saveUserActive(userActiveDTO);
+		if (flag) {
+			System.out.println("添加用户行为数据成功!!!");
+		}
+	}
+	
 }

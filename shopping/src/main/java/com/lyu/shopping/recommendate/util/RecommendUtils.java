@@ -11,7 +11,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.lyu.shopping.recommendate.dto.UserActiveDTO;
 import com.lyu.shopping.recommendate.dto.UserSimilarityDTO;
-import com.lyu.shopping.sysmanage.entity.Category2;
 import com.lyu.shopping.sysmanage.entity.Product;
 
 /**

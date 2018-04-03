@@ -19,4 +19,11 @@ public interface UserActiveMapper {
 	 */
 	List<UserActiveDTO> listAllUserActive();
 	
+	/**
+	 * 向用户行为表中添加一条用户的行为记录
+	 * @param userActive 用户的行为数据
+	 * @return 受影响的行数，1表示插入成功，0表示插入失败
+	 */
+	int saveUserActive(UserActiveDTO userActive);
+	
 }

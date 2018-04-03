@@ -21,4 +21,16 @@ public class UserActiveServiceImpl implements UserActiveService {
 		return userActiveMapper.listAllUserActive();
 	}
 
+	@Override
+	public boolean saveUserActive(UserActiveDTO userActiveDTO) {
+		boolean flag = false;
+		
+		int rows = this.userActiveMapper.saveUserActive(userActiveDTO);
+		if (rows > 0) {
+			flag = true;
+		}
+		
+		return flag;
+	}
+
 }
