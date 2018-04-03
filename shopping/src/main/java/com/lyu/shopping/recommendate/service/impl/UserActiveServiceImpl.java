@@ -42,4 +42,14 @@ public class UserActiveServiceImpl implements UserActiveService {
 		return rows;
 	}
 
+	@Override
+	public boolean updateUserActive(UserActiveDTO userActive) {
+		boolean flag = false;
+		int rows = this.userActiveMapper.updateUserActive(userActive);
+		if (rows > 0) {
+			flag = true;
+		}
+		return flag;
+	}
+
 }

@@ -33,4 +33,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   VALUES(#{userId}, #{category2Id}, #{hits})
 	</insert>
 
+    <!-- 更新用户对某个二级类目的点击量 -->
+    <update id="updateUserActive" parameterType="userActiveDTO">
+        UPDATE shopping_active SET hits = #{hits}
+        WHERE user_id = #{userId} AND category2_id = #{category2Id}
+    </update>
+
 </mapper>

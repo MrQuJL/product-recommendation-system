@@ -40,4 +40,11 @@ public interface UserActiveMapper {
 	 */
 	int saveUserActive(UserActiveDTO userActive);
 	
+	/**
+	 * 更新用户对某个二级类目的点击量
+	 * @param userActive 用户的浏览行为数据
+	 * @return 1表示更新成功，0表示更新失败
+	 */
+	int updateUserActive(UserActiveDTO userActive);
+	
 }
