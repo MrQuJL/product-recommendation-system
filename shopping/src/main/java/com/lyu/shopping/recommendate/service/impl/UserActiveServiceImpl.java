@@ -19,33 +19,11 @@ public class UserActiveServiceImpl implements UserActiveService {
 	public List<UserActiveDTO> listAllUserActive() {
 		return userActiveMapper.listAllUserActive();
 	}
-
-	@Override
-	public int getHitsByUserActiveInfo(UserActiveDTO userActieveDTO) {
-		int hits = this.userActiveMapper.getHitsByUserActiveInfo(userActieveDTO);
-		return hits;
-	}
 	
 	@Override
 	public boolean saveUserActive(UserActiveDTO userActiveDTO) {
 		boolean flag = false;
 		int rows = this.userActiveMapper.saveUserActive(userActiveDTO);
-		if (rows > 0) {
-			flag = true;
-		}
-		return flag;
-	}
-
-	@Override
-	public int countUserActive(UserActiveDTO userActieveDTO) {
-		int rows = this.userActiveMapper.countUserActive(userActieveDTO);		
-		return rows;
-	}
-
-	@Override
-	public boolean updateUserActive(UserActiveDTO userActive) {
-		boolean flag = false;
-		int rows = this.userActiveMapper.updateUserActive(userActive);
 		if (rows > 0) {
 			flag = true;
 		}

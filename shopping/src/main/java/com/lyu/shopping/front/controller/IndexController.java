@@ -52,7 +52,7 @@ public class IndexController {
 	 * @return 商城首页的视图名称
 	 */
 	@RequestMapping("/index")
-	public String gotoIndex (HttpSession session) {
+	public String gotoIndex(HttpSession session) {
 		// 在前往商城首页的时候要加载出所有的一级类目以及每个一级类目下的二级类目
 		Category1 category1 = new Category1();
 		category1.setShowFlag(1);
@@ -62,7 +62,7 @@ public class IndexController {
 		// 通过基于用户的协同过滤的推荐算法计算出需要给用户推荐出的商品
 		// 1.获取当前登录的用户(先暂时把当前的用户id定为1L，待后续功能完善后再做补充)
 		Long currUId = 1L;
-		
+
 		// 2.找到当前用户与其他用户的相似度列表
 		List<UserSimilarityDTO> userSimilarityList = this.userSimilarityService.listUserSimilarityByUId(currUId);
 		
