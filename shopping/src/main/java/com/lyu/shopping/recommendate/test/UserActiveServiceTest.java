@@ -39,7 +39,7 @@ public class UserActiveServiceTest {
 	}
 	
 	/**
-	 * 测试添加用户行为数据
+	 * 测试更新用户行为数据
 	 */
 	@Test
 	public void testSaveUserActive() {
@@ -51,7 +51,7 @@ public class UserActiveServiceTest {
 		userActiveDTO.setHits(10000L);
 		boolean flag = userActiveService.saveUserActive(userActiveDTO);
 		if (flag) {
-			System.out.println("添加用户行为数据成功!!!");
+			System.out.println("更新用户行为数据成功!!!");
 		}
 	}
 	

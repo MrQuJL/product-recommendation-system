@@ -24,7 +24,7 @@ public interface UserActiveMapper {
 	 * @param userActieveDTO 用户的行为数据
 	 * @return 某个用户对某个二级类目的点击量
 	 */
-	int getHitsByUserActiveInfo(UserActiveDTO userActieveDTO);
+	int getHitsByUserActiveInfo(UserActiveDTO userActiveDTO);
 	
 	/**
 	 * 统计某个用户的行为记录的条数
