@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lyu.shopping.recommendate.dto.UserActiveDTO;
 import com.lyu.shopping.recommendate.mapper.UserActiveMapper;
@@ -21,6 +24,7 @@ public class UserActiveServiceImpl implements UserActiveService {
 	}
 	
 	@Override
+	@Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
 	public boolean saveUserActive(UserActiveDTO userActiveDTO) {
 		boolean flag = false;
 		// 1.先判断数据库中是否存在当前用户的浏览记录

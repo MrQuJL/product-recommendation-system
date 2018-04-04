@@ -178,14 +178,6 @@ public class IndexController {
 			return "front/product";
 		}
 
-		// TODO 在用户点击该商品的时候记录用户的此次点击行为
-		// TODO 在用户点击该商品的时候记录用户的此次点击行为
-		// TODO 在用户点击该商品的时候记录用户的此次点击行为
-		// TODO 在用户点击该商品的时候记录用户的此次点击行为
-		// TODO 在用户点击该商品的时候记录用户的此次点击行为
-		// TODO 在用户点击该商品的时候记录用户的此次点击行为
-		// TODO 在用户点击该商品的时候记录用户的此次点击行为
-
 		// 1.查询出所有的一级类目以及一级类目下的二级类目列表，用Category1DTO来接收
 		// 如果缓存为空说明还没有加载过一级类目列表，或者一级类目列表被修改过了，此时需要重新加载一级类目列表
 		@SuppressWarnings("unchecked")
@@ -196,8 +188,9 @@ public class IndexController {
 			category1DTOList = this.category1Service.listCategory1DTO(category1);
 			session.setAttribute("category1List", category1DTOList);
 		}
-
 		Product product = this.productService.getProductByProductId(productId);
+		System.out.println("当前商品的二级类目id：" + product.getCategory2Id());
+		
 		request.setAttribute("product", product);
 		return "front/product";
 	}
