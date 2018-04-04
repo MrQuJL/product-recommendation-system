@@ -33,6 +33,7 @@ public class UserActiveServiceImpl implements UserActiveService {
 		int updateRows = 0;
 		// 2.不存在就添加
 		if (rows < 1) { // 不存在
+			userActiveDTO.setHits(1L); // 不存在记录的话那肯定是第一次访问，那点击量肯定是1
 			saveRows = this.userActiveMapper.saveUserActive(userActiveDTO);
 		} else { // 已经存在
 			// 3.存在则先把当前用户对当前二级类目的点击量取出来+1

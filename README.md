@@ -71,14 +71,12 @@
 具体的代码实现见<a href="https://github.com/MrQuJL/product-recommendation-system/blob/master/shopping/src/main/java/com/lyu/shopping/recommendate/util/RecommendUtils.java" target="_blank">RecommendUtils.java</a><br/>
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/recommendCategory2.png)<br/>
 
-
-
+### 初步完成对用户的商品推荐（2018-4-4 21:33）
+在上一个阶段确定了要推荐给用户的二级类目之后，找出每个类目下点击量最高的商品推荐给用户。<br/>
+直观感受一下：<br/>
+![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/recommendateProduct.png)<br/>
+ps：由于还没有实现前台的用户管理功能，所以这里的用户只能使用固定的ID模拟。<br/>
 
 ## 致谢
 感谢您对项目的关注，如果项目中有任何错误或不妥，欢迎指正。
-
-
-
-
-
 

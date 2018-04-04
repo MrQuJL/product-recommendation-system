@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +36,11 @@ import com.lyu.shopping.sysmanage.service.ProductService;
 @Controller
 public class IndexController {
 
+	/**
+	 * 负责打印日志
+	 */
+	private Logger logger = Logger.getLogger(IndexController.class);
+	
 	@Autowired
 	private Category1Service category1Service;
 
@@ -46,6 +52,11 @@ public class IndexController {
 
 	@Autowired
 	private UserActiveService userActiveService;
+	
+	/**
+	 * 充当当前登录的用户，当商城界面用户的功能完成后再做成动态的
+	 */
+	private static final Long currUId = 1L;
 	
 	/**
 	 * 处理前往商城首页的请求
@@ -61,7 +72,7 @@ public class IndexController {
 
 		// 通过基于用户的协同过滤的推荐算法计算出需要给用户推荐出的商品
 		// 1.获取当前登录的用户(先暂时把当前的用户id定为1L，待后续功能完善后再做补充)
-		Long currUId = 1L;
+//		Long currUId = 1L;
 
 		// 2.找到当前用户与其他用户的相似度列表
 		List<UserSimilarityDTO> userSimilarityList = this.userSimilarityService.listUserSimilarityByUId(currUId);
@@ -190,6 +201,18 @@ public class IndexController {
 		}
 		Product product = this.productService.getProductByProductId(productId);
 		System.out.println("当前商品的二级类目id：" + product.getCategory2Id());
+		
+		// 记录当前用户对该商品所处二级类目的浏览行为
+		UserActiveDTO userActiveDTO = new UserActiveDTO();
+		userActiveDTO.setUserId(currUId);
+		userActiveDTO.setCategory2Id(product.getCategory2Id());
+		boolean flag = this.userActiveService.saveUserActive(userActiveDTO);
+		if (flag) {
+			// 打印日志统计用户浏览信息是否成功入库，便于后台进行日志分析
+			logger.info("添加一条浏览记录如下：用户id-" + currUId + "，二级类目Id：" + product.getCategory2Id() + "，点击量为");
+		} else {
+			logger.info("更新Id为" + currUId + "的用户的一条");
+		}
 		
 		request.setAttribute("product", product);
 		return "front/product";
