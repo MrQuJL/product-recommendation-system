@@ -20,10 +20,13 @@ import com.lyu.shopping.recommendate.service.UserActiveService;
 import com.lyu.shopping.recommendate.service.UserSimilarityService;
 import com.lyu.shopping.recommendate.util.RecommendUtils;
 import com.lyu.shopping.sysmanage.dto.Category1DTO;
+import com.lyu.shopping.sysmanage.dto.Category2DTO;
 import com.lyu.shopping.sysmanage.dto.ProductDTO;
 import com.lyu.shopping.sysmanage.entity.Category1;
+import com.lyu.shopping.sysmanage.entity.Category2;
 import com.lyu.shopping.sysmanage.entity.Product;
 import com.lyu.shopping.sysmanage.service.Category1Service;
+import com.lyu.shopping.sysmanage.service.Category2Service;
 import com.lyu.shopping.sysmanage.service.ProductService;
 
 /**
@@ -43,6 +46,9 @@ public class IndexController {
 	
 	@Autowired
 	private Category1Service category1Service;
+	
+	@Autowired
+	private Category2Service category2Service;
 
 	@Autowired
 	private ProductService productService;
@@ -134,6 +140,26 @@ public class IndexController {
 
 		// 3.放置分页条的相关信息
 		setPageAttribute(request, category1Id, productList, "findProductListByCategory1Id");
+		
+		// 4.将该一级类目下的所有二级类目的点击量+1
+		// 4.1查询出当前一级类目下的所有二级类目
+		Category2 category2 = new Category2();
+		category2.setCategory1Id(category1Id);
+		List<Category2DTO> category2List = this.category2Service.listCategory2(category2);
+		// 4.2记录当前用户对这些二级类目的浏览次数
+		for (Category2DTO category2DTO : category2List) {
+			UserActiveDTO userActiveDTO = new UserActiveDTO();
+			userActiveDTO.setUserId(currUId);
+			userActiveDTO.setCategory2Id(category2DTO.getCategory2Id());
+			boolean flag = this.userActiveService.saveUserActive(userActiveDTO);
+			if (flag) {
+				// 打印日志统计用户浏览信息是否成功入库，便于后台进行日志分析
+				logger.info("添加一条浏览记录如下：用户id-" + currUId + "，二级类目Id：" + product.getCategory2Id());
+			} else {
+				logger.info("更新Id为" + currUId + "的用户的一条浏览记录");
+			}
+		}
+		
 		return "front/productList";
 	}
 
