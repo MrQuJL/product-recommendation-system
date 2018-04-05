@@ -171,7 +171,19 @@ public class IndexController {
 
 		// 3.放置分页条的相关信息
 		setPageAttribute(request, category2Id, productList, "findProductListByCategory2Id");
-
+		
+		// 4.向数据库中添加当前用户对当前二级类目的浏览记录
+		UserActiveDTO userActiveDTO = new UserActiveDTO();
+		userActiveDTO.setUserId(currUId);
+		userActiveDTO.setCategory2Id(category2Id);
+		boolean flag = this.userActiveService.saveUserActive(userActiveDTO);
+		if (flag) {
+			// 打印日志统计用户浏览信息是否成功入库，便于后台进行日志分析
+			logger.info("添加一条浏览记录如下：用户id-" + currUId + "，二级类目Id：" + product.getCategory2Id());
+		} else {
+			logger.info("更新Id为" + currUId + "的用户的一条浏览记录");
+		}
+		
 		return "front/productList";
 	}
 
@@ -209,9 +221,9 @@ public class IndexController {
 		boolean flag = this.userActiveService.saveUserActive(userActiveDTO);
 		if (flag) {
 			// 打印日志统计用户浏览信息是否成功入库，便于后台进行日志分析
-			logger.info("添加一条浏览记录如下：用户id-" + currUId + "，二级类目Id：" + product.getCategory2Id() + "，点击量为");
+			logger.info("添加一条浏览记录如下：用户id-" + currUId + "，二级类目Id：" + product.getCategory2Id());
 		} else {
-			logger.info("更新Id为" + currUId + "的用户的一条");
+			logger.info("更新Id为" + currUId + "的用户的一条浏览记录");
 		}
 		
 		request.setAttribute("product", product);
