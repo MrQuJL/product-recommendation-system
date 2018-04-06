@@ -67,6 +67,13 @@ public interface ProductService {
 	boolean updateProduct(Product product);
 	
 	/**
+	 * 通过商品的id更新商品的点击量
+	 * @param productId 商品的id
+	 * @return true表示更新成功，false表示更新失败
+	 */
+	boolean updateProductHitsByProductId(Long productId);
+	
+	/**
 	 * 根据商品id删除商品(逻辑删除)
 	 * @param productId 商品id
 	 * @return true表示删除成功

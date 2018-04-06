@@ -161,6 +161,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional(isolation=Isolation.DEFAULT,propagation=Propagation.REQUIRED)
+	public boolean updateProductHitsByProductId(Long productId) {
+		// 1.获取当前商品的点击量
+    	long hits = this.productMapper.getProductHitsByPId(productId);
+    	// 2.点击量+1再存进去
+    	Product product = new Product();
+    	product.setProductId(productId);
+    	product.setHits(++hits);
+    	int rows = this.productMapper.updateProduct(product);
+    	
+		return rows > 0 ? true : false;
+	}
+    
+    @Override
     public boolean removeProduct(Long productId) {
         if (productId == null) {
             return false;

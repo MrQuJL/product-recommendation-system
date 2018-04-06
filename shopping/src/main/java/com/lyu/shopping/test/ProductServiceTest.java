@@ -33,12 +33,9 @@ public class ProductServiceTest {
 	@Test
 	public void testListProduct() {
 		ProductService productService = (ProductService) this.application.getBean("productService");
-		
 		Product product = new Product();
 		product.setProductId(1L);;
-		
 		PageInfo<ProductDTO> pageInfo = productService.listProductPage(product, null);
-		
 		for (ProductDTO tempProductDTO : pageInfo.getList()) {
 			System.out.println(tempProductDTO);
 		}
@@ -50,15 +47,12 @@ public class ProductServiceTest {
 	@Test
 	public void testUpdateProductStatus() {
 		ProductService productService = (ProductService) this.application.getBean("productService");
-		
 		boolean flag = productService.updateProductStatus(1L, 1);
-		
 		if (flag) {
 			System.out.println("隐藏商品1L成功");
 		} else {
 			System.out.println("隐藏商品1L失败");
 		}
-		
 	}
 	
 	/**
@@ -67,7 +61,6 @@ public class ProductServiceTest {
 	@Test
 	public void testSaveProduct() {
 		ProductService productService = (ProductService) this.application.getBean("productService");
-		
 		Product product = new Product();
 		product.setProductName("测试商品");
 		product.setCategory2Id(15L);
@@ -77,9 +70,7 @@ public class ProductServiceTest {
 		product.setImgSrc("/www");
 		product.setDescription("测试描述");
 		product.setShowFlag(1);
-		
 		boolean flag = productService.saveProduct(product);
-		
 		if (flag) {
 			System.out.println("添加商品成功");
 		}else {
@@ -93,11 +84,8 @@ public class ProductServiceTest {
 	@Test
 	public void testGetProductByProductId() {
 		ProductService productService = (ProductService) this.application.getBean("productService");
-		
 		Product product = productService.getProductByProductId(1L);
-		
 		System.out.println(product);
-		
 	}
 	
 	/**
@@ -106,24 +94,36 @@ public class ProductServiceTest {
 	@Test
 	public void testRemoveProductByProductId() {
 		ProductService productService = (ProductService) this.application.getBean("productService");
-		
 		boolean flag = productService.removeProduct(57L);
-		
 		System.out.println(flag);
-		
 	}
 	
-	
+	/**
+	 * 测试根据二级类目的id查询商品
+	 */
 	@Test
     public void testGetProductByCategory2Id() {
 		ProductService productService = (ProductService) this.application.getBean("productService");
-		
 		List<ProductDTO> productList = productService.listProductByCategory2Id(23L);
-		
 		for (ProductDTO productDTO : productList) {
 			System.out.println(productDTO.getProductName());
 		}
-		
     }
+	
+	/**
+	 * 测试更新商品的点击量
+	 */
+	@Test
+	public void testUpdateProductHits() {
+		ProductService productService = (ProductService) this.application.getBean("productService");
+		Product product = new Product();
+		product.setProductId(1L);
+		boolean flag = productService.updateProductHitsByProductId(product.getProductId());
+		if (flag) {
+			System.out.println("更新商品点击量成功!");
+		} else {
+			System.out.println("更新商品点击量失败!");
+		}
+	}
 	
 }
