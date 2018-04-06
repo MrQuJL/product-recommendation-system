@@ -102,7 +102,6 @@ public class IndexController {
     	
     	// 把待推荐的商品放入session中，便于前台展示
     	session.setAttribute("recommendateList", recommendateProducts);
-		
 		return "front/main/main";
 	}
 
@@ -240,17 +239,23 @@ public class IndexController {
 		Product product = this.productService.getProductByProductId(productId);
 		System.out.println("当前商品的二级类目id：" + product.getCategory2Id());
 		
-		// 记录当前用户对该商品所处二级类目的浏览行为
+		// 2.记录当前用户对该商品所处二级类目的浏览行为
 		UserActiveDTO userActiveDTO = new UserActiveDTO();
 		userActiveDTO.setUserId(currUId);
 		userActiveDTO.setCategory2Id(product.getCategory2Id());
 		boolean flag = this.userActiveService.saveUserActive(userActiveDTO);
 		if (flag) {
-			// 打印日志统计用户浏览信息是否成功入库，便于后台进行日志分析
+			// 2.1打印日志统计用户浏览信息是否成功入库，便于后台进行日志分析
 			logger.info("添加一条浏览记录如下：用户id-" + currUId + "，二级类目Id：" + product.getCategory2Id());
 		} else {
 			logger.info("更新Id为" + currUId + "的用户的一条浏览记录");
 		}
+		
+		// 3.增加当前商品的点击量
+		
+		
+		
+		
 		
 		request.setAttribute("product", product);
 		return "front/product";

@@ -60,6 +60,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE product_id = #{productId} AND is_deleted = 0
 	</select>
 	
+	<!-- 根据商品的id获取该商品的点击量 -->
+	<select id="getProductHitsByPId" parameterType="long" resultType="integer">
+	   SELECT hits FROM shopping_product
+	   WHERE product_id = #{productId}
+	</select>
+	
 	<!-- 统计数据库中存在于集合中商品的个数 -->
 	<select id="countProductInList" parameterType="list" resultType="integer">
 		SELECT COUNT(1) FROM shopping_product
@@ -140,6 +146,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 			<if test="inventory != null">
 				inventory = #{inventory},
+			</if>
+			<if test="hits != null">
+				hits = #{hits},
 			</if>
 			<if test="showFlag != null">
 				is_show = #{showFlag},

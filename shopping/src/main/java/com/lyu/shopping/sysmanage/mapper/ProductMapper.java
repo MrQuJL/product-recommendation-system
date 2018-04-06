@@ -22,6 +22,13 @@ public interface ProductMapper {
 	Product getProductByProductId(Long productId);
 	
 	/**
+	 * 根据商品的id获取该商品的点击量
+	 * @param productId 商品的id
+	 * @return 该商品的点击量
+	 */
+	int getProductHitsByPId(Long productId);
+	
+	/**
 	 * 查询符合条件的商品列表
 	 * @param product 要查询的商品需满足的条件
 	 * @return 满足条件的商品列表
