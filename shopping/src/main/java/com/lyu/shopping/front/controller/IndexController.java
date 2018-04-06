@@ -252,10 +252,13 @@ public class IndexController {
 		}
 		
 		// 3.增加当前商品的点击量
-		
-		
-		
-		
+		boolean hitsFlag = this.productService.updateProductHitsByProductId(productId);
+		if (hitsFlag) {
+			// 3.1打印日志记录此次对商品点击量的增加
+			logger.info("productId为：" + productId + "的商品的点击量+1成功！");
+		} else {
+			logger.info("productId为：" + productId + "的商品的点击量+1失败！");
+		}
 		
 		request.setAttribute("product", product);
 		return "front/product";

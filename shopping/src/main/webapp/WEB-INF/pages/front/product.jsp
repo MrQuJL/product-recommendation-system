@@ -53,7 +53,7 @@
                         <!-- 当前一级类目下的二级类目 -->
                         <c:forEach var="cs" items="${c.category2List}">
                             <dd>
-                                <a href="${ctx}/findProductListByCategory2Id/${cs.category2Id}">
+                                <a href="${ctx}/findProductListByCategory2Id/${cs.category2Id}/1/${applicationScope.pageSize}">
                                     ${cs.category2Name}
                                 </a>
                             </dd>
