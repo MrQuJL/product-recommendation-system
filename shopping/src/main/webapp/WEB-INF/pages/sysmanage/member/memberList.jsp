@@ -5,15 +5,14 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link href="${ctxJsAndCss}/assets/css/bootstrap.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="${ctxJsAndCss}/css/style.css" />
+	<link href="${ctxJsAndCss}/css/style.css" rel="stylesheet" />
 	<link href="${ctxJsAndCss}/assets/css/codemirror.css" rel="stylesheet">
-	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace.min.css" />
-	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/font-awesome.min.css" />
+	<link href="${ctxJsAndCss}/assets/css/ace.min.css" rel="stylesheet" />
+	<link href="${ctxJsAndCss}/assets/css/font-awesome.min.css" rel="stylesheet" />
 	<script src="${ctxJsAndCss}/assets/js/jquery.min.js"></script>
 	<script type="text/javascript">
 	    window.jQuery || document.write("<script src='${ctxJsAndCss}/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 	</script>
-	
 	<script type="text/javascript">
         if("ontouchend" in document) document.write("<script src='${ctxJsAndCss}/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
     </script>
@@ -22,8 +21,8 @@
 	<!-- page specific plugin scripts -->
 	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.min.js"></script>
 	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.bootstrap.js"></script>
-	<script type="text/javascript" src="${ctxJsAndCss}/js/H-ui.js"></script>
-	<script type="text/javascript" src="${ctxJsAndCss}/js/H-ui.admin.js"></script>
+	<script src="${ctxJsAndCss}/js/H-ui.js" type="text/javascript"></script>
+	<script src="${ctxJsAndCss}/js/H-ui.admin.js" type="text/javascript"></script>
 	<script src="${ctxJsAndCss}/assets/layer/layer.js" type="text/javascript"></script>
 	<script src="${ctxJsAndCss}/assets/laydate/laydate.js" type="text/javascript"></script>
 	<title>用户列表</title>
@@ -35,24 +34,32 @@
 				<div class="search_style">
 					<div class="title_names">搜索查询</div>
 					<ul class="search_content clearfix">
-						<li><label class="l_f">会员名称</label><input name="" type="text"
-							class="text_add" placeholder="输入会员名称、电话、邮箱" style="width: 400px" /></li>
-						<li><label class="l_f">添加时间</label><input
-							class="inline laydate-icon" id="start" style="margin-left: 10px;"></li>
-						<li style="width: 90px;"><button type="button"
-								class="btn_search">
+						<li>
+						    <label class="l_f">会员名称</label>
+						    <input name="" type="text" class="text_add" placeholder="输入会员名称、电话、邮箱" style="width: 400px" />
+						</li>
+						<li>
+						    <label class="l_f">添加时间</label>
+						    <input class="inline laydate-icon" id="start" style="margin-left: 10px;">
+						</li>
+						<li style="width: 90px;">
+						    <button type="button" class="btn_search">
 								<i class="icon-search"></i>查询
-							</button></li>
+							</button>
+					    </li>
 					</ul>
 				</div>
 				<!---->
 				<div class="border clearfix">
-					<span class="l_f"> <a href="javascript:ovid()"
-						id="member_add" class="btn btn-warning"><i class="icon-plus"></i>添加用户</a>
-						<a href="javascript:ovid()" class="btn btn-danger"><i
-							class="icon-trash"></i>批量删除</a>
-					</span> <span class="r_f">共：<b>2345</b>条
+					<span class="l_f">
+					    <a href="javascript:ovid()" id="member_add" class="btn btn-warning">
+					        <i class="icon-plus"></i>添加用户
+					    </a>
+						<a href="javascript:ovid()" class="btn btn-danger">
+						    <i class="icon-trash"></i>批量删除
+						</a>
 					</span>
+					<span class="r_f">共：<b>2345</b>条</span>
 				</div>
 				<!---->
 				<div class="table_menu_list">
@@ -60,8 +67,12 @@
 						id="sample-table">
 						<thead>
 							<tr>
-								<th width="25"><label><input type="checkbox"
-										class="ace"><span class="lbl"></span></label></th>
+								<th width="25">
+								    <label>
+								        <input type="checkbox" class="ace">
+								        <span class="lbl"></span>
+								    </label>
+								</th>
 								<th width="80">ID</th>
 								<th width="100">用户名</th>
 								<th width="80">性别</th>
@@ -76,129 +87,41 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><label><input type="checkbox" class="ace"><span
-										class="lbl"></span></label></td>
+								<td>
+								    <label>
+								        <input type="checkbox" class="ace">
+								        <span class="lbl"></span>
+								    </label>
+								</td>
 								<td>1</td>
-								<td><u style="cursor: pointer" class="text-primary"
-									onclick="member_show('张三','member-show.html','10001','500','400')">张三</u></td>
+								<td>
+								    <u style="cursor: pointer" class="text-primary"
+									    onclick="member_show('张三','member-show.html','10001','500','400')">
+									   张三</u>
+								</td>
 								<td>男</td>
 								<td>13000000000</td>
 								<td>admin@mail.com</td>
 								<td class="text-l">北京市 海淀区</td>
 								<td>2014-6-11 11:11:42</td>
 								<td>普通用户</td>
-								<td class="td-status"><span
-									class="label label-success radius">已启用</span></td>
-								<td class="td-manage"><a
-									onClick="member_stop(this,'10001')" href="javascript:;"
-									title="停用" class="btn btn-xs btn-success"><i
-										class="icon-ok bigger-120"></i></a> <a title="编辑"
-									onclick="member_edit('550')" href="javascript:;"
-									class="btn btn-xs btn-info"><i
-										class="icon-edit bigger-120"></i></a> <a title="删除"
-									href="javascript:;" onclick="member_del(this,'1')"
-									class="btn btn-xs btn-warning"><i
-										class="icon-trash  bigger-120"></i></a></td>
-							</tr>
-							<tr>
-								<td><label><input type="checkbox" class="ace"><span
-										class="lbl"></span></label></td>
-								<td>2</td>
-								<td><u style="cursor: pointer" class="text-primary"
-									onclick="member_show('张小泉','member-show.html','1031','500','400')">张小泉</u></td>
-								<td>男</td>
-								<td>13000000000</td>
-								<td>admin@mail.com</td>
-								<td class="text-l">北京市 海淀区</td>
-								<td>2014-6-11 11:11:42</td>
-								<td>普通用户</td>
-								<td class="td-status"><span
-									class="label label-success radius">已启用</span></td>
-								<td class="td-manage"><a
-									onClick="member_stop(this,'10001')" href="javascript:;"
-									title="停用" class="btn btn-xs btn-success"><i
-										class="icon-ok bigger-120"></i></a> <a title="编辑"
-									onclick="member_edit('310')" href="javascript:;"
-									class="btn btn-xs btn-info"><i
-										class="icon-edit bigger-120"></i></a> <a title="删除"
-									href="javascript:;" onclick="member_del(this,'1')"
-									class="btn btn-xs btn-warning"><i
-										class="icon-trash  bigger-120"></i></a></td>
-							</tr>
-							<tr>
-								<td><label><input type="checkbox" class="ace"><span
-										class="lbl"></span></label></td>
-								<td>3</td>
-								<td><u style="cursor: pointer" class="text-primary"
-									onclick="member_show('张小泉','member-show.html','10301','500','400')">张小泉</u></td>
-								<td>男</td>
-								<td>13000000000</td>
-								<td>admin@mail.com</td>
-								<td class="text-l">北京市 海淀区</td>
-								<td>2014-6-11 11:11:42</td>
-								<td>银牌用户</td>
-								<td class="td-status"><span
-									class="label label-success radius">已启用</span></td>
-								<td class="td-manage"><a
-									onClick="member_stop(this,'10001')" href="javascript:;"
-									title="停用" class="btn btn-xs btn-success"><i
-										class="icon-ok bigger-120"></i></a> <a title="编辑"
-									onclick="member_edit(,'410')" href="javascript:;"
-									class="btn btn-xs btn-info"><i
-										class="icon-edit bigger-120"></i></a> <a title="删除"
-									href="javascript:;" onclick="member_del(this,'1')"
-									class="btn btn-xs btn-warning"><i
-										class="icon-trash  bigger-120"></i></a></td>
-							</tr>
-							<tr>
-								<td><label><input type="checkbox" class="ace"><span
-										class="lbl"></span></label></td>
-								<td>4</td>
-								<td><u style="cursor: pointer" class="text-primary"
-									onclick="member_show('张小泉','member-show.html','10001','500','400')">张小泉</u></td>
-								<td>男</td>
-								<td>13000000000</td>
-								<td>admin@mail.com</td>
-								<td class="text-l">北京市 海淀区</td>
-								<td>2014-6-11 11:11:42</td>
-								<td>银牌用户</td>
-								<td class="td-status"><span
-									class="label label-success radius">已启用</span></td>
-								<td class="td-manage"><a
-									onClick="member_stop(this,'10001')" href="javascript:;"
-									title="停用" class="btn btn-xs btn-success"><i
-										class="icon-ok bigger-120"></i></a> <a title="编辑"
-									onclick="member_edit('560')" href="javascript:;"
-									class="btn btn-xs btn-info"><i
-										class="icon-edit bigger-120"></i></a> <a title="删除"
-									href="javascript:;" onclick="member_del(this,'1')"
-									class="btn btn-xs btn-warning"><i
-										class="icon-trash  bigger-120"></i></a></td>
-							</tr>
-							<tr>
-								<td><label><input type="checkbox" class="ace"><span
-										class="lbl"></span></label></td>
-								<td>5</td>
-								<td><u style="cursor: pointer" class="text-primary"
-									onclick="member_show('张小泉','member-show.html','10001','500','400')">张小泉</u></td>
-								<td>男</td>
-								<td>13000000000</td>
-								<td>admin@mail.com</td>
-								<td class="text-l">北京市 海淀区</td>
-								<td>2014-6-11 11:11:42</td>
-								<td>银牌用户</td>
-								<td class="td-status"><span
-									class="label label-success radius">已启用</span></td>
-								<td class="td-manage"><a
-									onClick="member_stop(this,'10001')" href="javascript:;"
-									title="停用" class="btn btn-xs btn-success"><i
-										class="icon-ok bigger-120"></i></a> <a title="编辑"
-									onclick="member_edit('510')" href="javascript:;"
-									class="btn btn-xs btn-info"><i
-										class="icon-edit bigger-120"></i></a> <a title="删除"
-									href="javascript:;" onclick="member_del(this,'1')"
-									class="btn btn-xs btn-warning"><i
-										class="icon-trash  bigger-120"></i></a></td>
+								<td class="td-status">
+								    <span class="label label-success radius">已启用</span>
+								</td>
+								<td class="td-manage">
+								    <a onClick="member_stop(this,'10001')" href="javascript:;"
+									title="停用" class="btn btn-xs btn-success">
+									   <i class="icon-ok bigger-120"></i>
+								    </a>
+								    <a title="编辑" onclick="member_edit('550')" href="javascript:;"
+									   class="btn btn-xs btn-info">
+									   <i class="icon-edit bigger-120"></i>
+									</a>
+									<a title="删除" href="javascript:;" onclick="member_del(this,'1')"
+									   class="btn btn-xs btn-warning">
+									   <i class="icon-trash bigger-120"></i>
+									</a>
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -208,7 +131,6 @@
 	</div>
 	<!--添加用户图层-->
 	<div class="add_menber" id="add_menber_style" style="display: none">
-
 		<ul class=" page-content">
 			<li><label class="label_name">用&nbsp;&nbsp;户 &nbsp;名：</label><span
 				class="add_name"><input value="" name="用户名" type="text"
@@ -255,40 +177,37 @@
 	</div>
 <script>
     jQuery(function($) {
-                    var oTable1 = $('#sample-table').dataTable( {
-                    "aaSorting": [[ 1, "desc" ]],//默认第几个排序
-            "bStateSave": true,//状态保存
-            "aoColumnDefs": [
-              //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-              {"orderable":false,"aTargets":[0,8,9]}// 制定列不参与排序
-            ] } );
-                    
-                    
-                    $('table th input:checkbox').on('click' , function(){
-                        var that = this;
-                        $(this).closest('table').find('tr > td:first-child input:checkbox')
-                        .each(function(){
-                            this.checked = that.checked;
-                            $(this).closest('tr').toggleClass('selected');
-                        });
-                            
-                    });
+       var oTable1 = $('#sample-table').dataTable( {
+	       "aaSorting": [[ 1, "desc" ]],//默认第几个排序
+	       "bStateSave": true,//状态保存
+	       "aoColumnDefs": [
+	       //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+         {"orderable":false,"aTargets":[0,8,9]}// 制定列不参与排序
+       ]});
                 
-                
-                    $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-                    function tooltip_placement(context, source) {
-                        var $source = $(source);
-                        var $parent = $source.closest('table')
-                        var off1 = $parent.offset();
-                        var w1 = $parent.width();
-                
-                        var off2 = $source.offset();
-                        var w2 = $source.width();
-                
-                        if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-                        return 'left';
-                    }
-                })
+       $('table th input:checkbox').on('click' , function(){
+           var that = this;
+           $(this).closest('table').find('tr > td:first-child input:checkbox')
+           .each(function(){
+               this.checked = that.checked;
+               $(this).closest('tr').toggleClass('selected');
+           });
+       });
+    
+       $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+       function tooltip_placement(context, source) {
+           var $source = $(source);
+           var $parent = $source.closest('table')
+           var off1 = $parent.offset();
+           var w1 = $parent.width();
+   
+           var off2 = $source.offset();
+           var w2 = $source.width();
+   
+           if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
+           return 'left';
+       }
+    })
     /*用户-添加*/
      $('#member_add').on('click', function(){
         layer.open({
@@ -305,7 +224,6 @@
          $(".add_menber input[type$='text']").each(function(n){
               if($(this).val()=="")
               {
-                   
                    layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",{
                     title: '提示框',               
                     icon:0,                             
@@ -364,7 +282,6 @@
          $(".add_menber input[type$='text']").each(function(n){
               if($(this).val()=="")
               {
-                   
                    layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",{
                     title: '提示框',               
                     icon:0,                             
@@ -395,7 +312,6 @@
         elem: '#start',
         event: 'focus' 
     });
-
 </script>
 </body>
 </html>
