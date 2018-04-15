@@ -1,31 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/pages/include/taglib.jsp"%>
 <!doctype html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="css/style.css" />
-	<link href="assets/css/codemirror.css" rel="stylesheet">
-	<link rel="stylesheet" href="assets/css/ace.min.css" />
-	<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
-	<script src="assets/js/jquery.min.js"></script>
+	<link href="${ctxJsAndCss}/assets/css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="${ctxJsAndCss}/css/style.css" />
+	<link href="${ctxJsAndCss}/assets/css/codemirror.css" rel="stylesheet">
+	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/ace.min.css" />
+	<link rel="stylesheet" href="${ctxJsAndCss}/assets/css/font-awesome.min.css" />
+	<script src="${ctxJsAndCss}/assets/js/jquery.min.js"></script>
 	<script type="text/javascript">
-	    window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+	    window.jQuery || document.write("<script src='${ctxJsAndCss}/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 	</script>
 	
 	<script type="text/javascript">
-	            if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-	        </script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/typeahead-bs2.min.js"></script>
+        if("ontouchend" in document) document.write("<script src='${ctxJsAndCss}/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    </script>
+	<script src="${ctxJsAndCss}/assets/js/bootstrap.min.js"></script>
+	<script src="${ctxJsAndCss}/assets/js/typeahead-bs2.min.js"></script>
 	<!-- page specific plugin scripts -->
-	<script src="assets/js/jquery.dataTables.min.js"></script>
-	<script src="assets/js/jquery.dataTables.bootstrap.js"></script>
-	<script type="text/javascript" src="js/H-ui.js"></script>
-	<script type="text/javascript" src="js/H-ui.admin.js"></script>
-	<script src="assets/layer/layer.js" type="text/javascript"></script>
-	<script src="assets/laydate/laydate.js" type="text/javascript"></script>
+	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.min.js"></script>
+	<script src="${ctxJsAndCss}/assets/js/jquery.dataTables.bootstrap.js"></script>
+	<script type="text/javascript" src="${ctxJsAndCss}/js/H-ui.js"></script>
+	<script type="text/javascript" src="${ctxJsAndCss}/js/H-ui.admin.js"></script>
+	<script src="${ctxJsAndCss}/assets/layer/layer.js" type="text/javascript"></script>
+	<script src="${ctxJsAndCss}/assets/laydate/laydate.js" type="text/javascript"></script>
 	<title>用户列表</title>
 </head>
 <body>

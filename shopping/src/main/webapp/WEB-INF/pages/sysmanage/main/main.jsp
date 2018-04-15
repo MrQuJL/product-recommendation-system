@@ -259,15 +259,8 @@
 							class="arrow icon-angle-down"></b></a>
 						<ul class="submenu">
 							<li class="home"><a href="javascript:void(0)"
-								name="user_list.html" title="会员列表" class="iframeurl"><i
+								name="${ctx}/sysmgr/member/gotoMemberList" title="会员列表" class="iframeurl"><i
 									class="icon-double-angle-right"></i>会员列表</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="member-Grading.html" title="等级管理" class="iframeurl"><i
-									class="icon-double-angle-right"></i>等级管理</a></li>
-							<li class="home"><a href="javascript:void(0)"
-								name="integration.html" title="会员记录管理" class="iframeurl"><i
-									class="icon-double-angle-right"></i>会员记录管理</a></li>
-
 						</ul></li>
 					<li><a href="#" class="dropdown-toggle"><i
 							class="icon-edit"></i><span class="menu-text"> 类目管理 </span><b
