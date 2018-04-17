@@ -18,7 +18,7 @@ public class Member implements Serializable {
 
     private String loginName;
 
-    private String userName;
+    private String memberName;
 
     private String password;
 
@@ -55,13 +55,13 @@ public class Member implements Serializable {
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
 	}
-
-	public String getUserName() {
-		return userName;
+	
+	public String getMemberName() {
+		return memberName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
 	public String getPassword() {
@@ -146,10 +146,10 @@ public class Member implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", loginName=" + loginName + ", userName=" + userName + ", password=" + password
+		return "Member [id=" + id + ", loginName=" + loginName + ", memberName=" + memberName + ", password=" + password
 				+ ", email=" + email + ", mobile=" + mobile + ", sex=" + sex + ", age=" + age + ", address=" + address
 				+ ", status=" + status + ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", delFlag="
 				+ delFlag + "]";
 	}
-
+	
 }
