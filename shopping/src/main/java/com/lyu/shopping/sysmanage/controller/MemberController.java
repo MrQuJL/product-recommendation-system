@@ -19,10 +19,18 @@ public class MemberController {
 	 */
 	private static final String MEMBER_LIST_URI = "/sysmanage/member/memberList";
 	
+	/**
+	 * 处理跳转到会员列表页面请求的方法
+	 * @return
+	 */
 	@RequestMapping(value="/gotoMemberList")
 	public String gotoMemberList() {
 		
 		return MEMBER_LIST_URI;
 	}
+	
+	
+	
+	
 	
 }
