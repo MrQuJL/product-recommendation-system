@@ -5,15 +5,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.lyu.shopping.sysmanage.mapper.MemberMapper">
 	<!-- 商城会员表所有的字段 -->
-	<sql id="all_memeber_columns">
-		id, login_name, memeber_name, password, age, sex, email, mobile,
+	<sql id="all_member_columns">
+		id, login_name, member_name, password, age, sex, email, mobile,
 		address, status, gmt_create, gmt_modified, is_deleted delFlag
 	</sql>
 
 	<!-- 将通用的sql查询条件抽取出来，成为sql片段给不同的方法用 -->
-	<sql id="query_memeber_sql_where">
-		<if test="memeberName != null">
-			AND memeber_name LIKE '%${memeberName}%'
+	<sql id="query_member_sql_where">
+		<if test="memberName != null">
+			AND member_name LIKE '%${memberName}%'
 		</if>
 		<if test="loginName != null">
 			AND login_name = #{loginName}
@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 统计既存在于数据库中又存在于集合中的商城会员数目 -->
 	<select id="countMemberInList" parameterType="list" resultType="int">
-		SELECT count(1) FROM shopping_sys_memeber
+		SELECT count(1) FROM shopping_sys_member
 		<where>
 			<foreach collection="list" open="AND id IN (" item="id" 
 				separator="," close=")">#{id}</foreach>
@@ -40,43 +40,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 统计所有商城会员的数目(未删除的) -->
 	<select id="countMember" resultType="long">
-		SELECT COUNT(1) FROM shopping_sys_memeber
+		SELECT COUNT(1) FROM shopping_sys_member
 		WHERE is_deleted = 0
 	</select>
 	
 	<!-- 通过商城会员id获取商城会员的详细信息 -->
-	<select id="getMemberByMemberId" parameterType="long" resultType="memeber">
-		SELECT <include refid="all_memeber_columns" />
-		FROM shopping_sys_memeber
-		WHERE id = #{memeberId} AND is_deleted = 0
+	<select id="getMemberByMemberId" parameterType="long" resultType="member">
+		SELECT <include refid="all_member_columns" />
+		FROM shopping_sys_member
+		WHERE id = #{memberId} AND is_deleted = 0
 	</select>
 	
 	<!-- 查询用户列表 -->
-	<select id="listMember" parameterType="memeber" resultType="memeber">
-		SELECT <include refid="all_memeber_columns" />
-		FROM shopping_sys_memeber
+	<select id="listMember" parameterType="member" resultType="member">
+		SELECT <include refid="all_member_columns" />
+		FROM shopping_sys_member
 		<where>
-			<include refid="query_memeber_sql_where" />
+			<include refid="query_member_sql_where" />
 		</where>
 	</select>
 
 	<!-- 新增用户 -->
-	<insert id="saveMember" parameterType="memeber">
-		INSERT INTO shopping_sys_memeber(login_name, memeber_name, age, sex, password, email,
+	<insert id="saveMember" parameterType="member">
+		INSERT INTO shopping_sys_member(login_name, member_name, age, sex, password, email,
 			mobile, address, status, gmt_create, gmt_modified, is_deleted)
-		VALUES(#{loginName}, #{memeberName}, #{age}, #{sex}, #{password}, #{email},
+		VALUES(#{loginName}, #{memberName}, #{age}, #{sex}, #{password}, #{email},
 			#{mobile}, #{address}, #{status}, #{gmtCreate}, #{gmtModified}, #{delFlag})
 	</insert>
 	
 	<!-- 删除商城会员，根据商城会员id删除（逻辑删除）商城会员 -->
 	<update id="removeMember" parameterType="long">
-		UPDATE shopping_sys_memeber SET is_deleted = 1
-		WHERE id = #{memeberId} AND is_deleted = 0
+		UPDATE shopping_sys_member SET is_deleted = 1
+		WHERE id = #{memberId} AND is_deleted = 0
 	</update>
 	
 	<!-- 批量删除商城会员 -->
 	<update id="removeMemberBatch" parameterType="list">
-		UPDATE shopping_sys_memeber SET is_deleted = 1
+		UPDATE shopping_sys_member SET is_deleted = 1
 		<where>
 			<foreach collection="list" item="id" open="AND id in ("
 				separator="," close=")">#{id}</foreach>
@@ -87,14 +87,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!-- 修改商城会员的信息（不包括密码） -->
-	<update id="updateMember" parameterType="memeber">
-		UPDATE shopping_sys_memeber
+	<update id="updateMember" parameterType="member">
+		UPDATE shopping_sys_member
 		<set>
 			<if test = "loginName != null">
 				login_name = #{loginName},
 			</if>
-			<if test = "memeberName != null">
-				memeber_name = #{memeberName},
+			<if test = "memberName != null">
+				member_name = #{memberName},
 			</if>
 			<if test = "age != null">
 				age = #{age},
@@ -120,7 +120,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 更新商城会员的密码 -->
 	<update id="updatePassword">
-		UPDATE shopping_sys_memeber SET password = #{param2}
+		UPDATE shopping_sys_member SET password = #{param2}
 		WHERE id = #{param1} AND is_deleted = 0
 	</update>
 	
