@@ -12,12 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @version V1.0
  */
 @Controller
-public class LoginCustomerController {
+public class LoginMemberController {
 	
 	/**
 	 * 用来打印日志
 	 */
-	Logger logger = Logger.getLogger(LoginCustomerController.class);
+	Logger logger = Logger.getLogger(LoginMemberController.class);
+	
+	/**
+	 * 存入session中的商城会员的属性名
+	 */
+	public static final String SESSION_MEMBER_ATTR = "member";
 	
 	/**
 	 * 处理跳转到商城用户登录页面的请求
