@@ -1,4 +1,4 @@
-package com.lyu.shopping.sysmanage.controller;
+package com.lyu.shopping.front.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;

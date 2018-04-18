@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import com.lyu.shopping.common.dto.PageParam;
 import com.lyu.shopping.common.util.PageUtils;
+import com.lyu.shopping.front.controller.LoginMemberController;
 import com.lyu.shopping.sysmanage.entity.Member;
 import com.lyu.shopping.sysmanage.service.MemberService;
 

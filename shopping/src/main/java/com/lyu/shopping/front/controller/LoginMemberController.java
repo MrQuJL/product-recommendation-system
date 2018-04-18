@@ -1,4 +1,4 @@
-package com.lyu.shopping.sysmanage.controller;
+package com.lyu.shopping.front.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 类描述：用于客户登录的控制器
- * 类名称：com.lyu.shopping.sysmanage.controller.LoginCustomerController
+ * 类名称：com.lyu.shopping.front.controller.LoginMemberController
  * @author 曲健磊
- * 2018年2月27日.下午7:21:27
+ * 2018年4月18日.下午11:07:03
  * @version V1.0
  */
 @Controller
@@ -30,7 +30,7 @@ public class LoginMemberController {
 	 */
 	@RequestMapping(value="/toLogin")
 	public String gotoLoginCustomer() {
-		return "loginCustomer";
+		return "loginMember";
 	}
 	
 }

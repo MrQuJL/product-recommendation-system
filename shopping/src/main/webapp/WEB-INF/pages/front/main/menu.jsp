@@ -26,17 +26,12 @@
                     <a href="${ pageContext.request.contextPath }/quit">退出</a>|
                 </li>
             </c:if>
-
-            <%--<li><a>会员中心</a> |</li>
-            <li><a>购物指南</a> |</li>
-            <li><a>关于我们</a></li>--%>
         </ul>
     </div>
 
     <div class="cart">
         <a href="${pageContext.request.contextPath}/myCart">购物车</a>
     </div>
-
 </div>
 
 <div class="span24">
