@@ -29,7 +29,7 @@ public class LoginMemberController {
 	 * @return
 	 */
 	@RequestMapping(value="/toLogin")
-	public String gotoLoginCustomer() {
+	public String gotoLoginMember() {
 		return "loginMember";
 	}
 	

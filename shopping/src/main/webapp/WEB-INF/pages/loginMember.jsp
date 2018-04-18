@@ -65,14 +65,6 @@
 										</c:if></td>
 								</tr>
 								<tr>
-									<th>&nbsp;</th>
-									<td><label> <input type="checkbox"
-											id="isRememberUsername" name="isRememberUsername"
-											value="true" />记住用户名
-									</label> <label> &nbsp;&nbsp;<a>找回密码</a>
-									</label></td>
-								</tr>
-								<tr>
 									<th>&nbsp;<font color="red">${registerok }</font></th>
 									<td><input type="submit" class="submit" value="登 录" /></td>
 								</tr>

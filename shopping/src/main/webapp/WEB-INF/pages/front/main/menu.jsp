@@ -7,10 +7,10 @@
             <!-- 若用户未登录 -->
             <c:if test="${sessionScope.user == null}">
                 <li id="headerLogin" class="headerLogin" style="display: list-item;">
-                    <a href="${ pageContext.request.contextPath }/userLogin">登录</a>|
+                    <a href="${ pageContext.request.contextPath }/toLogin">登录</a>|
                 </li>
                 <li id="headerRegister" class="headerRegister" style="display: list-item;">
-                    <a href="${ pageContext.request.contextPath }/userRegister">注册</a>|
+                    <a href="${ pageContext.request.contextPath }/toRegister">注册</a>|
                 </li>
             </c:if>
 

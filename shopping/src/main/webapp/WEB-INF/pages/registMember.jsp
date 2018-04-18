@@ -1,49 +1,44 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/pages/include/taglib.jsp"%>
 <!doctype html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>会员注册</title>
-<link href="${pageContext.request.contextPath}/css/common.css"
-	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/register.css"
-	rel="stylesheet" type="text/css" />
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="js/messages_zh.js"></script>
-
-<script type="text/javascript">
-	$(function() {
-		$("#registerform").validate({
-			submitHandler : function(form) {
-
-				form.submit();
-			}
-		});
-	});
-
-	function checkUserName() {
-		$.post(
-			"${pageContext.request.contextPath}/checkUser/"
-					+ $("#userName").val(),
-			{},
-			function(data) {
-				if (data == 1) {
-					alert("ok");
-					document.getElementById("span1").innerHTML = "<font color='red'>用户名已经存在</font>";
-					$("#username").val("");
-					$("#username").focus();
-					$(".submit").unbind("click", function(event) {
-	
-					});
-				} else {
-					document.getElementById("span1").innerHTML = "<font color='green'>可以使用该用户名</font>";
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>会员注册</title>
+	<link href="${ctxJsAndCss}/css/common.css" rel="stylesheet" type="text/css" />
+	<link href="${ctxJsAndCss}/css/register.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="${ctxJsAndCss}/js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="${ctxJsAndCss}/js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="${ctxJsAndCss}/js/messages_zh.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$("#registerform").validate({
+				submitHandler : function(form) {
+					form.submit();
 				}
 			});
-	}
-</script>
+		});
+	
+		function checkUserName() {
+			$.post(
+				"${pageContext.request.contextPath}/checkUser/"
+						+ $("#userName").val(),
+				{},
+				function(data) {
+					if (data == 1) {
+						alert("ok");
+						document.getElementById("span1").innerHTML = "<font color='red'>用户名已经存在</font>";
+						$("#username").val("");
+						$("#username").focus();
+						$(".submit").unbind("click", function(event) {
+		
+						});
+					} else {
+						document.getElementById("span1").innerHTML = "<font color='green'>可以使用该用户名</font>";
+					}
+				});
+		}
+	</script>
 </head>
 <body>
 	<div class="container header">
@@ -121,7 +116,6 @@
 			<div class="copyright">曲健磊 Copyright © 2018-2018 版权所有</div>
 		</div>
 	</div>
-
 
 	<div id="_my97DP"
 		style="position: absolute; top: -1970px; left: -1970px;"></div>
