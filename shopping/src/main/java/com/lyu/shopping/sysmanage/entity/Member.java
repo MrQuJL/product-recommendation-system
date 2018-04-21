@@ -7,7 +7,7 @@ import java.util.Date;
  * 类描述：会员实体类
  * 类名称：com.lyu.shopping.sysmanage.entity.Member
  * @author 曲健磊
- * 2018年4月17日.下午6:42:06
+ * 2018年4月21日.上午9:59:56
  * @version V1.0
  */
 public class Member implements Serializable {

@@ -52,13 +52,12 @@
 					<div class="title">
 						<strong>会员注册</strong>USER REGISTER
 					</div>
-					<form id="registerform"
-						action="${pageContext.request.contextPath}/register" method="post">
+					<form id="registerform" action="${ctx}/registMember" method="post">
 						<table>
 							<tbody>
 								<tr>
 									<th><span class="requiredField">*</span>用户名:</th>
-									<td><input type="text" id="userName" name="userName"
+									<td><input type="text" id="userName" name="loginName"
 										class="text" required minlength="3" maxlength="20"
 										onblur="checkUserName()" /> <span id="span1"
 										style="padding-left: 10px;"></span></td>
@@ -69,34 +68,40 @@
 										required minlength="3" maxlength="20" /></td>
 								</tr>
 								<tr>
+									<th><span class="requiredField">*</span>确认密码:</th>
+									<td><input type="password" name="rePassword" class="text"
+										required minlength="3" maxlength="20" /></td>
+								</tr>
+								<tr>
 									<th>E-mail:</th>
 									<td><input type="text" name="email" class="text" /></td>
 								</tr>
 								<tr>
 									<th>姓名:</th>
-									<td><input type="text" name="name" class="text" required />
+									<td><input type="text" name="memberName" class="text" required />
+									</td>
+								</tr>
+								<tr>
+									<th>性别:</th>
+									<td><input type="radio" name="sex" value="男" class="text" required />
+									男</td>
+									<td><input type="radio" name="sex" value="女" class="text" required />
+									女</td>
+								</tr>
+								<tr>
+									<th>年龄:</th>
+									<td><input type="number" name="age" class="text" required />
 									</td>
 								</tr>
 								<tr>
 									<th><span class="requiredField">*</span>电话:</th>
-									<td><input type="text" name="phone" class="text" required />
+									<td><input type="text" name="mobile" class="text" required />
 									</td>
 								</tr>
 								<tr>
 									<th><span class="requiredField">*</span>地址:</th>
-									<td><input type="text" name="addr" class="text" required />
+									<td><input type="text" name="address" class="text" required />
 									</td>
-								</tr>
-								<tr>
-									<th><span class="requiredField">*</span>验证码:</th>
-									<td><span class="fieldSet"> <input type="text"
-											id="checkcode" name="checkcode" class="text captcha"
-											maxlength="4" /> <img id="checkImg" class="captchaImage"
-											src="${pageContext.request.contextPath}/getCheckCodeImage"
-											onclick="" title="点击更换验证码" />
-									</span> <c:if test="${errorCheckCode !=null}">
-											<font color="red">验证码出错</font>
-										</c:if></td>
 								</tr>
 								<tr>
 									<th>&nbsp;</th>

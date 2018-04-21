@@ -3,6 +3,8 @@ package com.lyu.shopping.front.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.lyu.shopping.sysmanage.entity.Member;
+
 /**
  * 类描述：用于处理注册商城会员请求的控制器
  * 类名称：com.lyu.shopping.front.controller.RegistMemberController
@@ -26,5 +28,20 @@ public class RegistMemberController {
 	public String gotoRegistMember() {
 		return REGIST_MEMBER_URI;
 	}
+	
+	/**
+	 * 处理注册成为商城会员的请求
+	 * @return 返回注册成功或者失败的页面
+	 */
+	@RequestMapping("/registMember")
+	public String registMember(Member member) {
+		
+		
+		System.out.println("这是member：" + member.toString());
+		
+		
+		return REGIST_MEMBER_URI;
+	}
+	
 	
 }

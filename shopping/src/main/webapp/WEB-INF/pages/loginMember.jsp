@@ -53,18 +53,6 @@
 										</c:if></td>
 								</tr>
 								<tr>
-									<th>验证码:</th>
-									<td><span class="fieldSet"> <input type="text"
-											id="captcha" name="checkcode" class="text captcha"
-											maxlength="4" /> <img id="captchaImage" class="captchaImage"
-											src="${pageContext.request.contextPath}/getCheckCodeImage"
-											title="点击更换验证码" />
-
-									</span> <c:if test="${errorCheckCode !=null}">
-											<font color="red">验证码出错</font>
-										</c:if></td>
-								</tr>
-								<tr>
 									<th>&nbsp;<font color="red">${registerok }</font></th>
 									<td><input type="submit" class="submit" value="登 录" /></td>
 								</tr>
@@ -73,7 +61,7 @@
 									<td>
 										<dl>
 											<dt>
-												<a href="${pageContext.request.contextPath }/userRegister">还没有注册账号？立即注册</a>
+												<a href="${ctx}/toRegister">还没有注册账号？立即注册</a>
 											</dt>
 										</dl>
 									</td>
