@@ -37,12 +37,19 @@ public interface MemberService {
 	Member loginMember(String loginName, String password);
 	
 	/**
-	 * 根据用户已知信息分页查询用户列表
+	 * 根据用户已知信息分页查询商城会员列表
 	 * @param member 用户信息
 	 * @param pageParam 分页对象
-	 * @return
+	 * @return 包含用户信息的PageInfo对象
 	 */
 	PageInfo<Member> listMember(Member member, PageParam pageParam);
+	
+	/**
+	 * 根据已有信息查询商城会员列表
+	 * @param member
+	 * @return 符合条件的商城会员列表
+	 */
+	List<Member> listMember(Member member);
 	
 	/**
 	 * 新增管理严

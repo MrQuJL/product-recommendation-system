@@ -7,9 +7,9 @@
 	<title>会员注册</title>
 	<link href="${ctxJsAndCss}/css/common.css" rel="stylesheet" type="text/css" />
 	<link href="${ctxJsAndCss}/css/register.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="${ctxJsAndCss}/js/jquery-1.8.3.min.js"></script>
-	<script type="text/javascript" src="${ctxJsAndCss}/js/jquery.validate.min.js"></script>
-	<script type="text/javascript" src="${ctxJsAndCss}/js/messages_zh.js"></script>
+	<script src="${ctxJsAndCss}/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+	<script src="${ctxJsAndCss}/js/jquery.validate.min.js" type="text/javascript"></script>
+	<script src="${ctxJsAndCss}/js/messages_zh.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		$(function() {
 			$("#registerform").validate({
@@ -18,25 +18,25 @@
 				}
 			});
 		});
-	
+		   
 		function checkUserName() {
-			$.post(
-				"${pageContext.request.contextPath}/checkUser/"
-						+ $("#userName").val(),
-				{},
-				function(data) {
-					if (data == 1) {
-						alert("ok");
+			$.ajax({
+				type : "post",
+				url : "${ctx}/checkUser/" + $("#userName").val(),
+				dataType : "json",
+				success : function(data) {
+					if (data.isExists == "true") { // 用户名已经存在
 						document.getElementById("span1").innerHTML = "<font color='red'>用户名已经存在</font>";
 						$("#username").val("");
-						$("#username").focus();
-						$(".submit").unbind("click", function(event) {
-		
-						});
-					} else {
+                        $("#username").focus();
+                        $(".submit").unbind("click", function(event) {
+        
+                        });
+					} else { // 用户名不存在
 						document.getElementById("span1").innerHTML = "<font color='green'>可以使用该用户名</font>";
 					}
-				});
+				}
+			});
 		}
 	</script>
 </head>
@@ -83,10 +83,10 @@
 								</tr>
 								<tr>
 									<th>性别:</th>
-									<td><input type="radio" name="sex" value="男" class="text" required />
-									男</td>
-									<td><input type="radio" name="sex" value="女" class="text" required />
-									女</td>
+									<td>
+										<input type="radio" name="sex" value="男"  required />男
+										<input type="radio" name="sex" value="女" required />女
+									</td>
 								</tr>
 								<tr>
 									<th>年龄:</th>

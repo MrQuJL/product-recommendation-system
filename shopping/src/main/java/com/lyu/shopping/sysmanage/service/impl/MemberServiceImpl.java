@@ -87,9 +87,15 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
+	public List<Member> listMember(Member member) {
+		List<Member> memberList = this.memberMapper.listMember(member);
+		return memberList;
+	}
+	
+	@Override
 	public boolean saveMember(Member user) {
 		if (user == null) return false;
-		user.setPassword(this.encryptPsd(DEFAULT_PASSWORD));
+//		user.setPassword(this.encryptPsd(DEFAULT_PASSWORD));
 		user.setStatus(0);
 		user.setGmtCreate(new Date());
 		user.setGmtModified(new Date());
