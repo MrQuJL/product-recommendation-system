@@ -34,8 +34,6 @@ public class MemberServiceImpl implements MemberService {
 	
 	private static final int SALT_SIZE = 8;
 	
-	private static final String DEFAULT_PASSWORD = "123";
-	
 	@Autowired
 	private MemberMapper memberMapper;
 	
@@ -95,7 +93,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public boolean saveMember(Member user) {
 		if (user == null) return false;
-//		user.setPassword(this.encryptPsd(DEFAULT_PASSWORD));
+		user.setPassword(this.encryptPsd(user.getPassword()));
 		user.setStatus(0);
 		user.setGmtCreate(new Date());
 		user.setGmtModified(new Date());

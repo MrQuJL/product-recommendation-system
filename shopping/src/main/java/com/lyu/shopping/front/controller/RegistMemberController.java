@@ -55,7 +55,7 @@ public class RegistMemberController {
 		boolean flag = memberService.saveMember(member);
 		// 3.获取增加结果
 		if (flag) {
-			return "registSuccess"; // 增加成功，跳转到登录页面
+			return "redirect:/toLogin"; // 增加成功，跳转到登录页面
 		}
 		
 		// 4.增加失败，返回原页面
