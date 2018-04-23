@@ -52,4 +52,9 @@
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<listener>
+        <listener-class>com.lyu.shopping.front.listener.CategoryListener</listener-class>
+    </listener>
+	
 </web-app>
