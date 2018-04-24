@@ -33,14 +33,14 @@
 						<strong>会员登录</strong>USER LOGIN
 					</div>
 					<form id="loginForm"
-						action="${pageContext.request.contextPath}/login" method="post">
+						action="${ctx}/loginMember" method="post">
 						<table>
 							<tbody>
 								<tr>
 									<th>用户名:</th>
-									<td><input type="text" name="userName" class="text"
+									<td><input type="text" name="loginName" class="text"
 										required minlength="3" maxlength="20" /> <c:if
-											test="${noUser != null }">
+											test="${errMsg != null }">
 											<font color="red">没有此用户</font>
 										</c:if></td>
 								</tr>

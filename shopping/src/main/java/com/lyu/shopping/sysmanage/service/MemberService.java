@@ -32,7 +32,7 @@ public interface MemberService {
 	 * 验证用户是否存在，若存在，继续验证密码是否匹配
 	 * @param loginName 用户登录名称
 	 * @param password 密码
-	 * @return
+	 * @return 返回验证成功的用户信息
 	 */
 	Member loginMember(String loginName, String password);
 	

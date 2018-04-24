@@ -5,32 +5,32 @@
     <div class="topNav clearfix">
         <ul>
             <!-- 若用户未登录 -->
-            <c:if test="${sessionScope.user == null}">
+            <c:if test="${sessionScope.member == null}">
                 <li id="headerLogin" class="headerLogin" style="display: list-item;">
-                    <a href="${ pageContext.request.contextPath }/toLogin">登录</a>|
+                    <a href="${ctx}/toLogin">登录</a>|
                 </li>
                 <li id="headerRegister" class="headerRegister" style="display: list-item;">
-                    <a href="${ pageContext.request.contextPath }/toRegister">注册</a>|
+                    <a href="${ctx}/toRegister">注册</a>|
                 </li>
             </c:if>
 
             <!-- 若用户已登录 -->
-            <c:if test="${sessionScope.user != null}">
+            <c:if test="${sessionScope.member != null}">
                 <li id="headerLogin" class="headerLogin" style="display: list-item;">
                     <c:out value="${user.userName }"/>
                 </li>
                 <li id="headerLogin" class="headerLogin" style="display: list-item;">
-                    <a href="${ pageContext.request.contextPath }/findOrderByUid/1">我的订单</a>|
+                    <a href="${ctx}/findOrderByUid/1">我的订单</a>|
                 </li>
                 <li id="headerRegister" class="headerRegister" style="display: list-item;">
-                    <a href="${ pageContext.request.contextPath }/quit">退出</a>|
+                    <a href="${ctx}/quit">退出</a>|
                 </li>
             </c:if>
         </ul>
     </div>
 
     <div class="cart">
-        <a href="${pageContext.request.contextPath}/myCart">购物车</a>
+        <a href="${ctx}/myCart">购物车</a>
     </div>
 </div>
 
