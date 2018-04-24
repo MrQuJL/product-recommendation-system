@@ -27,14 +27,14 @@ import com.lyu.shopping.sysmanage.service.Category1Service;
 @WebListener
 public class CategoryListener implements HttpSessionListener, ApplicationContextAware {
 
-	private static ApplicationContext applicationContext;
+	private ApplicationContext applicationContext;
 	
 	/**
 	 * session被创建的时候，将一二级类目列表加载到内存
 	 */
     public void sessionCreated(HttpSessionEvent se)  { 
     	// 1.从IOC容器中获取一级类目服务类
-    	Category1Service category1Service = (Category1Service) CategoryListener.applicationContext.getBean("category1Service");
+    	Category1Service category1Service = (Category1Service) this.applicationContext.getBean("category1Service");
     	// 2.设置一些查询条件
     	Category1 category1 = new Category1();
 		category1.setShowFlag(1);
