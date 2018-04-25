@@ -1,0 +1,13 @@
+已解决。
+原因：虽然实现了 ApplicationContextAware 接口，并且重写了 setApplicationContext 方法，但是如果想往监听器里面注入 ApplicationContext ，就必须先得把监听器注册到 Spring 的 IOC 容器中。
+解决方法：在监听器前面加上 @service 注解，以便于将监听器注册到 Spring 的 IOC 容器中。
+
+又现新bug：
+不在ApplicationContext上加静态修饰，就获取不到？
+
+原因：此问题先保留，明天解决。
+
+解决：
+
+Spring 通过一个 postProcessor 来调用这个 setApplicationContext 来注入
+IOC 容器。
