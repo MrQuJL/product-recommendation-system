@@ -27,7 +27,7 @@ import com.lyu.shopping.sysmanage.service.Category1Service;
 @WebListener
 public class CategoryListener implements HttpSessionListener, ApplicationContextAware {
 
-	private ApplicationContext applicationContext;
+	private static ApplicationContext applicationContext;
 	
 	/**
 	 * session被创建的时候，将一二级类目列表加载到内存

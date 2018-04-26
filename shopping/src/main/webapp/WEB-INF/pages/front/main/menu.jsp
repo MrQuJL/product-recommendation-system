@@ -30,7 +30,7 @@
     </div>
 
     <div class="cart">
-        <a href="${ctx}/myCart">购物车</a>
+        <a href="${ctx}/gotoCar">购物车</a>
     </div>
 </div>
 

@@ -29,14 +29,6 @@
 <body>
     <% float discount = 0; %>
     <div class="container header">
-        <div class="span5">
-
-        </div>
-        <div class="span9">
-            <div class="headerAd">
-
-            </div>
-        </div>
         <%@ include file="/WEB-INF/pages/front/main/menu.jsp"%>
     </div>
     <div class="container productContent">
@@ -89,7 +81,7 @@
                 </dl>
             </div>
 
-            <form id="cartForm" action="" method="post">
+            <form id="cartForm" action="${ctx}/gotoCar" method="post">
                 <input type="hidden" name="pid" value="" />
                 <div class="action">
                     <dl class="quantity">
