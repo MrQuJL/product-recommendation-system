@@ -17,36 +17,36 @@ public class CarController {
 	 * 处理前往购物车页面的请求
 	 * @return 购物车页面的视图名称
 	 */
-	@RequestMapping(value="/gotoCar")
+	/*@RequestMapping(value="/gotoCar")
 	public String gotoCar() {
 		return "front/car/car";
-	}
+	}*/
 	
 	/**
 	 * 向购物车添加商品
 	 * @return 购物车页面的视图名称
 	 */
-	@RequestMapping(value="/gotoCar")
+	/*@RequestMapping(value="/gotoCar")
 	public String addCar() {
 		return "";
-	}
+	}*/
 	
 	/**
 	 * 向购物车添加商品
 	 * @return 购物车页面的视图名称
 	 */
-	@RequestMapping(value="/gotoCar")
+	/*@RequestMapping(value="/gotoCar")
 	public String removeCar() {
 		return "";
-	}
+	}*/
 	
 	/**
 	 * 向购物车添加商品
 	 * @return 购物车页面的视图名称
 	 */
-	@RequestMapping(value="/gotoCar")
+	/*@RequestMapping(value="/gotoCar")
 	public String removeBatchCar() {
 		return "";
-	}
+	}*/
 	
 }

@@ -25,7 +25,7 @@ public class ProductPageListener implements ServletContextListener {
 	private static final Integer PAGE_SIZE = 8;
 	
 	/**
-	 * 项目销毁的时候调用的方法
+	 * 项目关闭的时候调用的方法
 	 */
     public void contextDestroyed(ServletContextEvent sce)  { 
     	
