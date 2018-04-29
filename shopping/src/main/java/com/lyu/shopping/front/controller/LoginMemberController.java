@@ -41,6 +41,16 @@ public class LoginMemberController {
 	public static final String LOGIN_MEMBER_URI = "loginMember";
 	
 	/**
+	 * 错误信息存放的属性
+	 */
+	public static final String ERR_MSG_ATTR = "errMsg";
+	
+	/**
+	 * 错误消息的提示信息
+	 */
+	public static final String ERR_MSG_CONTENT = "用户名或密码输入有误，请重新输入！";
+	
+	/**
 	 * 处理跳转到商城用户登录页面的请求
 	 * @return
 	 */
@@ -57,7 +67,7 @@ public class LoginMemberController {
 	public String loginMember(String loginName, String password, HttpServletRequest request, HttpSession session) {
 		// 1.合法性校验
 		if (StringUtils.isEmpty(loginName) || StringUtils.isEmpty(password)) {
-			request.setAttribute("errMsg", "用户名或密码输入有误，请重新输入！");
+			request.setAttribute(ERR_MSG_ATTR, ERR_MSG_CONTENT);
 			return LOGIN_MEMBER_URI;
 		}
 		// 2.调用service层方法去查询，获得返回结果
@@ -68,7 +78,7 @@ public class LoginMemberController {
 			return "redirect:/index.jsp";
 		}
 		// 4.失败则转发会原页面
-		request.setAttribute("errMsg", "用户名或密码输入有误，请重新输入！");
+		request.setAttribute(ERR_MSG_ATTR, ERR_MSG_CONTENT);
 		return "forward:/toLogin";
 	}
 	

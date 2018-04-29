@@ -73,6 +73,7 @@ public class RegistMemberController {
 	public @ResponseBody Map<String, String> checkUserName(@PathVariable(value="loginName") String loginName) {
 		Map<String, String> messageMap = new HashMap<String, String>();
 		messageMap.put("isExists", "false");
+		
 		if (StringUtils.isEmpty(loginName)) {
 			// 用户名不存在,返回
 			return messageMap;
@@ -80,11 +81,13 @@ public class RegistMemberController {
 		// 1.创建member对象
 		Member member = new Member();
 		member.setLoginName(loginName);
+		
 		// 2.验证某个用户名是否存在
 		List<Member> memeberList = memberService.listMember(member);
 		if (memeberList.size() > 0) {
 			messageMap.put("isExists", "true");
 		}
+		
 		return messageMap;
 	}
 	
