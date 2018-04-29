@@ -67,13 +67,10 @@ public class AdminServiceTest {
 		AdminService adminService = (AdminService) this.application.getBean("adminService");
 		List<Long> adminIds = new ArrayList<Long>();
 		adminIds.add(1L);
-//		adminIds.add(2L);
 		adminIds.add(3L);
 		adminIds.add(4L);
 		adminIds.add(5L);
-		
 		boolean flag  = adminService.removeAdminBatch(adminIds);
-		
 		System.out.println(flag);
 		
 	}

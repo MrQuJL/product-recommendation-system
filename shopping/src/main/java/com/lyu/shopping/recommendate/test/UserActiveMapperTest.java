@@ -79,7 +79,5 @@ public class UserActiveMapperTest {
 		} else {
 			System.out.println("更新用户的点击量失败!");
 		}
-		
 	}
-	
 }

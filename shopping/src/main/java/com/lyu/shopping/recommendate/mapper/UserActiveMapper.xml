@@ -4,6 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.lyu.shopping.recommendate.mapper.UserActiveMapper">
+
 	<!-- 所有的用户行为表的字段 -->
 	<sql id="all_user_active_columns">
 	   user_id, category2_id, hits

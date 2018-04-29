@@ -57,6 +57,7 @@ public class Category1ServiceTest {
 		Category1Service category1Service = (Category1Service) this.application.getBean("category1Service");
 		// 显示一级类目测试
 		// System.out.println(category1Service.showCategory1(2L));
+		
 		// 隐藏一级类目测试
 		System.out.println(category1Service.hideCategory1(2L));
 		
@@ -100,7 +101,6 @@ public class Category1ServiceTest {
 		category1Ids.add(7L);
 		category1Ids.add(8L);
 		category1Ids.add(9L);
-//		category1Ids.add(10L);
 		
 		boolean flag = category1Service.removeCategory1Batch(category1Ids);
 		
@@ -147,7 +147,5 @@ public class Category1ServiceTest {
 		for (Long category1Id : hitIds) {
 			System.out.println(category1Id + "命中");
 		}
-		
 	}
-	
 }

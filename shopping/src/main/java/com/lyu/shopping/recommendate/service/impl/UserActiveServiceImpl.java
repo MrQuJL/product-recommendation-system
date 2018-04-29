@@ -12,6 +12,13 @@ import com.lyu.shopping.recommendate.dto.UserActiveDTO;
 import com.lyu.shopping.recommendate.mapper.UserActiveMapper;
 import com.lyu.shopping.recommendate.service.UserActiveService;
 
+/**
+ * 类描述：用户的浏览行为服务接口的具体实现类
+ * 类名称：com.lyu.shopping.recommendate.service.impl.UserActiveServiceImpl
+ * @author 曲健磊
+ * 2018年4月29日.下午5:24:00
+ * @version V1.0
+ */
 @Service("userActiveService")
 public class UserActiveServiceImpl implements UserActiveService {
 
@@ -48,4 +55,5 @@ public class UserActiveServiceImpl implements UserActiveService {
 		}
 		return flag;
 	}
+	
 }

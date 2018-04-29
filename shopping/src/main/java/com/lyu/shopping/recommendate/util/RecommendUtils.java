@@ -30,8 +30,7 @@ public class RecommendUtils {
      */
     public static boolean updateBuyingBehavior(Long userId, Long itemId) {
         boolean flag = false;
-        
-        
+        // TODO
         return flag;
     }
     
@@ -78,8 +77,10 @@ public class RecommendUtils {
         
         // 获取所有的键的集合
         Set<Long> userSet = activeMap.keySet();
+        
         // 把这些集合放入ArrayList中
         List<Long> userIdList = new ArrayList<Long>(userSet);
+        
         // 小于两个说明当前map集合中只有一个map集合的购买行为，或者一个都没有，直接返回
         if (userIdList.size() < 2) {
             return similarityList;
@@ -148,6 +149,7 @@ public class RecommendUtils {
     public static List<Long> getSimilarityBetweenUsers(Long userId, List<UserSimilarityDTO> userSimilarityDTOList, Integer topN) {
         // 用来记录与userId相似度最高的前N个用户的id
         List<Long> similarityList = new ArrayList<Long>(topN);
+        
         // 堆排序找出最高的前N个用户，建立小根堆，遍历的时候当前的这个相似度比堆顶元素大就剔掉堆顶的值，把这个数入堆(把小的都删除干净,所以要建立小根堆)
         PriorityQueue<UserSimilarityDTO> minHeap = new PriorityQueue<UserSimilarityDTO>(new Comparator<UserSimilarityDTO>(){
             @Override
@@ -191,6 +193,7 @@ public class RecommendUtils {
         
         // userId的浏览行为列表
         List<UserActiveDTO> userIdActiveList = findUsersBrowsBehavior(userId, userActiveList);
+        
         // 对userId的浏览行为按照二级类目id排个序，方便后续与推荐的用户的浏览行为中的二级类目的点击次数直接相减，避免时间复杂度为O(n2)
         Collections.sort(userIdActiveList, new Comparator<UserActiveDTO>(){
             @Override
@@ -204,6 +207,7 @@ public class RecommendUtils {
             // 计算当前用户所点击的二级类目次数与被推荐的用户所点击的二级类目的次数的差值
             // 找到当前这个用户的浏览行为
             List<UserActiveDTO> currActiveList = findUsersBrowsBehavior(refId, userActiveList);
+            
             // 排序，同上述理由
             Collections.sort(currActiveList, new Comparator<UserActiveDTO>(){
                 @Override
@@ -211,8 +215,10 @@ public class RecommendUtils {
                     return o1.getCategory2Id().compareTo(o2.getCategory2Id());
                 }
             });
+            
             // 记录差值最大的二级类目的id
             long maxCategory2 = 0L;
+            
             // 记录最大的差值
             double maxDifference = 0.0;
             for (int i = 0; i < currActiveList.size(); i++) {
@@ -255,6 +261,7 @@ public class RecommendUtils {
         }
         // 记录当前最大的点击量
         Long maxHits = 0L;
+        
         // 记录当前点击量最大的商品
         Product product = null;
         for (Product temp : productList) {

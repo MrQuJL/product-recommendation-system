@@ -25,8 +25,11 @@ import java.security.SecureRandom;
  * @version V1.0
  */
 public class EncryptUtils {
+	
 	public static final String DEFAULT_URL_ENCODING = "UTF-8";
+	
 	public static final String SHA1 = "SHA-1";
+	
 	public static final String MD5 = "MD5";
 
 	private static SecureRandom random = new SecureRandom();

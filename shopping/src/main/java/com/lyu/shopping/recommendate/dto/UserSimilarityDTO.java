@@ -12,10 +12,13 @@ import java.io.Serializable;
 public class UserSimilarityDTO implements Serializable, Comparable<UserSimilarityDTO> {
 
 	private static final long serialVersionUID = 3940726816248544380L;
+	
 	// 用户id
 	private Long userId;
+	
 	// 进行比较的用户id
 	private Long userRefId;
+	
 	// userId与userRefId之间的相似度
 	private Double similarity;
 

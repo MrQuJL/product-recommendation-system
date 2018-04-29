@@ -41,10 +41,12 @@ public class RecommendateTest {
         UserActiveService userActiveService = (UserActiveService) application.getBean("userActiveService");
         // 1.查询出所有用户对所有二级类目的浏览记录
         List<UserActiveDTO> userActiveDTOList = userActiveService.listAllUserActive();
+        
         // 2.输出浏览记录列表
         for (UserActiveDTO userActiveDTO : userActiveDTOList) {
             System.out.println(userActiveDTO.getUserId() + "\t" + userActiveDTO.getCategory2Id() + "\t" + userActiveDTO.getHits());
         }
+        
     }
     
     /**
@@ -55,8 +57,10 @@ public class RecommendateTest {
         UserActiveService userActiveService = (UserActiveService) application.getBean("userActiveService");
         // 1.查询所有的用户浏览记录
         List<UserActiveDTO> userActiveDTOList = userActiveService.listAllUserActive();
+        
         // 2.调用推荐模块工具类的方法组装成一个ConcurrentHashMap来存储每个用户以及其对应的二级类目的点击量
         ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> activeMap = RecommendUtils.assembleUserBehavior(userActiveDTOList);
+        
         // 3.输出封装后的map的大小（也就是多少个用户的浏览记录）
         System.out.println(activeMap.size());
     }
@@ -70,8 +74,10 @@ public class RecommendateTest {
         UserSimilarityServiceImpl userSimilarityService = (UserSimilarityServiceImpl) application.getBean("userSimilarityService");
         // 1.查询所有的用户浏览记录
         List<UserActiveDTO> userActiveDTOList = userActiveService.listAllUserActive();
+        
         // 2.调用推荐模块工具类的方法组装成一个ConcurrentHashMap来存储每个用户以及其对应的二级类目的点击量
         ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> activeMap = RecommendUtils.assembleUserBehavior(userActiveDTOList);
+        
         // 3.调用推荐模块工具类的方法计算用户与用户之间的相似度
         List<UserSimilarityDTO> similarityList = RecommendUtils.calcSimilarityBetweenUsers(activeMap);
         
@@ -91,6 +97,7 @@ public class RecommendateTest {
                 }
             }
         }
+        
     }
     
     /**
@@ -98,10 +105,10 @@ public class RecommendateTest {
      */
     @Test
     public void testListUserSimilarity() {
-    	
     	UserSimilarityServiceImpl userSimilarityService = (UserSimilarityServiceImpl) application.getBean("userSimilarityService");
         // 1.查询出某个用户与其他用户的相似度列表
     	List<UserSimilarityDTO> userSimilarityList = userSimilarityService.listUserSimilarityByUId(2L);
+    	
     	// 2.打印输出
     	for (UserSimilarityDTO userSimilarityDTO : userSimilarityList) {
     		System.out.println(userSimilarityDTO.getUserId() + "\t" + userSimilarityDTO.getUserRefId() + "\t" + userSimilarityDTO.getSimilarity());
@@ -118,17 +125,21 @@ public class RecommendateTest {
     	UserSimilarityServiceImpl userSimilarityService = (UserSimilarityServiceImpl) application.getBean("userSimilarityService");
     	// 1.查询出某个用户与其他用户的相似度列表
     	List<UserSimilarityDTO> userSimilarityList = userSimilarityService.listUserSimilarityByUId(2L);
+    	
     	// 2.打印输出
     	for (UserSimilarityDTO userSimilarityDTO : userSimilarityList) {
     		System.out.println(userSimilarityDTO.getUserId() + "\t" + userSimilarityDTO.getUserRefId() + "\t" + userSimilarityDTO.getSimilarity());
     	}
+    	
     	// 3.获取与id为2L的用户的浏览行为最相似的前2个用户
     	List<Long> userIds = RecommendUtils.getSimilarityBetweenUsers(2L, userSimilarityList, 3);
+    	
     	// 4.打印输出
     	System.out.println("与" + 2 + "号用户最相似的前3个用户为：");
     	for (Long userRefId : userIds) {
     		System.out.println(userRefId);
     	}
+    	
     }
     
     /**
@@ -137,10 +148,10 @@ public class RecommendateTest {
     @Test
     public void testGetRecommendateCategoy2() {
     	UserSimilarityServiceImpl userSimilarityService = (UserSimilarityServiceImpl) application.getBean("userSimilarityService");
-    	
     	UserActiveService userActiveService = (UserActiveService) application.getBean("userActiveService");
     	// 1.查询出某个用户与其他用户的相似度列表
     	List<UserSimilarityDTO> userSimilarityList = userSimilarityService.listUserSimilarityByUId(1L);
+    	
     	// 2.获取所有的用户的浏览记录
     	List<UserActiveDTO> userActiveList = userActiveService.listAllUserActive();
     	for (UserSimilarityDTO userSimilarityDTO : userSimilarityList) {
@@ -173,6 +184,7 @@ public class RecommendateTest {
     	
     	// 1.查询出某个用户与其他用户的相似度列表
     	List<UserSimilarityDTO> userSimilarityList = userSimilarityService.listUserSimilarityByUId(1L);
+    	
     	// 2.获取所有的用户的浏览记录
     	List<UserActiveDTO> userActiveList = userActiveService.listAllUserActive();
     	for (UserSimilarityDTO userSimilarityDTO : userSimilarityList) {
@@ -207,4 +219,3 @@ public class RecommendateTest {
     	}
     }
 }
-
