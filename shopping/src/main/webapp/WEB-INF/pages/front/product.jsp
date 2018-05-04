@@ -25,6 +25,12 @@
             document.getElementById("cartForm").submit();
         }
     </script>
+    <script type="text/javascript">
+        function saveCart() {
+        	var count = $("#count").val();
+        	var inventory = $("#inventory").val();
+        }
+    </script>
 </head>
 <body>
     <% float discount = 0; %>
@@ -81,8 +87,8 @@
                 </dl>
             </div>
 
-            <form id="cartForm" action="${ctx}/gotoCar" method="post">
-                <input type="hidden" name="pid" value="" />
+            <form id="cartForm" action="${ctx}/addCar" method="post">
+                <input type="hidden" name="pid" value="${product.productId}" />
                 <div class="action">
                     <dl class="quantity">
                         <dt>购买数量:</dt>
@@ -97,7 +103,7 @@
                 </div>
                 <div class="buy">
                     <a href="#">立即购买</a>
-                    <a href="#" class="addCar">加入购物车</a>
+                    <a href="#" class="addCar" onclick="saveCart()">加入购物车</a>
                 </div>
             </form>
 
