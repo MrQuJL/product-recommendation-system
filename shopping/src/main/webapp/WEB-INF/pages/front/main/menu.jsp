@@ -39,7 +39,7 @@
         <li>
             <a href="${ctx}/index">首页</a>|
         </li>
-        <c:forEach items="${sessionScope.category1List}" var="c">
+        <c:forEach items="${category1List}" var="c">
             <li>
                 <a href="${ctx}/findProductListByCategory1Id/${c.category1Id}/1/${applicationScope.pageSize}">
                     ${c.category1Name}

@@ -17,7 +17,7 @@
         <!-- 左侧边栏的一二级类目列表 -->
         <div class="span6">
             <div class="hotProductCategory">
-                <c:forEach var="c" items="${sessionScope.category1List}">
+                <c:forEach var="c" items="${category1List}">
                     <dl>
                         <!-- 一级类目 -->
                         <dt>

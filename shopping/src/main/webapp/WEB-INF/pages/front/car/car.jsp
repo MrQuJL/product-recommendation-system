@@ -19,7 +19,7 @@
     
     <!-- 当购物车不为空的情况  -->
     <div class="container cart">
-        <c:if test="${fn:length(sessionScope.cart.cartItems) != 0 }">
+        <c:if test="${sessionScope.cart.cartItems.size() != 0 }">
             <div class="span24">
                 <table>
                 <tbody>
@@ -74,9 +74,9 @@
                 <center style="color: red">
                     <span>
                         <h2>您还没有
-		                    <a href="${ pageContext.request.contextPath }/index" style="color: #843d11">购物</a>
-		                                                                     或未
-		                    <a href="${ pageContext.request.contextPath }/userLogin" style="color: #843d11">登录</a>
+                            <a href="${ pageContext.request.contextPath }/index" style="color: #843d11">购物</a>
+                                                                             或未
+                            <a href="${ pageContext.request.contextPath }/userLogin" style="color: #843d11">登录</a>
                                                                 ！！！ </h2>
                    </span>
                 </center>

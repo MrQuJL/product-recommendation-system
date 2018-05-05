@@ -3,6 +3,7 @@ package com.lyu.shopping.front.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -63,6 +64,8 @@ public class IndexController {
 	 * 充当当前登录的用户，当商城界面用户的功能完成后再做成动态的
 	 */
 	private static final Long currUId = 1L;
+
+	private volatile ServletContext servletContext;
 	
 	/**
 	 * 处理前往商城首页的请求
@@ -119,16 +122,15 @@ public class IndexController {
 		@PathVariable("category1Id") Long category1Id, @PathVariable("pageNum") Integer pageNum,
 		@PathVariable("pageSize") Integer pageSize) {
 
-		// 1.查询出所有的一级类目以及一级类目下的二级类目列表，用Category1DTO来接收
-		// 如果缓存为空说明还没有加载过一级类目列表，或者一级类目列表被修改过了，此时需要重新加载一级类目列表
+		/*servletContext = session.getServletContext();
 		@SuppressWarnings("unchecked")
-		List<Category1DTO> category1DTOList = (List<Category1DTO>) session.getAttribute("category1List");
+		List<Category1DTO> category1DTOList = (List<Category1DTO>) servletContext.getAttribute("category1List");
 		if (category1DTOList == null) {
 			Category1 category1 = new Category1();
 			category1.setShowFlag(1);
 			category1DTOList = this.category1Service.listCategory1DTO(category1);
-			session.setAttribute("category1List", category1DTOList);
-		}
+			servletContext.setAttribute("category1List", category1DTOList);
+		}*/
 
 		// 2.查询出该一级类目下的所有商品
 		Product product = new Product();
@@ -142,7 +144,7 @@ public class IndexController {
 		
 		// 4.将该一级类目下的所有二级类目的点击量+1
 		// 4.1查询出当前一级类目下的所有二级类目
-		Category2 category2 = new Category2();
+		/*Category2 category2 = new Category2();
 		category2.setCategory1Id(category1Id);
 		List<Category2DTO> category2List = this.category2Service.listCategory2(category2);
 		// 4.2记录当前用户对这些二级类目的浏览次数
@@ -157,7 +159,7 @@ public class IndexController {
 			} else {
 				logger.info("更新Id为" + currUId + "的用户的一条浏览记录");
 			}
-		}
+		}*/
 		
 		return "front/productList";
 	}
