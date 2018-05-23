@@ -65,16 +65,15 @@
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/cos3.jpg)<br/>
 其中的 A1,A2,A3...就可以理解为该用户对不同的商品的点击量。
 
-### 初步确定要推荐给用户的二级类目（2018-3-30 22:48）
+### 计算出要推荐给用户的二级类目（2018-3-30 22:48）
 通过上一阶段对用户相似度之间的求解，可以获得与某个用户最相似的前N个用户，（假设需要被推荐商品的用户为X）然后在这N个用户的浏览记录中查找X没有浏览的类目，但是这N个用户浏览的二级类目的类目的id，作为推荐给用户的二级类目id<br/>
 具体的代码实现见<a href="https://github.com/MrQuJL/product-recommendation-system/blob/master/shopping/src/main/java/com/lyu/shopping/recommendate/util/RecommendUtils.java" target="_blank">RecommendUtils.java</a><br/>
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/recommendCategory2.png)<br/>
 
-### 初步完成对用户的商品推荐（2018-4-4 21:33）
+### 完成对用户的商品推荐（2018-4-4 21:33）
 在上一个阶段确定了要推荐给用户的二级类目之后，找出每个类目下点击量最高的商品推荐给用户。<br/>
 直观感受一下：<br/>
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/recommendateProduct.png)<br/>
-ps：由于还没有实现前台的用户管理功能，所以这里的用户只能使用固定的ID模拟。<br/>
 
 ## 致谢
 感谢您对项目的关注，如果项目中有任何错误或不妥，欢迎指正。
