@@ -74,6 +74,3 @@
 在上一个阶段确定了要推荐给用户的二级类目之后，找出每个类目下点击量最高的商品推荐给用户。<br/>
 直观感受一下：<br/>
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/recommendateProduct.png)<br/>
-
-## 致谢
-感谢您对项目的关注，如果项目中有任何错误或不妥，欢迎指正。
