@@ -18,7 +18,7 @@
 
 ### 开发环境
 
-* 操作系统：Windows8.1（计划迁移到linux服务器，敬请期待...）
+* 操作系统：Windows8.1
 * IDE：eclipse
 * Java版本：1.8
 * 数据库：mysql5.6.36

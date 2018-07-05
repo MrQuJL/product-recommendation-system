@@ -13,48 +13,48 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd      
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
-  	
-	<!--扫描当前的包路径下面的所有类 用于注解  -->
-	<context:component-scan base-package="com.lyu.shopping" >
-   		<!--过滤掉控制层的注解  -->
-   		<context:exclude-filter type="annotation" 
-   			expression="org.springframework.stereotype.Controller"/>
-   	</context:component-scan>
-	
- 	<!--从配置文件读取数据源配置信息 -->
+    
+    <!--扫描当前的包路径下面的所有类 用于注解  -->
+    <context:component-scan base-package="com.lyu.shopping" >
+        <!--过滤掉控制层的注解  -->
+        <context:exclude-filter type="annotation" 
+            expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    
+    <!--从配置文件读取数据源配置信息 -->
     <context:property-placeholder location="classpath:jdbc.properties" />  
     
-	<!--配置数据源 -->
-	<bean id= "dataSource" class = "com.alibaba.druid.pool.DruidDataSource"> 
-		<property name="driverClassName" value="${jdbc.driverClass}"></property> 		
-   		<property name="url" value="${jdbc.url}"></property>
-   		<property name="username" value="${jdbc.username}"></property>
-   		<property name="password" value="${jdbc.password}"></property> 
-	</bean>
-	
-	<!--配置mybaits的SqlSessionFactory  -->
-	<bean id = "sqlSessionFactory" class = "org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref = "dataSource"></property>
-		<property name="configLocation" value="classpath:mybatis-cfg.xml"></property>	
-	</bean>
-	
-	<bean class = "org.mybatis.spring.mapper.MapperScannerConfigurer">
-	 	<!--如果有多个报路径,用逗号分开即可  -->
-	 	<property name="basePackage" value="com.lyu.shopping.*.mapper"/>
-	 	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-	 </bean>
+    <!--配置数据源 -->
+    <bean id= "dataSource" class = "com.alibaba.druid.pool.DruidDataSource"> 
+        <property name="driverClassName" value="${jdbc.driverClass}"></property>        
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property> 
+    </bean>
+    
+    <!--配置mybaits的SqlSessionFactory  -->
+    <bean id = "sqlSessionFactory" class = "org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref = "dataSource"></property>
+        <property name="configLocation" value="classpath:mybatis-cfg.xml"></property>   
+    </bean>
+    
+    <bean class = "org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--如果有多个报路径,用逗号分开即可  -->
+        <property name="basePackage" value="com.lyu.shopping.*.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+     </bean>
  
- 	<!--注册jdbc访问数据的事务管理器  -->
-	<bean id = "txManager" class = "org.springframework.jdbc.datasource.DataSourceTransactionManager">
-	 	<property name="dataSource" ref = "dataSource"></property>	
-	</bean>
-	
-	<!--开启事务注解驱动  -->
-	<tx:annotation-driven transaction-manager="txManager" />
- 	
- 	<!-- 注册aspectJ的自动代理 -->
- 	<aop:aspectj-autoproxy />
- 	
- 	<import resource="classpath:springmvc.xml"/>
- 	
+    <!--注册jdbc访问数据的事务管理器  -->
+    <bean id = "txManager" class = "org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref = "dataSource"></property>  
+    </bean>
+    
+    <!--开启事务注解驱动  -->
+    <tx:annotation-driven transaction-manager="txManager" />
+    
+    <!-- 注册aspectJ的自动代理 -->
+    <aop:aspectj-autoproxy />
+    
+    <import resource="classpath:springmvc.xml"/>
+    
 </beans>
