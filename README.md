@@ -74,3 +74,9 @@
 在上一个阶段确定了要推荐给用户的二级类目之后，找出每个类目下点击量最高的商品推荐给用户。<br/>
 直观感受一下：<br/>
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/recommendateProduct.png)<br/>
+
+## 项目待完善
+
+* 用户的点击行为以及用户与用户之间的相似度数据存入```redis```中，在内存中计算的速度大于磁盘IO
+
+
