@@ -87,8 +87,8 @@
 
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/wxapp.jpg)<br/>
 
-![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/recom.jpeg)<br/>
+![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/recom.jpeg)
 
-![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/operate.jpeg)<br/>
+![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/operate.jpeg)
 
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/fpwl.jpeg)<br/>
