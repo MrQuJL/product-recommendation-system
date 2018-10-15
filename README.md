@@ -75,8 +75,20 @@
 直观感受一下：<br/>
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/recommendateProduct.png)<br/>
 
-## 项目待完善
+## 实际应用场景
 
-* 用户的点击行为以及用户与用户之间的相似度数据存入```redis```中，在内存中计算的速度大于磁盘IO
+* 公司的产品，微信小程序搜索：集栈
 
+* 介绍：集栈供应链立足于为个人中小卖家寻找最优质的跨境商品货源，解决海外仓储成本高昂以及国际物流不阳关清关难的痛点。B2B的产品，主要是为淘宝店主，微信卖家以及个人提供跨境货源，不需要自己清关，成本低，利润高哦！
 
+* 邀请码：E770909
+
+* 小程序识别码：
+
+![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/wxapp.jpg)<br/>
+
+![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/recom.jpeg)<br/>
+
+![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/operate.jpeg)<br/>
+
+![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/fpwl.jpeg)<br/>
