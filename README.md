@@ -74,19 +74,3 @@
 在上一个阶段确定了要推荐给用户的二级类目之后，找出每个类目下点击量最高的商品推荐给用户。<br/>
 直观感受一下：<br/>
 ![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/recommendateProduct.png)<br/>
-
-## 实际应用场景
-
-* 公司的产品，微信小程序搜索：集栈
-
-* 介绍：集栈供应链立足于为个人中小卖家寻找最优质的跨境商品货源，解决海外仓储成本高昂以及国际物流不阳关清关难的痛点。B2B的产品，主要是为淘宝店主，微信卖家以及个人提供跨境货源，不需要自己清关，成本低，利润高哦！
-
-* 邀请码：E770909
-
-* 小程序识别码：
-
-![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/wxapp.jpg)<br/>
-
-![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/recom.jpeg)
-![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/fpwl.jpeg)
-![image](https://github.com/MrQuJL/online-shop/raw/master/shopping-imgs/operate.jpeg)
