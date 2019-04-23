@@ -1,6 +1,6 @@
 # 商品推荐系统（product-recommendation-system）
 
-[![](http://progressed.io/bar/77?title=im)](https://blog.csdn.net/a909301740)
+[![](http://progressed.io/bar/89?title=recommend)](https://blog.csdn.net/a909301740)
 
 ## 项目介绍
 
