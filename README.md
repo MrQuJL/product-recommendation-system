@@ -1,5 +1,7 @@
 # 商品推荐系统（product-recommendation-system）
 
+[![](http://progressed.io/bar/77?title=im)](https://blog.csdn.net/a909301740)
+
 ## 项目介绍
 
 > 商品推荐是针对用户面对海量的商品信息而不知从何下手的一种解决方案，它可以根据用户的喜好，年龄，点击量，购买量以及各种购买行为来为用户推荐合适的商品。在本项目中采用的是基于用户的协同过滤的推荐算法来实现商品的推荐并在前台页面进行展示，我将会使用余弦相似度的度量方法来计算用户与用户之间相似性，最终将相似度较高的用户浏览的商品推荐给用户。<a href="https://github.com/MrQuJL/product-recommendation-system/tree/master/shopping-recommendate" target="blank">更多关于机器学习推荐算法的内容详见这里</a>
