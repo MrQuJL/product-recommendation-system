@@ -97,7 +97,7 @@
 		<dependency>
 		    <groupId>com.alibaba</groupId>
 		    <artifactId>fastjson</artifactId>
-		    <version>1.2.44</version>
+		    <version>1.2.83</version>
 		</dependency>
 
 		<!-- 引入mybatis相关的包 -->
